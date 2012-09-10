@@ -25,6 +25,6 @@ class PropertyBag implements \IteratorAggregate
 
     public function getIterator()
     {
-        return $this->elements;
+        return new \ArrayObject($this->elements);
     }
 }
