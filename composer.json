@@ -1,0 +1,21 @@
+{
+    "name":"eluceo/ical",
+    "description":"This package offers PHP-classes to create iCal compatible *.ics files.",
+    "homepage":"https://github.com/eluceo/iCal",
+    "authors":[
+        {
+            "name":"Markus Poerschke",
+            "email":"markus@eluceo.de",
+            "role":"Developer"
+        }
+    ],
+    "autoload":{
+        "psr-0":{
+            "Eluceo\\iCal":"src/"
+        }
+    },
+    "target-dir":"eluceo/ical",
+    "require":{
+        "php":">=5.3.0"
+    }
+}
