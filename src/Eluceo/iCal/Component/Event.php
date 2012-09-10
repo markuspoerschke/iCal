@@ -92,4 +92,46 @@ class Event extends Component
 
         return $dateTime->format($this->getDateFormat($noTime));
     }
+
+    public function setDtEnd($dtEnd)
+    {
+        $this->dtEnd = $dtEnd;
+    }
+
+    public function setDtStart($dtStart)
+    {
+        $this->dtStart = $dtStart;
+    }
+
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    public function setNoTime($noTime)
+    {
+        $this->noTime = $noTime;
+    }
+
+    public function setSequenz($sequenz)
+    {
+        $this->sequenz = $sequenz;
+    }
+
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
+    public function setUniqueId($uniqueId)
+    {
+        $this->uniqueId = $uniqueId;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+
 }
