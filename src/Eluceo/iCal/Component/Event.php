@@ -42,7 +42,7 @@ class Event extends Component
     /**
      * @var int
      */
-    protected $sequenz = 0;
+    protected $sequence = 0;
 
     function __construct($uniqueId = null)
     {
@@ -67,7 +67,7 @@ class Event extends Component
         $this->properties->set('DTSTAMP', $this->getDateString());
         $this->properties->set('DTSTART', $this->dtStart->format($this->getDateFormat($this->noTime)));
         $this->properties->set('DTEND', $this->dtEnd->format($this->getDateFormat($this->noTime)));
-        $this->properties->set('SEQUENZ', $this->sequenz);
+        $this->properties->set('SEQUENCE', $this->sequence);
 
         // optional information
         if (null != $this->url) {
@@ -76,6 +76,10 @@ class Event extends Component
 
         if (null != $this->location) {
             $this->properties->set('LOCATION', $this->location);
+        }
+
+        if (null != $this->summary) {
+            $this->properties->set('SUMMARY', $this->summary);
         }
     }
 
@@ -113,9 +117,9 @@ class Event extends Component
         $this->noTime = $noTime;
     }
 
-    public function setSequenz($sequenz)
+    public function setSequence($sequence)
     {
-        $this->sequenz = $sequenz;
+        $this->sequence = $sequence;
     }
 
     public function setSummary($summary)

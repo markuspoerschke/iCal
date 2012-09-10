@@ -28,6 +28,8 @@ abstract class Component
 
     public function build()
     {
+        $this->buildPropertyBag();
+
         $lines = array();
 
         $lines[] = sprintf('BEGIN:%s', $this->getType());
