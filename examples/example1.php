@@ -22,5 +22,9 @@ $vEvent->setSummary('Christmas');
 // 3. Add event to calendar
 $vCalendar->addEvent($vEvent);
 
-// 4. Output
+// 4. Set headers
+header('Content-Type: text/calendar; charset=utf-8');
+header('Content-Disposition: attachment; filename="cal.ics"');
+
+// 5. Output
 echo $vCalendar->render();
