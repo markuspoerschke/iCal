@@ -85,7 +85,7 @@ class Event extends Component
 
     private function getDateFormat($noTime = false)
     {
-        return $noTime ? 'Ymd' : 'YmdTHi00';
+        return $noTime ? 'Ymd' : 'Ymd\THis';
     }
 
     private function getDateString($dateTime = null, $noTime = false)
