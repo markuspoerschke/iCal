@@ -34,8 +34,8 @@ abstract class Component
 
         $lines[] = sprintf('BEGIN:%s', $this->getType());
 
-        foreach ($this->properties as $key => $value) {
-            $lines[] = sprintf('%s:%s', $key, $value);
+        foreach ($this->properties as $property) {
+            $lines[] = $property->toLine();
         }
 
         foreach ($this->components as $component) {
