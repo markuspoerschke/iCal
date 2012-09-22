@@ -3,6 +3,7 @@
 // require files
 require_once '../src/Eluceo/iCal/Component.php';
 require_once '../src/Eluceo/iCal/PropertyBag.php';
+require_once '../src/Eluceo/iCal/Property.php';
 require_once '../src/Eluceo/iCal/Component/Calendar.php';
 require_once '../src/Eluceo/iCal/Component/Event.php';
 
@@ -18,6 +19,9 @@ $vEvent->setDtStart(new \DateTime('2012-12-24'));
 $vEvent->setDtEnd(new \DateTime('2012-12-24'));
 $vEvent->setNoTime(true);
 $vEvent->setSummary('Christmas');
+
+// Adding Timezone (optional)
+$vEvent->setUseTimezone(true);
 
 // 3. Add event to calendar
 $vCalendar->addEvent($vEvent);

@@ -4,6 +4,7 @@ namespace Eluceo\iCal\Component;
 
 use Eluceo\iCal\Component;
 use Eluceo\iCal\PropertyBag;
+use Eluceo\iCal\Property;
 
 class Event extends Component
 {
@@ -40,6 +41,13 @@ class Event extends Component
     protected $summary;
 
     /**
+     * If set to true the timezone will be added to the event
+     *
+     * @var bool
+     */
+    protected $useTimezone = false;
+
+    /**
      * @var int
      */
     protected $sequence = 0;
@@ -64,9 +72,9 @@ class Event extends Component
 
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
-        $this->properties->set('DTSTAMP', $this->getDateString());
-        $this->properties->set('DTSTART', $this->dtStart->format($this->getDateFormat($this->noTime)));
-        $this->properties->set('DTEND', $this->dtEnd->format($this->getDateFormat($this->noTime)));
+        $this->properties->add($this->buildDateTimeProperty('DTSTAMP', new \DateTime()));
+        $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
+        $this->properties->add($this->buildDateTimeProperty('DTEND', $this->dtEnd, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
 
         // optional information
@@ -83,12 +91,33 @@ class Event extends Component
         }
     }
 
-    private function getDateFormat($noTime = false)
+    protected function buildDateTimeProperty($name, \DateTime $dateTime, $noTime = false)
+    {
+        $dateString = $this->getDateString($dateTime, $noTime);
+        $params     = array();
+
+        if ($this->useTimezone) {
+            $timeZone       = $dateTime->getTimezone()->getName();
+            $params['TZID'] = $timeZone;
+        }
+
+        return new Property($name, $dateString, $params);
+    }
+
+    /**
+     * Returns the dateformat that will be used in ical
+     *
+     * Depending on $noTime the time will be skipped
+     *
+     * @param bool $noTime
+     * @return string
+     */
+    protected function getDateFormat($noTime = false)
     {
         return $noTime ? 'Ymd' : 'Ymd\THis';
     }
 
-    private function getDateString($dateTime = null, $noTime = false)
+    protected function getDateString(\DateTime $dateTime = null, $noTime = false)
     {
         if (empty($dateTime)) {
             $dateTime = new \DateTime();
@@ -137,5 +166,13 @@ class Event extends Component
         $this->url = $url;
     }
 
+    public function setUseTimezone($useTimezone)
+    {
+        $this->useTimezone = $useTimezone;
+    }
 
+    public function getUseTimezone()
+    {
+        return $this->useTimezone;
+    }
 }
