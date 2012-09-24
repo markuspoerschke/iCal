@@ -38,8 +38,6 @@ class Property
     /**
      * Renders an unfolded line
      *
-     * @todo: Values containing ";", "=", ":" will not be escaped yet
-     *
      * @return string
      */
     public function toLine()
@@ -48,14 +46,35 @@ class Property
         $line = $this->getName();
 
         // Adding params
-        foreach ($this->params as $param => $paramValue) {
-            $line .= ';' . $param . '=' . $paramValue;
+        foreach ($this->params as $param => $paramValues) {
+            if (!is_array($paramValues)) {
+                $paramValues = array($paramValues);
+            }
+            foreach ($paramValues as $k => $v) {
+                $paramValues[$k] = $this->escapeParamValue($v);
+            }
+            $line .= ';' . $param . '=' . implode(',', $paramValues);
         }
 
         // Property value
         $line .= ':' . $this->value;
 
         return $line;
+    }
+
+    /**
+     * Returns an escaped string
+     *
+     * @param $value
+     */
+    public function escapeParamValue($value)
+    {
+        $count = 0;
+        $value = str_replace('"', '\"', $value, $count);
+        if (false !== strpos($value, ';') || false !== strpos($value, ',') || $count) {
+            $value = '"' . $value . '"';
+        }
+        return $value;
     }
 
     /**
