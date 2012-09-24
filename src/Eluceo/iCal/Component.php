@@ -26,6 +26,11 @@ abstract class Component
         }
     }
 
+    /**
+     * Renders an array containing the lines of the ical-file
+     *
+     * @return array
+     */
     public function build()
     {
         $this->buildPropertyBag();
