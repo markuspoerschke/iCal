@@ -52,6 +52,11 @@ class Event extends Component
      */
     protected $sequence = 0;
 
+    /**
+     * @var string
+     */
+    protected $description;
+
     function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
@@ -88,6 +93,10 @@ class Event extends Component
 
         if (null != $this->summary) {
             $this->properties->set('SUMMARY', $this->summary);
+        }
+
+        if (null != $this->description) {
+            $this->properties->set('DESCRIPTION', $this->description);
         }
     }
 
@@ -175,4 +184,22 @@ class Event extends Component
     {
         return $this->useTimezone;
     }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+
 }
