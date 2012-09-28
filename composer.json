@@ -1,5 +1,5 @@
 {
-    "name":"eluceo/ical",
+    "name":"sebastian-alfers/ical",
     "description":"This package offers PHP-classes to create iCal compatible *.ics files.",
     "homepage":"https://github.com/eluceo/iCal",
     "authors":[
