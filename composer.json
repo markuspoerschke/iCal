@@ -1,13 +1,18 @@
 {
-    "name":"eluceo/ical",
+    "name":"znanylekarz/ical",
     "description":"This package offers PHP-classes to create iCal compatible *.ics files.",
-    "homepage":"https://github.com/eluceo/iCal",
+    "homepage":"https://github.com/znanylekarz/iCal",
     "authors":[
         {
             "name":"Markus Poerschke",
             "email":"markus@eluceo.de",
             "role":"Developer"
-        }
+        },
+	{
+            "name":"Maciej Łebkowski",
+            "email":"m.lebkowski@gmail.com",
+            "role":"Contributor"
+	}
     ],
     "autoload":{
         "psr-0":{
