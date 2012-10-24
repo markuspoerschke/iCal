@@ -7,7 +7,12 @@
             "name":"Markus Poerschke",
             "email":"markus@eluceo.de",
             "role":"Developer"
-        }
+        },
+	{
+            "name":"Maciej Łebkowski",
+            "email":"m.lebkowski@gmail.com",
+            "role":"Contributor"
+	}
     ],
     "autoload":{
         "psr-0":{
