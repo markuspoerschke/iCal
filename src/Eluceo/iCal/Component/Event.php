@@ -98,6 +98,9 @@ class Event extends Component
         if (null != $this->description) {
             $this->properties->set('DESCRIPTION', $this->description);
         }
+        
+        if( $this->noTime )
+            $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
     }
 
     protected function buildDateTimeProperty($name, \DateTime $dateTime, $noTime = false)
@@ -109,6 +112,9 @@ class Event extends Component
             $timeZone       = $dateTime->getTimezone()->getName();
             $params['TZID'] = $timeZone;
         }
+        
+        if( $noTime )
+            $params['VALUE'] = 'DATE';
 
         return new Property($name, $dateString, $params);
     }
@@ -123,7 +129,7 @@ class Event extends Component
      */
     protected function getDateFormat($noTime = false)
     {
-        return $noTime ? 'Ymd' : 'Ymd\THis';
+        return $noTime ? 'Ymd' : 'Ymd\THis\Z';
     }
 
     protected function getDateString(\DateTime $dateTime = null, $noTime = false)

@@ -8,6 +8,7 @@ use Eluceo\iCal\PropertyBag;
 class Calendar extends Component
 {
     protected $prodId = null;
+    protected $name = null;
 
     function __construct($prodId)
     {
@@ -22,12 +23,20 @@ class Calendar extends Component
     {
         return 'VCALENDAR';
     }
+    
+    public function setName( $name )
+    {
+        $this->name = $name;
+    }
 
     public function buildPropertyBag()
     {
         $this->properties = new PropertyBag;
         $this->properties->set('VERSION', '2.0');
         $this->properties->set('PRODID', $this->prodId);
+        
+        if( $this->name )
+            $this->properties->set( 'X-WR-CALNAME', $this->name );
     }
 
     public function addEvent(Event $event)
