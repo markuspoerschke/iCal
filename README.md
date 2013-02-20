@@ -1,5 +1,11 @@
 # eluceo — iCal
-This package offers PHP-classes to create iCal compatible *.ics files.
+This package offers a abstraction layer for creating iCalendars. The output will 
+follow [RFC 2445](http://www.ietf.org/rfc/rfc2445.txt) as best as possible.
+
+The following components are supported at this time:
+
+* VCALENDAR
+* VEVENT
 
 ## Usage
 
