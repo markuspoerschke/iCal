@@ -240,6 +240,4 @@ class Event extends Component
     {
         return $this->description;
     }
-
-
 }
