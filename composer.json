@@ -1,6 +1,7 @@
 {
     "name":"eluceo/ical",
-    "description":"This package offers PHP-classes to create iCal compatible *.ics files.",
+    "description":"This package offers a abstraction layer for creating iCalendars. The output will follow RFC 2445 as best as possible.",
+    "license":"MIT",
     "homepage":"https://github.com/eluceo/iCal",
     "authors":[
         {
@@ -8,12 +9,16 @@
             "email":"markus@eluceo.de",
             "role":"Developer"
         },
-	{
+        {
             "name":"Maciej Łebkowski",
             "email":"m.lebkowski@gmail.com",
             "role":"Contributor"
-	}
+        }
     ],
+    "support":{
+        "issues":"https://github.com/eluceo/iCal/issues",
+        "source":"https://github.com/eluceo/iCal"
+    },
     "autoload":{
         "psr-0":{
             "Eluceo\\iCal":"src/"
