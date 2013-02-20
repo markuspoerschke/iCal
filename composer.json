@@ -15,6 +15,13 @@
             "role":"Contributor"
         }
     ],
+    "keywords":[
+        "ical",
+        "php calendar",
+        "icalendar",
+        "ics",
+        "calendar"
+    ],
     "support":{
         "issues":"https://github.com/eluceo/iCal/issues",
         "source":"https://github.com/eluceo/iCal"
