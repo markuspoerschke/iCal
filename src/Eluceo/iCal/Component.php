@@ -2,21 +2,41 @@
 
 namespace Eluceo\iCal;
 
+/**
+ * Abstract Calender Component
+ */
 abstract class Component
 {
     /**
+     * The PropertyBag
+     *
      * @var PropertyBag
      */
     protected $properties;
 
+    /**
+     * Array of Components
+     *
+     * @var array
+     */
     protected $components = array();
 
     /**
+     * The type of the concrete Component
+     *
      * @abstract
      * @return string
      */
     abstract public function getType();
 
+    /**
+     * Adds a Component
+     *
+     * If $key is given, the component at $key will be replaced else the component will be append.
+     *
+     * @param Component $component  The Component that will be added
+     * @param null      $key        The key of the Component
+     */
     protected function addComponent(Component $component, $key = null)
     {
         if (null == $key) {
@@ -27,7 +47,7 @@ abstract class Component
     }
 
     /**
-     * Renders an array containing the lines of the ical-file
+     * Renders an array containing the lines of the iCal file
      *
      * @return array
      */
@@ -59,6 +79,12 @@ abstract class Component
     }
 
     /**
+     * Folds a single line
+     *
+     * According to RFC 2445, all lines longer than 75 characters will be folded
+     *
+     * @link http://www.ietf.org/rfc/rfc2445.txt
+     *
      * @param $line
      * @return string
      */
@@ -67,7 +93,7 @@ abstract class Component
         $lines = array();
         $array = preg_split('/(?<!^)(?!$)/u', $string);
 
-        $line   = '';
+        $line = '';
         $lineNo = 0;
         foreach ($array as $char) {
             $charLen = strlen($char);
@@ -85,7 +111,7 @@ abstract class Component
     }
 
     /**
-     * Renders the output for our
+     * Renders the output
      *
      * @return string
      */

@@ -7,6 +7,17 @@ use Eluceo\iCal\PropertyBag;
 
 class Calendar extends Component
 {
+    /**
+     * The Product Identifier
+     *
+     * According to RFC 2445: 4.7.3 Product Identifier
+     *
+     * This property specifies the identifier for the product that created the Calendar object.
+     *
+     * @link http://www.ietf.org/rfc/rfc2445.txt
+     *
+     * @var string
+     */
     protected $prodId = null;
     protected $name = null;
 
@@ -19,6 +30,9 @@ class Calendar extends Component
         $this->prodId = $prodId;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'VCALENDAR';
@@ -29,6 +43,9 @@ class Calendar extends Component
         $this->name = $name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildPropertyBag()
     {
         $this->properties = new PropertyBag;
@@ -39,11 +56,29 @@ class Calendar extends Component
             $this->properties->set( 'X-WR-CALNAME', $this->name );
     }
 
+    /**
+     * Adds an Event to the Calendar
+     *
+     * Wrapper for addComponent()
+     *
+     * @see Eluceo\iCal::addComponent
+     *
+     * @param Event $event
+     */
     public function addEvent(Event $event)
     {
         $this->addComponent($event);
     }
 
+    /**
+     * Not needed here.
+     *
+     * @todo Remove this method
+     *
+     * @deprecated
+     *
+     * @return null|string
+     */
     public function getProdId()
     {
         return $this->prodId;

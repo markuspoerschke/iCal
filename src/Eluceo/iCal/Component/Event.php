@@ -6,8 +6,14 @@ use Eluceo\iCal\Component;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
 
+/**
+ * Implementation of the EVENT component
+ */
 class Event extends Component
 {
+    /**
+     * @var string
+     */
     protected $uniqueId;
 
     /**
@@ -66,11 +72,17 @@ class Event extends Component
         $this->uniqueId = $uniqueId;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'VEVENT';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildPropertyBag()
     {
         $this->properties = new PropertyBag;
@@ -103,6 +115,14 @@ class Event extends Component
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
     }
 
+    /**
+     * Creates a Property based on a DateTime object
+     *
+     * @param string        $name       The name of the Property
+     * @param \DateTime     $dateTime   The DateTime
+     * @param bool          $noTime     Indicates if the time will be added
+     * @return \Eluceo\iCal\Property
+     */
     protected function buildDateTimeProperty($name, \DateTime $dateTime, $noTime = false)
     {
         $dateString = $this->getDateString($dateTime, $noTime);
@@ -120,11 +140,9 @@ class Event extends Component
     }
 
     /**
-     * Returns the dateformat that will be used in ical
+     * Returns the date format that can be passed to DateTime::format()
      *
-     * Depending on $noTime the time will be skipped
-     *
-     * @param bool $noTime
+     * @param bool $noTime Indicates if the time will be added
      * @return string
      */
     protected function getDateFormat($noTime = false)
@@ -132,6 +150,13 @@ class Event extends Component
         return $noTime ? 'Ymd' : 'Ymd\THis\Z';
     }
 
+    /**
+     * Returns a formatted date string
+     *
+     * @param \DateTime|null  $dateTime  The DateTime object
+     * @param bool            $noTime    Indicates if the time will be added
+     * @return mixed
+     */
     protected function getDateString(\DateTime $dateTime = null, $noTime = false)
     {
         if (empty($dateTime)) {
