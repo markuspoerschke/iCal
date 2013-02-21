@@ -7,6 +7,19 @@ The following components are supported at this time:
 * VCALENDAR
 * VEVENT
 
+## Installation
+
+You can install this package by using [Composer](http://getcomposer.org). 
+Link to Packagist: https://packagist.org/packages/eluceo/ical
+
+```
+{
+    "require": {
+        "eluceo/ical": "*"
+    }
+}
+```
+
 ## Usage
 
 ### 1. Create a Calendar object
