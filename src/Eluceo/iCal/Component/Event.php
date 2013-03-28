@@ -300,10 +300,6 @@ class Event extends Component
         return $this;
     }
 
-    /**
-     * @param $dtStart
-     * @return $this
-     */
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
