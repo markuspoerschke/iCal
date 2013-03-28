@@ -14,12 +14,17 @@ namespace Eluceo\iCal\Component;
 use Eluceo\iCal\Component;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
+use \InvalidArgumentException;
 
 /**
  * Implementation of the EVENT component
  */
 class Event extends Component
 {
+
+    const TIME_TRANSPARENCY_OPAQUE = 'OPAQUE';
+    const TIME_TRANSPARENCY_TRANSPARENT = 'TRANSPARENT';
+
     /**
      * @var string
      */
@@ -54,6 +59,12 @@ class Event extends Component
      * @var string
      */
     protected $summary;
+
+    /**
+     * @see http://www.ietf.org/rfc/rfc2445.txt 4.8.2.7 Time Transparency
+     * @var string
+     */
+    protected $transparency = self::TIME_TRANSPARENCY_OPAQUE;
 
     /**
      * If set to true the timezone will be added to the event
@@ -102,6 +113,7 @@ class Event extends Component
         $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
         $this->properties->add($this->buildDateTimeProperty('DTEND', $this->dtEnd, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
+        $this->properties->set('TRANSP', $this->transparency);
 
         // optional information
         if (null != $this->url) {
@@ -239,5 +251,16 @@ class Event extends Component
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function setTimeTransparency($transparency)
+    {
+        $transparency = strtoupper($transparency);
+        if ($transparency === self::TIME_TRANSPARENCY_OPAQUE ||
+            $transparency === self::TIME_TRANSPARENCY_TRANSPARENT) {
+            $this->transparency = $transparency;
+        } else {
+            throw new InvalidArgumentException('Invalid value for transparancy');
+        }
     }
 }
