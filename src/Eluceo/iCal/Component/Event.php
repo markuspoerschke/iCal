@@ -318,6 +318,11 @@ class Event extends Component
         return $this;
     }
 
+    public function getDtEnd()
+    {
+        return $this->dtEnd;
+    }
+    
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
