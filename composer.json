@@ -1,8 +1,8 @@
 {
-    "name":"camdram/ical",
-    "description":"The camdram/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 2445 as best as possible.",
+    "name":"eluceo/ical",
+    "description":"The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 2445 as best as possible.",
     "license":"MIT",
-    "homepage":"https://github.com/camdram/iCal",
+    "homepage":"https://github.com/eluceo/iCal",
     "authors":[
         {
             "name":"Markus Poerschke",
@@ -12,10 +12,6 @@
         {
             "name":"Maciej Łebkowski",
             "email":"m.lebkowski@gmail.com",
-            "role":"Contributor"
-        },
-        {
-            "name":"Andrew Featherstone",
             "role":"Contributor"
         }
     ],
@@ -27,8 +23,8 @@
         "calendar"
     ],
     "support":{
-        "issues":"https://github.com/camdram/iCal/issues",
-        "source":"https://github.com/camdram/iCal"
+        "issues":"https://github.com/eluceo/iCal/issues",
+        "source":"https://github.com/eluceo/iCal"
     },
     "autoload":{
         "psr-0":{
