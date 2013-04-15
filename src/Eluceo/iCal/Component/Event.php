@@ -36,9 +36,16 @@ class Event extends Component
     protected $dtStart;
 
     /**
+     * Preferentially chosen over the duration if both are set.
+     *
      * @var \DateTime
      */
     protected $dtEnd;
+
+    /**
+     * @var \DateInterval
+     */
+    protected $duration;
 
     /**
      * @var boolean
@@ -111,9 +118,16 @@ class Event extends Component
         $this->properties->set('UID', $this->uniqueId);
         $this->properties->add($this->buildDateTimeProperty('DTSTAMP', new \DateTime()));
         $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
-        $this->properties->add($this->buildDateTimeProperty('DTEND', $this->dtEnd, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
         $this->properties->set('TRANSP', $this->transparency);
+
+        // An event can have a 'dtend' or 'duration', but not both.
+        if (null != $this->dtEnd) {
+            $this->properties->add($this->buildDateTimeProperty('DTEND', $this->dtEnd, $this->noTime));
+        }
+        else {
+            $this->properties->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
+        }
 
         // optional information
         if (null != $this->url) {
@@ -195,6 +209,11 @@ class Event extends Component
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
+    }
+    
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
     }
 
     public function setLocation($location)
