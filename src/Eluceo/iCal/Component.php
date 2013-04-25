@@ -135,6 +135,15 @@ abstract class Component
     }
 
     /**
+     * Renders the output when treating the class as a string
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->render();
+    }
+
+    /**
      * Building the PropertyBag
      *
      * @abstract
