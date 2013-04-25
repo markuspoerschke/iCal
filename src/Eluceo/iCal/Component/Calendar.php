@@ -29,6 +29,7 @@ class Calendar extends Component
      */
     protected $prodId = null;
     protected $name = null;
+    protected $timezone = null;
 
     function __construct($prodId)
     {
@@ -46,10 +47,15 @@ class Calendar extends Component
     {
         return 'VCALENDAR';
     }
-    
-    public function setName( $name )
+
+    public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function setTimezone($timezone)
+    {
+        $this->timezone = $timezone;
     }
 
     /**
@@ -60,9 +66,15 @@ class Calendar extends Component
         $this->properties = new PropertyBag;
         $this->properties->set('VERSION', '2.0');
         $this->properties->set('PRODID', $this->prodId);
-        
-        if( $this->name )
-            $this->properties->set( 'X-WR-CALNAME', $this->name );
+
+        if ($this->name) {
+            $this->properties->set('X-WR-CALNAME', $this->name);
+        }
+
+        if ($this->timezone) {
+            $this->properties->set('X-WR-TIMEZONE', $this->timezone);
+            $this->addComponent(new Timezone($this->timezone));
+        }
     }
 
     /**
