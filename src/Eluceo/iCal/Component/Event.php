@@ -182,13 +182,13 @@ class Event extends Component
      */
     protected function getDateFormat($noTime = false)
     {
-		// Do not use UTC time (Z) if timezone support is enabled.
-		if ($this->useTimezone) {
-			return $noTime ? 'Ymd' : 'Ymd\THis';
-		}
-		else {
-			return $noTime ? 'Ymd' : 'Ymd\THis\Z';
-		}
+        // Do not use UTC time (Z) if timezone support is enabled.
+        if ($this->useTimezone) {
+            return $noTime ? 'Ymd' : 'Ymd\THis';
+        }
+        else {
+            return $noTime ? 'Ymd' : 'Ymd\THis\Z';
+        }
     }
 
     /**
