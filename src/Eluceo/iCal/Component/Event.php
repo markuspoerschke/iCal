@@ -90,6 +90,13 @@ class Event extends Component
      */
     protected $description;
 
+    /**
+     * Indicates if the UTC time should be used or not
+     *
+     * @var bool
+     */
+    protected $useUtc = true;
+
     function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
@@ -183,7 +190,7 @@ class Event extends Component
     protected function getDateFormat($noTime = false)
     {
         // Do not use UTC time (Z) if timezone support is enabled.
-        if ($this->useTimezone) {
+        if ($this->useTimezone || !$this->useUtc) {
             return $noTime ? 'Ymd' : 'Ymd\THis';
         }
         else {
@@ -268,6 +275,10 @@ class Event extends Component
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    public function setUseUtc($useUtc = true) {
+        $this->useUtc = $useUtc;
     }
 
     /**
