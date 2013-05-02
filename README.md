@@ -22,19 +22,21 @@ Link to Packagist: https://packagist.org/packages/eluceo/ical
 
 ## Usage
 
-### 1. Create a Calendar object
+### Basic Usage
+
+#### 1. Create a Calendar object
 
 ```PHP
 $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
 ```
 
-### 2. Create an Event object
+#### 2. Create an Event object
 
 ```PHP
 $vEvent = new \Eluceo\iCal\Component\Event();
 ```
 
-### 3. Add your information to the Event
+#### 3. Add your information to the Event
 
 ```PHP
 $vEvent->setDtStart(new \DateTime('2012-12-24'));
@@ -43,23 +45,52 @@ $vEvent->setNoTime(true);
 $vEvent->setSummary('Christmas');
 ```
 
-### 4. Add Event to Calendar
+#### 4. Add Event to Calendar
 
 ```PHP
 $vCalendar->addEvent($vEvent);
 ```
 
-### 5. Set HTTP-headers
+#### 5. Set HTTP-headers
 
 ```PHP
 header('Content-Type: text/calendar; charset=utf-8');
 header('Content-Disposition: attachment; filename="cal.ics"');
 ```
 
-### 6. Send output
+#### 6. Send output
 
 ```PHP
 echo $vCalendar->render();
+```
+
+### Timezone support
+
+This package supports three different types of handling timezones:
+
+#### 1. UTC (default)
+
+In the default setting, UTC/GMT will be used as Timezone. The time will be formated as following:
+
+```
+DTSTART:20121224T180000Z
+```
+
+#### 2. Use explicit timezone
+
+You can use an explicit timezone by calling `$vEvent->setUseTimezone(true);`. The timezone of your 
+`\DateTime` object will be used. The output will be as following:
+
+```
+DTSTART;TZID=Europe/Berlin:20121224T180000
+```
+
+#### 3. Use locale time
+
+You can use local time by calling `$vEvent->setUseUtc(false);`. The output will be:
+
+```
+DTSTART:20121224T180000
 ```
 
 ## License
