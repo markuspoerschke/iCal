@@ -28,6 +28,7 @@ class Calendar extends Component
      * @var string
      */
     protected $prodId = null;
+    protected $method = null;
     protected $name = null;
     protected $timezone = null;
 
@@ -48,6 +49,11 @@ class Calendar extends Component
         return 'VCALENDAR';
     }
 
+    public function setMethod($method)
+    {
+        $this->method = $method;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
@@ -66,6 +72,10 @@ class Calendar extends Component
         $this->properties = new PropertyBag;
         $this->properties->set('VERSION', '2.0');
         $this->properties->set('PRODID', $this->prodId);
+
+        if ($this->method) {
+            $this->properties->set('METHOD', $this->method);
+        }
 
         if ($this->name) {
             $this->properties->set('X-WR-CALNAME', $this->name);

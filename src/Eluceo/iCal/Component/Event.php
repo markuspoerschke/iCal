@@ -88,6 +88,11 @@ class Event extends Component
     /**
      * @var string
      */
+    protected $attendee;
+
+    /**
+     * @var string
+     */
     protected $description;
 
     /**
@@ -147,6 +152,10 @@ class Event extends Component
 
         if (null != $this->summary) {
             $this->properties->set('SUMMARY', $this->summary);
+        }
+
+        if (null != $this->attendee) {
+            $this->properties->set('ATTENDEE', $this->attendee);
         }
 
         if (null != $this->description) {
@@ -267,6 +276,22 @@ class Event extends Component
     public function getUseTimezone()
     {
         return $this->useTimezone;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setAttendee($attendee)
+    {
+        $this->attendee = $attendee;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAttendee()
+    {
+        return $this->attendee;
     }
 
     /**
