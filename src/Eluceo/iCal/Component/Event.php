@@ -33,6 +33,11 @@ class Event extends Component
     /**
      * @var \DateTime
      */
+    protected $dtStamp;
+
+    /**
+     * @var \DateTime
+     */
     protected $dtStart;
 
     /**
@@ -128,7 +133,10 @@ class Event extends Component
 
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
-        $this->properties->add($this->buildDateTimeProperty('DTSTAMP', new \DateTime()));
+        $this->properties->add($this->buildDateTimeProperty(
+            'DTSTAMP',
+            $this->dtStamp ?: new \DateTime()
+        ));
         $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
         $this->properties->set('TRANSP', $this->transparency);
@@ -161,7 +169,7 @@ class Event extends Component
         if (null != $this->description) {
             $this->properties->set('DESCRIPTION', $this->description);
         }
-        
+
         if( $this->noTime )
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
     }
@@ -183,7 +191,7 @@ class Event extends Component
             $timeZone       = $dateTime->getTimezone()->getName();
             $params['TZID'] = $timeZone;
         }
-        
+
         if( $noTime )
             $params['VALUE'] = 'DATE';
 
@@ -232,7 +240,12 @@ class Event extends Component
     {
         $this->dtStart = $dtStart;
     }
-    
+
+    public function setDtStamp($dtStamp)
+    {
+        $this->dtStamp = $dtStamp;
+    }
+
     public function setDuration($duration)
     {
         $this->duration = $duration;
