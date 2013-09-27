@@ -393,10 +393,6 @@ class Event extends Component
         return $this;
     }
 
-    /**
-     * @param $summary
-     * @return $this
-     */
     public function setSummary($summary)
     {
         $this->summary = $summary;
