@@ -185,11 +185,6 @@ class Calendar extends Component
         return $this->prodId;
     }
 
-    public function setMethod($method)
-    {
-        $this->method = strtoupper($method);
-    }
-
     public function getMethod()
     {
         return $this->method;
