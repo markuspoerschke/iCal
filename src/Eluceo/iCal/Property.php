@@ -86,7 +86,7 @@ class Property
         $value = str_replace('"', '\\"', $value);
         $value = str_replace(',', '\\,', $value);
         $value = str_replace(';', '\\;', $value);
-        $value = str_replace('\n', '\\n', $value);
+        $value = str_replace("\n", '\\n', $value);
 
         return $value;
     }
