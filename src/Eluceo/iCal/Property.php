@@ -54,11 +54,13 @@ class Property
         // Property-name
         $line = $this->getName();
         $value = $this->value;
-        if (false !== strpos($value, "\n")) {
-            $this->params['ENCODING'] = 'QUOTED-PRINTABLE';
-            $value = quoted_printable_encode($value);
-            $value = strtr($value, array ("\r" => "", "\n" => ""));
-        }
+
+        // Escape values as per RFC 2445. See http://www.kanzaki.com/docs/ical/text.html
+        $value = str_replace("\"", "DQUOTE", $value);
+        $value = str_replace("\\", "\\\\", $value);
+        $value = str_replace(",", "\,", $value);
+        $value = str_replace(";", "\;", $value);
+        $value = str_replace("\n", "\\n", $value);
 
         // Adding params
         foreach ($this->params as $param => $paramValues) {

@@ -24,11 +24,19 @@ class Event extends Component
 
     const TIME_TRANSPARENCY_OPAQUE = 'OPAQUE';
     const TIME_TRANSPARENCY_TRANSPARENT = 'TRANSPARENT';
+    const STATUS_TENTATIVE = 'TENTATIVE';
+    const STATUS_CONFIRMED = 'CONFIRMED';
+    const STATUS_CANCELLED = 'CANCELLED';
 
     /**
      * @var string
      */
     protected $uniqueId;
+
+    /**
+     * @var \DateTime
+     */
+    protected $dtStamp;
 
     /**
      * @var \DateTime
@@ -96,6 +104,11 @@ class Event extends Component
     protected $description;
 
     /**
+     * @var string
+     */
+    protected $status;
+
+    /**
      * Indicates if the UTC time should be used or not
      *
      * @var bool
@@ -128,10 +141,17 @@ class Event extends Component
 
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
-        $this->properties->add($this->buildDateTimeProperty('DTSTAMP', new \DateTime()));
+        $this->properties->add($this->buildDateTimeProperty(
+            'DTSTAMP',
+            $this->dtStamp ?: new \DateTime()
+        ));
         $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
         $this->properties->set('TRANSP', $this->transparency);
+
+        if ($this->status) {
+            $this->properties->set('STATUS', $this->status);
+        }
 
         // An event can have a 'dtend' or 'duration', but not both.
         if (null != $this->dtEnd) {
@@ -161,7 +181,7 @@ class Event extends Component
         if (null != $this->description) {
             $this->properties->set('DESCRIPTION', $this->description);
         }
-        
+
         if( $this->noTime )
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
     }
@@ -183,7 +203,7 @@ class Event extends Component
             $timeZone       = $dateTime->getTimezone()->getName();
             $params['TZID'] = $timeZone;
         }
-        
+
         if( $noTime )
             $params['VALUE'] = 'DATE';
 
@@ -232,7 +252,12 @@ class Event extends Component
     {
         $this->dtStart = $dtStart;
     }
-    
+
+    public function setDtStamp($dtStamp)
+    {
+        $this->dtStamp = $dtStamp;
+    }
+
     public function setDuration($duration)
     {
         $this->duration = $duration;
@@ -322,6 +347,18 @@ class Event extends Component
             $this->transparency = $transparency;
         } else {
             throw new InvalidArgumentException('Invalid value for transparancy');
+        }
+    }
+
+    public function setStatus($status)
+    {
+        $status = strtoupper($status);
+        if ($status == self::STATUS_CANCELLED ||
+            $status == self::STATUS_CONFIRMED ||
+            $status == self::STATUS_TENTATIVE) {
+            $this->status = $status;
+        } else {
+            throw new InvalidArgumentException('Invalid value for status');
         }
     }
 }
