@@ -32,7 +32,7 @@ class Calendar extends Component
     protected $name = null;
     protected $timezone = null;
 
-    function __construct($prodId)
+    public function __construct($prodId)
     {
         if (empty($prodId)) {
             throw new \UnexpectedValueException('PRODID cannot be empty');

@@ -43,8 +43,8 @@ abstract class Component
      *
      * If $key is given, the component at $key will be replaced else the component will be append.
      *
-     * @param Component $component  The Component that will be added
-     * @param null      $key        The key of the Component
+     * @param Component $component The Component that will be added
+     * @param null      $key       The key of the Component
      */
     protected function addComponent(Component $component, $key = null)
     {
@@ -139,7 +139,8 @@ abstract class Component
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->render();
     }
 

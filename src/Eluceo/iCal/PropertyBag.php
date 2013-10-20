@@ -34,7 +34,7 @@ class PropertyBag implements \IteratorAggregate
     }
 
     /**
-     * @param string $key
+     * @param  string        $key
      * @return null|Property
      */
     public function get($name)
@@ -52,7 +52,7 @@ class PropertyBag implements \IteratorAggregate
     /**
      * Adds a Property. If Property already exists an Exception will be thrown.
      *
-     * @param Property $property
+     * @param  Property   $property
      * @throws \Exception
      */
     public function add(Property $property)

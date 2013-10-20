@@ -37,7 +37,7 @@ class Property
      */
     protected $name;
 
-    function __construct($name, $value, $params = array())
+    public function __construct($name, $value, $params = array())
     {
         $this->name   = $name;
         $this->value  = $value;
@@ -91,12 +91,13 @@ class Property
         if (false !== strpos($value, ';') || false !== strpos($value, ',') || $count) {
             $value = '"' . $value . '"';
         }
+
         return $value;
     }
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setParam($name, $value)
     {

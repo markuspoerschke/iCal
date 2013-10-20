@@ -115,7 +115,7 @@ class Event extends Component
      */
     protected $useUtc = true;
 
-    function __construct($uniqueId = null)
+    public function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
             $uniqueId = uniqid();
@@ -156,8 +156,7 @@ class Event extends Component
         // An event can have a 'dtend' or 'duration', but not both.
         if (null != $this->dtEnd) {
             $this->properties->add($this->buildDateTimeProperty('DTEND', $this->dtEnd, $this->noTime));
-        }
-        else {
+        } else {
             $this->properties->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
         }
 
@@ -189,9 +188,9 @@ class Event extends Component
     /**
      * Creates a Property based on a DateTime object
      *
-     * @param string        $name       The name of the Property
-     * @param \DateTime     $dateTime   The DateTime
-     * @param bool          $noTime     Indicates if the time will be added
+     * @param  string                $name     The name of the Property
+     * @param  \DateTime             $dateTime The DateTime
+     * @param  bool                  $noTime   Indicates if the time will be added
      * @return \Eluceo\iCal\Property
      */
     protected function buildDateTimeProperty($name, \DateTime $dateTime, $noTime = false)
@@ -213,7 +212,7 @@ class Event extends Component
     /**
      * Returns the date format that can be passed to DateTime::format()
      *
-     * @param bool $noTime Indicates if the time will be added
+     * @param  bool   $noTime Indicates if the time will be added
      * @return string
      */
     protected function getDateFormat($noTime = false)
@@ -221,8 +220,7 @@ class Event extends Component
         // Do not use UTC time (Z) if timezone support is enabled.
         if ($this->useTimezone || !$this->useUtc) {
             return $noTime ? 'Ymd' : 'Ymd\THis';
-        }
-        else {
+        } else {
             return $noTime ? 'Ymd' : 'Ymd\THis\Z';
         }
     }
@@ -230,8 +228,8 @@ class Event extends Component
     /**
      * Returns a formatted date string
      *
-     * @param \DateTime|null  $dateTime  The DateTime object
-     * @param bool            $noTime    Indicates if the time will be added
+     * @param  \DateTime|null $dateTime The DateTime object
+     * @param  bool           $noTime   Indicates if the time will be added
      * @return mixed
      */
     protected function getDateString(\DateTime $dateTime = null, $noTime = false)
@@ -327,7 +325,8 @@ class Event extends Component
         $this->description = $description;
     }
 
-    public function setUseUtc($useUtc = true) {
+    public function setUseUtc($useUtc = true)
+    {
         $this->useUtc = $useUtc;
     }
 

@@ -24,7 +24,7 @@ class Timezone extends Component
      */
     protected $timezone;
 
-    function __construct($timezone)
+    public function __construct($timezone)
     {
         $this->timezone = $timezone;
     }
