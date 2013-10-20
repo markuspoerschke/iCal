@@ -56,11 +56,11 @@ class Property
         $value = $this->value;
 
         // Escape values as per RFC 2445. See http://www.kanzaki.com/docs/ical/text.html
-        $value = str_replace("\\", "\\\\", $value);
-        $value = str_replace("\"", "\\\"", $value);
-        $value = str_replace(",", "\,", $value);
-        $value = str_replace(";", "\;", $value);
-        $value = str_replace("\n", "\\n", $value);
+        $value = str_replace('\\', '\\\\', $value);
+        $value = str_replace('"', '\\"', $value);
+        $value = str_replace(',', '\\,', $value);
+        $value = str_replace(';', '\\;', $value);
+        $value = str_replace('\n', '\\n', $value);
 
         // Adding params
         foreach ($this->params as $param => $paramValues) {
@@ -82,7 +82,8 @@ class Property
     /**
      * Returns an escaped string
      *
-     * @param $value
+     * @param   string  $value
+     * @return  string
      */
     public function escapeParamValue($value)
     {
