@@ -56,8 +56,8 @@ class Property
         $value = $this->value;
 
         // Escape values as per RFC 2445. See http://www.kanzaki.com/docs/ical/text.html
-        $value = str_replace("\"", "DQUOTE", $value);
         $value = str_replace("\\", "\\\\", $value);
+        $value = str_replace("\"", "\\\"", $value);
         $value = str_replace(",", "\,", $value);
         $value = str_replace(";", "\;", $value);
         $value = str_replace("\n", "\\n", $value);
