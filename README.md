@@ -93,6 +93,15 @@ You can use local time by calling `$vEvent->setUseUtc(false);`. The output will 
 DTSTART:20121224T180000
 ```
 
+## Running the tests
+
+To setup and run tests:
+
+- go to the root directory of this project
+- download composer: `wget https://getcomposer.org/composer.phar`
+- install dev dependencies: `php composer.phar install --dev`
+- run `./vendor/bin/phpunit -c tests`
+
 ## License
 
 This package is released under the __MIT license__.
