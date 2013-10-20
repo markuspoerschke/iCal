@@ -1,4 +1,7 @@
 # eluceo — iCal
+
+[![Build Status](https://secure.travis-ci.org/eluceo/iCal.png)](http://travis-ci.org/eluceo/iCal)
+
 This package offers a abstraction layer for creating iCalendars. The output will 
 follow [RFC 2445](http://www.ietf.org/rfc/rfc2445.txt) as best as possible.
 
