@@ -94,7 +94,8 @@ abstract class Component
      *
      * @link http://www.ietf.org/rfc/rfc2445.txt
      *
-     * @param $line
+     * @param $string
+     *
      * @return string
      */
     public function fold($string)

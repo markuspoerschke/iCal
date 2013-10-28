@@ -11,6 +11,9 @@
 
 namespace Eluceo\iCal;
 
+use Eluceo\iCal\Property\StringValue;
+use Eluceo\iCal\Property\ValueInterface;
+
 /**
  * The Property Class represents a property as defined in RFC 2445
  *
@@ -21,27 +24,33 @@ class Property
     /**
      * The value of the Property
      *
-     * @var mixed
+     * @var ValueInterface
      */
     protected $value;
 
     /**
      * The params of the Property
      *
-     * @var array
+     * @var ParameterBag
      */
-    protected $params;
+    protected $parameterBag;
 
     /**
      * @var string
      */
     protected $name;
 
+    /**
+     * @param $name
+     * @param $value
+     * @param array $params
+     * @return \Eluceo\iCal\Property
+     */
     public function __construct($name, $value, $params = array())
     {
-        $this->name   = $name;
-        $this->value  = $value;
-        $this->params = $params;
+        $this->name = $name;
+        $this->setValue($value);
+        $this->parameterBag = new ParameterBag($params);
     }
 
     /**
@@ -53,59 +62,16 @@ class Property
     {
         // Property-name
         $line = $this->getName();
-        $value = $this->escapeValue($this->value);
 
         // Adding params
-        foreach ($this->params as $param => $paramValues) {
-            if (!is_array($paramValues)) {
-                $paramValues = array($paramValues);
-            }
-            foreach ($paramValues as $k => $v) {
-                $paramValues[$k] = $this->escapeParamValue($v);
-            }
-            $line .= ';' . $param . '=' . implode(',', $paramValues);
+        if ($this->parameterBag->hasParams()) {
+            $line .= ';' . $this->parameterBag->toString();
         }
 
         // Property value
-        $line .= ':' . $value;
+        $line .= ':' . $this->value->getEscapedValue();
 
         return $line;
-    }
-
-    /**
-     * Returns an escaped string for a value
-     *
-     * Escape values as per RFC 2445. See http://www.kanzaki.com/docs/ical/text.html
-     *
-     * @param   string  $value
-     * @return  string
-     */
-    public function escapeValue($value)
-    {
-        $value = str_replace('\\', '\\\\', $value);
-        $value = str_replace('"', '\\"', $value);
-        $value = str_replace(',', '\\,', $value);
-        $value = str_replace(';', '\\;', $value);
-        $value = str_replace("\n", '\\n', $value);
-
-        return $value;
-    }
-
-    /**
-     * Returns an escaped string for a param value
-     *
-     * @param   string  $value
-     * @return  string
-     */
-    public function escapeParamValue($value)
-    {
-        $count = 0;
-        $value = str_replace('"', '\"', $value, $count);
-        if (false !== strpos($value, ';') || false !== strpos($value, ',') || $count) {
-            $value = '"' . $value . '"';
-        }
-
-        return $value;
     }
 
     /**
@@ -114,7 +80,7 @@ class Property
      */
     public function setParam($name, $value)
     {
-        $this->params[$name] = $value;
+        $this->parameterBag->setParam($name, $value);
     }
 
     /**
@@ -123,19 +89,22 @@ class Property
      */
     public function getParam($name)
     {
-        if (array_key_exists($name, $this->params)) {
-            return $this->params[$name];
-        }
-
-        return null;
+        return $this->parameterBag->getParam($name);
     }
 
     /**
      * @param mixed $value
+     * @throws \Exception
      */
     public function setValue($value)
     {
-        $this->value = $value;
+        if (is_scalar($value)) {
+            $this->value = new StringValue($value);
+        } else if (!$value instanceof ValueInterface) {
+            throw new \Exception("The value must implement the ValueInterface.");
+        } else {
+            $this->value = $value;
+        }
     }
 
     /**
@@ -144,14 +113,6 @@ class Property
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParams()
-    {
-        return $this->params;
     }
 
     /**

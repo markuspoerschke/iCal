@@ -14,6 +14,7 @@ namespace Eluceo\iCal\Component;
 use Eluceo\iCal\Component;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
+use Eluceo\iCal\Property\Event\RecurrenceRule;
 use \InvalidArgumentException;
 
 /**
@@ -109,6 +110,11 @@ class Event extends Component
     protected $status;
 
     /**
+     * @var RecurrenceRule
+     */
+    protected $recurrenceRule;
+
+    /**
      * Indicates if the UTC time should be used or not
      *
      * @var bool
@@ -179,6 +185,10 @@ class Event extends Component
 
         if (null != $this->description) {
             $this->properties->set('DESCRIPTION', $this->description);
+        }
+
+        if (null != $this->recurrenceRule) {
+            $this->properties->set('RRULE', $this->recurrenceRule);
         }
 
         if( $this->noTime )
@@ -359,5 +369,21 @@ class Event extends Component
         } else {
             throw new InvalidArgumentException('Invalid value for status');
         }
+    }
+
+    /**
+     * @param RecurrenceRule $recurrenceRule
+     */
+    public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
+    {
+        $this->recurrenceRule = $recurrenceRule;
+    }
+
+    /**
+     * @return RecurrenceRule
+     */
+    public function getRecurrenceRule()
+    {
+        return $this->recurrenceRule;
     }
 }
