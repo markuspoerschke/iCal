@@ -1,11 +1,7 @@
 <?php
 
-// require files
-require_once '../src/Eluceo/iCal/Component.php';
-require_once '../src/Eluceo/iCal/PropertyBag.php';
-require_once '../src/Eluceo/iCal/Property.php';
-require_once '../src/Eluceo/iCal/Component/Calendar.php';
-require_once '../src/Eluceo/iCal/Component/Event.php';
+// use composer autoloader
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // set default timezone (PHP 5.4)
 date_default_timezone_set('Europe/Berlin');
