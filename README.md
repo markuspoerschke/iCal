@@ -1,6 +1,6 @@
 # eluceo — iCal
 
-[![Build Status](https://secure.travis-ci.org/eluceo/iCal.png)](http://travis-ci.org/eluceo/iCal)
+[![Build Status](https://secure.travis-ci.org/eluceo/iCal.png)](http://travis-ci.org/eluceo/iCal) [![Code Coverage](https://scrutinizer-ci.com/g/eluceo/iCal/badges/coverage.png?s=96bd87d2615285caaef1173e80f0aad7ac98d86a)](https://scrutinizer-ci.com/g/eluceo/iCal/) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/eluceo/iCal/badges/quality-score.png?s=dd55c5a4e8acc26b2436c2f55c4c14e3fd1026cb)](https://scrutinizer-ci.com/g/eluceo/iCal/)
 
 This package offers a abstraction layer for creating iCalendars. The output will 
 follow [RFC 2445](http://www.ietf.org/rfc/rfc2445.txt) as best as possible.
