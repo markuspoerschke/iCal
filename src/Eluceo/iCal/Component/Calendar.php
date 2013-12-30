@@ -102,12 +102,6 @@ class Calendar extends Component
     }
 
     /**
-     * Not needed here.
-     *
-     * @todo Remove this method
-     *
-     * @deprecated
-     *
      * @return null|string
      */
     public function getProdId()
