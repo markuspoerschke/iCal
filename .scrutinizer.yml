@@ -1,0 +1,11 @@
+tools:
+    php_cs_fixer: true
+    php_code_sniffer:
+        config:
+            standard: PSR1
+    php_mess_detector: true
+    php_analyzer:
+        filter:
+            excluded_paths: ["*/Tests/*"]
+    sensiolabs_security_checker: true
+    external_code_coverage: true

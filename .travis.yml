@@ -4,8 +4,13 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - hhvm
 
 before_script:
   - composer dump-autoload
 
-script: phpunit --coverage-text -c tests/
+script: phpunit --coverage-clover=coverage.clover -c tests/
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
