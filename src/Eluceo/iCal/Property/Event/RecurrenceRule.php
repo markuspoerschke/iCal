@@ -2,7 +2,6 @@
 
 namespace Eluceo\iCal\Property\Event;
 
-use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\ValueInterface;
 use Eluceo\iCal\ParameterBag;
 
