@@ -64,6 +64,7 @@ class PropertyBag implements \IteratorAggregate
         }
 
         $this->elements[] = $property;
+        return $this;
     }
 
     public function getIterator()
