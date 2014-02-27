@@ -31,6 +31,7 @@ class PropertyBag implements \IteratorAggregate
     {
         $property         = new Property($name, $value, $params);
         $this->elements[] = $property;
+        return $this;
     }
 
     /**
