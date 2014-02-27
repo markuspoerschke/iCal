@@ -81,6 +81,7 @@ class Property
     public function setParam($name, $value)
     {
         $this->parameterBag->setParam($name, $value);
+        return $this;
     }
 
     /**
@@ -105,6 +106,7 @@ class Property
         } else {
             $this->value = $value;
         }
+        return $this;
     }
 
     /**
