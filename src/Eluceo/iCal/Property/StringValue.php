@@ -42,6 +42,7 @@ class StringValue implements ValueInterface
     public function setValue($value)
     {
         $this->value = $value;
+        return $this;
     }
 
     /**
