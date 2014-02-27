@@ -254,56 +254,67 @@ class Event extends Component
     public function setDtEnd($dtEnd)
     {
         $this->dtEnd = $dtEnd;
+        return $this;
     }
 
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
+        return $this;
     }
 
     public function setDtStamp($dtStamp)
     {
         $this->dtStamp = $dtStamp;
+        return $this;
     }
 
     public function setDuration($duration)
     {
         $this->duration = $duration;
+        return $this;
     }
 
     public function setLocation($location)
     {
         $this->location = $location;
+        return $this;
     }
 
     public function setNoTime($noTime)
     {
         $this->noTime = $noTime;
+        return $this;
     }
 
     public function setSequence($sequence)
     {
         $this->sequence = $sequence;
+        return $this;
     }
 
     public function setSummary($summary)
     {
         $this->summary = $summary;
+        return $this;
     }
 
     public function setUniqueId($uniqueId)
     {
         $this->uniqueId = $uniqueId;
+        return $this;
     }
 
     public function setUrl($url)
     {
         $this->url = $url;
+        return $this;
     }
 
     public function setUseTimezone($useTimezone)
     {
         $this->useTimezone = $useTimezone;
+        return $this;
     }
 
     public function getUseTimezone()
@@ -317,6 +328,7 @@ class Event extends Component
     public function setAttendee($attendee)
     {
         $this->attendee = $attendee;
+        return $this;
     }
 
     /**
@@ -333,11 +345,13 @@ class Event extends Component
     public function setDescription($description)
     {
         $this->description = $description;
+        return $this;
     }
 
     public function setUseUtc($useUtc = true)
     {
         $this->useUtc = $useUtc;
+        return $this;
     }
 
     /**
@@ -357,6 +371,7 @@ class Event extends Component
         } else {
             throw new InvalidArgumentException('Invalid value for transparancy');
         }
+        return $this;
     }
 
     public function setStatus($status)
@@ -369,6 +384,7 @@ class Event extends Component
         } else {
             throw new InvalidArgumentException('Invalid value for status');
         }
+        return $this;
     }
 
     /**
@@ -377,6 +393,7 @@ class Event extends Component
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
     {
         $this->recurrenceRule = $recurrenceRule;
+        return $this;
     }
 
     /**
