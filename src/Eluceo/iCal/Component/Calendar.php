@@ -52,16 +52,19 @@ class Calendar extends Component
     public function setMethod($method)
     {
         $this->method = $method;
+        return $this;
     }
 
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     public function setTimezone($timezone)
     {
         $this->timezone = $timezone;
+        return $this;
     }
 
     /**

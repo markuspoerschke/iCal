@@ -67,6 +67,7 @@ class RecurrenceRule implements ValueInterface
     public function setCount($count)
     {
         $this->count = $count;
+        return $this;
     }
 
     /**
@@ -89,6 +90,7 @@ class RecurrenceRule implements ValueInterface
         } else {
             throw new \InvalidArgumentException("The Frequency {$freq} is not supported.");
         }
+        return $this;
     }
 
     /**
@@ -105,6 +107,7 @@ class RecurrenceRule implements ValueInterface
     public function setInterval($interval)
     {
         $this->interval = $interval;
+        return $this;
     }
 
     /**
