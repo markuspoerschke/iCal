@@ -42,10 +42,12 @@ $vEvent = new \Eluceo\iCal\Component\Event();
 #### 3. Add your information to the Event
 
 ```PHP
-$vEvent->setDtStart(new \DateTime('2012-12-24'));
-$vEvent->setDtEnd(new \DateTime('2012-12-24'));
-$vEvent->setNoTime(true);
-$vEvent->setSummary('Christmas');
+$vEvent
+    ->setDtStart(new \DateTime('2012-12-24'))
+    ->setDtEnd(new \DateTime('2012-12-24'))
+    ->setNoTime(true)
+    ->setSummary('Christmas')
+;
 ```
 
 #### 4. Add Event to Calendar
