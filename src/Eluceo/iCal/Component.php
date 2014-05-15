@@ -80,11 +80,15 @@ abstract class Component
 
         $lines[] = sprintf('END:%s', $this->getType());
 
-        foreach ($lines as $key => $line) {
-            $lines[$key] = $this->fold($line);
+        $ret = array();
+
+        foreach ($lines as $line) {
+            foreach ($this->fold($line) as $l) {
+                $ret[] = $l;
+            }
         }
 
-        return $lines;
+        return $ret;
     }
 
     /**
@@ -96,7 +100,7 @@ abstract class Component
      *
      * @param $string
      *
-     * @return string
+     * @return array
      */
     public function fold($string)
     {
@@ -117,7 +121,7 @@ abstract class Component
             $lines[$lineNo] = $line;
         }
 
-        return implode("\r\n", $lines);
+        return $lines;
     }
 
     /**
