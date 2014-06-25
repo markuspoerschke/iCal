@@ -74,6 +74,16 @@ class Event extends Component
     /**
      * @var string
      */
+    protected $locationTitle;
+
+    /**
+     * @var string
+     */
+    protected $locationGeo;
+
+    /**
+     * @var string
+     */
     protected $summary;
 
     /**
@@ -173,6 +183,15 @@ class Event extends Component
 
         if (null != $this->location) {
             $this->properties->set('LOCATION', $this->location);
+
+            if(null != $this->locationGeo) {
+                $this->properties->add(new Property('X-APPLE-STRUCTURED-LOCATION', 'geo:'.$this->locationGeo, array(
+                    'VALUE' => 'URI',
+                    'X-ADDRESS' => $this->location,
+                    'X-APPLE-RADIUS' => 49,
+                    'X-TITLE' => $this->locationTitle,
+                )));
+            }
         }
 
         if (null != $this->summary) {
@@ -275,9 +294,11 @@ class Event extends Component
         return $this;
     }
 
-    public function setLocation($location)
+    public function setLocation($location, $title = '', $geo = null)
     {
         $this->location = $location;
+        $this->locationTitle = $title;
+        $this->locationGeo = $geo;
         return $this;
     }
 

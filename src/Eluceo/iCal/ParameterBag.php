@@ -81,7 +81,9 @@ class ParameterBag
     public function escapeParamValue($value)
     {
         $count = 0;
+        $value = str_replace('\\', '\\\\', $value);
         $value = str_replace('"', '\"', $value, $count);
+        $value = str_replace("\n", '\\n', $value);
         if (false !== strpos($value, ';') || false !== strpos($value, ',') || $count) {
             $value = '"' . $value . '"';
         }
