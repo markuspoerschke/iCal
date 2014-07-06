@@ -22,9 +22,9 @@ use \InvalidArgumentException;
  */
 class Event extends Component
 {
-
-    const TIME_TRANSPARENCY_OPAQUE = 'OPAQUE';
+    const TIME_TRANSPARENCY_OPAQUE      = 'OPAQUE';
     const TIME_TRANSPARENCY_TRANSPARENT = 'TRANSPARENT';
+
     const STATUS_TENTATIVE = 'TENTATIVE';
     const STATUS_CONFIRMED = 'CONFIRMED';
     const STATUS_CANCELLED = 'CANCELLED';
@@ -210,8 +210,9 @@ class Event extends Component
             $this->properties->set('RRULE', $this->recurrenceRule);
         }
 
-        if( $this->noTime )
+        if( $this->noTime ) {
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
+        }
     }
 
     /**
@@ -232,8 +233,9 @@ class Event extends Component
             $params['TZID'] = $timeZone;
         }
 
-        if( $noTime )
+        if($noTime) {
             $params['VALUE'] = 'DATE';
+        }
 
         return new Property($name, $dateString, $params);
     }
@@ -270,30 +272,52 @@ class Event extends Component
         return $dateTime->format($this->getDateFormat($noTime));
     }
 
+    /**
+     * @param $dtEnd
+     * @return $this
+     */
     public function setDtEnd($dtEnd)
     {
         $this->dtEnd = $dtEnd;
         return $this;
     }
 
+    /**
+     * @param $dtStart
+     * @return $this
+     */
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
         return $this;
     }
 
+    /**
+     * @param $dtStamp
+     * @return $this
+     */
     public function setDtStamp($dtStamp)
     {
         $this->dtStamp = $dtStamp;
         return $this;
     }
 
+    /**
+     * @param $duration
+     * @return $this
+     */
     public function setDuration($duration)
     {
         $this->duration = $duration;
         return $this;
     }
 
+    /**
+     * @param $location
+     * @param string $title
+     * @param null $geo
+     * @return $this
+     */
     public function setLocation($location, $title = '', $geo = null)
     {
         $this->location = $location;
@@ -302,49 +326,77 @@ class Event extends Component
         return $this;
     }
 
+    /**
+     * @param $noTime
+     * @return $this
+     */
     public function setNoTime($noTime)
     {
         $this->noTime = $noTime;
         return $this;
     }
 
+    /**
+     * @param $sequence
+     * @return $this
+     */
     public function setSequence($sequence)
     {
         $this->sequence = $sequence;
         return $this;
     }
 
+    /**
+     * @param $summary
+     * @return $this
+     */
     public function setSummary($summary)
     {
         $this->summary = $summary;
         return $this;
     }
 
+    /**
+     * @param $uniqueId
+     * @return $this
+     */
     public function setUniqueId($uniqueId)
     {
         $this->uniqueId = $uniqueId;
         return $this;
     }
 
+    /**
+     * @param $url
+     * @return $this
+     */
     public function setUrl($url)
     {
         $this->url = $url;
         return $this;
     }
 
+    /**
+     * @param $useTimezone
+     * @return $this
+     */
     public function setUseTimezone($useTimezone)
     {
         $this->useTimezone = $useTimezone;
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function getUseTimezone()
     {
         return $this->useTimezone;
     }
 
     /**
-     * @param string $description
+     * @param $attendee
+     * @return $this
      */
     public function setAttendee($attendee)
     {
@@ -361,7 +413,8 @@ class Event extends Component
     }
 
     /**
-     * @param string $description
+     * @param $description
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -369,6 +422,10 @@ class Event extends Component
         return $this;
     }
 
+    /**
+     * @param bool $useUtc
+     * @return $this
+     */
     public function setUseUtc($useUtc = true)
     {
         $this->useUtc = $useUtc;
@@ -383,6 +440,11 @@ class Event extends Component
         return $this->description;
     }
 
+    /**
+     * @param $transparency
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function setTimeTransparency($transparency)
     {
         $transparency = strtoupper($transparency);
@@ -395,6 +457,11 @@ class Event extends Component
         return $this;
     }
 
+    /**
+     * @param $status
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function setStatus($status)
     {
         $status = strtoupper($status);
@@ -410,6 +477,7 @@ class Event extends Component
 
     /**
      * @param RecurrenceRule $recurrenceRule
+     * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
     {

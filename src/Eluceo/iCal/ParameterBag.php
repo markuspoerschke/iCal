@@ -11,9 +11,9 @@ class ParameterBag
      */
     protected $params;
 
-    public function __construct($parms = array())
+    public function __construct($params = array())
     {
-        $this->params = $parms;
+        $this->params = $params;
     }
 
     /**

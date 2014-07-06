@@ -68,10 +68,12 @@ abstract class Component
 
         $lines[] = sprintf('BEGIN:%s', $this->getType());
 
+        /** @var $property Property */
         foreach ($this->properties as $property) {
             $lines[] = $property->toLine();
         }
 
+        /** @var $component Component */
         foreach ($this->components as $component) {
             foreach ($component->build() as $l) {
                 $lines[] = $l;

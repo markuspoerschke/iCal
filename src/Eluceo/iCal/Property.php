@@ -76,11 +76,14 @@ class Property
 
     /**
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
+     *
+     * @return $this
      */
     public function setParam($name, $value)
     {
         $this->parameterBag->setParam($name, $value);
+
         return $this;
     }
 
@@ -95,6 +98,7 @@ class Property
 
     /**
      * @param mixed $value
+     * @return $this
      * @throws \Exception
      */
     public function setValue($value)
@@ -106,6 +110,7 @@ class Property
         } else {
             $this->value = $value;
         }
+
         return $this;
     }
 
