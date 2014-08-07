@@ -17,6 +17,35 @@ use Eluceo\iCal\PropertyBag;
 class Calendar extends Component
 {
     /**
+     * Methods for calendar components
+     * 
+     * According to RFP 5545: 3.7.2. Method
+     * 
+     * @link http://tools.ietf.org/html/rfc5545#section-3.7.2
+     * 
+     * And then according to RFC 2446: 3 APPLICATION PROTOCOL ELEMENTS
+     * 
+     * @link https://www.ietf.org/rfc/rfc2446.txt
+     */
+    const METHOD_PUBLISH = 'PUBLISH';
+    const METHOD_REQUEST = 'REQUEST';
+    const METHOD_REPLY = 'REPLY';
+    const METHOD_ADD = 'ADD';
+    const METHOD_CANCEL = 'CANCEL';
+    const METHOD_REFRESH = 'REFRESH';
+    const METHOD_COUNTER = 'COUNTER';
+    const METHOD_DECLINECOUNTER = 'DECLINECOUNTER';
+
+    /**
+     * This property defines the calendar scale used for the calendar information specified in the iCalendar object.
+     * 
+     * According to RFC 5545: 3.7.1. Calendar Scale
+     * 
+     * @link http://tools.ietf.org/html/rfc5545#section-3.7
+     */
+    const CALSCALE_GREGORIAN = 'GREGORIAN';
+
+    /**
      * The Product Identifier
      *
      * According to RFC 2445: 4.7.3 Product Identifier
@@ -31,6 +60,7 @@ class Calendar extends Component
     protected $method = null;
     protected $name = null;
     protected $timezone = null;
+    protected $calendarScale = null;
 
     public function __construct($prodId)
     {
@@ -81,6 +111,16 @@ class Calendar extends Component
     }
 
     /**
+     * @param $calendarScale
+     * @return $this
+     */
+    public function setCalendarScale($calendarScale)
+    {
+        $this->calendarScale = $calendarScale;
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildPropertyBag()
@@ -91,6 +131,10 @@ class Calendar extends Component
 
         if ($this->method) {
             $this->properties->set('METHOD', $this->method);
+        }
+
+        if ($this->calendarScale) {
+            $this->properties->set('CALSCALE', $this->calendarScale);
         }
 
         if ($this->name) {
