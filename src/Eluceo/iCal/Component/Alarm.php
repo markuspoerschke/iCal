@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the zargener/iCal package.
+ * This file is part of the eluceo/iCal package.
  *
  * (c) Radoslav Lukac <dev@elceka.sk>
  *
