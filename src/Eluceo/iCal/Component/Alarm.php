@@ -24,7 +24,7 @@ class Alarm extends Component
     /**
      * Alarm ACTION property
      * 
-     * According to RFP 5545: 3.8.6.1. Action
+     * According to RFC 5545: 3.8.6.1. Action
      * 
      * @link http://tools.ietf.org/html/rfc5545#section-3.8.6.1
      */
