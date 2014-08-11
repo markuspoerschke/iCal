@@ -148,6 +148,21 @@ class Calendar extends Component
     }
 
     /**
+     * Adds an Event to the Calendar
+     *
+     * Wrapper for addComponent()
+     *
+     * @see Eluceo\iCal::addComponent
+     * @deprecated Please, use public method addComponent() from abstract Component class
+     *
+     * @param Event $event
+     */
+    public function addEvent(Event $event)
+    {
+        $this->addComponent($event);
+    }
+
+    /**
      * @return null|string
      */
     public function getProdId()
