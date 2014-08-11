@@ -20,7 +20,7 @@ $vEvent->setSummary('Christmas');
 $vEvent->setUseTimezone(true);
 
 // 3. Add event to calendar
-$vCalendar->addEvent($vEvent);
+$vCalendar->addComponent($vEvent);
 
 // 4. Set headers
 header('Content-Type: text/calendar; charset=utf-8');
