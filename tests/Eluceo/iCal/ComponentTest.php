@@ -10,9 +10,16 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
 
         $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
         $vEvent = new \Eluceo\iCal\Component\Event();
-        $vEvent->setDtStart(new \DateTime('2012-12-24'));
-        $vEvent->setDtEnd(new \DateTime('2012-12-24'));
+        $vEvent->setDtStart(new \DateTime('2014-12-24'));
+        $vEvent->setDtEnd(new \DateTime('2014-12-24'));
         $vEvent->setDescription($input);
+
+        $vAlarm = new \Eluceo\iCal\Component\Alarm;
+        $vAlarm->setAction(\Eluceo\iCal\Component\Alarm::ACTION_DISPLAY);
+        $vAlarm->setDescription($input);
+        $vAlarm->setTrigger('PT0S', true);
+        $vEvent->addComponent($vAlarm);
+
         $vCalendar->addComponent($vEvent);
 
         $output = $vCalendar->render();
