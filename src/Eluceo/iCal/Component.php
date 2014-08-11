@@ -46,7 +46,7 @@ abstract class Component
      * @param Component $component The Component that will be added
      * @param null      $key       The key of the Component
      */
-    protected function addComponent(Component $component, $key = null)
+    public function addComponent(Component $component, $key = null)
     {
         if (null == $key) {
             $this->components[] = $component;
