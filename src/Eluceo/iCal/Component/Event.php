@@ -125,6 +125,16 @@ class Event extends Component
     protected $recurrenceRule;
 
     /**
+     * @var \DateTime
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     */
+    protected $modified;
+
+    /**
      * Indicates if the UTC time should be used or not
      *
      * @var bool
@@ -212,6 +222,14 @@ class Event extends Component
 
         if( $this->noTime ) {
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
+        }
+
+        if( $this->created ) {
+            $this->properties->add($this->buildDateTimeProperty('CREATED', $this->created));
+        }
+
+        if( $this->modified ) {
+            $this->properties->add($this->buildDateTimeProperty('LAST-MODIFIED', $this->modified));
         }
     }
 
@@ -491,5 +509,25 @@ class Event extends Component
     public function getRecurrenceRule()
     {
         return $this->recurrenceRule;
+    }
+
+    /**
+     * @param $dtStamp
+     * @return $this
+     */
+    public function setCreated($dtStamp)
+    {
+        $this->created = $dtStamp;
+        return $this;
+    }
+
+    /**
+     * @param $dtStamp
+     * @return $this
+     */
+    public function setModified($dtStamp)
+    {
+        $this->modified = $dtStamp;
+        return $this;
     }
 }

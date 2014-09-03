@@ -59,6 +59,7 @@ class Calendar extends Component
     protected $prodId = null;
     protected $method = null;
     protected $name = null;
+    protected $description = null;
     protected $timezone = null;
     protected $calendarScale = null;
 
@@ -96,6 +97,16 @@ class Calendar extends Component
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @param $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 
@@ -139,6 +150,10 @@ class Calendar extends Component
 
         if ($this->name) {
             $this->properties->set('X-WR-CALNAME', $this->name);
+        }
+
+        if ($this->description) {
+            $this->properties->set('X-WR-CALDESC', $this->description);
         }
 
         if ($this->timezone) {
