@@ -2,7 +2,7 @@
     "name":"eluceo/ical",
     "description":"The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 2445 as best as possible.",
     "license":"MIT",
-    "homepage":"https://github.com/eluceo/iCal",
+    "homepage":"https://github.com/markuspoerschke/iCal",
     "authors":[
         {
             "name":"Markus Poerschke",
@@ -23,8 +23,8 @@
         "calendar"
     ],
     "support":{
-        "issues":"https://github.com/eluceo/iCal/issues",
-        "source":"https://github.com/eluceo/iCal"
+        "issues":"https://github.com/markuspoerschke/iCal/issues",
+        "source":"https://github.com/markuspoerschke/iCal"
     },
     "autoload":{
         "psr-0":{
