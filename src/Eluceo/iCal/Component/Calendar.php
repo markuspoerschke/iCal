@@ -184,4 +184,9 @@ class Calendar extends Component
     {
         return $this->prodId;
     }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
 }

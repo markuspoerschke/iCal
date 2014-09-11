@@ -87,6 +87,11 @@ class Event extends Component
     protected $summary;
 
     /**
+     * @var string
+     */
+    protected $organizer;
+
+    /**
      * @see http://www.ietf.org/rfc/rfc2445.txt 4.8.2.7 Time Transparency
      * @var string
      */
@@ -140,6 +145,11 @@ class Event extends Component
      * @var bool
      */
     protected $useUtc = true;
+
+    /**
+     * @var bool
+     */
+    protected $cancelled;
 
     public function __construct($uniqueId = null)
     {
@@ -220,6 +230,14 @@ class Event extends Component
             $this->properties->set('RRULE', $this->recurrenceRule);
         }
 
+        if ($this->cancelled) {
+            $this->properties->set('STATUS', 'CANCELLED');
+        }
+
+        if (null != $this->organizer) {
+            $this->properties->set('ORGANIZER', $this->organizer);
+        }
+        
         if( $this->noTime ) {
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
         }
@@ -300,10 +318,11 @@ class Event extends Component
         return $this;
     }
 
-    /**
-     * @param $dtStart
-     * @return $this
-     */
+    public function getDtEnd()
+    {
+        return $this->dtEnd;
+    }
+    
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
@@ -365,9 +384,15 @@ class Event extends Component
     }
 
     /**
-     * @param $summary
+     * @param $organizer
      * @return $this
      */
+    public function setOrganizer($organizer)
+    {
+        $this->organizer = $organizer;
+        return $this;
+    }
+
     public function setSummary($summary)
     {
         $this->summary = $summary;
@@ -456,6 +481,16 @@ class Event extends Component
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param $status
+     * @return $this
+     */
+    public function setCancelled($status)
+    {
+        $this->cancelled = (bool) $status;
+        return $this;
     }
 
     /**
