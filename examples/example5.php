@@ -44,7 +44,7 @@ $vTimezoneRuleStd->setRecurrenceRule($stdRecurrenceRule);
 $vTimezone = new \Eluceo\iCal\Component\Timezone($tz);
 $vTimezone->addComponent($vTimezoneRuleDst);
 $vTimezone->addComponent($vTimezoneRuleStd);
-$vCalendar->addComponent($vTimezone);
+$vCalendar->setTimezone($vTimezone);
 
 // 5. Create an event
 $vEvent = new \Eluceo\iCal\Component\Event();

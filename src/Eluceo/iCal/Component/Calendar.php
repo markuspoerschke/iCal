@@ -157,8 +157,14 @@ class Calendar extends Component
         }
 
         if ($this->timezone) {
-            $this->properties->set('X-WR-TIMEZONE', $this->timezone);
-            $this->addComponent(new Timezone($this->timezone));
+            if ($this->timezone instanceof Timezone) {
+                $this->properties->set('X-WR-TIMEZONE', $this->timezone->getZoneIdentifier());
+                $this->addComponent($this->timezone);
+            }
+            else {
+                $this->properties->set('X-WR-TIMEZONE', $this->timezone);
+                $this->addComponent(new Timezone($this->timezone));
+            }
         }
     }
 
