@@ -9,6 +9,8 @@ The following components are supported at this time:
 
 * VCALENDAR
 * VEVENT
+* VALARM
+* VTIMEZONE
 
 ## Installation
 
@@ -84,13 +86,41 @@ DTSTART:20121224T180000Z
 #### 2. Use explicit timezone
 
 You can use an explicit timezone by calling `$vEvent->setUseTimezone(true);`. The timezone of your 
-`\DateTime` object will be used. The output will be as following:
+`\DateTime` object will be used. In this case the non-standard field "X-WR-TIMEZONE" will be used.
+Be awre that this is a simple solution which is not supported by all calendar clients.
+The output will be as following:
 
 ```
 DTSTART;TZID=Europe/Berlin:20121224T180000
 ```
 
-#### 3. Use locale time
+#### 3. Use explicit timezone with definition
+
+You can use an explicit timezone and define it using `Timezone()` and `TimezoneRule()` (see example5.php).
+The timezone of your `\DateTime` object will be used. The output will be as following:
+
+```
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+X-LIC-LOCATION:Europe/Berlin
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+DTSTART:19810329T030000
+RRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+DTSTART:19961027T030000
+RRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+...
+DTSTART;TZID=Europe/Berlin:20121224T180000
+```
+
+#### 4. Use locale time
 
 You can use local time by calling `$vEvent->setUseUtc(false);`. The output will be:
 
