@@ -237,7 +237,7 @@ class Event extends Component
         if (null != $this->organizer) {
             $this->properties->set('ORGANIZER', $this->organizer);
         }
-        
+
         if( $this->noTime ) {
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
         }
@@ -322,7 +322,7 @@ class Event extends Component
     {
         return $this->dtEnd;
     }
-    
+
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
@@ -393,6 +393,10 @@ class Event extends Component
         return $this;
     }
 
+    /**
+     * @param $summary
+     * @return $this
+     */
     public function setSummary($summary)
     {
         $this->summary = $summary;
