@@ -47,4 +47,9 @@ class Timezone extends Component
         $this->properties->set('TZID', $this->timezone);
         $this->properties->set('X-LIC-LOCATION', $this->timezone);
     }
+
+    public function getZoneIdentifier()
+    {
+        return $this->timezone;
+    }
 }
