@@ -60,9 +60,6 @@ class ParameterBag
             }
             foreach ($paramValues as $k => $v) {
                 $paramValues[$k] = $this->escapeParamValue($v);
-                if (strpos($paramValues[$k], ":") !== false) {
-                    $paramValues[$k] = '"' . $paramValues[$k] . '"';
-                }
             }
 
             if ('' != $line) {
@@ -87,7 +84,7 @@ class ParameterBag
         $value = str_replace('\\', '\\\\', $value);
         $value = str_replace('"', '\"', $value, $count);
         $value = str_replace("\n", '\\n', $value);
-        if (false !== strpos($value, ';') || false !== strpos($value, ',') || $count) {
+        if (false !== strpos($value, ';') || false !== strpos($value, ',') || false !== strpos($value, ':') || $count) {
             $value = '"' . $value . '"';
         }
 
