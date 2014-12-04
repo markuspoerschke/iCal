@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Component;
 
 use Eluceo\iCal\Component;
+use Eluceo\iCal\Property\Event\Attendees;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
@@ -110,9 +111,9 @@ class Event extends Component
     protected $sequence = 0;
 
     /**
-     * @var string
+     * @var Attendees
      */
-    protected $attendee;
+    protected $attendees;
 
     /**
      * @var string
@@ -218,8 +219,8 @@ class Event extends Component
             $this->properties->set('SUMMARY', $this->summary);
         }
 
-        if (null != $this->attendee) {
-            $this->properties->set('ATTENDEE', $this->attendee);
+        if (null != $this->attendees) {
+            $this->properties->add($this->attendees);
         }
 
         if (null != $this->description) {
@@ -442,21 +443,34 @@ class Event extends Component
     }
 
     /**
-     * @param $attendee
+     * @param $attendees
      * @return $this
      */
-    public function setAttendee($attendee)
+    public function setAttendees($attendees)
     {
-        $this->attendee = $attendee;
+        $this->attendees = $attendees;
+        return $this;
+    }
+
+    /**
+     * @param string $attendee
+     * @return $this
+     */
+    public function addAttendee($attendee, $params = array())
+    {
+        if (!isset($this->attendees)) {
+            $this->attendees = new Attendees();
+        }
+        $this->attendees->add($attendee, $params);
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getAttendee()
+    public function getAttendees()
     {
-        return $this->attendee;
+        return $this->attendees;
     }
 
     /**

@@ -60,6 +60,9 @@ class ParameterBag
             }
             foreach ($paramValues as $k => $v) {
                 $paramValues[$k] = $this->escapeParamValue($v);
+                if (strpos($paramValues[$k], ":") !== false) {
+                    $paramValues[$k] = '"' . $paramValues[$k] . '"';
+                }
             }
 
             if ('' != $line) {

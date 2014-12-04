@@ -70,7 +70,7 @@ abstract class Component
 
         /** @var $property Property */
         foreach ($this->properties as $property) {
-            $lines[] = $property->toLine();
+            $lines = array_merge($lines, $property->toLines());
         }
 
         /** @var $component Component */

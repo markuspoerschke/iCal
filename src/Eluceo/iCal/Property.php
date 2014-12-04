@@ -75,6 +75,16 @@ class Property
     }
 
     /**
+     * Get all unfolded lines
+     *
+     * @return array
+     */
+    public function toLines()
+    {
+        return array($this->toLine());
+    }
+
+    /**
      * @param string $name
      * @param mixed $value
      *
