@@ -11,7 +11,7 @@ class StringValue implements ValueInterface
      */
     protected $value;
 
-    function __construct($value)
+    public function __construct($value)
     {
         $this->value = $value;
     }
@@ -38,6 +38,8 @@ class StringValue implements ValueInterface
 
     /**
      * @param string $value
+     *
+     * @return $this
      */
     public function setValue($value)
     {

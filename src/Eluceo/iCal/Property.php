@@ -41,9 +41,10 @@ class Property
     protected $name;
 
     /**
-     * @param $name
-     * @param $value
+     * @param       $name
+     * @param       $value
      * @param array $params
+     *
      * @return \Eluceo\iCal\Property
      */
     public function __construct($name, $value, $params = array())
@@ -86,7 +87,7 @@ class Property
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return $this
      */
@@ -99,6 +100,7 @@ class Property
 
     /**
      * @param $name
+     *
      * @return null
      */
     public function getParam($name)
@@ -108,6 +110,7 @@ class Property
 
     /**
      * @param mixed $value
+     *
      * @return $this
      * @throws \Exception
      */
@@ -115,10 +118,12 @@ class Property
     {
         if (is_scalar($value)) {
             $this->value = new StringValue($value);
-        } else if (!$value instanceof ValueInterface) {
-            throw new \Exception("The value must implement the ValueInterface.");
         } else {
-            $this->value = $value;
+            if (!$value instanceof ValueInterface) {
+                throw new \Exception("The value must implement the ValueInterface.");
+            } else {
+                $this->value = $value;
+            }
         }
 
         return $this;

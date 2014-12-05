@@ -18,29 +18,29 @@ class Calendar extends Component
 {
     /**
      * Methods for calendar components
-     * 
+     *
      * According to RFP 5545: 3.7.2. Method
-     * 
+     *
      * @link http://tools.ietf.org/html/rfc5545#section-3.7.2
-     * 
+     *
      * And then according to RFC 2446: 3 APPLICATION PROTOCOL ELEMENTS
-     * 
+     *
      * @link https://www.ietf.org/rfc/rfc2446.txt
      */
-    const METHOD_PUBLISH = 'PUBLISH';
-    const METHOD_REQUEST = 'REQUEST';
-    const METHOD_REPLY = 'REPLY';
-    const METHOD_ADD = 'ADD';
-    const METHOD_CANCEL = 'CANCEL';
-    const METHOD_REFRESH = 'REFRESH';
-    const METHOD_COUNTER = 'COUNTER';
+    const METHOD_PUBLISH        = 'PUBLISH';
+    const METHOD_REQUEST        = 'REQUEST';
+    const METHOD_REPLY          = 'REPLY';
+    const METHOD_ADD            = 'ADD';
+    const METHOD_CANCEL         = 'CANCEL';
+    const METHOD_REFRESH        = 'REFRESH';
+    const METHOD_COUNTER        = 'COUNTER';
     const METHOD_DECLINECOUNTER = 'DECLINECOUNTER';
 
     /**
      * This property defines the calendar scale used for the calendar information specified in the iCalendar object.
-     * 
+     *
      * According to RFC 5545: 3.7.1. Calendar Scale
-     * 
+     *
      * @link http://tools.ietf.org/html/rfc5545#section-3.7
      */
     const CALSCALE_GREGORIAN = 'GREGORIAN';
@@ -82,6 +82,7 @@ class Calendar extends Component
 
     /**
      * @param $method
+     *
      * @return $this
      */
     public function setMethod($method)
@@ -92,6 +93,7 @@ class Calendar extends Component
 
     /**
      * @param $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -102,6 +104,7 @@ class Calendar extends Component
 
     /**
      * @param $description
+     *
      * @return $this
      */
     public function setDescription($description)
@@ -112,6 +115,7 @@ class Calendar extends Component
 
     /**
      * @param $timezone
+     *
      * @return $this
      */
     public function setTimezone($timezone)
@@ -123,6 +127,7 @@ class Calendar extends Component
 
     /**
      * @param $calendarScale
+     *
      * @return $this
      */
     public function setCalendarScale($calendarScale)
@@ -160,8 +165,7 @@ class Calendar extends Component
             if ($this->timezone instanceof Timezone) {
                 $this->properties->set('X-WR-TIMEZONE', $this->timezone->getZoneIdentifier());
                 $this->addComponent($this->timezone);
-            }
-            else {
+            } else {
                 $this->properties->set('X-WR-TIMEZONE', $this->timezone);
                 $this->addComponent(new Timezone($this->timezone));
             }
@@ -173,7 +177,7 @@ class Calendar extends Component
      *
      * Wrapper for addComponent()
      *
-     * @see Eluceo\iCal::addComponent
+     * @see        Eluceo\iCal::addComponent
      * @deprecated Please, use public method addComponent() from abstract Component class
      *
      * @param Event $event

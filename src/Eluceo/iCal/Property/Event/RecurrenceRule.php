@@ -4,6 +4,7 @@ namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\Property\ValueInterface;
 use Eluceo\iCal\ParameterBag;
+use InvalidArgumentException;
 
 /**
  * Implementation of Recurrence Rule
@@ -12,18 +13,18 @@ use Eluceo\iCal\ParameterBag;
  */
 class RecurrenceRule implements ValueInterface
 {
-    const FREQ_YEARLY = 'YEARLY';
+    const FREQ_YEARLY  = 'YEARLY';
     const FREQ_MONTHLY = 'MONTHLY';
-    const FREQ_WEEKLY = 'WEEKLY';
-    const FREQ_DAILY = 'DAILY';
+    const FREQ_WEEKLY  = 'WEEKLY';
+    const FREQ_DAILY   = 'DAILY';
 
-    const WEEKDAY_SUNDAY = "SU";
-    const WEEKDAY_MONDAY = "MO";
-    const WEEKDAY_TUESDAY = "TU";
+    const WEEKDAY_SUNDAY    = "SU";
+    const WEEKDAY_MONDAY    = "MO";
+    const WEEKDAY_TUESDAY   = "TU";
     const WEEKDAY_WEDNESDAY = "WE";
-    const WEEKDAY_THURSDAY = "TH";
-    const WEEKDAY_FRIDAY = "FR";
-    const WEEKDAY_SATURDAY = "SA";
+    const WEEKDAY_THURSDAY  = "TH";
+    const WEEKDAY_FRIDAY    = "FR";
+    const WEEKDAY_SATURDAY  = "SA";
 
     /**
      * The frequency of an Event
@@ -153,6 +154,7 @@ class RecurrenceRule implements ValueInterface
 
     /**
      * @param int|null $count
+     *
      * @return $this
      */
     public function setCount($count)
@@ -183,13 +185,16 @@ class RecurrenceRule implements ValueInterface
      * YEARLY, to specify repeating events based on an interval of a year or more.
      *
      * @param string $freq
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setFreq($freq)
     {
-        if (self::FREQ_YEARLY === $freq || self::FREQ_MONTHLY === $freq ||
-            self::FREQ_WEEKLY === $freq || self::FREQ_DAILY === $freq) {
+        if (self::FREQ_YEARLY === $freq || self::FREQ_MONTHLY === $freq
+            || self::FREQ_WEEKLY === $freq
+            || self::FREQ_DAILY === $freq
+        ) {
             $this->freq = $freq;
         } else {
             throw new \InvalidArgumentException("The Frequency {$freq} is not supported.");
@@ -210,6 +215,7 @@ class RecurrenceRule implements ValueInterface
      * which intervals the recurrence rule repeats.
      *
      * @param int|null $interval
+     *
      * @return $this
      */
     public function setInterval($interval)
@@ -231,6 +237,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are MO, TU, WE, TH, FR, SA, and SU.
      *
      * @param integer $value
+     *
      * @return $this
      */
     public function setWkst($value)
@@ -244,6 +251,8 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 1 to 12.
      *
      * @param integer $month
+     *
+     * @throws InvalidArgumentException
      * @return $this
      */
     public function setByMonth($month)
@@ -261,6 +270,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 1 to 53 or -53 to -1.
      *
      * @param integer $value
+     *
      * @return $this
      */
     public function setByWeekNo($value)
@@ -274,6 +284,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 1 to 366 or -366 to -1.
      *
      * @param integer $day
+     *
      * @return $this
      */
     public function setByYearDay($day)
@@ -287,6 +298,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 1 to 31 or -31 to -1.
      *
      * @param integer $day
+     *
      * @return $this
      */
     public function setByMonthDay($day)
@@ -305,6 +317,7 @@ class RecurrenceRule implements ValueInterface
      * If present, this indicates the nth occurrence of a specific day within the MONTHLY or YEARLY "RRULE".
      *
      * @param string $day
+     *
      * @return $this
      */
     public function setByDay($day)
@@ -318,6 +331,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 0 to 23.
      *
      * @param integer $value
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */
@@ -336,6 +350,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 0 to 59.
      *
      * @param integer $value
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */
@@ -354,6 +369,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are 0 to 60.
      *
      * @param integer $value
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */

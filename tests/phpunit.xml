@@ -10,7 +10,7 @@
          stopOnFailure="false"
          syntaxCheck="false"
          bootstrap="./bootstrap.php"
->
+        >
     <testsuites>
         <testsuite name="eluceo iCal Test Suite">
             <directory suffix="Test.php">./Eluceo/iCal/</directory>

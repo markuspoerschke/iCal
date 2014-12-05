@@ -17,14 +17,14 @@ class Attendees extends Property
     }
 
     /**
-     * @param $value
+     * @param       $value
      * @param array $params
      *
      * @return $this
      */
-    public function add( $value, $params = array() )
+    public function add($value, $params = array())
     {
-        $this->attendees[] = new Property( 'ATTENDEE', $value, $params );
+        $this->attendees[] = new Property('ATTENDEE', $value, $params);
         return $this;
     }
 
@@ -61,14 +61,14 @@ class Attendees extends Property
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @throws \BadMethodCallException
      * @return void
      */
-    public function setParam( $name, $value )
+    public function setParam($name, $value)
     {
-        throw new \BadMethodCallException( 'Cannot call setParam on Attendees Property' );
+        throw new \BadMethodCallException('Cannot call setParam on Attendees Property');
     }
 
     /**
@@ -77,9 +77,9 @@ class Attendees extends Property
      * @throws \BadMethodCallException
      * @return void
      */
-    public function getParam( $name )
+    public function getParam($name)
     {
-        throw new \BadMethodCallException( 'Cannot call getParam on Attendees Property' );
+        throw new \BadMethodCallException('Cannot call getParam on Attendees Property');
     }
 
     /**
