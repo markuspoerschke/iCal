@@ -25,5 +25,11 @@ class ParameterBagTest extends \PHPUnit_Framework_TestCase
             $propertyObject->escapeParamValue('Containing forbidden chars like a ;'),
             'Text with semicolon'
         );
+
+        $this->assertEquals(
+            '"Containing forbidden chars like a :"',
+            $propertyObject->escapeParamValue('Containing forbidden chars like a :'),
+            'Text with colon'
+        );
     }
 }
