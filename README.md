@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/eluceo/iCal.png)](http://travis-ci.org/eluceo/iCal) [![Code Coverage](https://scrutinizer-ci.com/g/eluceo/iCal/badges/coverage.png?s=96bd87d2615285caaef1173e80f0aad7ac98d86a)](https://scrutinizer-ci.com/g/eluceo/iCal/) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/eluceo/iCal/badges/quality-score.png?s=dd55c5a4e8acc26b2436c2f55c4c14e3fd1026cb)](https://scrutinizer-ci.com/g/eluceo/iCal/) [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable.png)](https://packagist.org/packages/eluceo/ical) [![Total Downloads](https://poser.pugx.org/eluceo/ical/downloads.png)](https://packagist.org/packages/eluceo/ical) [![License](https://poser.pugx.org/eluceo/ical/license.png)](https://packagist.org/packages/eluceo/ical)
 
-This package offers a abstraction layer for creating iCalendars. The output will 
+This package offers a abstraction layer for creating iCalendars. The output will
 follow [RFC 2445](http://www.ietf.org/rfc/rfc2445.txt) as best as possible.
 
 The following components are supported at this time:
@@ -14,7 +14,7 @@ The following components are supported at this time:
 
 ## Installation
 
-You can install this package by using [Composer](http://getcomposer.org). 
+You can install this package by using [Composer](http://getcomposer.org).
 Link to Packagist: https://packagist.org/packages/eluceo/ical
 
 ```
@@ -85,7 +85,7 @@ DTSTART:20121224T180000Z
 
 #### 2. Use explicit timezone
 
-You can use an explicit timezone by calling `$vEvent->setUseTimezone(true);`. The timezone of your 
+You can use an explicit timezone by calling `$vEvent->setUseTimezone(true);`. The timezone of your
 `\DateTime` object will be used. In this case the non-standard field "X-WR-TIMEZONE" will be used.
 Be awre that this is a simple solution which is not supported by all calendar clients.
 The output will be as following:
@@ -135,7 +135,7 @@ To setup and run tests:
 - go to the root directory of this project
 - download composer: `wget https://getcomposer.org/composer.phar`
 - install dev dependencies: `php composer.phar install --dev`
-- run `./vendor/bin/phpunit -c tests`
+- run `./bin/phpunit -c tests`
 
 ## License
 
@@ -163,4 +163,3 @@ THE SOFTWARE.
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/eluceo/ical/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
