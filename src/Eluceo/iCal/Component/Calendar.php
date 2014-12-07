@@ -61,7 +61,43 @@ class Calendar extends Component
     protected $name = null;
     protected $description = null;
     protected $timezone = null;
+
+    /**
+     * This property defines the calendar scale used for the
+     * calendar information specified in the iCalendar object.
+     *
+     * Also identifies the calendar type of a non-Gregorian recurring appointment.
+     *
+     * @var string
+     * @see http://tools.ietf.org/html/rfc5545#section-3.7
+     * @see http://msdn.microsoft.com/en-us/library/ee237520(v=exchg.80).aspx
+     */
     protected $calendarScale = null;
+
+    /**
+     * Specifies whether or not the iCalendar file only contains one appointment.
+     *
+     * @var boolean
+     * @see http://msdn.microsoft.com/en-us/library/ee203486(v=exchg.80).aspx
+     */
+    protected $forceInspectOrOpen = false;
+
+    /**
+     * Specifies a globally unique identifier for the calendar.
+     *
+     * @var string
+     * @see http://msdn.microsoft.com/en-us/library/ee179588(v=exchg.80).aspx
+     */
+    protected $calId = null;
+
+    /**
+     * Specifies a suggested iCalendar file download frequency for clients and
+     * servers with sync capabilities.
+     *
+     * @var string
+     * @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx
+     */
+    protected $publishedTTL = 'P1W';
 
     public function __construct($prodId)
     {
@@ -132,6 +168,36 @@ class Calendar extends Component
     }
 
     /**
+     * @param boolean $forceInspectOrOpen
+     * @return $this
+     */
+    public function setForceInspectOrOpen($forceInspectOrOpen)
+    {
+        $this->forceInspectOrOpen = $forceInspectOrOpen;
+        return $this;
+    }
+
+    /**
+     * @param string $calId
+     * @return $this
+     */
+    public function setCalId($calId)
+    {
+        $this->calId = $calId;
+        return $this;
+    }
+
+    /**
+     * @param string $ttl
+     * @return $this
+     */
+    public function setPublishedTTL($ttl)
+    {
+        $this->publishedTTL = $ttl;
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildPropertyBag()
@@ -146,6 +212,7 @@ class Calendar extends Component
 
         if ($this->calendarScale) {
             $this->properties->set('CALSCALE', $this->calendarScale);
+            $this->properties->set('X-MICROSOFT-CALSCALE', $this->calendarScale);
         }
 
         if ($this->name) {
@@ -165,6 +232,18 @@ class Calendar extends Component
                 $this->properties->set('X-WR-TIMEZONE', $this->timezone);
                 $this->addComponent(new Timezone($this->timezone));
             }
+        }
+
+        if ($this->forceInspectOrOpen) {
+            $this->properties->set('X-MS-OLK-FORCEINSPECTOROPEN', $this->forceInspectOrOpen);
+        }
+
+        if ($this->calId) {
+            $this->properties->set('X-WR-RELCALID', $this->calId);
+        }
+
+        if ($this->publishedTTL) {
+            $this->properties->set('X-PUBLISHED-TTL', $this->publishedTTL);
         }
     }
 
