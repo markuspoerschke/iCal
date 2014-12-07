@@ -9,7 +9,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // set default timezone (PHP 5.4)
-$tz = 'Europe/Berlin';
+$tz  = 'Europe/Berlin';
 $dtz = new \DateTimeZone($tz);
 date_default_timezone_set($tz);
 

@@ -18,7 +18,7 @@ class ParameterBag
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setParam($name, $value)
     {
@@ -27,6 +27,7 @@ class ParameterBag
 
     /**
      * @param $name
+     *
      * @return null
      */
     public function getParam($name)
@@ -75,7 +76,8 @@ class ParameterBag
     /**
      * Returns an escaped string for a param value
      *
-     * @param   string  $value
+     * @param   string $value
+     *
      * @return  string
      */
     public function escapeParamValue($value)
@@ -94,7 +96,7 @@ class ParameterBag
     /**
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->toString();
     }

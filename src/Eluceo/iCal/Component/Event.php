@@ -178,10 +178,12 @@ class Event extends Component
 
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
-        $this->properties->add($this->buildDateTimeProperty(
-            'DTSTAMP',
-            $this->dtStamp ?: new \DateTime()
-        ));
+        $this->properties->add(
+            $this->buildDateTimeProperty(
+                'DTSTAMP',
+                $this->dtStamp ?: new \DateTime()
+            )
+        );
         $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
         $this->properties->set('TRANSP', $this->transparency);
@@ -205,13 +207,19 @@ class Event extends Component
         if (null != $this->location) {
             $this->properties->set('LOCATION', $this->location);
 
-            if(null != $this->locationGeo) {
-                $this->properties->add(new Property('X-APPLE-STRUCTURED-LOCATION', 'geo:'.$this->locationGeo, array(
-                    'VALUE' => 'URI',
-                    'X-ADDRESS' => $this->location,
-                    'X-APPLE-RADIUS' => 49,
-                    'X-TITLE' => $this->locationTitle,
-                )));
+            if (null != $this->locationGeo) {
+                $this->properties->add(
+                    new Property(
+                        'X-APPLE-STRUCTURED-LOCATION',
+                        'geo:' . $this->locationGeo,
+                        array(
+                            'VALUE'          => 'URI',
+                            'X-ADDRESS'      => $this->location,
+                            'X-APPLE-RADIUS' => 49,
+                            'X-TITLE'        => $this->locationTitle,
+                        )
+                    )
+                );
             }
         }
 
@@ -239,15 +247,15 @@ class Event extends Component
             $this->properties->set('ORGANIZER', $this->organizer);
         }
 
-        if( $this->noTime ) {
+        if ($this->noTime) {
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
         }
 
-        if( $this->created ) {
+        if ($this->created) {
             $this->properties->add($this->buildDateTimeProperty('CREATED', $this->created));
         }
 
-        if( $this->modified ) {
+        if ($this->modified) {
             $this->properties->add($this->buildDateTimeProperty('LAST-MODIFIED', $this->modified));
         }
     }
@@ -255,9 +263,10 @@ class Event extends Component
     /**
      * Creates a Property based on a DateTime object
      *
-     * @param  string                $name     The name of the Property
-     * @param  \DateTime             $dateTime The DateTime
-     * @param  bool                  $noTime   Indicates if the time will be added
+     * @param  string    $name     The name of the Property
+     * @param  \DateTime $dateTime The DateTime
+     * @param  bool      $noTime   Indicates if the time will be added
+     *
      * @return \Eluceo\iCal\Property
      */
     protected function buildDateTimeProperty($name, \DateTime $dateTime, $noTime = false)
@@ -270,7 +279,7 @@ class Event extends Component
             $params['TZID'] = $timeZone;
         }
 
-        if($noTime) {
+        if ($noTime) {
             $params['VALUE'] = 'DATE';
         }
 
@@ -280,7 +289,8 @@ class Event extends Component
     /**
      * Returns the date format that can be passed to DateTime::format()
      *
-     * @param  bool   $noTime Indicates if the time will be added
+     * @param  bool $noTime Indicates if the time will be added
+     *
      * @return string
      */
     protected function getDateFormat($noTime = false)
@@ -298,6 +308,7 @@ class Event extends Component
      *
      * @param  \DateTime|null $dateTime The DateTime object
      * @param  bool           $noTime   Indicates if the time will be added
+     *
      * @return mixed
      */
     protected function getDateString(\DateTime $dateTime = null, $noTime = false)
@@ -311,6 +322,7 @@ class Event extends Component
 
     /**
      * @param $dtEnd
+     *
      * @return $this
      */
     public function setDtEnd($dtEnd)
@@ -332,6 +344,7 @@ class Event extends Component
 
     /**
      * @param $dtStamp
+     *
      * @return $this
      */
     public function setDtStamp($dtStamp)
@@ -342,6 +355,7 @@ class Event extends Component
 
     /**
      * @param $duration
+     *
      * @return $this
      */
     public function setDuration($duration)
@@ -351,21 +365,23 @@ class Event extends Component
     }
 
     /**
-     * @param $location
+     * @param        $location
      * @param string $title
-     * @param null $geo
+     * @param null   $geo
+     *
      * @return $this
      */
     public function setLocation($location, $title = '', $geo = null)
     {
-        $this->location = $location;
+        $this->location      = $location;
         $this->locationTitle = $title;
-        $this->locationGeo = $geo;
+        $this->locationGeo   = $geo;
         return $this;
     }
 
     /**
      * @param $noTime
+     *
      * @return $this
      */
     public function setNoTime($noTime)
@@ -376,6 +392,7 @@ class Event extends Component
 
     /**
      * @param $sequence
+     *
      * @return $this
      */
     public function setSequence($sequence)
@@ -386,6 +403,7 @@ class Event extends Component
 
     /**
      * @param $organizer
+     *
      * @return $this
      */
     public function setOrganizer($organizer)
@@ -396,6 +414,7 @@ class Event extends Component
 
     /**
      * @param $summary
+     *
      * @return $this
      */
     public function setSummary($summary)
@@ -406,6 +425,7 @@ class Event extends Component
 
     /**
      * @param $uniqueId
+     *
      * @return $this
      */
     public function setUniqueId($uniqueId)
@@ -416,6 +436,7 @@ class Event extends Component
 
     /**
      * @param $url
+     *
      * @return $this
      */
     public function setUrl($url)
@@ -426,6 +447,7 @@ class Event extends Component
 
     /**
      * @param $useTimezone
+     *
      * @return $this
      */
     public function setUseTimezone($useTimezone)
@@ -444,6 +466,7 @@ class Event extends Component
 
     /**
      * @param $attendees
+     *
      * @return $this
      */
     public function setAttendees($attendees)
@@ -454,6 +477,8 @@ class Event extends Component
 
     /**
      * @param string $attendee
+     * @param array  $params
+     *
      * @return $this
      */
     public function addAttendee($attendee, $params = array())
@@ -475,6 +500,7 @@ class Event extends Component
 
     /**
      * @param $description
+     *
      * @return $this
      */
     public function setDescription($description)
@@ -485,6 +511,7 @@ class Event extends Component
 
     /**
      * @param bool $useUtc
+     *
      * @return $this
      */
     public function setUseUtc($useUtc = true)
@@ -503,24 +530,27 @@ class Event extends Component
 
     /**
      * @param $status
+     *
      * @return $this
      */
     public function setCancelled($status)
     {
-        $this->cancelled = (bool) $status;
+        $this->cancelled = (bool)$status;
         return $this;
     }
 
     /**
      * @param $transparency
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setTimeTransparency($transparency)
     {
         $transparency = strtoupper($transparency);
-        if ($transparency === self::TIME_TRANSPARENCY_OPAQUE ||
-            $transparency === self::TIME_TRANSPARENCY_TRANSPARENT) {
+        if ($transparency === self::TIME_TRANSPARENCY_OPAQUE
+            || $transparency === self::TIME_TRANSPARENCY_TRANSPARENT
+        ) {
             $this->transparency = $transparency;
         } else {
             throw new InvalidArgumentException('Invalid value for transparancy');
@@ -530,15 +560,17 @@ class Event extends Component
 
     /**
      * @param $status
+     *
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function setStatus($status)
     {
         $status = strtoupper($status);
-        if ($status == self::STATUS_CANCELLED ||
-            $status == self::STATUS_CONFIRMED ||
-            $status == self::STATUS_TENTATIVE) {
+        if ($status == self::STATUS_CANCELLED
+            || $status == self::STATUS_CONFIRMED
+            || $status == self::STATUS_TENTATIVE
+        ) {
             $this->status = $status;
         } else {
             throw new InvalidArgumentException('Invalid value for status');
@@ -548,6 +580,7 @@ class Event extends Component
 
     /**
      * @param RecurrenceRule $recurrenceRule
+     *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
@@ -566,6 +599,7 @@ class Event extends Component
 
     /**
      * @param $dtStamp
+     *
      * @return $this
      */
     public function setCreated($dtStamp)
@@ -576,6 +610,7 @@ class Event extends Component
 
     /**
      * @param $dtStamp
+     *
      * @return $this
      */
     public function setModified($dtStamp)

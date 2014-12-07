@@ -15,7 +15,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyWithValueAndParams()
     {
-        $property =new Property('DTSTAMP', '20131020T153112', array('TZID' => 'Europe/Berlin'));
+        $property = new Property('DTSTAMP', '20131020T153112', array('TZID' => 'Europe/Berlin'));
         $this->assertEquals(
             'DTSTAMP;TZID=Europe/Berlin:20131020T153112',
             $property->toLine()

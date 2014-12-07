@@ -14,7 +14,6 @@ namespace Eluceo\iCal\Component;
 use Eluceo\iCal\Component;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
-use \InvalidArgumentException;
 
 /**
  * Implementation of the VALARM component
@@ -23,14 +22,14 @@ class Alarm extends Component
 {
     /**
      * Alarm ACTION property
-     * 
+     *
      * According to RFC 5545: 3.8.6.1. Action
-     * 
+     *
      * @link http://tools.ietf.org/html/rfc5545#section-3.8.6.1
      */
-    const ACTION_AUDIO = 'AUDIO';
+    const ACTION_AUDIO   = 'AUDIO';
     const ACTION_DISPLAY = 'DISPLAY';
-    const ACTION_EMAIL = 'EMAIL';
+    const ACTION_EMAIL   = 'EMAIL';
 
     protected $action;
     protected $repeat;

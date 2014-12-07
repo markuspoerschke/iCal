@@ -109,7 +109,7 @@ abstract class Component
         $lines = array();
         $array = preg_split('/(?<!^)(?!$)/u', $string);
 
-        $line = '';
+        $line   = '';
         $lineNo = 0;
         foreach ($array as $char) {
             $charLen = strlen($char);

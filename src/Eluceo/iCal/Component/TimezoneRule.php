@@ -58,7 +58,9 @@ class TimezoneRule extends Component
     /**
      * create new Timezone Rule object by giving a rule type identifier
      *
-     * @param string $ruleType  one of DAYLIGHT or STANDARD
+     * @param string $ruleType one of DAYLIGHT or STANDARD
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($ruleType)
     {
@@ -66,7 +68,7 @@ class TimezoneRule extends Component
         if ($ruleType === self::TYPE_DAYLIGHT || $ruleType === self::TYPE_STANDARD) {
             $this->type = $ruleType;
         } else {
-            throw new InvalidArgumentException('Invalid value for timezone rule type');
+            throw new \InvalidArgumentException('Invalid value for timezone rule type');
         }
     }
 
@@ -90,7 +92,7 @@ class TimezoneRule extends Component
         }
 
         if (null != $this->getDtStart()) {
-            $this->properties->set('DTSTART',  $this->getDtStart());
+            $this->properties->set('DTSTART', $this->getDtStart());
         }
 
         if (null != $this->recurrenceRule) {
@@ -100,6 +102,7 @@ class TimezoneRule extends Component
 
     /**
      * @param $offset
+     *
      * @return $this
      */
     public function setTzOffsetFrom($offset)
@@ -110,6 +113,7 @@ class TimezoneRule extends Component
 
     /**
      * @param $offset
+     *
      * @return $this
      */
     public function setTzOffsetTo($offset)
@@ -120,6 +124,7 @@ class TimezoneRule extends Component
 
     /**
      * @param $name
+     *
      * @return $this
      */
     public function setTzName($name)
@@ -129,7 +134,8 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @param DateTime $dtStart
+     * @param \DateTime $dtStart
+     *
      * @return $this
      */
     public function setDtStart(\DateTime $dtStart)
@@ -140,6 +146,7 @@ class TimezoneRule extends Component
 
     /**
      * @param RecurrenceRule $recurrenceRule
+     *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)

@@ -9,7 +9,7 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
         $input = "x" . str_repeat("あいうえお", 5);
 
         $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
-        $vEvent = new \Eluceo\iCal\Component\Event();
+        $vEvent    = new \Eluceo\iCal\Component\Event();
         $vEvent->setDtStart(new \DateTime('2014-12-24'));
         $vEvent->setDtEnd(new \DateTime('2014-12-24'));
         $vEvent->setDescription($input);
