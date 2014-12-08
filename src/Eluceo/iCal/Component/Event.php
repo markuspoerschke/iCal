@@ -36,6 +36,11 @@ class Event extends Component
     protected $uniqueId;
 
     /**
+     * The property indicates the date/time that the instance of
+     * the iCalendar object was created.
+     *
+     * The value MUST be specified in the UTC time format.
+     *
      * @var \DateTime
      */
     protected $dtStamp;
@@ -131,11 +136,21 @@ class Event extends Component
     protected $recurrenceRule;
 
     /**
+     * This property specifies the date and time that the calendar
+     * information was created.
+     *
+     * The value MUST be specified in the UTC time format.
+     *
      * @var \DateTime
      */
     protected $created;
 
     /**
+     * The property specifies the date and time that the information
+     * associated with the calendar component was last revised.
+     *
+     * The value MUST be specified in the UTC time format.
+     *
      * @var \DateTime
      */
     protected $modified;
@@ -178,12 +193,7 @@ class Event extends Component
 
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
-        $this->properties->add(
-            $this->buildDateTimeProperty(
-                'DTSTAMP',
-                $this->dtStamp ?: new \DateTime()
-            )
-        );
+
         $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
         $this->properties->set('SEQUENCE', $this->sequence);
         $this->properties->set('TRANSP', $this->transparency);
@@ -251,6 +261,18 @@ class Event extends Component
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
         }
 
+        // remember custom settings before we enforce a specific value
+        $customUseTZ        = $this->useTimezone;
+        $customUseUTC       = $this->useUtc;
+
+        // the following properties need to be set in UTC so we enforce that
+        $this->useTimezone  = false;
+        $this->useUtc       = true;
+
+        $this->properties->add(
+            $this->buildDateTimeProperty('DTSTAMP', $this->dtStamp ?: new \DateTime())
+        );
+
         if ($this->created) {
             $this->properties->add($this->buildDateTimeProperty('CREATED', $this->created));
         }
@@ -258,6 +280,10 @@ class Event extends Component
         if ($this->modified) {
             $this->properties->add($this->buildDateTimeProperty('LAST-MODIFIED', $this->modified));
         }
+
+        // reset the custom values
+        $this->useTimezone  = $customUseTZ;
+        $this->useUtc       = $customUseUTC;
     }
 
     /**
