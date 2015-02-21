@@ -11,12 +11,12 @@ class ArrayValue implements ValueInterface
      */
     protected $values;
 
-    public function __construct(array $values)
+    public function __construct($values)
     {
         $this->values = $values;
     }
 
-    public function setValues(array $values)
+    public function setValues($values)
     {
         $this->values = $values;
 
