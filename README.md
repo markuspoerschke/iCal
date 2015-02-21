@@ -55,7 +55,7 @@ $vEvent
 #### 4. Add Event to Calendar
 
 ```PHP
-$vCalendar->addEvent($vEvent);
+$vCalendar->addComponent($vEvent);
 ```
 
 #### 5. Set HTTP-headers
