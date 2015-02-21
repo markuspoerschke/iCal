@@ -11,12 +11,12 @@ class ArrayValue implements ValueInterface
      */
     protected $values;
 
-    public function __construct($values)
+    public function __construct(array $values)
     {
         $this->values = $values;
     }
 
-    public function setValues($values)
+    public function setValues(array $values)
     {
         $this->values = $values;
 
@@ -26,7 +26,8 @@ class ArrayValue implements ValueInterface
     public function getEscapedValue()
     {
         $escapedValues = array_map(function ($value) {
-            return (new StringValue($value))->getEscapedValue();
+            $stringValue = new StringValue($value);
+            return $stringValue->getEscapedValue();
         }, $this->values);
 
         return implode(',', $escapedValues);
