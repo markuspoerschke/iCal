@@ -16,12 +16,12 @@ use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
 
 /**
- * Implementation of the VALARM component
+ * Implementation of the VALARM component.
  */
 class Alarm extends Component
 {
     /**
-     * Alarm ACTION property
+     * Alarm ACTION property.
      *
      * According to RFC 5545: 3.8.6.1. Action
      *
@@ -76,36 +76,42 @@ class Alarm extends Component
     public function setAction($action)
     {
         $this->action = $action;
+
         return $this;
     }
 
     public function setRepeat($repeat)
     {
         $this->repeat = $repeat;
+
         return $this;
     }
 
     public function setDuration($duration)
     {
         $this->duration = $duration;
+
         return $this;
     }
 
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     public function setAttendee($attendee)
     {
         $this->attendee = $attendee;
+
         return $this;
     }
 
     public function setTrigger($trigger)
     {
         $this->trigger = $trigger;
+
         return $this;
     }
 
@@ -114,7 +120,7 @@ class Alarm extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag;
+        $this->properties = new PropertyBag();
 
         if (null != $this->trigger) {
             $this->properties->set('TRIGGER', $this->trigger);

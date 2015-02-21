@@ -17,11 +17,10 @@ use Eluceo\iCal\Property\Event\RecurrenceRule;
 
 /**
  * Implementation of Standard Time and Daylight Saving Time observances (or rules)
- * which define the TIMEZONE component
+ * which define the TIMEZONE component.
  */
 class TimezoneRule extends Component
 {
-
     const TYPE_DAYLIGHT = 'DAYLIGHT';
     const TYPE_STANDARD = 'STANDARD';
 
@@ -56,7 +55,7 @@ class TimezoneRule extends Component
     protected $recurrenceRule;
 
     /**
-     * create new Timezone Rule object by giving a rule type identifier
+     * create new Timezone Rule object by giving a rule type identifier.
      *
      * @param string $ruleType one of DAYLIGHT or STANDARD
      *
@@ -77,7 +76,7 @@ class TimezoneRule extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag;
+        $this->properties = new PropertyBag();
 
         if (null != $this->getTzName()) {
             $this->properties->set('TZNAME', $this->getTzName());
@@ -108,6 +107,7 @@ class TimezoneRule extends Component
     public function setTzOffsetFrom($offset)
     {
         $this->tzOffsetFrom = $offset;
+
         return $this;
     }
 
@@ -119,6 +119,7 @@ class TimezoneRule extends Component
     public function setTzOffsetTo($offset)
     {
         $this->tzOffsetTo = $offset;
+
         return $this;
     }
 
@@ -130,6 +131,7 @@ class TimezoneRule extends Component
     public function setTzName($name)
     {
         $this->tzName = $name;
+
         return $this;
     }
 
@@ -141,6 +143,7 @@ class TimezoneRule extends Component
     public function setDtStart(\DateTime $dtStart)
     {
         $this->dtStart = $dtStart;
+
         return $this;
     }
 
@@ -152,6 +155,7 @@ class TimezoneRule extends Component
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
     {
         $this->recurrenceRule = $recurrenceRule;
+
         return $this;
     }
 
@@ -196,14 +200,12 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @return mixed    return string representation of start date or NULL if no date was given
+     * @return mixed return string representation of start date or NULL if no date was given
      */
     public function getDtStart()
     {
         if ($this->dtStart) {
             return $this->dtStart->format('Ymd\THis');
         }
-
-        return null;
     }
 }

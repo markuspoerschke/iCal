@@ -11,7 +11,6 @@
 
 namespace Eluceo\iCal;
 
-use Eluceo\iCal\Property;
 
 class PropertyBag implements \IteratorAggregate
 {
@@ -21,7 +20,7 @@ class PropertyBag implements \IteratorAggregate
     protected $elements = array();
 
     /**
-     * Creates a new Property with $name, $value and $params
+     * Creates a new Property with $name, $value and $params.
      *
      * @param       $name
      * @param       $value
@@ -38,7 +37,7 @@ class PropertyBag implements \IteratorAggregate
     }
 
     /**
-     * @param  string $name
+     * @param string $name
      *
      * @return null|Property
      */
@@ -52,15 +51,16 @@ class PropertyBag implements \IteratorAggregate
             }
         }
 
-        return null;
+        return;
     }
 
     /**
      * Adds a Property. If Property already exists an Exception will be thrown.
      *
-     * @param  Property $property
+     * @param Property $property
      *
      * @return $this
+     *
      * @throws \Exception
      */
     public function add(Property $property)

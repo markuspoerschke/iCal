@@ -5,7 +5,7 @@ namespace Eluceo\iCal\Property;
 class StringValue implements ValueInterface
 {
     /**
-     * The value
+     * The value.
      *
      * @var string
      */
@@ -25,7 +25,7 @@ class StringValue implements ValueInterface
      */
     public function getEscapedValue()
     {
-        $value = (string)$this->value;
+        $value = (string) $this->value;
 
         $value = str_replace('\\', '\\\\', $value);
         $value = str_replace('"', '\\"', $value);
@@ -44,6 +44,7 @@ class StringValue implements ValueInterface
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 

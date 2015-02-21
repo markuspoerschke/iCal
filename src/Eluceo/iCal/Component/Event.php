@@ -13,13 +13,12 @@ namespace Eluceo\iCal\Component;
 
 use Eluceo\iCal\Component;
 use Eluceo\iCal\Property\Event\Attendees;
-use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
-use \InvalidArgumentException;
+use Eluceo\iCal\PropertyBag;
 
 /**
- * Implementation of the EVENT component
+ * Implementation of the EVENT component.
  */
 class Event extends Component
 {
@@ -99,12 +98,13 @@ class Event extends Component
 
     /**
      * @see http://www.ietf.org/rfc/rfc2445.txt 4.8.2.7 Time Transparency
+     *
      * @var string
      */
     protected $transparency = self::TIME_TRANSPARENCY_OPAQUE;
 
     /**
-     * If set to true the timezone will be added to the event
+     * If set to true the timezone will be added to the event.
      *
      * @var bool
      */
@@ -156,7 +156,7 @@ class Event extends Component
     protected $modified;
 
     /**
-     * Indicates if the UTC time should be used or not
+     * Indicates if the UTC time should be used or not.
      *
      * @var bool
      */
@@ -189,7 +189,7 @@ class Event extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag;
+        $this->properties = new PropertyBag();
 
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
@@ -287,11 +287,11 @@ class Event extends Component
     }
 
     /**
-     * Creates a Property based on a DateTime object
+     * Creates a Property based on a DateTime object.
      *
-     * @param  string    $name     The name of the Property
-     * @param  \DateTime $dateTime The DateTime
-     * @param  bool      $noTime   Indicates if the time will be added
+     * @param string    $name     The name of the Property
+     * @param \DateTime $dateTime The DateTime
+     * @param bool      $noTime   Indicates if the time will be added
      *
      * @return \Eluceo\iCal\Property
      */
@@ -313,9 +313,9 @@ class Event extends Component
     }
 
     /**
-     * Returns the date format that can be passed to DateTime::format()
+     * Returns the date format that can be passed to DateTime::format().
      *
-     * @param  bool $noTime Indicates if the time will be added
+     * @param bool $noTime Indicates if the time will be added
      *
      * @return string
      */
@@ -330,10 +330,10 @@ class Event extends Component
     }
 
     /**
-     * Returns a formatted date string
+     * Returns a formatted date string.
      *
-     * @param  \DateTime|null $dateTime The DateTime object
-     * @param  bool           $noTime   Indicates if the time will be added
+     * @param \DateTime|null $dateTime The DateTime object
+     * @param bool           $noTime   Indicates if the time will be added
      *
      * @return mixed
      */
@@ -354,6 +354,7 @@ class Event extends Component
     public function setDtEnd($dtEnd)
     {
         $this->dtEnd = $dtEnd;
+
         return $this;
     }
 
@@ -365,6 +366,7 @@ class Event extends Component
     public function setDtStart($dtStart)
     {
         $this->dtStart = $dtStart;
+
         return $this;
     }
 
@@ -376,6 +378,7 @@ class Event extends Component
     public function setDtStamp($dtStamp)
     {
         $this->dtStamp = $dtStamp;
+
         return $this;
     }
 
@@ -387,6 +390,7 @@ class Event extends Component
     public function setDuration($duration)
     {
         $this->duration = $duration;
+
         return $this;
     }
 
@@ -402,6 +406,7 @@ class Event extends Component
         $this->location      = $location;
         $this->locationTitle = $title;
         $this->locationGeo   = $geo;
+
         return $this;
     }
 
@@ -413,6 +418,7 @@ class Event extends Component
     public function setNoTime($noTime)
     {
         $this->noTime = $noTime;
+
         return $this;
     }
 
@@ -424,6 +430,7 @@ class Event extends Component
     public function setSequence($sequence)
     {
         $this->sequence = $sequence;
+
         return $this;
     }
 
@@ -435,6 +442,7 @@ class Event extends Component
     public function setOrganizer($organizer)
     {
         $this->organizer = $organizer;
+
         return $this;
     }
 
@@ -446,6 +454,7 @@ class Event extends Component
     public function setSummary($summary)
     {
         $this->summary = $summary;
+
         return $this;
     }
 
@@ -457,6 +466,7 @@ class Event extends Component
     public function setUniqueId($uniqueId)
     {
         $this->uniqueId = $uniqueId;
+
         return $this;
     }
 
@@ -476,6 +486,7 @@ class Event extends Component
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -487,6 +498,7 @@ class Event extends Component
     public function setUseTimezone($useTimezone)
     {
         $this->useTimezone = $useTimezone;
+
         return $this;
     }
 
@@ -506,6 +518,7 @@ class Event extends Component
     public function setAttendees($attendees)
     {
         $this->attendees = $attendees;
+
         return $this;
     }
 
@@ -521,6 +534,7 @@ class Event extends Component
             $this->attendees = new Attendees();
         }
         $this->attendees->add($attendee, $params);
+
         return $this;
     }
 
@@ -540,6 +554,7 @@ class Event extends Component
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -551,6 +566,7 @@ class Event extends Component
     public function setUseUtc($useUtc = true)
     {
         $this->useUtc = $useUtc;
+
         return $this;
     }
 
@@ -569,7 +585,8 @@ class Event extends Component
      */
     public function setCancelled($status)
     {
-        $this->cancelled = (bool)$status;
+        $this->cancelled = (bool) $status;
+
         return $this;
     }
 
@@ -577,6 +594,7 @@ class Event extends Component
      * @param $transparency
      *
      * @return $this
+     *
      * @throws \InvalidArgumentException
      */
     public function setTimeTransparency($transparency)
@@ -587,8 +605,9 @@ class Event extends Component
         ) {
             $this->transparency = $transparency;
         } else {
-            throw new InvalidArgumentException('Invalid value for transparancy');
+            throw new \InvalidArgumentException('Invalid value for transparancy');
         }
+
         return $this;
     }
 
@@ -596,6 +615,7 @@ class Event extends Component
      * @param $status
      *
      * @return $this
+     *
      * @throws \InvalidArgumentException
      */
     public function setStatus($status)
@@ -607,8 +627,9 @@ class Event extends Component
         ) {
             $this->status = $status;
         } else {
-            throw new InvalidArgumentException('Invalid value for status');
+            throw new \InvalidArgumentException('Invalid value for status');
         }
+
         return $this;
     }
 
@@ -620,6 +641,7 @@ class Event extends Component
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
     {
         $this->recurrenceRule = $recurrenceRule;
+
         return $this;
     }
 
@@ -639,6 +661,7 @@ class Event extends Component
     public function setCreated($dtStamp)
     {
         $this->created = $dtStamp;
+
         return $this;
     }
 
@@ -650,6 +673,7 @@ class Event extends Component
     public function setModified($dtStamp)
     {
         $this->modified = $dtStamp;
+
         return $this;
     }
 }

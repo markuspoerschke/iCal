@@ -15,21 +15,21 @@ use Eluceo\iCal\Property\StringValue;
 use Eluceo\iCal\Property\ValueInterface;
 
 /**
- * The Property Class represents a property as defined in RFC 2445
+ * The Property Class represents a property as defined in RFC 2445.
  *
  * The content of a line (unfolded) will be rendered in this class
  */
 class Property
 {
     /**
-     * The value of the Property
+     * The value of the Property.
      *
      * @var ValueInterface
      */
     protected $value;
 
     /**
-     * The params of the Property
+     * The params of the Property.
      *
      * @var ParameterBag
      */
@@ -55,7 +55,7 @@ class Property
     }
 
     /**
-     * Renders an unfolded line
+     * Renders an unfolded line.
      *
      * @return string
      */
@@ -76,7 +76,7 @@ class Property
     }
 
     /**
-     * Get all unfolded lines
+     * Get all unfolded lines.
      *
      * @return array
      */
@@ -100,8 +100,6 @@ class Property
 
     /**
      * @param $name
-     *
-     * @return null
      */
     public function getParam($name)
     {
@@ -112,6 +110,7 @@ class Property
      * @param mixed $value
      *
      * @return $this
+     *
      * @throws \Exception
      */
     public function setValue($value)

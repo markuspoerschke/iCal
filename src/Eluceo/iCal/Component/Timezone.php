@@ -15,7 +15,7 @@ use Eluceo\iCal\Component;
 use Eluceo\iCal\PropertyBag;
 
 /**
- * Implementation of the TIMEZONE component
+ * Implementation of the TIMEZONE component.
  */
 class Timezone extends Component
 {
@@ -42,7 +42,7 @@ class Timezone extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag;
+        $this->properties = new PropertyBag();
 
         $this->properties->set('TZID', $this->timezone);
         $this->properties->set('X-LIC-LOCATION', $this->timezone);

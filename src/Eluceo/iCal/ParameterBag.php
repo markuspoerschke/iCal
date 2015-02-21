@@ -5,7 +5,7 @@ namespace Eluceo\iCal;
 class ParameterBag
 {
     /**
-     * The params
+     * The params.
      *
      * @var array
      */
@@ -27,20 +27,16 @@ class ParameterBag
 
     /**
      * @param $name
-     *
-     * @return null
      */
     public function getParam($name)
     {
         if (array_key_exists($name, $this->params)) {
             return $this->params[$name];
         }
-
-        return null;
     }
 
     /**
-     * Checks if there are any params
+     * Checks if there are any params.
      *
      * @return bool
      */
@@ -74,11 +70,11 @@ class ParameterBag
     }
 
     /**
-     * Returns an escaped string for a param value
+     * Returns an escaped string for a param value.
      *
-     * @param   string $value
+     * @param string $value
      *
-     * @return  string
+     * @return string
      */
     public function escapeParamValue($value)
     {

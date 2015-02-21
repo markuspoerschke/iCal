@@ -12,34 +12,35 @@
 namespace Eluceo\iCal;
 
 /**
- * Abstract Calender Component
+ * Abstract Calender Component.
  */
 abstract class Component
 {
     /**
-     * The PropertyBag
+     * The PropertyBag.
      *
      * @var PropertyBag
      */
     protected $properties;
 
     /**
-     * Array of Components
+     * Array of Components.
      *
      * @var array
      */
     protected $components = array();
 
     /**
-     * The type of the concrete Component
+     * The type of the concrete Component.
      *
      * @abstract
+     *
      * @return string
      */
     abstract public function getType();
 
     /**
-     * Adds a Component
+     * Adds a Component.
      *
      * If $key is given, the component at $key will be replaced else the component will be append.
      *
@@ -56,7 +57,7 @@ abstract class Component
     }
 
     /**
-     * Renders an array containing the lines of the iCal file
+     * Renders an array containing the lines of the iCal file.
      *
      * @return array
      */
@@ -94,7 +95,7 @@ abstract class Component
     }
 
     /**
-     * Folds a single line
+     * Folds a single line.
      *
      * According to RFC 2445, all lines longer than 75 characters will be folded
      *
@@ -127,7 +128,7 @@ abstract class Component
     }
 
     /**
-     * Renders the output
+     * Renders the output.
      *
      * @return string
      */
@@ -142,7 +143,7 @@ abstract class Component
     }
 
     /**
-     * Renders the output when treating the class as a string
+     * Renders the output when treating the class as a string.
      *
      * @return string
      */
@@ -152,10 +153,9 @@ abstract class Component
     }
 
     /**
-     * Building the PropertyBag
+     * Building the PropertyBag.
      *
      * @abstract
-     * @return void
      */
     abstract public function buildPropertyBag();
 }

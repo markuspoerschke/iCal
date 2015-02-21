@@ -7,7 +7,7 @@ use Eluceo\iCal\ParameterBag;
 use InvalidArgumentException;
 
 /**
- * Implementation of Recurrence Rule
+ * Implementation of Recurrence Rule.
  *
  * @see http://www.ietf.org/rfc/rfc2445.txt 3.3.10.  Recurrence Rule
  */
@@ -27,7 +27,7 @@ class RecurrenceRule implements ValueInterface
     const WEEKDAY_SATURDAY  = "SA";
 
     /**
-     * The frequency of an Event
+     * The frequency of an Event.
      *
      * @var string
      */
@@ -160,6 +160,7 @@ class RecurrenceRule implements ValueInterface
     public function setCount($count)
     {
         $this->count = $count;
+
         return $this;
     }
 
@@ -174,7 +175,7 @@ class RecurrenceRule implements ValueInterface
     /**
      * The FREQ rule part identifies the type of recurrence rule.  This
      * rule part MUST be specified in the recurrence rule.  Valid values
-     * include
+     * include.
      *
      * SECONDLY, to specify repeating events based on an interval of a second or more;
      * MINUTELY, to specify repeating events based on an interval of a minute or more;
@@ -187,6 +188,7 @@ class RecurrenceRule implements ValueInterface
      * @param string $freq
      *
      * @return $this
+     *
      * @throws \InvalidArgumentException
      */
     public function setFreq($freq)
@@ -199,6 +201,7 @@ class RecurrenceRule implements ValueInterface
         } else {
             throw new \InvalidArgumentException("The Frequency {$freq} is not supported.");
         }
+
         return $this;
     }
 
@@ -221,6 +224,7 @@ class RecurrenceRule implements ValueInterface
     public function setInterval($interval)
     {
         $this->interval = $interval;
+
         return $this;
     }
 
@@ -243,6 +247,7 @@ class RecurrenceRule implements ValueInterface
     public function setWkst($value)
     {
         $this->byWeekNo = $value;
+
         return $this;
     }
 
@@ -253,6 +258,7 @@ class RecurrenceRule implements ValueInterface
      * @param integer $month
      *
      * @throws InvalidArgumentException
+     *
      * @return $this
      */
     public function setByMonth($month)
@@ -262,6 +268,7 @@ class RecurrenceRule implements ValueInterface
         }
 
         $this->byMonth = $month;
+
         return $this;
     }
 
@@ -276,6 +283,7 @@ class RecurrenceRule implements ValueInterface
     public function setByWeekNo($value)
     {
         $this->byWeekNo = $value;
+
         return $this;
     }
 
@@ -290,6 +298,7 @@ class RecurrenceRule implements ValueInterface
     public function setByYearDay($day)
     {
         $this->byYearDay = $day;
+
         return $this;
     }
 
@@ -304,11 +313,12 @@ class RecurrenceRule implements ValueInterface
     public function setByMonthDay($day)
     {
         $this->byMonthDay = $day;
+
         return $this;
     }
 
     /**
-     * The BYDAY rule part specifies a COMMA-separated list of days of the week;
+     * The BYDAY rule part specifies a COMMA-separated list of days of the week;.
      *
      * SU indicates Sunday; MO indicates Monday; TU indicates Tuesday;
      * WE indicates Wednesday; TH indicates Thursday; FR indicates Friday; and SA indicates Saturday.
@@ -323,6 +333,7 @@ class RecurrenceRule implements ValueInterface
     public function setByDay($day)
     {
         $this->byDay = $day;
+
         return $this;
     }
 
@@ -333,6 +344,7 @@ class RecurrenceRule implements ValueInterface
      * @param integer $value
      *
      * @return $this
+     *
      * @throws \InvalidArgumentException
      */
     public function setByHour($value)
@@ -342,6 +354,7 @@ class RecurrenceRule implements ValueInterface
         }
 
         $this->byHour = $value;
+
         return $this;
     }
 
@@ -352,6 +365,7 @@ class RecurrenceRule implements ValueInterface
      * @param integer $value
      *
      * @return $this
+     *
      * @throws \InvalidArgumentException
      */
     public function setByMinute($value)
@@ -361,6 +375,7 @@ class RecurrenceRule implements ValueInterface
         }
 
         $this->byMinute = $value;
+
         return $this;
     }
 
@@ -371,6 +386,7 @@ class RecurrenceRule implements ValueInterface
      * @param integer $value
      *
      * @return $this
+     *
      * @throws \InvalidArgumentException
      */
     public function setBySecond($value)
@@ -380,6 +396,7 @@ class RecurrenceRule implements ValueInterface
         }
 
         $this->bySecond = $value;
+
         return $this;
     }
 }

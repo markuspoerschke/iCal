@@ -25,6 +25,7 @@ class Attendees extends Property
     public function add($value, $params = array())
     {
         $this->attendees[] = new Property('ATTENDEE', $value, $params);
+
         return $this;
     }
 
@@ -36,6 +37,7 @@ class Attendees extends Property
     public function setValue($value)
     {
         $this->attendees = $value;
+
         return $this;
     }
 
@@ -56,6 +58,7 @@ class Attendees extends Property
         foreach ($this->attendees as $attendee) {
             $lines[] = $attendee->toLine();
         }
+
         return $lines;
     }
 
@@ -64,7 +67,6 @@ class Attendees extends Property
      * @param mixed  $value
      *
      * @throws \BadMethodCallException
-     * @return void
      */
     public function setParam($name, $value)
     {
@@ -75,7 +77,6 @@ class Attendees extends Property
      * @param $name
      *
      * @throws \BadMethodCallException
-     * @return void
      */
     public function getParam($name)
     {

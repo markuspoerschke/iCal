@@ -17,14 +17,13 @@ use Eluceo\iCal\PropertyBag;
 class Calendar extends Component
 {
     /**
-     * Methods for calendar components
+     * Methods for calendar components.
      *
      * According to RFP 5545: 3.7.2. Method
      *
      * @link http://tools.ietf.org/html/rfc5545#section-3.7.2
      *
      * And then according to RFC 2446: 3 APPLICATION PROTOCOL ELEMENTS
-     *
      * @link https://www.ietf.org/rfc/rfc2446.txt
      */
     const METHOD_PUBLISH        = 'PUBLISH';
@@ -46,7 +45,7 @@ class Calendar extends Component
     const CALSCALE_GREGORIAN = 'GREGORIAN';
 
     /**
-     * The Product Identifier
+     * The Product Identifier.
      *
      * According to RFC 2445: 4.7.3 Product Identifier
      *
@@ -69,6 +68,7 @@ class Calendar extends Component
      * Also identifies the calendar type of a non-Gregorian recurring appointment.
      *
      * @var string
+     *
      * @see http://tools.ietf.org/html/rfc5545#section-3.7
      * @see http://msdn.microsoft.com/en-us/library/ee237520(v=exchg.80).aspx
      */
@@ -78,6 +78,7 @@ class Calendar extends Component
      * Specifies whether or not the iCalendar file only contains one appointment.
      *
      * @var boolean
+     *
      * @see http://msdn.microsoft.com/en-us/library/ee203486(v=exchg.80).aspx
      */
     protected $forceInspectOrOpen = false;
@@ -86,6 +87,7 @@ class Calendar extends Component
      * Specifies a globally unique identifier for the calendar.
      *
      * @var string
+     *
      * @see http://msdn.microsoft.com/en-us/library/ee179588(v=exchg.80).aspx
      */
     protected $calId = null;
@@ -95,6 +97,7 @@ class Calendar extends Component
      * servers with sync capabilities.
      *
      * @var string
+     *
      * @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx
      */
     protected $publishedTTL = 'P1W';
@@ -124,6 +127,7 @@ class Calendar extends Component
     public function setMethod($method)
     {
         $this->method = $method;
+
         return $this;
     }
 
@@ -135,6 +139,7 @@ class Calendar extends Component
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -146,6 +151,7 @@ class Calendar extends Component
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -169,36 +175,43 @@ class Calendar extends Component
     public function setCalendarScale($calendarScale)
     {
         $this->calendarScale = $calendarScale;
+
         return $this;
     }
 
     /**
      * @param boolean $forceInspectOrOpen
+     *
      * @return $this
      */
     public function setForceInspectOrOpen($forceInspectOrOpen)
     {
         $this->forceInspectOrOpen = $forceInspectOrOpen;
+
         return $this;
     }
 
     /**
      * @param string $calId
+     *
      * @return $this
      */
     public function setCalId($calId)
     {
         $this->calId = $calId;
+
         return $this;
     }
 
     /**
      * @param string $ttl
+     *
      * @return $this
      */
     public function setPublishedTTL($ttl)
     {
         $this->publishedTTL = $ttl;
+
         return $this;
     }
 
@@ -207,7 +220,7 @@ class Calendar extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag;
+        $this->properties = new PropertyBag();
         $this->properties->set('VERSION', '2.0');
         $this->properties->set('PRODID', $this->prodId);
 
@@ -252,7 +265,7 @@ class Calendar extends Component
     }
 
     /**
-     * Adds an Event to the Calendar
+     * Adds an Event to the Calendar.
      *
      * Wrapper for addComponent()
      *
