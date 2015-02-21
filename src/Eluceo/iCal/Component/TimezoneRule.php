@@ -129,7 +129,7 @@ class TimezoneRule extends Component
      */
     public function setTzName($name)
     {
-        $this->tzOffsetTo = $name;
+        $this->tzName = $name;
         return $this;
     }
 
