@@ -167,6 +167,17 @@ class Event extends Component
      */
     protected $cancelled;
 
+    /**
+     * This property is used to specify categories or subtypes
+     * of the calendar component.  The categories are useful in searching
+     * for a calendar component of a particular type and category.
+     *
+     * @see https://tools.ietf.org/html/rfc5545#section-3.8.1.2
+     *
+     * @var array
+     */
+    protected $categories;
+
     public function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
@@ -259,6 +270,10 @@ class Event extends Component
 
         if ($this->noTime) {
             $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
+        }
+
+        if (null != $this->categories) {
+            $this->properties->set('CATEGORIES', $this->categories);
         }
 
         // remember custom settings before we enforce a specific value
@@ -673,6 +688,18 @@ class Event extends Component
     public function setModified($dtStamp)
     {
         $this->modified = $dtStamp;
+
+        return $this;
+    }
+
+    /**
+     * @param $categories
+     *
+     * @return $this
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
 
         return $this;
     }

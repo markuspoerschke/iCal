@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal;
 
+use Eluceo\iCal\Property\ArrayValue;
 use Eluceo\iCal\Property\StringValue;
 use Eluceo\iCal\Property\ValueInterface;
 
@@ -117,6 +118,8 @@ class Property
     {
         if (is_scalar($value)) {
             $this->value = new StringValue($value);
+        } elseif (is_array($value)) {
+            $this->value = new ArrayValue($value);
         } else {
             if (!$value instanceof ValueInterface) {
                 throw new \Exception("The value must implement the ValueInterface.");
