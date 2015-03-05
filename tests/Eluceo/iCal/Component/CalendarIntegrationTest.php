@@ -31,7 +31,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
         // 3. Add event to calendar
         $vCalendar->addComponent($vEvent);
 
-        $lines = [
+        $lines = array(
             '/BEGIN:VCALENDAR/',
             '/VERSION:2\.0/',
             '/PRODID:www\.example\.com/',
@@ -48,7 +48,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
             '/DTSTAMP:20\d{6}T\d{6}Z/',
             '/END:VEVENT/',
             '/END:VCALENDAR/',
-        ];
+        );
 
         foreach (explode("\n", $vCalendar->render()) as $key => $line)
         {
