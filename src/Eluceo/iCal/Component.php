@@ -86,45 +86,12 @@ abstract class Component
         $ret = array();
 
         foreach ($lines as $line) {
-            foreach ($this->fold($line) as $l) {
+            foreach (ComponentUtil::fold($line) as $l) {
                 $ret[] = $l;
             }
         }
 
         return $ret;
-    }
-
-    /**
-     * Folds a single line.
-     *
-     * According to RFC 2445, all lines longer than 75 characters will be folded
-     *
-     * @link http://www.ietf.org/rfc/rfc2445.txt
-     *
-     * @param $string
-     *
-     * @return array
-     */
-    public function fold($string)
-    {
-        $lines = array();
-        $array = preg_split('/(?<!^)(?!$)/u', $string);
-
-        $line   = '';
-        $lineNo = 0;
-        foreach ($array as $char) {
-            $charLen = strlen($char);
-            $lineLen = strlen($line);
-            if ($lineLen + $charLen > 75) {
-                $line = ' ' . $char;
-                ++$lineNo;
-            } else {
-                $line .= $char;
-            }
-            $lines[$lineNo] = $line;
-        }
-
-        return $lines;
     }
 
     /**
