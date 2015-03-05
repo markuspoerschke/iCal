@@ -9,13 +9,15 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testExample3()
     {
+        $timeZone = new \DateTimeZone('Europe/Berlin');
+
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
 
         // 2. Create an event
         $vEvent = new \Eluceo\iCal\Component\Event('123456');
-        $vEvent->setDtStart(new \DateTime('2012-12-31'));
-        $vEvent->setDtEnd(new \DateTime('2012-12-31'));
+        $vEvent->setDtStart(new \DateTime('2012-12-31', $timeZone));
+        $vEvent->setDtEnd(new \DateTime('2012-12-31', $timeZone));
         $vEvent->setNoTime(true);
         $vEvent->setSummary('New Year’s Eve');
 

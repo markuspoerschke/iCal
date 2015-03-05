@@ -8,7 +8,6 @@ php:
   - hhvm
 
 before_script:
-  - echo 'date.timezone = "Europe/Berlin"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer install
 
 script: ./bin/phpunit --coverage-clover=coverage.clover -c tests/
