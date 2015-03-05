@@ -20,7 +20,7 @@ abstract class Component
     /**
      * Array of Components.
      *
-     * @var array
+     * @var Component[]
      */
     protected $components = array();
 
@@ -95,12 +95,7 @@ abstract class Component
      */
     public function render()
     {
-        $lines = array();
-        foreach ($this->build() as $l) {
-            $lines[] = $l;
-        }
-
-        return implode("\r\n", $lines);
+        return implode("\r\n", $this->build());
     }
 
     /**
@@ -117,7 +112,7 @@ abstract class Component
      * Building the PropertyBag.
      *
      * @abstract
-     * @return ParameterBag
+     * @return PropertyBag
      */
     abstract public function buildPropertyBag();
 }

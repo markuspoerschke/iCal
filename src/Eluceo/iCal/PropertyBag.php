@@ -50,8 +50,6 @@ class PropertyBag implements \IteratorAggregate
                 return $property;
             }
         }
-
-        return;
     }
 
     /**
