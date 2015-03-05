@@ -10,19 +10,13 @@
  */
 
 namespace Eluceo\iCal;
+use Eluceo\iCal\Util\ComponentUtil;
 
 /**
  * Abstract Calender Component.
  */
 abstract class Component
 {
-    /**
-     * The PropertyBag.
-     *
-     * @var PropertyBag
-     */
-    protected $properties;
-
     /**
      * Array of Components.
      *
@@ -63,14 +57,12 @@ abstract class Component
      */
     public function build()
     {
-        $this->buildPropertyBag();
-
         $lines = array();
 
         $lines[] = sprintf('BEGIN:%s', $this->getType());
 
         /** @var $property Property */
-        foreach ($this->properties as $property) {
+        foreach ($this->buildPropertyBag() as $property) {
             $lines = array_merge($lines, $property->toLines());
         }
 
@@ -123,6 +115,7 @@ abstract class Component
      * Building the PropertyBag.
      *
      * @abstract
+     * @return ParameterBag
      */
     abstract public function buildPropertyBag();
 }

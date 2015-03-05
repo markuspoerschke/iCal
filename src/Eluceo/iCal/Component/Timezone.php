@@ -42,10 +42,12 @@ class Timezone extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag();
+        $propertyBag = new PropertyBag();
 
-        $this->properties->set('TZID', $this->timezone);
-        $this->properties->set('X-LIC-LOCATION', $this->timezone);
+        $propertyBag->set('TZID', $this->timezone);
+        $propertyBag->set('X-LIC-LOCATION', $this->timezone);
+
+        return $propertyBag;
     }
 
     public function getZoneIdentifier()

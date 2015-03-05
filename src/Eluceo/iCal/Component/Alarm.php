@@ -120,30 +120,32 @@ class Alarm extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag();
+        $propertyBag = new PropertyBag();
 
         if (null != $this->trigger) {
-            $this->properties->set('TRIGGER', $this->trigger);
+            $propertyBag->set('TRIGGER', $this->trigger);
         }
 
         if (null != $this->action) {
-            $this->properties->set('ACTION', $this->action);
+            $propertyBag->set('ACTION', $this->action);
         }
 
         if (null != $this->repeat) {
-            $this->properties->set('REPEAT', $this->repeat);
+            $propertyBag->set('REPEAT', $this->repeat);
         }
 
         if (null != $this->duration) {
-            $this->properties->set('DURATION', $this->duration);
+            $propertyBag->set('DURATION', $this->duration);
         }
 
         if (null != $this->description) {
-            $this->properties->set('DESCRIPTION', $this->description);
+            $propertyBag->set('DESCRIPTION', $this->description);
         }
 
         if (null != $this->attendee) {
-            $this->properties->set('ATTENDEE', $this->attendee);
+            $propertyBag->set('ATTENDEE', $this->attendee);
         }
+
+        return $propertyBag;
     }
 }

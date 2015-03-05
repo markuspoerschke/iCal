@@ -220,48 +220,50 @@ class Calendar extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag();
-        $this->properties->set('VERSION', '2.0');
-        $this->properties->set('PRODID', $this->prodId);
+        $propertyBag = new PropertyBag();
+        $propertyBag->set('VERSION', '2.0');
+        $propertyBag->set('PRODID', $this->prodId);
 
         if ($this->method) {
-            $this->properties->set('METHOD', $this->method);
+            $propertyBag->set('METHOD', $this->method);
         }
 
         if ($this->calendarScale) {
-            $this->properties->set('CALSCALE', $this->calendarScale);
-            $this->properties->set('X-MICROSOFT-CALSCALE', $this->calendarScale);
+            $propertyBag->set('CALSCALE', $this->calendarScale);
+            $propertyBag->set('X-MICROSOFT-CALSCALE', $this->calendarScale);
         }
 
         if ($this->name) {
-            $this->properties->set('X-WR-CALNAME', $this->name);
+            $propertyBag->set('X-WR-CALNAME', $this->name);
         }
 
         if ($this->description) {
-            $this->properties->set('X-WR-CALDESC', $this->description);
+            $propertyBag->set('X-WR-CALDESC', $this->description);
         }
 
         if ($this->timezone) {
             if ($this->timezone instanceof Timezone) {
-                $this->properties->set('X-WR-TIMEZONE', $this->timezone->getZoneIdentifier());
+                $propertyBag->set('X-WR-TIMEZONE', $this->timezone->getZoneIdentifier());
                 $this->addComponent($this->timezone);
             } else {
-                $this->properties->set('X-WR-TIMEZONE', $this->timezone);
+                $propertyBag->set('X-WR-TIMEZONE', $this->timezone);
                 $this->addComponent(new Timezone($this->timezone));
             }
         }
 
         if ($this->forceInspectOrOpen) {
-            $this->properties->set('X-MS-OLK-FORCEINSPECTOROPEN', $this->forceInspectOrOpen);
+            $propertyBag->set('X-MS-OLK-FORCEINSPECTOROPEN', $this->forceInspectOrOpen);
         }
 
         if ($this->calId) {
-            $this->properties->set('X-WR-RELCALID', $this->calId);
+            $propertyBag->set('X-WR-RELCALID', $this->calId);
         }
 
         if ($this->publishedTTL) {
-            $this->properties->set('X-PUBLISHED-TTL', $this->publishedTTL);
+            $propertyBag->set('X-PUBLISHED-TTL', $this->publishedTTL);
         }
+
+        return $propertyBag;
     }
 
     /**

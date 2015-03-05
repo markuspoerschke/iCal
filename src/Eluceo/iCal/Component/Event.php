@@ -201,36 +201,36 @@ class Event extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag();
+        $propertyBag = new PropertyBag();
 
         // mandatory information
-        $this->properties->set('UID', $this->uniqueId);
+        $propertyBag->set('UID', $this->uniqueId);
 
-        $this->properties->add(new DateTimeProperty('DTSTART', $this->dtStart, $this->noTime, $this->useTimezone, $this->useUtc));
-        $this->properties->set('SEQUENCE', $this->sequence);
-        $this->properties->set('TRANSP', $this->transparency);
+        $propertyBag->add(new DateTimeProperty('DTSTART', $this->dtStart, $this->noTime, $this->useTimezone, $this->useUtc));
+        $propertyBag->set('SEQUENCE', $this->sequence);
+        $propertyBag->set('TRANSP', $this->transparency);
 
         if ($this->status) {
-            $this->properties->set('STATUS', $this->status);
+            $propertyBag->set('STATUS', $this->status);
         }
 
         // An event can have a 'dtend' or 'duration', but not both.
         if (null != $this->dtEnd) {
-            $this->properties->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc));
+            $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc));
         } elseif (null != $this->duration) {
-            $this->properties->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
+            $propertyBag->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
         }
 
         // optional information
         if (null != $this->url) {
-            $this->properties->set('URL', $this->url);
+            $propertyBag->set('URL', $this->url);
         }
 
         if (null != $this->location) {
-            $this->properties->set('LOCATION', $this->location);
+            $propertyBag->set('LOCATION', $this->location);
 
             if (null != $this->locationGeo) {
-                $this->properties->add(
+                $propertyBag->add(
                     new Property(
                         'X-APPLE-STRUCTURED-LOCATION',
                         'geo:' . $this->locationGeo,
@@ -246,48 +246,50 @@ class Event extends Component
         }
 
         if (null != $this->summary) {
-            $this->properties->set('SUMMARY', $this->summary);
+            $propertyBag->set('SUMMARY', $this->summary);
         }
 
         if (null != $this->attendees) {
-            $this->properties->add($this->attendees);
+            $propertyBag->add($this->attendees);
         }
 
         if (null != $this->description) {
-            $this->properties->set('DESCRIPTION', $this->description);
+            $propertyBag->set('DESCRIPTION', $this->description);
         }
 
         if (null != $this->recurrenceRule) {
-            $this->properties->set('RRULE', $this->recurrenceRule);
+            $propertyBag->set('RRULE', $this->recurrenceRule);
         }
 
         if ($this->cancelled) {
-            $this->properties->set('STATUS', 'CANCELLED');
+            $propertyBag->set('STATUS', 'CANCELLED');
         }
 
         if (null != $this->organizer) {
-            $this->properties->set('ORGANIZER', $this->organizer);
+            $propertyBag->set('ORGANIZER', $this->organizer);
         }
 
         if ($this->noTime) {
-            $this->properties->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
+            $propertyBag->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
         }
 
         if (null != $this->categories) {
-            $this->properties->set('CATEGORIES', $this->categories);
+            $propertyBag->set('CATEGORIES', $this->categories);
         }
 
-        $this->properties->add(
+        $propertyBag->add(
             new DateTimeProperty('DTSTAMP', $this->dtStamp ?: new \DateTime(), false, false, true)
         );
 
         if ($this->created) {
-            $this->properties->add(new DateTimeProperty('CREATED', $this->created, false, false, true));
+            $propertyBag->add(new DateTimeProperty('CREATED', $this->created, false, false, true));
         }
 
         if ($this->modified) {
-            $this->properties->add(new DateTimeProperty('LAST-MODIFIED', $this->modified, false, false, true));
+            $propertyBag->add(new DateTimeProperty('LAST-MODIFIED', $this->modified, false, false, true));
         }
+
+        return $propertyBag;
     }
 
     /**

@@ -76,27 +76,29 @@ class TimezoneRule extends Component
      */
     public function buildPropertyBag()
     {
-        $this->properties = new PropertyBag();
+        $propertyBag = new PropertyBag();
 
         if (null != $this->getTzName()) {
-            $this->properties->set('TZNAME', $this->getTzName());
+            $propertyBag->set('TZNAME', $this->getTzName());
         }
 
         if (null != $this->getTzOffsetFrom()) {
-            $this->properties->set('TZOFFSETFROM', $this->getTzOffsetFrom());
+            $propertyBag->set('TZOFFSETFROM', $this->getTzOffsetFrom());
         }
 
         if (null != $this->getTzOffsetTo()) {
-            $this->properties->set('TZOFFSETTO', $this->getTzOffsetTo());
+            $propertyBag->set('TZOFFSETTO', $this->getTzOffsetTo());
         }
 
         if (null != $this->getDtStart()) {
-            $this->properties->set('DTSTART', $this->getDtStart());
+            $propertyBag->set('DTSTART', $this->getDtStart());
         }
 
         if (null != $this->recurrenceRule) {
-            $this->properties->set('RRULE', $this->recurrenceRule);
+            $propertyBag->set('RRULE', $this->recurrenceRule);
         }
+
+        return $propertyBag;
     }
 
     /**
