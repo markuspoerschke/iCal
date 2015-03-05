@@ -12,8 +12,9 @@
 namespace Eluceo\iCal\Component;
 
 use Eluceo\iCal\Component;
-use Eluceo\iCal\Property\Event\Attendees;
 use Eluceo\iCal\Property;
+use Eluceo\iCal\Property\DateTimeProperty;
+use Eluceo\iCal\Property\Event\Attendees;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\PropertyBag;
 
@@ -205,7 +206,7 @@ class Event extends Component
         // mandatory information
         $this->properties->set('UID', $this->uniqueId);
 
-        $this->properties->add($this->buildDateTimeProperty('DTSTART', $this->dtStart, $this->noTime));
+        $this->properties->add(new DateTimeProperty('DTSTART', $this->dtStart, $this->noTime, $this->useTimezone, $this->useUtc));
         $this->properties->set('SEQUENCE', $this->sequence);
         $this->properties->set('TRANSP', $this->transparency);
 
@@ -215,7 +216,7 @@ class Event extends Component
 
         // An event can have a 'dtend' or 'duration', but not both.
         if (null != $this->dtEnd) {
-            $this->properties->add($this->buildDateTimeProperty('DTEND', $this->dtEnd, $this->noTime));
+            $this->properties->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc));
         } elseif (null != $this->duration) {
             $this->properties->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
         }
@@ -276,89 +277,17 @@ class Event extends Component
             $this->properties->set('CATEGORIES', $this->categories);
         }
 
-        // remember custom settings before we enforce a specific value
-        $customUseTZ        = $this->useTimezone;
-        $customUseUTC       = $this->useUtc;
-
-        // the following properties need to be set in UTC so we enforce that
-        $this->useTimezone  = false;
-        $this->useUtc       = true;
-
         $this->properties->add(
-            $this->buildDateTimeProperty('DTSTAMP', $this->dtStamp ?: new \DateTime())
+            new DateTimeProperty('DTSTAMP', $this->dtStamp ?: new \DateTime(), false, false, true)
         );
 
         if ($this->created) {
-            $this->properties->add($this->buildDateTimeProperty('CREATED', $this->created));
+            $this->properties->add(new DateTimeProperty('CREATED', $this->created, false, false, true));
         }
 
         if ($this->modified) {
-            $this->properties->add($this->buildDateTimeProperty('LAST-MODIFIED', $this->modified));
+            $this->properties->add(new DateTimeProperty('LAST-MODIFIED', $this->modified, false, false, true));
         }
-
-        // reset the custom values
-        $this->useTimezone  = $customUseTZ;
-        $this->useUtc       = $customUseUTC;
-    }
-
-    /**
-     * Creates a Property based on a DateTime object.
-     *
-     * @param string    $name     The name of the Property
-     * @param \DateTime $dateTime The DateTime
-     * @param bool      $noTime   Indicates if the time will be added
-     *
-     * @return \Eluceo\iCal\Property
-     */
-    protected function buildDateTimeProperty($name, \DateTime $dateTime, $noTime = false)
-    {
-        $dateString = $this->getDateString($dateTime, $noTime);
-        $params     = array();
-
-        if ($this->useTimezone) {
-            $timeZone       = $dateTime->getTimezone()->getName();
-            $params['TZID'] = $timeZone;
-        }
-
-        if ($noTime) {
-            $params['VALUE'] = 'DATE';
-        }
-
-        return new Property($name, $dateString, $params);
-    }
-
-    /**
-     * Returns the date format that can be passed to DateTime::format().
-     *
-     * @param bool $noTime Indicates if the time will be added
-     *
-     * @return string
-     */
-    protected function getDateFormat($noTime = false)
-    {
-        // Do not use UTC time (Z) if timezone support is enabled.
-        if ($this->useTimezone || !$this->useUtc) {
-            return $noTime ? 'Ymd' : 'Ymd\THis';
-        } else {
-            return $noTime ? 'Ymd' : 'Ymd\THis\Z';
-        }
-    }
-
-    /**
-     * Returns a formatted date string.
-     *
-     * @param \DateTime|null $dateTime The DateTime object
-     * @param bool           $noTime   Indicates if the time will be added
-     *
-     * @return mixed
-     */
-    protected function getDateString(\DateTime $dateTime = null, $noTime = false)
-    {
-        if (empty($dateTime)) {
-            $dateTime = new \DateTime();
-        }
-
-        return $dateTime->format($this->getDateFormat($noTime));
     }
 
     /**
