@@ -2,6 +2,8 @@
 
 namespace Eluceo\iCal\Property;
 
+use Eluceo\iCal\Util\PropertyValueUtil;
+
 class StringValue implements ValueInterface
 {
     /**
@@ -25,15 +27,7 @@ class StringValue implements ValueInterface
      */
     public function getEscapedValue()
     {
-        $value = (string) $this->value;
-
-        $value = str_replace('\\', '\\\\', $value);
-        $value = str_replace('"', '\\"', $value);
-        $value = str_replace(',', '\\,', $value);
-        $value = str_replace(';', '\\;', $value);
-        $value = str_replace("\n", '\\n', $value);
-
-        return $value;
+        return PropertyValueUtil::escapeValue((string) $this->value);
     }
 
     /**
