@@ -17,7 +17,7 @@ class PropertyValueUtil
                 "\x08", "\x09", /* \n*/ "\x0B", "\x0C", "\x0D", "\x0E", "\x0F",
                 "\x11", "\x11", "\x12", "\x13", "\x14", "\x15", "\x16", "\x17",
                 "\x18", "\x19", "\x1A", "\x1B", "\x1C", "\x1D", "\x1E", "\x1F",
-                ":", "\x7F"), '', $value
+                "\x7F"), '', $value
         );
 
         return $value;
