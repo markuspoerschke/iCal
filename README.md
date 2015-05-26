@@ -1,21 +1,21 @@
-# eluceo — iCal
+# Alice — Opal
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master) [![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=master)](https://travis-ci.org/markuspoerschke/iCal)
 
-This package offers a abstraction layer for creating iCalendars. The output will
+This package offers a abstraction layer for creating calendars. The output will
 follow [RFC 2445](http://www.ietf.org/rfc/rfc2445.txt) as best as possible.
 
 The following components are supported at this time:
 
-* VCALENDAR
-* VEVENT
-* VALARM
-* VTIMEZONE
+* CALENDAR
+* EVENT
+* VAL ARM
+* TIMEZONE
 
 ## Installation
 
 You can install this package by using [Composer](http://getcomposer.org).
-Link to Packagist: https://packagist.org/packages/eluceo/ical
+Link to Packages: HTTP://packages.org/packages/Alice/Opal
 
 ```
 {
