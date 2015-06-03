@@ -117,6 +117,10 @@ class RecurrenceRule implements ValueInterface
             $parameterBag->setParam('COUNT', $this->count);
         }
 
+        if (null !== $this->wkst) {
+            $parameterBag->setParam('WKST', $this->wkst);
+        }
+
         if (null !== $this->byMonth) {
             $parameterBag->setParam('BYMONTH', $this->byMonth);
         }
