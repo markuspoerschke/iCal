@@ -246,7 +246,7 @@ class RecurrenceRule implements ValueInterface
      */
     public function setWkst($value)
     {
-        $this->byWeekNo = $value;
+        $this->wkst = $value;
 
         return $this;
     }
