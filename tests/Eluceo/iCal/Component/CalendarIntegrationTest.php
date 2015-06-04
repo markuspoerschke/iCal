@@ -54,7 +54,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
 
         foreach (explode("\n", $vCalendar->render()) as $key => $line)
         {
-            $this->assertTrue(isset($lines[$key]), 'To much lines... ' . $line);
+            $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
 
             $this->assertRegExp($lines[$key], $line);
         }
