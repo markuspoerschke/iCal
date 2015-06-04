@@ -3,6 +3,7 @@
 namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\Property\ValueInterface;
+use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\ParameterBag;
 use InvalidArgumentException;
 
@@ -42,6 +43,11 @@ class RecurrenceRule implements ValueInterface
      * @var null|int
      */
     protected $count = null;
+
+    /**
+     * @var null|\DateTime
+     */
+    protected $until = null;
 
     /**
      * @var null|string
@@ -117,6 +123,10 @@ class RecurrenceRule implements ValueInterface
             $parameterBag->setParam('COUNT', $this->count);
         }
 
+        if (null != $this->until) {
+            $parameterBag->setParam('UNTIL', $this->until->format('Ymd\THis\Z'));
+        }
+
         if (null !== $this->wkst) {
             $parameterBag->setParam('WKST', $this->wkst);
         }
@@ -174,6 +184,26 @@ class RecurrenceRule implements ValueInterface
     public function getCount()
     {
         return $this->count;
+    }
+
+    /**
+     * @param \DateTime|null $count
+     *
+     * @return $this
+     */
+    public function setUntil(\DateTime $until = null)
+    {
+        $this->until = $until;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getUntil()
+    {
+        return $this->until;
     }
 
     /**
