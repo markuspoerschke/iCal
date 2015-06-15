@@ -15,6 +15,7 @@ use Eluceo\iCal\Component;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\Property\Event\Attendees;
+use Eluceo\iCal\Property\Event\Organizer;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\PropertyBag;
 
@@ -93,7 +94,7 @@ class Event extends Component
     protected $summary;
 
     /**
-     * @var string
+     * @var Organizer
      */
     protected $organizer;
 
@@ -266,7 +267,7 @@ class Event extends Component
         }
 
         if (null != $this->organizer) {
-            $propertyBag->set('ORGANIZER', $this->organizer);
+            $propertyBag->add($this->organizer);
         }
 
         if ($this->noTime) {
@@ -381,13 +382,14 @@ class Event extends Component
     }
 
     /**
-     * @param $organizer
+     * @param string $organizer The name of the organizer
      *
+     * @param array $params (e.g. ['MAILTO' => 'email'])
      * @return $this
      */
-    public function setOrganizer($organizer)
+    public function setOrganizer($organizer, array $params = array())
     {
-        $this->organizer = $organizer;
+        $this->organizer = new Organizer($organizer, $params);
 
         return $this;
     }
@@ -457,11 +459,11 @@ class Event extends Component
     }
 
     /**
-     * @param $attendees
+     * @param Attendees $attendees
      *
      * @return $this
      */
-    public function setAttendees($attendees)
+    public function setAttendees(Attendees $attendees)
     {
         $this->attendees = $attendees;
 
@@ -485,7 +487,7 @@ class Event extends Component
     }
 
     /**
-     * @return string
+     * @return Attendees
      */
     public function getAttendees()
     {
