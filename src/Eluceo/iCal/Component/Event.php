@@ -379,7 +379,7 @@ class Event extends Component
     }
 
     /**
-     * @param $sequence
+     * @param int $sequence
      *
      * @return $this
      */
@@ -388,6 +388,14 @@ class Event extends Component
         $this->sequence = $sequence;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
     }
 
     /**
