@@ -180,6 +180,13 @@ class Event extends Component
      */
     protected $categories;
 
+    /**
+     * https://tools.ietf.org/html/rfc5545#section-3.8.1.3
+     *
+     * @var bool
+     */
+    protected $isPrivate = false;
+
     public function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
@@ -253,6 +260,8 @@ class Event extends Component
         if (null != $this->attendees) {
             $propertyBag->add($this->attendees);
         }
+
+        $propertyBag->set('CLASS', $this->isPrivate ? 'PRIVATE' : 'PUBLIC');
 
         if (null != $this->description) {
             $propertyBag->set('DESCRIPTION', $this->description);
@@ -633,6 +642,19 @@ class Event extends Component
     public function setCategories($categories)
     {
         $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Sets the event privacy
+     *
+     * @param bool $flag
+     * @return $this
+     */
+    public function setIsPrivate($flag)
+    {
+        $this->isPrivate = (bool) $flag;
 
         return $this;
     }
