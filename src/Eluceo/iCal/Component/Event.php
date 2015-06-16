@@ -399,14 +399,13 @@ class Event extends Component
     }
 
     /**
-     * @param string $organizer The name of the organizer
-     *
-     * @param array $params (e.g. ['MAILTO' => 'email'])
+     * @param string $name
+     * @param string $email
      * @return $this
      */
-    public function setOrganizer($organizer, array $params = array())
+    public function setOrganizer($name, $email = '')
     {
-        $this->organizer = new Organizer($organizer, $params);
+        $this->organizer = new Organizer($name, $email);
 
         return $this;
     }

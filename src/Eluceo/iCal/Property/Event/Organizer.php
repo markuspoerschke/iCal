@@ -8,15 +8,15 @@ class Organizer extends Property
     const PROPERTY_NAME = 'ORGANIZER';
 
     /**
-     * @param null $value
-     * @param array $params
-     * @throws \Exception
+     * @param string $name
+     * @param string $email
      */
-    public function __construct($value = null, $params = array())
+    public function __construct($name, $email = '')
     {
-        $value = $value ? sprintf('CN=%s', $value) : '';
+        $name = $name ? array('CN' => $name) : array();
+        $email = !$email ?: sprintf('MAILTO:%s', $email);
 
-        return parent::__construct($this->getName(), $value, $params);
+        return parent::__construct($this->getName(), $email, $name);
     }
 
     /**
