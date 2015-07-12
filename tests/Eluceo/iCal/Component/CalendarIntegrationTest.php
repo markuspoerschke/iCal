@@ -19,6 +19,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
         $vEvent->setDtStart(new \DateTime('2012-12-31', $timeZone));
         $vEvent->setDtEnd(new \DateTime('2012-12-31', $timeZone));
         $vEvent->setNoTime(true);
+        $vEvent->setIsPrivate(true);
         $vEvent->setSummary('New Year’s Eve');
 
         // Set recurrence rule
@@ -45,6 +46,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
             '/TRANSP:OPAQUE/',
             '/DTEND;TZID=Europe\/Berlin;VALUE=DATE:20121231/',
             '/SUMMARY:New Year’s Eve/',
+            '/CLASS:PRIVATE/',
             '/RRULE:FREQ=YEARLY;INTERVAL=1/',
             '/X-MICROSOFT-CDO-ALLDAYEVENT:TRUE/',
             '/DTSTAMP:20\d{6}T\d{6}Z/',

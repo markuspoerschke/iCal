@@ -15,6 +15,7 @@ use Eluceo\iCal\Component;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\Property\Event\Attendees;
+use Eluceo\iCal\Property\Event\Organizer;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\PropertyBag;
 
@@ -93,7 +94,7 @@ class Event extends Component
     protected $summary;
 
     /**
-     * @var string
+     * @var Organizer
      */
     protected $organizer;
 
@@ -179,6 +180,13 @@ class Event extends Component
      */
     protected $categories;
 
+    /**
+     * https://tools.ietf.org/html/rfc5545#section-3.8.1.3
+     *
+     * @var bool
+     */
+    protected $isPrivate = false;
+
     public function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
@@ -253,6 +261,8 @@ class Event extends Component
             $propertyBag->add($this->attendees);
         }
 
+        $propertyBag->set('CLASS', $this->isPrivate ? 'PRIVATE' : 'PUBLIC');
+
         if (null != $this->description) {
             $propertyBag->set('DESCRIPTION', $this->description);
         }
@@ -266,7 +276,7 @@ class Event extends Component
         }
 
         if (null != $this->organizer) {
-            $propertyBag->set('ORGANIZER', $this->organizer);
+            $propertyBag->add($this->organizer);
         }
 
         if ($this->noTime) {
@@ -369,7 +379,7 @@ class Event extends Component
     }
 
     /**
-     * @param $sequence
+     * @param int $sequence
      *
      * @return $this
      */
@@ -381,13 +391,21 @@ class Event extends Component
     }
 
     /**
-     * @param $organizer
-     *
+     * @return int
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
+    }
+
+    /**
+     * @param string $name
+     * @param string $email
      * @return $this
      */
-    public function setOrganizer($organizer)
+    public function setOrganizer($name, $email = '')
     {
-        $this->organizer = $organizer;
+        $this->organizer = new Organizer($name, $email);
 
         return $this;
     }
@@ -457,11 +475,11 @@ class Event extends Component
     }
 
     /**
-     * @param $attendees
+     * @param Attendees $attendees
      *
      * @return $this
      */
-    public function setAttendees($attendees)
+    public function setAttendees(Attendees $attendees)
     {
         $this->attendees = $attendees;
 
@@ -485,7 +503,7 @@ class Event extends Component
     }
 
     /**
-     * @return string
+     * @return Attendees
      */
     public function getAttendees()
     {
@@ -631,6 +649,19 @@ class Event extends Component
     public function setCategories($categories)
     {
         $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Sets the event privacy
+     *
+     * @param bool $flag
+     * @return $this
+     */
+    public function setIsPrivate($flag)
+    {
+        $this->isPrivate = (bool) $flag;
 
         return $this;
     }
