@@ -45,8 +45,6 @@ class Property
      * @param       $name
      * @param       $value
      * @param array $params
-     *
-     * @return \Eluceo\iCal\Property
      */
     public function __construct($name, $value, $params = array())
     {

@@ -187,7 +187,7 @@ class RecurrenceRule implements ValueInterface
     }
 
     /**
-     * @param \DateTime|null $count
+     * @param \DateTime|null $until
      *
      * @return $this
      */
@@ -274,7 +274,7 @@ class RecurrenceRule implements ValueInterface
      * The WKST rule part specifies the day on which the workweek starts.
      * Valid values are MO, TU, WE, TH, FR, SA, and SU.
      *
-     * @param integer $value
+     * @param string $value
      *
      * @return $this
      */

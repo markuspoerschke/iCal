@@ -78,23 +78,23 @@ class TimezoneRule extends Component
     {
         $propertyBag = new PropertyBag();
 
-        if (null != $this->getTzName()) {
+        if (null !== $this->getTzName()) {
             $propertyBag->set('TZNAME', $this->getTzName());
         }
 
-        if (null != $this->getTzOffsetFrom()) {
+        if (null !== $this->getTzOffsetFrom()) {
             $propertyBag->set('TZOFFSETFROM', $this->getTzOffsetFrom());
         }
 
-        if (null != $this->getTzOffsetTo()) {
+        if (null !== $this->getTzOffsetTo()) {
             $propertyBag->set('TZOFFSETTO', $this->getTzOffsetTo());
         }
 
-        if (null != $this->getDtStart()) {
+        if (null !== $this->getDtStart()) {
             $propertyBag->set('DTSTART', $this->getDtStart());
         }
 
-        if (null != $this->recurrenceRule) {
+        if (null !== $this->recurrenceRule) {
             $propertyBag->set('RRULE', $this->recurrenceRule);
         }
 
@@ -209,5 +209,7 @@ class TimezoneRule extends Component
         if ($this->dtStart) {
             return $this->dtStart->format('Ymd\THis');
         }
+
+        return nulll;
     }
 }

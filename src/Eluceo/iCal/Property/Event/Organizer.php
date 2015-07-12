@@ -16,7 +16,7 @@ class Organizer extends Property
         $name = $name ? array('CN' => $name) : array();
         $email = !$email ?: sprintf('MAILTO:%s', $email);
 
-        return parent::__construct($this->getName(), $email, $name);
+        parent::__construct($this->getName(), $email, $name);
     }
 
     /**
