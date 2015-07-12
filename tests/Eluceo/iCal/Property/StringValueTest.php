@@ -13,7 +13,7 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'LOREM',
             $stringValue->getEscapedValue(),
-            'No escaping nessesary'
+            'No escaping necessary'
         );
     }
 
@@ -24,7 +24,7 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'text contains backslash: \\\\',
             $stringValue->getEscapedValue(),
-            'text contains backslash'
+            'Text contains backslash'
         );
     }
 
@@ -35,7 +35,7 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'text with \\"doublequotes\\" will be escaped',
             $stringValue->getEscapedValue(),
-            'escaping double quotes'
+            'Escaping double quotes'
         );
     }
 
@@ -46,7 +46,7 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'text with \\, and \\; will also be escaped',
             $stringValue->getEscapedValue(),
-            'escaping ; and ,'
+            'Escaping ; and ,'
         );
     }
 
@@ -57,7 +57,7 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'Text with new\\n line',
             $stringValue->getEscapedValue(),
-            'escape new line to text'
+            'Escape new line to text'
         );
     }
 }
