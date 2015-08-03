@@ -210,6 +210,6 @@ class TimezoneRule extends Component
             return $this->dtStart->format('Ymd\THis');
         }
 
-        return nulll;
+        return null;
     }
 }
