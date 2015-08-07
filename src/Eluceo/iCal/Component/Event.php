@@ -399,13 +399,12 @@ class Event extends Component
     }
 
     /**
-     * @param string $name
-     * @param string $email
+     * @param Organizer $organizer
      * @return $this
      */
-    public function setOrganizer($name, $email = '')
+    public function setOrganizer(Organizer $organizer)
     {
-        $this->organizer = new Organizer($name, $email);
+        $this->organizer = $organizer;
 
         return $this;
     }
