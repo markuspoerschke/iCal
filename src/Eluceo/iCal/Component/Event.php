@@ -18,6 +18,8 @@ use Eluceo\iCal\Property\Event\Attendees;
 use Eluceo\iCal\Property\Event\Organizer;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\PropertyBag;
+use Eluceo\iCal\Property\Event\RecurrenceId;
+use Eluceo\iCal\Property\DateTimesProperty;
 
 /**
  * Implementation of the EVENT component.
@@ -186,6 +188,18 @@ class Event extends Component
      * @var bool
      */
     protected $isPrivate = false;
+    
+    /**
+     * Dates to be excluded from a series of events
+     * 
+     * @var \DateTime[]
+     */
+    protected $exDates = array();
+    
+    /**
+     * @var RecurrenceId
+     */
+    protected $recurrenceId;
 
     public function __construct($uniqueId = null)
     {
@@ -269,6 +283,15 @@ class Event extends Component
 
         if (null != $this->recurrenceRule) {
             $propertyBag->set('RRULE', $this->recurrenceRule);
+        }
+        
+        if (null != $this->recurrenceId) {
+            $this->recurrenceId->applyTimeSettings($this->noTime, $this->useTimezone, $this->useUtc);
+            $propertyBag->add($this->recurrenceId);
+        }
+        
+        if (!empty($this->exDates)) {
+            $propertyBag->add(new DateTimesProperty('EXDATE', $this->exDates, $this->noTime, $this->useTimezone, $this->useUtc));
         }
 
         if ($this->cancelled) {
@@ -665,4 +688,51 @@ class Event extends Component
 
         return $this;
     }
+
+    /**
+     * @param \DateTime $dateTime
+     * @return \Eluceo\iCal\Component\Event
+     */
+    public function addExDate(\DateTime $dateTime)
+    {
+        $this->exDates[] = $dateTime;
+        return $this;
+    }
+    
+    /**
+     * @return DateTime[]
+     */
+    public function getExDates()
+    {
+        return $this->exDates;
+    }
+
+    /**
+     * @param \DateTime[]
+     * @return \Eluceo\iCal\Component\Event
+     */
+    public function setExDates(Array $exDates)
+    {
+        $this->exDates = $exDates;
+        return $this;
+    }
+
+    /**
+     * @return \Eluceo\iCal\Property\Event\RecurrenceId
+     */
+    public function getRecurrenceId()
+    {
+        return $this->recurrenceId;
+    }
+
+    /**
+     * @param RecurrenceId $recurrenceId
+     * @return \Eluceo\iCal\Component\Event
+     */
+    public function setRecurrenceId(RecurrenceId $recurrenceId)
+    {
+        $this->recurrenceId = $recurrenceId;
+        return $this;
+    }
+ 
 }
