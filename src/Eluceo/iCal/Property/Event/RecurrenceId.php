@@ -30,6 +30,13 @@ class RecurrenceId extends Property
      */
     protected $dateTime;
 
+    /**
+     * Specify the effective range of recurrence instances from the instance.
+     *
+     * @var string
+     */
+    protected $range;
+
     public function __construct(\DateTime $dateTime)
     {
         $this->dateTime = $dateTime;
@@ -41,6 +48,10 @@ class RecurrenceId extends Property
         $params = DateUtil::getDefaultParams($this->dateTime, $noTime, $useTimezone, $useUtc);
         foreach ($params as $name => $value) {
             $this->parameterBag->setParam($name, $value);
+        }
+
+        if ($this->range) {
+            $this->parameterBag->setParam('RANGE', $this->range);
         }
 
         $this->setValue(DateUtil::getDateString($this->dateTime, $noTime, $useTimezone, $useUtc));
@@ -67,13 +78,21 @@ class RecurrenceId extends Property
     }
 
     /**
+     * @return string
+     */
+    public function getRange()
+    {
+        return $this->range;
+    }
+
+    /**
      * @param string $range
      *
      * @return \Eluceo\iCal\Property\Event\RecurrenceId
      */
     public function setRange($range)
     {
-        $this->parameterBag->setParam('RANGE', $range);
+        $this->range = $range;
     }
 
     /**
