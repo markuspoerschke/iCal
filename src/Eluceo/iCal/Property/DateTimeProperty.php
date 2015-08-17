@@ -14,16 +14,15 @@ class DateTimeProperty extends Property
      * @param bool      $useTimezone
      * @param bool      $useUtc
      */
-    function __construct(
+    public function __construct(
         $name,
         \DateTime $dateTime = null,
         $noTime = false,
         $useTimezone = false,
         $useUtc = false
-    )
-    {
+    ) {
         $dateString = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
-        $params     = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone);
+        $params = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone);
 
         parent::__construct($name, $dateString, $params);
     }
