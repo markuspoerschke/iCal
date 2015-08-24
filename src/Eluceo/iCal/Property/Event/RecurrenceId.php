@@ -37,10 +37,12 @@ class RecurrenceId extends Property
      */
     protected $range;
 
-    public function __construct(\DateTime $dateTime)
+    public function __construct(\DateTime $dateTime = null)
     {
-        $this->dateTime = $dateTime;
         $this->parameterBag = new ParameterBag();
+        if (isset($dateTime)) {
+            $this->dateTime = $dateTime;
+        }
     }
 
     public function applyTimeSettings($noTime = false, $useTimezone = false, $useUtc = false)
