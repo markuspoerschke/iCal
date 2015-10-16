@@ -14,16 +14,12 @@ The following components are supported at this time:
 
 ## Installation
 
-You can install this package by using [Composer](http://getcomposer.org).
-Link to Packagist: https://packagist.org/packages/eluceo/ical
+You can install this package by using [Composer](http://getcomposer.org), running this command:
 
+```sh
+composer require eluceo/ical
 ```
-{
-    "require": {
-        "eluceo/ical": "*"
-    }
-}
-```
+Link to Packagist: https://packagist.org/packages/eluceo/ical
 
 ## Usage
 
