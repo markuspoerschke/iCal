@@ -52,7 +52,7 @@ class Property
         $this->setValue($value);
         $this->parameterBag = new ParameterBag($params);
     }
-
+    
     /**
      * Renders an unfolded line.
      *
@@ -64,7 +64,8 @@ class Property
         $line = $this->getName();
 
         // Adding params
-        if ($this->parameterBag->hasParams()) {
+        //@todo added check for $this->parameterBag because doctrine/orm proxies won't execute constructor - ok?
+        if ($this->parameterBag && $this->parameterBag->hasParams()) {
             $line .= ';' . $this->parameterBag->toString();
         }
 
