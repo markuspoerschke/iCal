@@ -6,18 +6,11 @@ class PropertyValueUtil
 {
     public static function escapeValue($value)
     {
-        $value = self::escapeValueAllowNewLine($value);
-        $value = str_replace("\n", '\\n', $value);
-
-        return $value;
-    }
-
-    public static function escapeValueAllowNewLine($value)
-    {
         $value = str_replace('\\', '\\\\', $value);
         $value = str_replace('"', '\\"', $value);
         $value = str_replace(',', '\\,', $value);
         $value = str_replace(';', '\\;', $value);
+        $value = str_replace("\n", '\\n', $value);
         $value = str_replace(
             array(
                 "\x00", "\x01", "\x02", "\x03", "\x04", "\x05", "\x06", "\x07",
