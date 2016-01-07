@@ -26,20 +26,4 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
         $output = preg_replace('/\r\n /u', '', $output);
         $this->assertContains($input, $output);
     }
-
-    public function testDescriptionWithNewLines()
-    {
-        $input = "new string \n new line \n new line \n new string";
-
-        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
-        $vEvent    = new \Eluceo\iCal\Component\Event();
-        $vEvent->setDtStart(new \DateTime('2014-12-24'));
-        $vEvent->setDtEnd(new \DateTime('2014-12-24'));
-        $vEvent->setDescription($input);
-
-        $vCalendar->addComponent($vEvent);
-
-        $output = $vCalendar->render();
-        $this->assertContains($input, $output);
-    }
 }
