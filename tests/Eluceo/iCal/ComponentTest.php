@@ -40,6 +40,6 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
         $vCalendar->addComponent($vEvent);
 
         $output = $vCalendar->render();
-        $this->assertContains($input, $output);
+        $this->assertContains(str_replace("\n", "\\n", $input), $output);
     }
 }
