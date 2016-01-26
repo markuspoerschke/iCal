@@ -387,7 +387,8 @@ class RecurrenceRule implements ValueInterface
         foreach ($weekdays as $weekday) {
             $weekdaysNeg[] = '.-' . $weekday;
         }
-        if (!empty(array_diff($value, array_merge($weekdays, $weekdaysNeg)))) {
+        $arrayDiff = array_diff($value, array_merge($weekdays, $weekdaysNeg));
+        if (!empty($arrayDiff)) {
             throw new InvalidArgumentException('Invalid value for BYDAY');
         }
         $this->byDay = $value;
@@ -469,7 +470,9 @@ class RecurrenceRule implements ValueInterface
      */
     private function piecesAreInRange($value, $max, $min = 0)
     {
-        return empty(array_diff($value, $this->getRange($min, $max)));
+        $arrayDiff = array_diff($value, $this->getRange($min, $max));
+
+        return empty($arrayDiff);
     }
 
     /**
@@ -483,8 +486,10 @@ class RecurrenceRule implements ValueInterface
      */
     private function piecesAreInPositiveOrNegativeRange($value, $max, $min = 1)
     {
-        $countDiffPositive = count(array_diff($value, $this->getRange($min, $max)));
-        $countDiffNegative = count(array_diff($value, $this->getRange(-$min, -$max)));
+        $arrayDiffPositive = array_diff($value, $this->getRange($min, $max));
+        $arrayDiffNegative = array_diff($value, $this->getRange(-$min, -$max));
+        $countDiffPositive = count($arrayDiffPositive);
+        $countDiffNegative = count($arrayDiffNegative);
 
         //return true if all pieces are in the positive range OR all pieces are in the negative range
         $isInPositiveRange = (0 == $countDiffPositive && count($value) == $countDiffNegative);
