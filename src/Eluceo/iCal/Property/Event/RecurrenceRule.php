@@ -387,7 +387,7 @@ class RecurrenceRule implements ValueInterface
         foreach ($weekdays as $weekday) {
             $weekdaysNeg[] = '.-' . $weekday;
         }
-        if (!empty(array_diff($value, array_merge($weekday, $weekdaysNeg)))) {
+        if (!empty(array_diff($value, array_merge($weekdays, $weekdaysNeg)))) {
             throw new InvalidArgumentException('Invalid value for BYDAY');
         }
         $this->byDay = $value;
