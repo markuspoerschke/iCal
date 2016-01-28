@@ -34,7 +34,7 @@ class Description implements ValueInterface
      */
     public function getEscapedValue()
     {
-        return PropertyValueUtil::escapeValueAllowNewLine((string) $this->value);
+        return PropertyValueUtil::escapeValue((string) $this->value);
     }
 
     /**

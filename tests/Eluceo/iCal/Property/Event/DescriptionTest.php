@@ -10,7 +10,7 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase
         $description = new Description($testString);
 
         $this->assertEquals(
-            $testString,
+            str_replace("\n", "\\n", $testString),
             $description->getEscapedValue()
         );
     }
