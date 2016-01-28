@@ -133,6 +133,11 @@ class Event extends Component
     /**
      * @var string
      */
+    protected $descriptionHTML;
+
+    /**
+     * @var string
+     */
     protected $status;
 
     /**
@@ -280,6 +285,18 @@ class Event extends Component
 
         if (null != $this->description) {
             $propertyBag->set('DESCRIPTION', new Description($this->description));
+        }
+
+        if (null != $this->descriptionHTML) {
+            $propertyBag->add(
+                new Property(
+                    'X-ALT-DESC',
+                    $this->descriptionHTML,
+                    array(
+                        'FMTTYPE'          => 'text/html',
+                    )
+                )
+            );
         }
 
         if (null != $this->recurrenceRule) {
@@ -546,6 +563,18 @@ class Event extends Component
     }
 
     /**
+     * @param $descriptionHTML
+     *
+     * @return $this
+     */
+    public function setDescriptionHTML($descriptionHTML)
+    {
+        $this->descriptionHTML = $descriptionHTML;
+
+        return $this;
+    }
+
+    /**
      * @param bool $useUtc
      *
      * @return $this
@@ -563,6 +592,14 @@ class Event extends Component
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescriptionHTML()
+    {
+        return $this->descriptionHTML;
     }
 
     /**
