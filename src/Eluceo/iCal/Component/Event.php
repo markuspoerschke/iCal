@@ -21,6 +21,7 @@ use Eluceo\iCal\Property\Event\Description;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\DateTimesProperty;
+use Eluceo\iCal\Property\GeoValue;
 
 /**
  * Implementation of the EVENT component.
@@ -274,7 +275,7 @@ class Event extends Component
         }
 
         if (null != $this->locationGeo) {
-            $propertyBag->set('GEO', $this->locationGeo);
+            $propertyBag->set('GEO', new GeoValue($this->locationGeo));
         }
 
         if (null != $this->summary) {
