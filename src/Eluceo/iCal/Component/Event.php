@@ -273,6 +273,10 @@ class Event extends Component
             }
         }
 
+        if (null != $this->locationGeo) {
+            $propertyBag->set('GEO', $this->locationGeo);
+        }
+
         if (null != $this->summary) {
             $propertyBag->set('SUMMARY', $this->summary);
         }
