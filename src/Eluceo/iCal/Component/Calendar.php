@@ -102,6 +102,15 @@ class Calendar extends Component
      */
     protected $publishedTTL = 'P1W';
 
+    /**
+     * Specifies a color for the calendar in calendar for Apple/Outlook.
+     *
+     * @var string
+     *
+     * @see http://msdn.microsoft.com/en-us/library/ee179588(v=exchg.80).aspx
+     */
+    protected $calendarColor = null;
+
     public function __construct($prodId)
     {
         if (empty($prodId)) {
@@ -168,6 +177,18 @@ class Calendar extends Component
     }
 
     /**
+     * @param $calendarColor
+     *
+     * @return $this
+     */
+    public function setCalendarColor($calendarColor)
+    {
+        $this->calendarColor = $calendarColor;
+
+        return $this;
+    }
+
+    /**
      * @param $calendarScale
      *
      * @return $this
@@ -226,6 +247,12 @@ class Calendar extends Component
 
         if ($this->method) {
             $propertyBag->set('METHOD', $this->method);
+        }
+
+        if ($this->calendarColor) {
+            $propertyBag->set('X-APPLE-CALENDAR-COLOR', $this->calendarColor);
+            $propertyBag->set('X-OUTLOOK-COLOR', $this->calendarColor);
+            $propertyBag->set('X-FUNAMBOL-COLOR', $this->calendarColor);
         }
 
         if ($this->calendarScale) {
