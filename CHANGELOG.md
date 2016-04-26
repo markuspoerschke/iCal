@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.10.0] - 2016-04-26
 ### Changed
 - Use 'escapeValue' to escape the new line character. [#60](https://github.com/markuspoerschke/iCal/pull/60)
 - Order components by type when building ical file. [#65](https://github.com/markuspoerschke/iCal/pull/65)
