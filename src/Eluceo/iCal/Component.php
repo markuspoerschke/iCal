@@ -69,7 +69,7 @@ abstract class Component
         }
 
         /** @var $component Component */
-        foreach ($this->components as $component) {
+        foreach (array_reverse($this->components) as $component) {
             foreach ($component->build() as $l) {
                 $lines[] = $l;
             }
