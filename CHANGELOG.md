@@ -7,7 +7,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - X-ALT-DESC for HTML types with new descriptionHTML field. [#55](https://github.com/markuspoerschke/iCal/pull/55)
-
+- Added a property and setter for calendar color. [#68](https://github.com/markuspoerschke/iCal/pull/68)
+- Write also GEO property if geo location is given. [#66](https://github.com/markuspoerschke/iCal/pull/66)
 
 ## [0.9.0] - 2015-11-13
 ### Added
