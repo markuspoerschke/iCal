@@ -52,7 +52,7 @@ class Property
         $this->setValue($value);
         $this->parameterBag = new ParameterBag($params);
     }
-    
+
     /**
      * Renders an unfolded line.
      *
@@ -121,7 +121,7 @@ class Property
             $this->value = new ArrayValue($value);
         } else {
             if (!$value instanceof ValueInterface) {
-                throw new \Exception("The value must implement the ValueInterface.");
+                throw new \Exception('The value must implement the ValueInterface.');
             } else {
                 $this->value = $value;
             }

@@ -55,11 +55,11 @@ class Calendar extends Component
      *
      * @var string
      */
-    protected $prodId = null;
-    protected $method = null;
-    protected $name = null;
+    protected $prodId      = null;
+    protected $method      = null;
+    protected $name        = null;
     protected $description = null;
-    protected $timezone = null;
+    protected $timezone    = null;
 
     /**
      * This property defines the calendar scale used for the
@@ -77,7 +77,7 @@ class Calendar extends Component
     /**
      * Specifies whether or not the iCalendar file only contains one appointment.
      *
-     * @var boolean
+     * @var bool
      *
      * @see http://msdn.microsoft.com/en-us/library/ee203486(v=exchg.80).aspx
      */
@@ -201,7 +201,7 @@ class Calendar extends Component
     }
 
     /**
-     * @param boolean $forceInspectOrOpen
+     * @param bool $forceInspectOrOpen
      *
      * @return $this
      */

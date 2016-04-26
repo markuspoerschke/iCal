@@ -4,7 +4,6 @@ namespace Eluceo\iCal\Util;
 
 class ComponentUtil
 {
-
     /**
      * Folds a single line.
      *

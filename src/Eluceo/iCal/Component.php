@@ -47,6 +47,7 @@ abstract class Component
      * Building the PropertyBag.
      *
      * @abstract
+     *
      * @return PropertyBag
      */
     abstract public function buildPropertyBag();
@@ -57,7 +58,7 @@ abstract class Component
      * If $key is given, the component at $key will be replaced else the component will be append.
      *
      * @param Component $component The Component that will be added
-     * @param null $key The key of the Component
+     * @param null      $key       The key of the Component
      */
     public function addComponent(Component $component, $key = null)
     {
@@ -123,6 +124,7 @@ abstract class Component
 
     /**
      * @param $lines
+     *
      * @return array
      */
     private function buildComponents(array &$lines)
@@ -158,7 +160,7 @@ abstract class Component
     }
 
     /**
-     * @param array $lines
+     * @param array     $lines
      * @param Component $component
      */
     private function addComponentLines(array &$lines, Component $component)

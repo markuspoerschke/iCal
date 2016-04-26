@@ -40,7 +40,7 @@ class Alarm extends Component
 
     public function getType()
     {
-        return "VALARM";
+        return 'VALARM';
     }
 
     public function getAction()

@@ -7,9 +7,7 @@ use Eluceo\iCal\Util\PropertyValueUtil;
 
 /**
  * Class Description
- * Alows new line charectars to be in the description
- *
- * @package Eluceo\iCal\Property
+ * Alows new line charectars to be in the description.
  */
 class Description implements ValueInterface
 {

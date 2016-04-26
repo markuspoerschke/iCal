@@ -20,7 +20,7 @@ class RecurrenceId extends Property
      * The effective range of recurrence instances from the instance
      * specified by the recurrence identifier specified by the property.
      */
-    const RANGE_THISANDPRIOR = 'THISANDPRIOR';
+    const RANGE_THISANDPRIOR  = 'THISANDPRIOR';
     const RANGE_THISANDFUTURE = 'THISANDFUTURE';
 
     /**
@@ -112,7 +112,7 @@ class RecurrenceId extends Property
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {

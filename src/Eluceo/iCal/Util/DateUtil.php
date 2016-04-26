@@ -9,7 +9,7 @@ class DateUtil
         $params = array();
 
         if ($useTimezone) {
-            $timeZone = $dateTime->getTimezone()->getName();
+            $timeZone       = $dateTime->getTimezone()->getName();
             $params['TZID'] = $timeZone;
         }
 

@@ -9,7 +9,7 @@ class Attendees extends Property
     /** @var Property[] */
     protected $attendees = array();
 
-    const PROPERTY_NAME = "ATTENDEES";
+    const PROPERTY_NAME = 'ATTENDEES';
 
     public function __construct()
     {
@@ -50,7 +50,7 @@ class Attendees extends Property
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function toLines()
     {
@@ -84,7 +84,7 @@ class Attendees extends Property
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {

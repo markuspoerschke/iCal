@@ -67,7 +67,7 @@ class Event extends Component
     protected $duration;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $noTime = false;
 
@@ -189,19 +189,19 @@ class Event extends Component
     protected $categories;
 
     /**
-     * https://tools.ietf.org/html/rfc5545#section-3.8.1.3
+     * https://tools.ietf.org/html/rfc5545#section-3.8.1.3.
      *
      * @var bool
      */
     protected $isPrivate = false;
-    
+
     /**
-     * Dates to be excluded from a series of events
+     * Dates to be excluded from a series of events.
      * 
      * @var \DateTime[]
      */
     protected $exDates = array();
-    
+
     /**
      * @var RecurrenceId
      */
@@ -294,7 +294,7 @@ class Event extends Component
                     'X-ALT-DESC',
                     $this->descriptionHTML,
                     array(
-                        'FMTTYPE'          => 'text/html',
+                        'FMTTYPE' => 'text/html',
                     )
                 )
             );
@@ -303,12 +303,12 @@ class Event extends Component
         if (null != $this->recurrenceRule) {
             $propertyBag->set('RRULE', $this->recurrenceRule);
         }
-        
+
         if (null != $this->recurrenceId) {
             $this->recurrenceId->applyTimeSettings($this->noTime, $this->useTimezone, $this->useUtc);
             $propertyBag->add($this->recurrenceId);
         }
-        
+
         if (!empty($this->exDates)) {
             $propertyBag->add(new DateTimesProperty('EXDATE', $this->exDates, $this->noTime, $this->useTimezone, $this->useUtc));
         }
@@ -442,6 +442,7 @@ class Event extends Component
 
     /**
      * @param Organizer $organizer
+     *
      * @return $this
      */
     public function setOrganizer(Organizer $organizer)
@@ -715,9 +716,10 @@ class Event extends Component
     }
 
     /**
-     * Sets the event privacy
+     * Sets the event privacy.
      *
      * @param bool $flag
+     *
      * @return $this
      */
     public function setIsPrivate($flag)
@@ -729,14 +731,16 @@ class Event extends Component
 
     /**
      * @param \DateTime $dateTime
+     *
      * @return \Eluceo\iCal\Component\Event
      */
     public function addExDate(\DateTime $dateTime)
     {
         $this->exDates[] = $dateTime;
+
         return $this;
     }
-    
+
     /**
      * @return \DateTime[]
      */
@@ -747,11 +751,13 @@ class Event extends Component
 
     /**
      * @param \DateTime[]
+     *
      * @return \Eluceo\iCal\Component\Event
      */
-    public function setExDates(Array $exDates)
+    public function setExDates(array $exDates)
     {
         $this->exDates = $exDates;
+
         return $this;
     }
 
@@ -765,12 +771,13 @@ class Event extends Component
 
     /**
      * @param RecurrenceId $recurrenceId
+     *
      * @return \Eluceo\iCal\Component\Event
      */
     public function setRecurrenceId(RecurrenceId $recurrenceId)
     {
         $this->recurrenceId = $recurrenceId;
+
         return $this;
     }
- 
 }

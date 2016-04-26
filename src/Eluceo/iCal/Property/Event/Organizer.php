@@ -1,11 +1,11 @@
 <?php
+
 namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\Property;
 
 /**
- * Class Organizer
- * @package Eluceo\iCal\Property\Event
+ * Class Organizer.
  */
 class Organizer extends Property
 {
@@ -13,7 +13,7 @@ class Organizer extends Property
 
     /**
      * @param string $value
-     * @param array $params
+     * @param array  $params
      */
     public function __construct($value, $params = array())
     {
@@ -21,7 +21,7 @@ class Organizer extends Property
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getName()
     {

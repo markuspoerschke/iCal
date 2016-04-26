@@ -11,7 +11,6 @@
 
 namespace Eluceo\iCal;
 
-
 class PropertyBag implements \IteratorAggregate
 {
     /**

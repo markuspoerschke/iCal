@@ -22,7 +22,7 @@ class DateTimeProperty extends Property
         $useUtc = false
     ) {
         $dateString = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
-        $params = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone);
+        $params     = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone);
 
         parent::__construct($name, $dateString, $params);
     }
