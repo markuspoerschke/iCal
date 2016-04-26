@@ -10,6 +10,7 @@
  */
 
 namespace Eluceo\iCal;
+
 use Eluceo\iCal\Util\ComponentUtil;
 
 /**
@@ -25,6 +26,15 @@ abstract class Component
     protected $components = array();
 
     /**
+     * The order in which the components will be rendered during build.
+     *
+     * Not defined components will be appended at the end.
+     *
+     * @var array
+     */
+    private $componentsBuildOrder = array('VTIMEZONE', 'DAYLIGHT', 'STANDARD');
+
+    /**
      * The type of the concrete Component.
      *
      * @abstract
@@ -34,12 +44,20 @@ abstract class Component
     abstract public function getType();
 
     /**
+     * Building the PropertyBag.
+     *
+     * @abstract
+     * @return PropertyBag
+     */
+    abstract public function buildPropertyBag();
+
+    /**
      * Adds a Component.
      *
      * If $key is given, the component at $key will be replaced else the component will be append.
      *
      * @param Component $component The Component that will be added
-     * @param null      $key       The key of the Component
+     * @param null $key The key of the Component
      */
     public function addComponent(Component $component, $key = null)
     {
@@ -68,12 +86,7 @@ abstract class Component
             }
         }
 
-        /** @var $component Component */
-        foreach ($this->components as $component) {
-            foreach ($component->build() as $l) {
-                $lines[] = $l;
-            }
-        }
+        $this->buildComponents($lines);
 
         $lines[] = sprintf('END:%s', $this->getType());
 
@@ -109,10 +122,49 @@ abstract class Component
     }
 
     /**
-     * Building the PropertyBag.
-     *
-     * @abstract
-     * @return PropertyBag
+     * @param $lines
+     * @return array
      */
-    abstract public function buildPropertyBag();
+    private function buildComponents(array &$lines)
+    {
+        $componentsByType = [];
+
+        /** @var $component Component */
+        foreach ($this->components as $component) {
+            $type = $component->getType();
+            if (!isset($componentsByType[$type])) {
+                $componentsByType[$type] = [];
+            }
+            $componentsByType[$type][] = $component;
+        }
+
+        // render ordered components
+        foreach ($this->componentsBuildOrder as $type) {
+            if (!isset($componentsByType[$type])) {
+                continue;
+            }
+            foreach ($componentsByType[$type] as $component) {
+                $this->addComponentLines($lines, $component);
+            }
+            unset($componentsByType[$type]);
+        }
+
+        // render all other
+        foreach ($componentsByType as $components) {
+            foreach ($components as $component) {
+                $this->addComponentLines($lines, $component);
+            }
+        }
+    }
+
+    /**
+     * @param array $lines
+     * @param Component $component
+     */
+    private function addComponentLines(array &$lines, Component $component)
+    {
+        foreach ($component->build() as $l) {
+            $lines[] = $l;
+        }
+    }
 }
