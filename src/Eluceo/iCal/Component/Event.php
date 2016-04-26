@@ -270,6 +270,7 @@ class Event extends Component
                         )
                     )
                 );
+                $propertyBag->set('GEO', $this->locationGeo);
             }
         }
 
