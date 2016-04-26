@@ -131,7 +131,7 @@ To setup and run tests:
 - go to the root directory of this project
 - download composer: `wget https://getcomposer.org/composer.phar`
 - install dev dependencies: `php composer.phar install --dev`
-- run `./bin/phpunit -c tests`
+- run `./bin/phpunit`
 
 ## License
 
