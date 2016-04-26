@@ -738,7 +738,7 @@ class Event extends Component
     }
     
     /**
-     * @return DateTime[]
+     * @return \DateTime[]
      */
     public function getExDates()
     {
