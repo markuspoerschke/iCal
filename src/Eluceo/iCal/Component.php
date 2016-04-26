@@ -129,13 +129,13 @@ abstract class Component
      */
     private function buildComponents(array &$lines)
     {
-        $componentsByType = [];
+        $componentsByType = array();
 
         /** @var $component Component */
         foreach ($this->components as $component) {
             $type = $component->getType();
             if (!isset($componentsByType[$type])) {
-                $componentsByType[$type] = [];
+                $componentsByType[$type] = array();
             }
             $componentsByType[$type][] = $component;
         }
