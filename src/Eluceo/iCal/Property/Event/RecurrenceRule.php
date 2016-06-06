@@ -383,14 +383,15 @@ class RecurrenceRule implements ValueInterface
     {
         //todo: refactor weekday array handling
         $weekdays = array(self::WEEKDAY_MONDAY, self::WEEKDAY_TUESDAY, self::WEEKDAY_WEDNESDAY, self::WEEKDAY_THURSDAY, self::WEEKDAY_FRIDAY, self::WEEKDAY_SATURDAY, self::WEEKDAY_SUNDAY);
-        $weekdaysNeg = array();
-        foreach ($weekdays as $weekday) {
-            $weekdaysNeg[] = '.-' . $weekday;
+        $pattern = '/^(-?[0-9]\d*)?('.implode('|', $weekdays).')$/';
+
+        $checkValues = explode(', ', $value);
+        foreach ($checkValues as $checkValue) {
+            if (!preg_match($pattern, $checkValue)) {
+                throw new InvalidArgumentException('Invalid value for BYDAY');
+            }
         }
-        $arrayDiff = array_diff($value, array_merge($weekdays, $weekdaysNeg));
-        if (!empty($arrayDiff)) {
-            throw new InvalidArgumentException('Invalid value for BYDAY');
-        }
+
         $this->byDay = $value;
 
         return $this;
