@@ -197,7 +197,7 @@ class Event extends Component
 
     /**
      * Dates to be excluded from a series of events.
-     * 
+     *
      * @var \DateTime[]
      */
     protected $exDates = array();
@@ -270,7 +270,7 @@ class Event extends Component
                         )
                     )
                 );
-                $propertyBag->set('GEO', $this->locationGeo);
+                $propertyBag->set('GEO', str_replace(',', ';', $this->locationGeo));
             }
         }
 
