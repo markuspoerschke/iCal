@@ -27,6 +27,9 @@ class PropertyValueUtil
                 "\x7F"), '', $value
         );
 
+        // edrush: really not sure why all the code before but if we want to keep \n we can do the following
+        $value = str_replace("\\\\n", "\\n", $value);
+
         return $value;
     }
 }
