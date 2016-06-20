@@ -14,18 +14,26 @@ use InvalidArgumentException;
  */
 class RecurrenceRule implements ValueInterface
 {
-    const FREQ_YEARLY = 'YEARLY';
-    const FREQ_MONTHLY = 'MONTHLY';
-    const FREQ_WEEKLY = 'WEEKLY';
     const FREQ_DAILY = 'DAILY';
+    const FREQ_WEEKLY = 'WEEKLY';
+    const FREQ_MONTHLY = 'MONTHLY';
+    const FREQ_YEARLY = 'YEARLY';
 
-    const WEEKDAY_SUNDAY = "SU";
     const WEEKDAY_MONDAY = "MO";
     const WEEKDAY_TUESDAY = "TU";
     const WEEKDAY_WEDNESDAY = "WE";
     const WEEKDAY_THURSDAY = "TH";
     const WEEKDAY_FRIDAY = "FR";
     const WEEKDAY_SATURDAY = "SA";
+    const WEEKDAY_SUNDAY = "SU";
+
+    const NTH_OCCURRENCE_EVERY = '';
+    const NTH_OCCURRENCE_FIRST = '1';
+    const NTH_OCCURRENCE_SECOND = '2';
+    const NTH_OCCURRENCE_THIRD = '3';
+    const NTH_OCCURRENCE_FOURTH= '4';
+    const NTH_OCCURRENCE_FIFTH = '5';
+    const NTH_OCCURRENCE_LAST = '-1';
 
     /**
      * The frequency of an Event.
