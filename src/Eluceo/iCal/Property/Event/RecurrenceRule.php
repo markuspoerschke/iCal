@@ -22,10 +22,13 @@ use InvalidArgumentException;
  */
 class RecurrenceRule implements ValueInterface
 {
-    const FREQ_YEARLY  = 'YEARLY';
-    const FREQ_MONTHLY = 'MONTHLY';
-    const FREQ_WEEKLY  = 'WEEKLY';
-    const FREQ_DAILY   = 'DAILY';
+    const FREQ_YEARLY   = 'YEARLY';
+    const FREQ_MONTHLY  = 'MONTHLY';
+    const FREQ_WEEKLY   = 'WEEKLY';
+    const FREQ_DAILY    = 'DAILY';
+    const FREQ_HOURLY   = 'HOURLY';
+    const FREQ_MINUTELY = 'MINUTELY';
+    const FREQ_SECONDLY = 'SECONDLY';
 
     const WEEKDAY_SUNDAY    = 'SU';
     const WEEKDAY_MONDAY    = 'MO';
@@ -235,10 +238,7 @@ class RecurrenceRule implements ValueInterface
      */
     public function setFreq($freq)
     {
-        if (self::FREQ_YEARLY === $freq || self::FREQ_MONTHLY === $freq
-            || self::FREQ_WEEKLY === $freq
-            || self::FREQ_DAILY === $freq
-        ) {
+        if (@constant('static::FREQ_' . $freq) !== null) {
             $this->freq = $freq;
         } else {
             throw new \InvalidArgumentException("The Frequency {$freq} is not supported.");
