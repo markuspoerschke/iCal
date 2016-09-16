@@ -146,6 +146,11 @@ class Event extends Component
     protected $recurrenceRule;
 
     /**
+     * @var array
+     */
+    protected $recurrenceRules = array();
+
+    /**
      * This property specifies the date and time that the calendar
      * information was created.
      *
@@ -302,6 +307,10 @@ class Event extends Component
 
         if (null != $this->recurrenceRule) {
             $propertyBag->set('RRULE', $this->recurrenceRule);
+        }
+
+        foreach ($this->recurrenceRules as $recurrenceRule) {
+            $propertyBag->set('RRULE', $recurrenceRule);
         }
 
         if (null != $this->recurrenceId) {
@@ -660,23 +669,51 @@ class Event extends Component
     }
 
     /**
+     * @deprecated Deprecated since version 0.11.0, to be removed in 1.0. Use addRecurrenceRule instead.
+     *
      * @param RecurrenceRule $recurrenceRule
      *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
     {
+        @trigger_error('setRecurrenceRule() is deprecated since version 0.11.0 and will be removed in 1.0. Use addRecurrenceRule instead.', E_USER_DEPRECATED);
+
         $this->recurrenceRule = $recurrenceRule;
 
         return $this;
     }
 
     /**
+     * @deprecated Deprecated since version 0.11.0, to be removed in 1.0. Use getRecurrenceRules instead.
+     *
      * @return RecurrenceRule
      */
     public function getRecurrenceRule()
     {
+        @trigger_error('getRecurrenceRule() is deprecated since version 0.11.0 and will be removed in 1.0. Use getRecurrenceRules instead.', E_USER_DEPRECATED);
+
         return $this->recurrenceRule;
+    }
+
+    /**
+     * @param RecurrenceRule $recurrenceRule
+     *
+     * @return $this
+     */
+    public function addRecurrenceRule(RecurrenceRule $recurrenceRule)
+    {
+        $this->recurrenceRules[] = $recurrenceRule;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRecurrenceRules()
+    {
+        return $this->recurrenceRules;
     }
 
     /**
