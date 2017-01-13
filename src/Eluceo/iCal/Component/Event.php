@@ -377,6 +377,11 @@ class Event extends Component
         return $this;
     }
 
+    public function getDtStart()
+    {
+        return $this->dtStart;
+    }
+
     /**
      * @param $dtStamp
      *
