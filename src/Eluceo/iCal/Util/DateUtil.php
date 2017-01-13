@@ -17,7 +17,7 @@ class DateUtil
     {
         $params = array();
 
-        if ($useTimezone) {
+        if ($useTimezone && $noTime === false) {
             $timeZone       = $dateTime->getTimezone()->getName();
             $params['TZID'] = $timeZone;
         }
