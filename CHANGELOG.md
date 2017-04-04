@@ -1,10 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.11.1] - 2017-04-04
 ### Fixed
 - All days events (no time) ends on the next day. [#83](https://github.com/markuspoerschke/iCal/pull/83)
 - Timezone will not applied on all days events [#83](https://github.com/markuspoerschke/iCal/pull/83)
+
+### Added
 - Add `Event::getDtStart` method [#83](https://github.com/markuspoerschke/iCal/pull/83)
 
 ## [0.11.0] - 2016-09-16
@@ -39,7 +41,8 @@ All notable changes to this project will be documented in this file.
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.11.0...HEAD
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.11.1...HEAD
+[0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
 [0.11.0]: https://github.com/markuspoerschke/iCal/compare/0.10.1...0.11.0
 [0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/markuspoerschke/iCal/compare/0.9.0...0.10.0
