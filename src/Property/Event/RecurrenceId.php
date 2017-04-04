@@ -13,8 +13,8 @@ namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\ParameterBag;
 use Eluceo\iCal\Property;
-use Eluceo\iCal\Util\DateUtil;
 use Eluceo\iCal\Property\ValueInterface;
+use Eluceo\iCal\Util\DateUtil;
 
 /**
  * Implementation of Recurrence Id.
@@ -29,7 +29,7 @@ class RecurrenceId extends Property
      * The effective range of recurrence instances from the instance
      * specified by the recurrence identifier specified by the property.
      */
-    const RANGE_THISANDPRIOR  = 'THISANDPRIOR';
+    const RANGE_THISANDPRIOR = 'THISANDPRIOR';
     const RANGE_THISANDFUTURE = 'THISANDFUTURE';
 
     /**

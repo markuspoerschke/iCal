@@ -16,7 +16,7 @@ class PropertyBag implements \IteratorAggregate
     /**
      * @var array
      */
-    protected $elements = array();
+    protected $elements = [];
 
     /**
      * Creates a new Property with $name, $value and $params.
@@ -27,9 +27,9 @@ class PropertyBag implements \IteratorAggregate
      *
      * @return $this
      */
-    public function set($name, $value, $params = array())
+    public function set($name, $value, $params = [])
     {
-        $property         = new Property($name, $value, $params);
+        $property = new Property($name, $value, $params);
         $this->elements[] = $property;
 
         return $this;

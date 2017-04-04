@@ -23,7 +23,7 @@ abstract class Component
      *
      * @var Component[]
      */
-    protected $components = array();
+    protected $components = [];
 
     /**
      * The order in which the components will be rendered during build.
@@ -32,7 +32,7 @@ abstract class Component
      *
      * @var array
      */
-    private $componentsBuildOrder = array('VTIMEZONE', 'DAYLIGHT', 'STANDARD');
+    private $componentsBuildOrder = ['VTIMEZONE', 'DAYLIGHT', 'STANDARD'];
 
     /**
      * The type of the concrete Component.
@@ -76,7 +76,7 @@ abstract class Component
      */
     public function build()
     {
-        $lines = array();
+        $lines = [];
 
         $lines[] = sprintf('BEGIN:%s', $this->getType());
 
@@ -91,7 +91,7 @@ abstract class Component
 
         $lines[] = sprintf('END:%s', $this->getType());
 
-        $ret = array();
+        $ret = [];
 
         foreach ($lines as $line) {
             foreach (ComponentUtil::fold($line) as $l) {
@@ -129,13 +129,13 @@ abstract class Component
      */
     private function buildComponents(array &$lines)
     {
-        $componentsByType = array();
+        $componentsByType = [];
 
         /** @var $component Component */
         foreach ($this->components as $component) {
             $type = $component->getType();
             if (!isset($componentsByType[$type])) {
-                $componentsByType[$type] = array();
+                $componentsByType[$type] = [];
             }
             $componentsByType[$type][] = $component;
         }

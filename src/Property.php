@@ -46,7 +46,7 @@ class Property
      * @param       $value
      * @param array $params
      */
-    public function __construct($name, $value, $params = array())
+    public function __construct($name, $value, $params = [])
     {
         $this->name = $name;
         $this->setValue($value);
@@ -82,7 +82,7 @@ class Property
      */
     public function toLines()
     {
-        return array($this->toLine());
+        return [$this->toLine()];
     }
 
     /**

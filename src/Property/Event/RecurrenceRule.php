@@ -11,8 +11,8 @@
 
 namespace Eluceo\iCal\Property\Event;
 
-use Eluceo\iCal\Property\ValueInterface;
 use Eluceo\iCal\ParameterBag;
+use Eluceo\iCal\Property\ValueInterface;
 use InvalidArgumentException;
 
 /**
@@ -22,21 +22,21 @@ use InvalidArgumentException;
  */
 class RecurrenceRule implements ValueInterface
 {
-    const FREQ_YEARLY   = 'YEARLY';
-    const FREQ_MONTHLY  = 'MONTHLY';
-    const FREQ_WEEKLY   = 'WEEKLY';
-    const FREQ_DAILY    = 'DAILY';
-    const FREQ_HOURLY   = 'HOURLY';
+    const FREQ_YEARLY = 'YEARLY';
+    const FREQ_MONTHLY = 'MONTHLY';
+    const FREQ_WEEKLY = 'WEEKLY';
+    const FREQ_DAILY = 'DAILY';
+    const FREQ_HOURLY = 'HOURLY';
     const FREQ_MINUTELY = 'MINUTELY';
     const FREQ_SECONDLY = 'SECONDLY';
 
-    const WEEKDAY_SUNDAY    = 'SU';
-    const WEEKDAY_MONDAY    = 'MO';
-    const WEEKDAY_TUESDAY   = 'TU';
+    const WEEKDAY_SUNDAY = 'SU';
+    const WEEKDAY_MONDAY = 'MO';
+    const WEEKDAY_TUESDAY = 'TU';
     const WEEKDAY_WEDNESDAY = 'WE';
-    const WEEKDAY_THURSDAY  = 'TH';
-    const WEEKDAY_FRIDAY    = 'FR';
-    const WEEKDAY_SATURDAY  = 'SA';
+    const WEEKDAY_THURSDAY = 'TH';
+    const WEEKDAY_FRIDAY = 'FR';
+    const WEEKDAY_SATURDAY = 'SA';
 
     /**
      * The frequency of an Event.

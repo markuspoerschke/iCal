@@ -16,7 +16,7 @@ use Eluceo\iCal\Property;
 class Attendees extends Property
 {
     /** @var Property[] */
-    protected $attendees = array();
+    protected $attendees = [];
 
     const PROPERTY_NAME = 'ATTENDEES';
 
@@ -31,7 +31,7 @@ class Attendees extends Property
      *
      * @return $this
      */
-    public function add($value, $params = array())
+    public function add($value, $params = [])
     {
         $this->attendees[] = new Property('ATTENDEE', $value, $params);
 
@@ -63,7 +63,7 @@ class Attendees extends Property
      */
     public function toLines()
     {
-        $lines = array();
+        $lines = [];
         foreach ($this->attendees as $attendee) {
             $lines[] = $attendee->toLine();
         }

@@ -18,7 +18,7 @@ class ComponentUtil
      *
      * According to RFC 2445, all lines longer than 75 characters will be folded
      *
-     * @link http://www.ietf.org/rfc/rfc2445.txt
+     * @see http://www.ietf.org/rfc/rfc2445.txt
      *
      * @param $string
      *
@@ -26,10 +26,10 @@ class ComponentUtil
      */
     public static function fold($string)
     {
-        $lines = array();
+        $lines = [];
         $array = preg_split('/(?<!^)(?!$)/u', $string);
 
-        $line   = '';
+        $line = '';
         $lineNo = 0;
         foreach ($array as $char) {
             $charLen = strlen($char);

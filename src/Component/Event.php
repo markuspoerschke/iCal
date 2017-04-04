@@ -14,20 +14,20 @@ namespace Eluceo\iCal\Component;
 use Eluceo\iCal\Component;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
-use Eluceo\iCal\Property\Event\Attendees;
-use Eluceo\iCal\Property\Event\Organizer;
-use Eluceo\iCal\Property\Event\RecurrenceRule;
-use Eluceo\iCal\Property\Event\Description;
-use Eluceo\iCal\PropertyBag;
-use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\DateTimesProperty;
+use Eluceo\iCal\Property\Event\Attendees;
+use Eluceo\iCal\Property\Event\Description;
+use Eluceo\iCal\Property\Event\Organizer;
+use Eluceo\iCal\Property\Event\RecurrenceId;
+use Eluceo\iCal\Property\Event\RecurrenceRule;
+use Eluceo\iCal\PropertyBag;
 
 /**
  * Implementation of the EVENT component.
  */
 class Event extends Component
 {
-    const TIME_TRANSPARENCY_OPAQUE      = 'OPAQUE';
+    const TIME_TRANSPARENCY_OPAQUE = 'OPAQUE';
     const TIME_TRANSPARENCY_TRANSPARENT = 'TRANSPARENT';
 
     const STATUS_TENTATIVE = 'TENTATIVE';
@@ -148,7 +148,7 @@ class Event extends Component
     /**
      * @var array
      */
-    protected $recurrenceRules = array();
+    protected $recurrenceRules = [];
 
     /**
      * This property specifies the date and time that the calendar
@@ -205,7 +205,7 @@ class Event extends Component
      *
      * @var \DateTime[]
      */
-    protected $exDates = array();
+    protected $exDates = [];
 
     /**
      * @var RecurrenceId
@@ -249,7 +249,7 @@ class Event extends Component
 
         // An event can have a 'dtend' or 'duration', but not both.
         if (null != $this->dtEnd) {
-            if($this->noTime === true) {
+            if ($this->noTime === true) {
                 $this->dtEnd->add(new \DateInterval('P1D'));
             }
             $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc));
@@ -270,12 +270,12 @@ class Event extends Component
                     new Property(
                         'X-APPLE-STRUCTURED-LOCATION',
                         'geo:' . $this->locationGeo,
-                        array(
-                            'VALUE'          => 'URI',
-                            'X-ADDRESS'      => $this->location,
+                        [
+                            'VALUE' => 'URI',
+                            'X-ADDRESS' => $this->location,
                             'X-APPLE-RADIUS' => 49,
-                            'X-TITLE'        => $this->locationTitle,
-                        )
+                            'X-TITLE' => $this->locationTitle,
+                        ]
                     )
                 );
                 $propertyBag->set('GEO', str_replace(',', ';', $this->locationGeo));
@@ -301,9 +301,9 @@ class Event extends Component
                 new Property(
                     'X-ALT-DESC',
                     $this->descriptionHTML,
-                    array(
+                    [
                         'FMTTYPE' => 'text/html',
-                    )
+                    ]
                 )
             );
         }
@@ -418,9 +418,9 @@ class Event extends Component
      */
     public function setLocation($location, $title = '', $geo = null)
     {
-        $this->location      = $location;
+        $this->location = $location;
         $this->locationTitle = $title;
-        $this->locationGeo   = $geo;
+        $this->locationGeo = $geo;
 
         return $this;
     }
@@ -551,7 +551,7 @@ class Event extends Component
      *
      * @return $this
      */
-    public function addAttendee($attendee, $params = array())
+    public function addAttendee($attendee, $params = [])
     {
         if (!isset($this->attendees)) {
             $this->attendees = new Attendees();

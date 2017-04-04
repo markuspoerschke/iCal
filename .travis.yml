@@ -13,9 +13,11 @@ cache:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction --prefer-dist
+  - travis_retry wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar
 
 script:
   - ./vendor/bin/phpunit --coverage-clover=coverage.clover
+  - php php-cs-fixer-v2.phar fix --dry-run --diff
 
 after_script:
   - travis_retry wget https://scrutinizer-ci.com/ocular.phar

@@ -21,18 +21,18 @@ class Calendar extends Component
      *
      * According to RFP 5545: 3.7.2. Method
      *
-     * @link http://tools.ietf.org/html/rfc5545#section-3.7.2
+     * @see http://tools.ietf.org/html/rfc5545#section-3.7.2
      *
      * And then according to RFC 2446: 3 APPLICATION PROTOCOL ELEMENTS
-     * @link https://www.ietf.org/rfc/rfc2446.txt
+     * @see https://www.ietf.org/rfc/rfc2446.txt
      */
-    const METHOD_PUBLISH        = 'PUBLISH';
-    const METHOD_REQUEST        = 'REQUEST';
-    const METHOD_REPLY          = 'REPLY';
-    const METHOD_ADD            = 'ADD';
-    const METHOD_CANCEL         = 'CANCEL';
-    const METHOD_REFRESH        = 'REFRESH';
-    const METHOD_COUNTER        = 'COUNTER';
+    const METHOD_PUBLISH = 'PUBLISH';
+    const METHOD_REQUEST = 'REQUEST';
+    const METHOD_REPLY = 'REPLY';
+    const METHOD_ADD = 'ADD';
+    const METHOD_CANCEL = 'CANCEL';
+    const METHOD_REFRESH = 'REFRESH';
+    const METHOD_COUNTER = 'COUNTER';
     const METHOD_DECLINECOUNTER = 'DECLINECOUNTER';
 
     /**
@@ -40,7 +40,7 @@ class Calendar extends Component
      *
      * According to RFC 5545: 3.7.1. Calendar Scale
      *
-     * @link http://tools.ietf.org/html/rfc5545#section-3.7
+     * @see http://tools.ietf.org/html/rfc5545#section-3.7
      */
     const CALSCALE_GREGORIAN = 'GREGORIAN';
 
@@ -51,15 +51,15 @@ class Calendar extends Component
      *
      * This property specifies the identifier for the product that created the Calendar object.
      *
-     * @link http://www.ietf.org/rfc/rfc2445.txt
+     * @see http://www.ietf.org/rfc/rfc2445.txt
      *
      * @var string
      */
-    protected $prodId      = null;
-    protected $method      = null;
-    protected $name        = null;
+    protected $prodId = null;
+    protected $method = null;
+    protected $name = null;
     protected $description = null;
-    protected $timezone    = null;
+    protected $timezone = null;
 
     /**
      * This property defines the calendar scale used for the

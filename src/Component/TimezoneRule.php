@@ -12,8 +12,8 @@
 namespace Eluceo\iCal\Component;
 
 use Eluceo\iCal\Component;
-use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
+use Eluceo\iCal\PropertyBag;
 
 /**
  * Implementation of Standard Time and Daylight Saving Time observances (or rules)

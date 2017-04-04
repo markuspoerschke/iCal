@@ -20,7 +20,7 @@ class ParameterBag
      */
     protected $params;
 
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         $this->params = $params;
     }
@@ -62,7 +62,7 @@ class ParameterBag
         $line = '';
         foreach ($this->params as $param => $paramValues) {
             if (!is_array($paramValues)) {
-                $paramValues = array($paramValues);
+                $paramValues = [$paramValues];
             }
             foreach ($paramValues as $k => $v) {
                 $paramValues[$k] = $this->escapeParamValue($v);
