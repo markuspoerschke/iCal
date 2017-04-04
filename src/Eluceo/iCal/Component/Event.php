@@ -215,7 +215,7 @@ class Event extends Component
     public function __construct($uniqueId = null)
     {
         if (null == $uniqueId) {
-            $uniqueId = uniqid();
+            $uniqueId = uniqid('', true);
         }
 
         $this->uniqueId = $uniqueId;
