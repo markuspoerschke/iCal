@@ -19,12 +19,12 @@ class Calendar extends Component
     /**
      * Methods for calendar components.
      *
-     * According to RFP 5545: 3.7.2. Method
+     * According to RFC 5545: 3.7.2. Method
      *
      * @see http://tools.ietf.org/html/rfc5545#section-3.7.2
      *
      * And then according to RFC 2446: 3 APPLICATION PROTOCOL ELEMENTS
-     * @see https://www.ietf.org/rfc/rfc2446.txt
+     * @see https://tools.ietf.org/html/rfc2446#section-3.2
      */
     const METHOD_PUBLISH = 'PUBLISH';
     const METHOD_REQUEST = 'REQUEST';
@@ -47,11 +47,11 @@ class Calendar extends Component
     /**
      * The Product Identifier.
      *
-     * According to RFC 2445: 4.7.3 Product Identifier
+     * According to RFC 5545: 3.7.3 Product Identifier
      *
      * This property specifies the identifier for the product that created the Calendar object.
      *
-     * @see http://www.ietf.org/rfc/rfc2445.txt
+     * @see https://tools.ietf.org/html/rfc5545#section-3.7.3
      *
      * @var string
      */

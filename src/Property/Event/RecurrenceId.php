@@ -19,7 +19,7 @@ use Eluceo\iCal\Util\DateUtil;
 /**
  * Implementation of Recurrence Id.
  *
- * @see http://www.ietf.org/rfc/rfc2445.txt 4.8.4.4 Recurrence ID
+ * @see https://tools.ietf.org/html/rfc5545#section-3.8.4.4
  */
 class RecurrenceId extends Property
 {

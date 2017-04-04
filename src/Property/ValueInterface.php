@@ -16,9 +16,11 @@ interface ValueInterface
     /**
      * Return the value of the Property as an escaped string.
      *
-     * Escape values as per RFC 2445. See http://www.kanzaki.com/docs/ical/text.html
+     * Escape values as per RFC 5545.
+     *
+     * @see https://tools.ietf.org/html/rfc5545#section-3.3.11
      *
      * @return string
      */
-    public function getEscapedValue();
+    public function getEscapedValue(): string;
 }

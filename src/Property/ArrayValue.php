@@ -11,8 +11,6 @@
 
 namespace Eluceo\iCal\Property;
 
-use Eluceo\iCal\Util\PropertyValueUtil;
-
 class ArrayValue implements ValueInterface
 {
     /**
@@ -34,10 +32,10 @@ class ArrayValue implements ValueInterface
         return $this;
     }
 
-    public function getEscapedValue()
+    public function getEscapedValue(): string
     {
-        return implode(',', array_map(function ($value) {
-            return PropertyValueUtil::escapeValue((string) $value);
+        return implode(',', array_map(function (string $value): string {
+            return (new StringValue($value))->getEscapedValue();
         }, $this->values));
     }
 }

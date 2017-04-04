@@ -18,7 +18,7 @@ use InvalidArgumentException;
 /**
  * Implementation of Recurrence Rule.
  *
- * @see http://www.ietf.org/rfc/rfc2445.txt 3.3.10.  Recurrence Rule
+ * @see https://tools.ietf.org/html/rfc5545#section-3.8.5.3
  */
 class RecurrenceRule implements ValueInterface
 {
@@ -105,14 +105,7 @@ class RecurrenceRule implements ValueInterface
      */
     protected $bySecond;
 
-    /**
-     * Return the value of the Property as an escaped string.
-     *
-     * Escape values as per RFC 2445. See http://www.kanzaki.com/docs/ical/text.html
-     *
-     * @return string
-     */
-    public function getEscapedValue()
+    public function getEscapedValue(): string
     {
         return $this->buildParameterBag()->toString();
     }

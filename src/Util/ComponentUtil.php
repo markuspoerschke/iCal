@@ -16,9 +16,10 @@ class ComponentUtil
     /**
      * Folds a single line.
      *
-     * According to RFC 2445, all lines longer than 75 characters will be folded
+     * According to RFC 5545, all lines longer than 75 characters should be folded
      *
-     * @see http://www.ietf.org/rfc/rfc2445.txt
+     * @see https://tools.ietf.org/html/rfc5545#section-5
+     * @see https://tools.ietf.org/html/rfc5545#section-3.1
      *
      * @param $string
      *

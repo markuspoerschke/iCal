@@ -16,9 +16,11 @@ use Eluceo\iCal\Property\StringValue;
 use Eluceo\iCal\Property\ValueInterface;
 
 /**
- * The Property Class represents a property as defined in RFC 2445.
+ * The Property Class represents a property as defined in RFC 5545.
  *
- * The content of a line (unfolded) will be rendered in this class
+ * The content of a line (unfolded) will be rendered in this class.
+ *
+ * @see https://tools.ietf.org/html/rfc5545#section-3.5
  */
 class Property
 {

@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - Remove class `\Eluceo\iCal\Property\Event\Description` (see [#61](https://github.com/markuspoerschke/iCal/pull/61))
-- Remove static method `\Eluceo\iCal\Util\PropertyValueUtil::escapeValueAllowNewLine` (see [#61](https://github.com/markuspoerschke/iCal/pull/61))
+- Remove class `\Eluceo\iCal\Util\PropertyValueUtil` (see [#61](https://github.com/markuspoerschke/iCal/pull/61))
 
 ## [0.11.1] - 2017-04-04
 ### Fixed

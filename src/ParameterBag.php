@@ -36,12 +36,15 @@ class ParameterBag
 
     /**
      * @param $name
+     * @return array|mixed
      */
     public function getParam($name)
     {
-        if (array_key_exists($name, $this->params)) {
+        if (isset($this->params[$name])) {
             return $this->params[$name];
         }
+
+        return null;
     }
 
     /**
