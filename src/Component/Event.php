@@ -16,7 +16,6 @@ use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\Property\DateTimesProperty;
 use Eluceo\iCal\Property\Event\Attendees;
-use Eluceo\iCal\Property\Event\Description;
 use Eluceo\iCal\Property\Event\Organizer;
 use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
@@ -293,7 +292,7 @@ class Event extends Component
         $propertyBag->set('CLASS', $this->isPrivate ? 'PRIVATE' : 'PUBLIC');
 
         if (null != $this->description) {
-            $propertyBag->set('DESCRIPTION', new Description($this->description));
+            $propertyBag->set('DESCRIPTION', $this->description);
         }
 
         if (null != $this->descriptionHTML) {
