@@ -2,9 +2,9 @@
 
 namespace Eluceo\iCal\Property;
 
-use Eluceo\iCal\Property\StringValue;
+use PHPUnit\Framework\TestCase;
 
-class StringValueTest extends \PHPUnit_Framework_TestCase
+class StringValueTest extends TestCase
 {
     public function testNoEscapeNeeded()
     {

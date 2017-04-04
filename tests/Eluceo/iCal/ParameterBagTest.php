@@ -2,7 +2,9 @@
 
 namespace Eluceo\iCal;
 
-class ParameterBagTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ParameterBagTest extends TestCase
 {
     public function testEscapeParamValue()
     {

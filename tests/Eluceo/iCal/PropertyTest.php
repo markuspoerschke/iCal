@@ -2,7 +2,9 @@
 
 namespace Eluceo\iCal;
 
-class PropertyTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class PropertyTest extends TestCase
 {
     public function testPropertyWithSingleValue()
     {

@@ -2,7 +2,9 @@
 
 namespace Eluceo\iCal\Property;
 
-class ArrayValueTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ArrayValueTest extends TestCase
 {
     /**
      * @dataProvider arrayValuesProvider

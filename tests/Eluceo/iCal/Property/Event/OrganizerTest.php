@@ -7,10 +7,12 @@
 
 namespace Eluceo\iCal\Property\Event;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * OrganizerTest
  */
-class OrganizerTest extends \PHPUnit_Framework_TestCase
+class OrganizerTest extends TestCase
 {
     public function testOrganizerValueOnly()
     {

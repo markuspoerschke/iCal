@@ -2,7 +2,9 @@
 
 namespace Eluceo\iCal\Property\Event;
 
-class RecurrenceRuleTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class RecurrenceRuleTest extends TestCase
 {
     /**
      * Example taken from http://www.kanzaki.com/docs/ical/rrule.html

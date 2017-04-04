@@ -2,7 +2,9 @@
 
 namespace Eluceo\iCal;
 
-class ComponentTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ComponentTest extends TestCase
 {
     public function testFoldWithMultibyte()
     {
