@@ -11,8 +11,6 @@
 
 namespace Eluceo\iCal\Property;
 
-use Eluceo\iCal\Util\PropertyValueUtil;
-
 class StringValue implements ValueInterface
 {
     /**
