@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Fixed
+- All days events (no time) ends on the next day. [#83](https://github.com/markuspoerschke/iCal/pull/83)
+- Timezone will not applied on all days events [#83](https://github.com/markuspoerschke/iCal/pull/83)
+- Add `Event::getDtStart` method [#83](https://github.com/markuspoerschke/iCal/pull/83)
+
 ## [0.11.0] - 2016-09-16
 ### Added
 - Allow multiple recurrence rules in an event [#77](https://github.com/markuspoerschke/iCal/pull/77)
