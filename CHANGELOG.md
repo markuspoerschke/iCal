@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+- Drop support for old PHP versions: 5.3, 5.4, 5.6
+
 ## [0.11.1] - 2017-04-04
 ### Fixed
 - All days events (no time) ends on the next day. [#83](https://github.com/markuspoerschke/iCal/pull/83)
