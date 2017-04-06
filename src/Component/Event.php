@@ -115,6 +115,13 @@ class Event extends Component
     protected $useTimezone = false;
 
     /**
+     * If set will we used as the timezone identifier
+     *
+     * @var string
+     */
+    protected $timezoneString = '';
+
+    /**
      * @var int
      */
     protected $sequence = 0;
@@ -238,7 +245,7 @@ class Event extends Component
         // mandatory information
         $propertyBag->set('UID', $this->uniqueId);
 
-        $propertyBag->add(new DateTimeProperty('DTSTART', $this->dtStart, $this->noTime, $this->useTimezone, $this->useUtc));
+        $propertyBag->add(new DateTimeProperty('DTSTART', $this->dtStart, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
         $propertyBag->set('SEQUENCE', $this->sequence);
         $propertyBag->set('TRANSP', $this->transparency);
 
@@ -251,7 +258,7 @@ class Event extends Component
             if ($this->noTime === true) {
                 $this->dtEnd->add(new \DateInterval('P1D'));
             }
-            $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc));
+            $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
         } elseif (null != $this->duration) {
             $propertyBag->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
         }
@@ -316,12 +323,12 @@ class Event extends Component
         }
 
         if (null != $this->recurrenceId) {
-            $this->recurrenceId->applyTimeSettings($this->noTime, $this->useTimezone, $this->useUtc);
+            $this->recurrenceId->applyTimeSettings($this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString);
             $propertyBag->add($this->recurrenceId);
         }
 
         if (!empty($this->exDates)) {
-            $propertyBag->add(new DateTimesProperty('EXDATE', $this->exDates, $this->noTime, $this->useTimezone, $this->useUtc));
+            $propertyBag->add(new DateTimesProperty('EXDATE', $this->exDates, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
         }
 
         if ($this->cancelled) {
@@ -530,6 +537,26 @@ class Event extends Component
     public function getUseTimezone()
     {
         return $this->useTimezone;
+    }
+
+    /**
+     * @param $timezoneString
+     *
+     * @return $this
+     */
+    public function setTimezoneString($timezoneString)
+    {
+        $this->timezoneString = $timezoneString;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTimezoneString()
+    {
+        return $this->timezoneString;
     }
 
     /**

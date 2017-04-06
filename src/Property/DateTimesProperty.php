@@ -22,19 +22,23 @@ class DateTimesProperty extends Property
      * @param bool        $noTime
      * @param bool        $useTimezone
      * @param bool        $useUtc
+     * @param string      $timezoneString
      */
     public function __construct(
         $name,
         $dateTimes = [],
         $noTime = false,
         $useTimezone = false,
-        $useUtc = false
+        $useUtc = false,
+        $timezoneString = ''
     ) {
         $dates = [];
         foreach ($dateTimes as $dateTime) {
             $dates[] = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
         }
-        $params = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone);
+
+        //@todo stop this triggering an E_NOTICE when $dateTimes is empty
+        $params = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone, $timezoneString);
 
         parent::__construct($name, $dates, $params);
     }

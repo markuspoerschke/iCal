@@ -13,12 +13,12 @@ namespace Eluceo\iCal\Util;
 
 class DateUtil
 {
-    public static function getDefaultParams(\DateTime $dateTime = null, $noTime = false, $useTimezone = false)
+    public static function getDefaultParams(\DateTime $dateTime = null, $noTime = false, $useTimezone = false, $timezoneString = '')
     {
         $params = [];
 
         if ($useTimezone && $noTime === false) {
-            $timeZone = $dateTime->getTimezone()->getName();
+            $timeZone = $timezoneString === '' ? $dateTime->getTimezone()->getName() : $timezoneString;
             $params['TZID'] = $timeZone;
         }
 
