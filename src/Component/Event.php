@@ -218,13 +218,14 @@ class Event extends Component
      */
     protected $recurrenceId;
 
-    public function __construct($uniqueId = null)
+    public function __construct(string $uniqueId = null)
     {
         if (null == $uniqueId) {
             $uniqueId = uniqid();
         }
 
         $this->uniqueId = $uniqueId;
+        $this->attendees = new Attendees();
     }
 
     /**
@@ -254,12 +255,12 @@ class Event extends Component
         }
 
         // An event can have a 'dtend' or 'duration', but not both.
-        if (null != $this->dtEnd) {
+        if ($this->dtEnd !== null) {
             if ($this->noTime === true) {
                 $this->dtEnd->add(new \DateInterval('P1D'));
             }
             $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
-        } elseif (null != $this->duration) {
+        } elseif ($this->duration !== null) {
             $propertyBag->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
         }
 
@@ -579,9 +580,6 @@ class Event extends Component
      */
     public function addAttendee($attendee, $params = [])
     {
-        if (!isset($this->attendees)) {
-            $this->attendees = new Attendees();
-        }
         $this->attendees->add($attendee, $params);
 
         return $this;
@@ -590,7 +588,7 @@ class Event extends Component
     /**
      * @return Attendees
      */
-    public function getAttendees()
+    public function getAttendees(): Attendees
     {
         return $this->attendees;
     }

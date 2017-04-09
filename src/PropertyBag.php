@@ -29,8 +29,7 @@ class PropertyBag implements \IteratorAggregate
      */
     public function set($name, $value, $params = [])
     {
-        $property = new Property($name, $value, $params);
-        $this->elements[] = $property;
+        $this->add(new Property($name, $value, $params));
 
         return $this;
     }
@@ -40,15 +39,13 @@ class PropertyBag implements \IteratorAggregate
      *
      * @return null|Property
      */
-    public function get($name)
+    public function get(string $name)
     {
-        // Searching Property in elements-array
-        /** @var $property Property */
-        foreach ($this->elements as $property) {
-            if ($property->getName() == $name) {
-                return $property;
-            }
+        if (isset($this->elements[$name])) {
+            return $this->elements[$name];
         }
+
+        return null;
     }
 
     /**
@@ -62,12 +59,13 @@ class PropertyBag implements \IteratorAggregate
      */
     public function add(Property $property)
     {
-        // Property already exists?
-        if (null !== $this->get($property->getName())) {
-            throw new \Exception("Property with name '{$property->getName()}' already exists");
+        $name = $property->getName();
+
+        if (isset($this->elements[$name])) {
+            throw new \Exception("Property with name '{$name}' already exists");
         }
 
-        $this->elements[] = $property;
+        $this->elements[$name] = $property;
 
         return $this;
     }

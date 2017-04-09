@@ -15,14 +15,15 @@ use Eluceo\iCal\Property;
 
 class Attendees extends Property
 {
-    /** @var Property[] */
+    /**
+     * @var Property[]
+     */
     protected $attendees = [];
-
-    const PROPERTY_NAME = 'ATTENDEES';
 
     public function __construct()
     {
-        // Overwrites constructor functionality of Property
+        $this->name = 'ATTENDEES';
+        // prevent super constructor to be called
     }
 
     /**
@@ -90,13 +91,5 @@ class Attendees extends Property
     public function getParam($name)
     {
         throw new \BadMethodCallException('Cannot call getParam on Attendees Property');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return self::PROPERTY_NAME;
     }
 }

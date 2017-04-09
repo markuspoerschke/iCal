@@ -6,32 +6,27 @@ use PHPUnit\Framework\TestCase;
 
 class ParameterBagTest extends TestCase
 {
-    public function testEscapeParamValue()
+    /**
+     * @dataProvider escapedParamsDataProvider
+     */
+    public function testParamEscaping($value, $expected)
     {
         $propertyObject = new ParameterBag;
+        $propertyObject->setParam('TEST', $value);
 
         $this->assertEquals(
-            'test string',
-            $propertyObject->escapeParamValue('test string'),
-            'No escaping necessary'
+            $expected,
+            $propertyObject->toString()
         );
+    }
 
-        $this->assertEquals(
-            '"Containing \\"double-quotes\\""',
-            $propertyObject->escapeParamValue('Containing "double-quotes"'),
-            'Text contains double quotes'
-        );
-
-        $this->assertEquals(
-            '"Containing forbidden chars like a ;"',
-            $propertyObject->escapeParamValue('Containing forbidden chars like a ;'),
-            'Text with semicolon'
-        );
-
-        $this->assertEquals(
-            '"Containing forbidden chars like a :"',
-            $propertyObject->escapeParamValue('Containing forbidden chars like a :'),
-            'Text with colon'
-        );
+    public function escapedParamsDataProvider()
+    {
+        return [
+            'No escaping necessary' => ['test string', 'TEST=test string'],
+            'Text contains double quotes' => ['Containing "double-quotes"', 'TEST="Containing \\"double-quotes\\""'],
+            'Text with semicolon' => ['Containing forbidden chars like a ;', 'TEST="Containing forbidden chars like a ;"'],
+            'Text with colon' => ['Containing forbidden chars like a :', 'TEST="Containing forbidden chars like a :"'],
+        ];
     }
 }

@@ -23,8 +23,6 @@ use Eluceo\iCal\Util\DateUtil;
  */
 class RecurrenceId extends Property
 {
-    const PROPERTY_NAME = 'RECURRENCE-ID';
-
     /**
      * The effective range of recurrence instances from the instance
      * specified by the recurrence identifier specified by the property.
@@ -48,6 +46,7 @@ class RecurrenceId extends Property
 
     public function __construct(\DateTimeInterface $dateTime = null)
     {
+        $this->name = 'RECURRENCE-ID';
         $this->parameterBag = new ParameterBag();
         if (isset($dateTime)) {
             $this->dateTime = $dateTime;
@@ -120,13 +119,5 @@ class RecurrenceId extends Property
         } else {
             return parent::toLines();
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return self::PROPERTY_NAME;
     }
 }

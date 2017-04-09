@@ -53,7 +53,7 @@ class ParameterBag
      *
      * @return bool
      */
-    public function hasParams()
+    public function hasParams(): bool
     {
         return count($this->params) > 0;
     }
@@ -61,7 +61,7 @@ class ParameterBag
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $line = '';
         foreach ($this->params as $param => $paramValues) {
@@ -89,7 +89,7 @@ class ParameterBag
      *
      * @return string
      */
-    public function escapeParamValue($value)
+    private function escapeParamValue($value)
     {
         $count = 0;
         $value = str_replace('\\', '\\\\', $value);
