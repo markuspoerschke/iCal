@@ -18,14 +18,14 @@ class DateTimeProperty extends Property
 {
     /**
      * @param string    $name
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      * @param bool      $noTime
      * @param bool      $useTimezone
      * @param bool      $useUtc
      */
     public function __construct(
         $name,
-        \DateTime $dateTime = null,
+        \DateTimeInterface $dateTime = null,
         $noTime = false,
         $useTimezone = false,
         $useUtc = false

@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Add support for `\DateTimerInterface`. This allows to use `\DateTimeImmutable`. [#86](https://github.com/markuspoerschke/iCal/issues/86)
+
 ### Changed
 - Drop support for old PHP versions: 5.3, 5.4, 5.6
 

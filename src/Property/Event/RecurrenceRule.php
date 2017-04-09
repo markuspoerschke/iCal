@@ -56,7 +56,7 @@ class RecurrenceRule implements ValueInterface
     protected $count = null;
 
     /**
-     * @var null|\DateTime
+     * @var null|\DateTimeInterface
      */
     protected $until = null;
 
@@ -191,11 +191,11 @@ class RecurrenceRule implements ValueInterface
     }
 
     /**
-     * @param \DateTime|null $until
+     * @param \DateTimeInterface|null $until
      *
      * @return $this
      */
-    public function setUntil(\DateTime $until = null)
+    public function setUntil(\DateTimeInterface $until = null)
     {
         $this->until = $until;
 
@@ -203,7 +203,7 @@ class RecurrenceRule implements ValueInterface
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getUntil()
     {

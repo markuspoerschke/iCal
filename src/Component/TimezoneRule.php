@@ -45,7 +45,7 @@ class TimezoneRule extends Component
     protected $tzName;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $dtStart;
 
@@ -138,11 +138,11 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @param \DateTime $dtStart
+     * @param \DateTimeInterface $dtStart
      *
      * @return $this
      */
-    public function setDtStart(\DateTime $dtStart)
+    public function setDtStart(\DateTimeInterface $dtStart)
     {
         $this->dtStart = $dtStart;
 

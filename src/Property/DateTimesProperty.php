@@ -18,7 +18,7 @@ class DateTimesProperty extends Property
 {
     /**
      * @param string      $name
-     * @param \DateTime[] $dateTimes
+     * @param \DateTimeInterface[] $dateTimes
      * @param bool        $noTime
      * @param bool        $useTimezone
      * @param bool        $useUtc
@@ -31,6 +31,7 @@ class DateTimesProperty extends Property
         $useUtc = false
     ) {
         $dates = [];
+        $dateTime = new \DateTimeImmutable();
         foreach ($dateTimes as $dateTime) {
             $dates[] = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
         }
