@@ -813,7 +813,7 @@ class Event extends Component
     }
 
     /**
-     * @return \DateTime[]
+     * @return \DateTimeInterface[]
      */
     public function getExDates()
     {
@@ -821,7 +821,7 @@ class Event extends Component
     }
 
     /**
-     * @param \DateTime[]
+     * @param \DateTimeInterface[]
      *
      * @return \Eluceo\iCal\Component\Event
      */
