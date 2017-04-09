@@ -54,9 +54,9 @@ class RecurrenceId extends Property
         }
     }
 
-    public function applyTimeSettings($noTime = false, $useTimezone = false, $useUtc = false)
+    public function applyTimeSettings($noTime = false, $useTimezone = false, $useUtc = false, $timezoneString = '')
     {
-        $params = DateUtil::getDefaultParams($this->dateTime, $noTime, $useTimezone);
+        $params = DateUtil::getDefaultParams($this->dateTime, $noTime, $useTimezone, $timezoneString);
         foreach ($params as $name => $value) {
             $this->parameterBag->setParam($name, $value);
         }
@@ -104,6 +104,8 @@ class RecurrenceId extends Property
     public function setRange($range)
     {
         $this->range = $range;
+
+        return $this;
     }
 
     /**

@@ -22,16 +22,18 @@ class DateTimeProperty extends Property
      * @param bool               $noTime
      * @param bool               $useTimezone
      * @param bool               $useUtc
+     * @param string             $timezoneString
      */
     public function __construct(
         $name,
         \DateTimeInterface $dateTime = null,
         $noTime = false,
         $useTimezone = false,
-        $useUtc = false
+        $useUtc = false,
+        $timezoneString = ''
     ) {
         $dateString = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
-        $params = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone);
+        $params = DateUtil::getDefaultParams($dateTime, $noTime, $useTimezone, $timezoneString);
 
         parent::__construct($name, $dateString, $params);
     }

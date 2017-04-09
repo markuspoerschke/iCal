@@ -63,4 +63,60 @@ class CalendarIntegrationTest extends TestCase
             $this->assertRegExp($lines[$key], $line);
         }
     }
+
+    /**
+     * @coversNothing
+     */
+    public function testExample4b()
+    {
+        $timeZoneString = '/example.com/1.0.0-0/Europe/Berlin';
+
+        // 1. Create new calendar
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+
+        // 2. Create an event
+        $vEvent = new \Eluceo\iCal\Component\Event('123456');
+        $vEvent->setDtStart(new \DateTime('2012-11-11 13:00:00'));
+        $vEvent->setDtEnd(new \DateTime('2012-11-11 14:30:00'));
+        $vEvent->setSummary('Weekly lunch with Markus');
+
+        // Set recurrence rule
+        $recurrenceRule = new \Eluceo\iCal\Property\Event\RecurrenceRule();
+        $recurrenceRule->setFreq(\Eluceo\iCal\Property\Event\RecurrenceRule::FREQ_WEEKLY);
+        $recurrenceRule->setInterval(1);
+        $vEvent->setRecurrenceRule($recurrenceRule);
+
+        // Adding Timezone (optional)
+        $vEvent->setUseTimezone(true);
+        $vEvent->setTimezoneString($timeZoneString);
+
+        // 3. Add event to calendar
+        $vCalendar->addComponent($vEvent);
+
+        $lines = array(
+            '/BEGIN:VCALENDAR/',
+            '/VERSION:2\.0/',
+            '/PRODID:www\.example\.com/',
+            '/X-PUBLISHED-TTL:P1W/',
+            '/BEGIN:VEVENT/',
+            '/UID:123456/',
+            '/DTSTART;TZID=\/example.com\/1.0.0-0\/Europe\/Berlin:20121111T130000/',
+            '/SEQUENCE:0/',
+            '/TRANSP:OPAQUE/',
+            '/DTEND;TZID=\/example.com\/1.0.0-0\/Europe\/Berlin:20121111T143000/',
+            '/SUMMARY:Weekly lunch with Markus/',
+            '/CLASS:PUBLIC/',
+            '/RRULE:FREQ=WEEKLY;INTERVAL=1/',
+            '/DTSTAMP:20\d{6}T\d{6}Z/',
+            '/END:VEVENT/',
+            '/END:VCALENDAR/',
+        );
+
+        foreach (explode("\n", $vCalendar->render()) as $key => $line)
+        {
+            $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
+
+            $this->assertRegExp($lines[$key], $line);
+        }
+    }
 }
