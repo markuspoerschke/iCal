@@ -33,9 +33,9 @@ class DateUtil
      * Returns a formatted date string.
      *
      * @param \DateTimeInterface|null $dateTime    The DateTime object
-     * @param bool           $noTime      Indicates if the time will be added
-     * @param bool           $useTimezone
-     * @param bool           $useUtc
+     * @param bool                    $noTime      Indicates if the time will be added
+     * @param bool                    $useTimezone
+     * @param bool                    $useUtc
      *
      * @return mixed
      */

@@ -17,11 +17,11 @@ use Eluceo\iCal\Util\DateUtil;
 class DateTimesProperty extends Property
 {
     /**
-     * @param string      $name
+     * @param string               $name
      * @param \DateTimeInterface[] $dateTimes
-     * @param bool        $noTime
-     * @param bool        $useTimezone
-     * @param bool        $useUtc
+     * @param bool                 $noTime
+     * @param bool                 $useTimezone
+     * @param bool                 $useUtc
      */
     public function __construct(
         $name,
