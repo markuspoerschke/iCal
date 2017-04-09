@@ -17,12 +17,12 @@ use Eluceo\iCal\Util\DateUtil;
 class DateTimesProperty extends Property
 {
     /**
-     * @param string      $name
-     * @param \DateTime[] $dateTimes
-     * @param bool        $noTime
-     * @param bool        $useTimezone
-     * @param bool        $useUtc
-     * @param string      $timezoneString
+     * @param string               $name
+     * @param \DateTimeInterface[] $dateTimes
+     * @param bool                 $noTime
+     * @param bool                 $useTimezone
+     * @param bool                 $useUtc
+     * @param string               $timezoneString
      */
     public function __construct(
         $name,
@@ -33,6 +33,7 @@ class DateTimesProperty extends Property
         $timezoneString = ''
     ) {
         $dates = [];
+        $dateTime = new \DateTimeImmutable();
         foreach ($dateTimes as $dateTime) {
             $dates[] = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
         }

@@ -35,7 +35,7 @@ class RecurrenceId extends Property
     /**
      * The dateTime to identify a particular instance of a recurring event which is getting modified.
      *
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     protected $dateTime;
 
@@ -46,7 +46,7 @@ class RecurrenceId extends Property
      */
     protected $range;
 
-    public function __construct(\DateTime $dateTime = null)
+    public function __construct(\DateTimeInterface $dateTime = null)
     {
         $this->parameterBag = new ParameterBag();
         if (isset($dateTime)) {
@@ -69,7 +69,7 @@ class RecurrenceId extends Property
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getDatetime()
     {
@@ -77,11 +77,11 @@ class RecurrenceId extends Property
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      *
      * @return \Eluceo\iCal\Property\Event\RecurrenceId
      */
-    public function setDatetime(\DateTime $dateTime)
+    public function setDatetime(\DateTimeInterface $dateTime)
     {
         $this->dateTime = $dateTime;
 

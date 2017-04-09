@@ -209,7 +209,7 @@ class Event extends Component
     /**
      * Dates to be excluded from a series of events.
      *
-     * @var \DateTime[]
+     * @var \DateTimeInterface[]
      */
     protected $exDates = [];
 
@@ -348,7 +348,7 @@ class Event extends Component
         }
 
         $propertyBag->add(
-            new DateTimeProperty('DTSTAMP', $this->dtStamp ?: new \DateTime(), false, false, true)
+            new DateTimeProperty('DTSTAMP', $this->dtStamp ?: new \DateTimeImmutable(), false, false, true)
         );
 
         if ($this->created) {
@@ -801,11 +801,11 @@ class Event extends Component
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      *
      * @return \Eluceo\iCal\Component\Event
      */
-    public function addExDate(\DateTime $dateTime)
+    public function addExDate(\DateTimeInterface $dateTime)
     {
         $this->exDates[] = $dateTime;
 
