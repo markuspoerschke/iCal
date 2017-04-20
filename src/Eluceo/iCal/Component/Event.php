@@ -428,7 +428,7 @@ class Event extends Component
         } else if (!$geo instanceof Geo) {
             $className = get_class($geo);
             throw new \InvalidArgumentException(
-                "The parameter 'geo' must be a string or an instance of " . Geo::class
+                "The parameter 'geo' must be a string or an instance of \\Eluceo\\iCal\\Property\\Event\\Geo"
                 . " but an instance of {$className} was given."
             );
         }
