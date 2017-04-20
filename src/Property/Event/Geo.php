@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) Markus Poerschke <markus@eluceo.de>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\Property;
 
 /**
- * GEO property
+ * GEO property.
  *
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.1.6
  */
@@ -45,6 +54,7 @@ class Geo extends Property
      * @deprecated This method is used to allow backwards compatibility for Event::setLocation
      *
      * @param string $geoLocationString
+     *
      * @return Geo
      */
     public static function fromString(string $geoLocationString): self
@@ -61,6 +71,7 @@ class Geo extends Property
      * @example 37.386013;-122.082932
      *
      * @param string $separator
+     *
      * @return string
      */
     public function getGeoLocationAsString(string $separator = ';'): string

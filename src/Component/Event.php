@@ -422,8 +422,8 @@ class Event extends Component
     }
 
     /**
-     * @param string       $location
-     * @param string $title
+     * @param string     $location
+     * @param string     $title
      * @param Geo|string $geo
      *
      * @return $this
@@ -432,7 +432,7 @@ class Event extends Component
     {
         if (is_scalar($geo)) {
             $geo = Geo::fromString($geo);
-        } else if (!$geo instanceof Geo) {
+        } elseif (!$geo instanceof Geo) {
             $className = get_class($geo);
             throw new \InvalidArgumentException(
                 "The parameter 'geo' must be a string or an instance of " . Geo::class
@@ -449,6 +449,7 @@ class Event extends Component
 
     /**
      * @param Geo $geoProperty
+     *
      * @return $this
      */
     public function setGeoLocation(Geo $geoProperty)
@@ -600,7 +601,7 @@ class Event extends Component
 
     /**
      * @param string $attendee
-     * @param array $params
+     * @param array  $params
      *
      * @return $this
      */
@@ -678,7 +679,7 @@ class Event extends Component
      */
     public function setCancelled($status)
     {
-        $this->cancelled = (bool)$status;
+        $this->cancelled = (bool) $status;
 
         return $this;
     }
@@ -819,7 +820,7 @@ class Event extends Component
      */
     public function setIsPrivate($flag)
     {
-        $this->isPrivate = (bool)$flag;
+        $this->isPrivate = (bool) $flag;
 
         return $this;
     }
