@@ -2,16 +2,20 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Fixed
+- Do not escape value of the GEO property [#79](https://github.com/markuspoerschke/iCal/pull/79)
+
 ### Added
 - Add support for `\DateTimerInterface`. This allows to use `\DateTimeImmutable`. [#86](https://github.com/markuspoerschke/iCal/issues/86)
 - Add support for arbitrary time zone strings. [#87](https://github.com/markuspoerschke/iCal/issues/86),[#89](https://github.com/markuspoerschke/iCal/issues/86)
+- Add new Geo property class [#79](https://github.com/markuspoerschke/iCal/pull/79)
 
 ### Changed
 - Drop support for old PHP versions: 5.3, 5.4, 5.6
 
 ### Removed
-- Remove class `\Eluceo\iCal\Property\Event\Description` (see [#61](https://github.com/markuspoerschke/iCal/pull/61))
-- Remove class `\Eluceo\iCal\Util\PropertyValueUtil` (see [#61](https://github.com/markuspoerschke/iCal/pull/61))
+- Remove class `\Eluceo\iCal\Property\Event\Description` [#61](https://github.com/markuspoerschke/iCal/pull/61)
+- Remove class `\Eluceo\iCal\Util\PropertyValueUtil` [#61](https://github.com/markuspoerschke/iCal/pull/61)
 
 ## [0.11.1] - 2017-04-04
 ### Fixed
