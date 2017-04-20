@@ -16,9 +16,11 @@ use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\Property\DateTimesProperty;
 use Eluceo\iCal\Property\Event\Attendees;
+use Eluceo\iCal\Property\Event\Geo;
 use Eluceo\iCal\Property\Event\Organizer;
 use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
+use Eluceo\iCal\Property\RawStringValue;
 use Eluceo\iCal\PropertyBag;
 
 /**
@@ -86,7 +88,7 @@ class Event extends Component
     protected $locationTitle;
 
     /**
-     * @var string
+     * @var Geo
      */
     protected $locationGeo;
 
@@ -276,7 +278,7 @@ class Event extends Component
                 $propertyBag->add(
                     new Property(
                         'X-APPLE-STRUCTURED-LOCATION',
-                        'geo:' . $this->locationGeo,
+                        new RawStringValue('geo:' . $this->locationGeo->getGeoLocationAsString(',')),
                         [
                             'VALUE' => 'URI',
                             'X-ADDRESS' => $this->location,
@@ -285,8 +287,11 @@ class Event extends Component
                         ]
                     )
                 );
-                $propertyBag->set('GEO', str_replace(',', ';', $this->locationGeo));
             }
+        }
+
+        if (null != $this->locationGeo) {
+            $propertyBag->add($this->locationGeo);
         }
 
         if (null != $this->summary) {
@@ -417,17 +422,38 @@ class Event extends Component
     }
 
     /**
-     * @param        $location
+     * @param string       $location
      * @param string $title
-     * @param null   $geo
+     * @param Geo|string $geo
      *
      * @return $this
      */
     public function setLocation($location, $title = '', $geo = null)
     {
+        if (is_scalar($geo)) {
+            $geo = Geo::fromString($geo);
+        } else if (!$geo instanceof Geo) {
+            $className = get_class($geo);
+            throw new \InvalidArgumentException(
+                "The parameter 'geo' must be a string or an instance of " . Geo::class
+                . " but an instance of {$className} was given."
+            );
+        }
+
         $this->location = $location;
         $this->locationTitle = $title;
         $this->locationGeo = $geo;
+
+        return $this;
+    }
+
+    /**
+     * @param Geo $geoProperty
+     * @return $this
+     */
+    public function setGeoLocation(Geo $geoProperty)
+    {
+        $this->locationGeo = $geoProperty;
 
         return $this;
     }
@@ -574,7 +600,7 @@ class Event extends Component
 
     /**
      * @param string $attendee
-     * @param array  $params
+     * @param array $params
      *
      * @return $this
      */
@@ -652,7 +678,7 @@ class Event extends Component
      */
     public function setCancelled($status)
     {
-        $this->cancelled = (bool) $status;
+        $this->cancelled = (bool)$status;
 
         return $this;
     }
@@ -793,7 +819,7 @@ class Event extends Component
      */
     public function setIsPrivate($flag)
     {
-        $this->isPrivate = (bool) $flag;
+        $this->isPrivate = (bool)$flag;
 
         return $this;
     }
