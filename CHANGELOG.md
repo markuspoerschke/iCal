@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.11.2] - 2017-04-21
+### Fixed
+- Do not escape value of the GEO property [#79](https://github.com/markuspoerschke/iCal/pull/79)
+
 ## [0.11.1] - 2017-04-04
 ### Fixed
 - All days events (no time) ends on the next day. [#83](https://github.com/markuspoerschke/iCal/pull/83)
@@ -41,7 +45,7 @@ All notable changes to this project will be documented in this file.
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.11.1...HEAD
+[0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
 [0.11.0]: https://github.com/markuspoerschke/iCal/compare/0.10.1...0.11.0
 [0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
