@@ -21,7 +21,7 @@ class Geo extends Property
      */
     private $longitude;
 
-    public function __construct(float $latitude, float $longitude)
+    public function __construct($latitude, $longitude)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
@@ -47,7 +47,7 @@ class Geo extends Property
      * @param string $geoLocationString
      * @return Geo
      */
-    public static function fromString(string $geoLocationString)
+    public static function fromString($geoLocationString)
     {
         $geoLocationString = str_replace(',', ';', $geoLocationString);
         $parts = explode(';', $geoLocationString);
@@ -63,7 +63,7 @@ class Geo extends Property
      * @param string $separator
      * @return string
      */
-    public function getGeoLocationAsString(string $separator = ';')
+    public function getGeoLocationAsString($separator = ';')
     {
         return number_format($this->latitude, 6) . $separator . number_format($this->longitude, 6);
     }
