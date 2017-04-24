@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.11.3] - 2017-04-24
 ### Fixed
-- Fix the GEO property [#91](https://github.com/markuspoerschke/iCal/pull/91)
+- Fix the GEO property [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
 
 ## [0.11.2] - 2017-04-21
 ### Fixed
