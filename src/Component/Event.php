@@ -432,7 +432,7 @@ class Event extends Component
     {
         if (is_scalar($geo)) {
             $geo = Geo::fromString($geo);
-        } elseif (!$geo instanceof Geo) {
+        } elseif (!is_null($geo) && !$geo instanceof Geo) {
             $className = get_class($geo);
             throw new \InvalidArgumentException(
                 "The parameter 'geo' must be a string or an instance of " . Geo::class
