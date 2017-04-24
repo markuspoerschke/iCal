@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.11.3] - 2017-04-24
+### Fixed
+- Fix the GEO property [#91](https://github.com/markuspoerschke/iCal/pull/91)
+
 ## [0.11.2] - 2017-04-21
 ### Fixed
 - Do not escape value of the GEO property [#79](https://github.com/markuspoerschke/iCal/pull/79)
