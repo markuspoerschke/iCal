@@ -15,6 +15,7 @@ class CalendarIntegrationTest extends TestCase
 
         // 1. Create new calendar
         $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+        $vCalendar->setPublishedTTL('P1W');
 
         // 2. Create an event
         $vEvent = new \Eluceo\iCal\Component\Event('123456');
@@ -97,7 +98,6 @@ class CalendarIntegrationTest extends TestCase
             '/BEGIN:VCALENDAR/',
             '/VERSION:2\.0/',
             '/PRODID:www\.example\.com/',
-            '/X-PUBLISHED-TTL:P1W/',
             '/BEGIN:VEVENT/',
             '/UID:123456/',
             '/DTSTART;TZID=\/example.com\/1.0.0-0\/Europe\/Berlin:20121111T130000/',

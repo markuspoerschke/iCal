@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Drop support for old PHP versions: 5.3, 5.4, 5.6
+- Remove default value for `X-PUBLISHED-TTL`. This value controls the update interval if the ics file is synced. 
+The former default value was set to one week. If you want the behavior from version `< 0.12` you have to set the value: 
+`$vCalendar->setPublishedTTL('P1W')`. [#81](https://github.com/markuspoerschke/iCal/pull/81)
 
 ### Removed
 - Remove class `\Eluceo\iCal\Property\Event\Description` [#61](https://github.com/markuspoerschke/iCal/pull/61)

@@ -96,11 +96,14 @@ class Calendar extends Component
      * Specifies a suggested iCalendar file download frequency for clients and
      * servers with sync capabilities.
      *
+     * For example you can set the value to 'P1W' if the calendar should be
+     * synced once a week. Use 'P3H' to sync the file every 3 hours.
+     *
      * @var string
      *
      * @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx
      */
-    protected $publishedTTL = 'P1W';
+    protected $publishedTTL = null;
 
     /**
      * Specifies a color for the calendar in calendar for Apple/Outlook.
