@@ -35,6 +35,12 @@ class Event extends Component
     const STATUS_CONFIRMED = 'CONFIRMED';
     const STATUS_CANCELLED = 'CANCELLED';
 
+    /*
+     * It denotes whether end date has been set by adding
+     * a day to start date if $noTime is true
+     */
+    private $dayAdded = false;
+
     /**
      * @var string
      */
@@ -259,7 +265,10 @@ class Event extends Component
         // An event can have a 'dtend' or 'duration', but not both.
         if ($this->dtEnd !== null) {
             if ($this->noTime === true) {
-                $this->dtEnd->add(new \DateInterval('P1D'));
+                if (!$this->dayAdded) {
+                    $this->dayAdded = true;
+                    $this->dtEnd->add(new \DateInterval('P1D'));
+                }
             }
             $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
         } elseif ($this->duration !== null) {
