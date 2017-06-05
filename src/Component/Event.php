@@ -258,10 +258,11 @@ class Event extends Component
 
         // An event can have a 'dtend' or 'duration', but not both.
         if ($this->dtEnd !== null) {
+            $dtEnd = clone $this->dtEnd;
             if ($this->noTime === true) {
-                $this->dtEnd = $this->dtEnd->add(new \DateInterval('P1D'));
+                $dtEnd = $dtEnd->add(new \DateInterval('P1D'));
             }
-            $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
+            $propertyBag->add(new DateTimeProperty('DTEND', $dtEnd, $this->noTime, $this->useTimezone, $this->useUtc, $this->timezoneString));
         } elseif ($this->duration !== null) {
             $propertyBag->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
         }

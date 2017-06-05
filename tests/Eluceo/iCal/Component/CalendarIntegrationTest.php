@@ -119,4 +119,26 @@ class CalendarIntegrationTest extends TestCase
             $this->assertRegExp($lines[$key], $line);
         }
     }
+
+    /**
+     * This test was introduced because of a regression bug.
+     *
+     * @see https://github.com/markuspoerschke/iCal/issues/98
+     *
+     * @coversNothing
+     */
+    public function testRenderIsIdempotent()
+    {
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+
+        $vEvent = new \Eluceo\iCal\Component\Event('123456');
+        $vEvent->setDtStart(new \DateTime('2012-12-24'));
+        $vEvent->setDtEnd(new \DateTime('2012-01-04'));
+        $vEvent->setNoTime(true);
+        $vEvent->setSummary('Vacations');
+
+        $vCalendar->addComponent($vEvent);
+
+        $this->assertEquals($vCalendar->render(), $vCalendar->render());
+    }
 }
