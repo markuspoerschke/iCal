@@ -68,7 +68,7 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
+[0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
 [0.12.0]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.12.0
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
