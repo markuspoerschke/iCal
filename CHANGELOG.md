@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.12.1] - 2017-06-07
 ### Fixed
-- `\DateTimeImmutable` is now supported by events. [#98](https://github.com/markuspoerschke/iCal/pull/98), [#99](https://github.com/markuspoerschke/iCal/pull/99), [#100](https://github.com/markuspoerschke/iCal/pull/100)
+- `\DateTimeImmutable` is now supported by events. When using `\DateTime` there will be no side effect anymore that will change the original date time object. [#98](https://github.com/markuspoerschke/iCal/pull/98), [#99](https://github.com/markuspoerschke/iCal/pull/99), [#100](https://github.com/markuspoerschke/iCal/pull/100)
 
 ## [0.12.0] - 2017-05-10
 ### Fixed
