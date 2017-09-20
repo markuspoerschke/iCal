@@ -28,22 +28,16 @@ class ComponentUtil
     public static function fold($string)
     {
         $lines = [];
-        $array = preg_split('/(?<!^)(?!$)/u', $string);
-
-        $line = '';
-        $lineNo = 0;
-        foreach ($array as $char) {
-            $charLen = strlen($char);
-            $lineLen = strlen($line);
-            if ($lineLen + $charLen > 75) {
-                $line = ' ' . $char;
-                ++$lineNo;
+        while (strlen($string) > 0) {
+            if (strlen($string) > 75) {
+                $lines[] = mb_strcut($string, 0, 75, 'utf-8') . "\r\n";
+                $str = ' ' . mb_strcut($string, 75, strlen($string), 'utf-8');
             } else {
-                $line .= $char;
+                $lines[] = $string;
+                $str = '';
+                break;
             }
-            $lines[$lineNo] = $line;
         }
-
         return $lines;
     }
 }
