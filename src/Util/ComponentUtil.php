@@ -31,10 +31,10 @@ class ComponentUtil
         while (strlen($string) > 0) {
             if (strlen($string) > 75) {
                 $lines[] = mb_strcut($string, 0, 75, 'utf-8') . "\r\n";
-                $str = ' ' . mb_strcut($string, 75, strlen($string), 'utf-8');
+                $string = ' ' . mb_strcut($string, 75, strlen($string), 'utf-8');
             } else {
                 $lines[] = $string;
-                $str = '';
+                $string = '';
                 break;
             }
         }
