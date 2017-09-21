@@ -26,7 +26,7 @@ class ComponentUtil
      */
     public static function fold($string)
     {
-        $lines = [];
+        $lines = array();
         while (strlen($string) > 0) {
             if (strlen($string) > 75) {
                 $lines[] = mb_strcut($string, 0, 75, 'utf-8');
