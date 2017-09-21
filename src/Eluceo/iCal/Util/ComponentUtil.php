@@ -20,23 +20,42 @@ class ComponentUtil
      *
      * @link http://www.ietf.org/rfc/rfc2445.txt
      *
-     * @param $string
+     * @param string $string
      *
      * @return array
      */
     public static function fold($string)
     {
         $lines = array();
-        while (strlen($string) > 0) {
-            if (strlen($string) > 75) {
-                $lines[] = mb_strcut($string, 0, 75, 'utf-8');
-                $string = ' ' . mb_strcut($string, 75, strlen($string), 'utf-8');
-            } else {
-                $lines[] = $string;
-                $string = '';
-                break;
+
+        if (function_exists('mb_strcut')) {
+            while (strlen($string) > 0) {
+                if (strlen($string) > 75) {
+                    $lines[] = mb_strcut($string, 0, 75, 'utf-8');
+                    $string = ' ' . mb_strcut($string, 75, strlen($string), 'utf-8');
+                } else {
+                    $lines[] = $string;
+                    $string = '';
+                    break;
+                }
+            }
+        } else {
+            $array = preg_split('/(?<!^)(?!$)/u', $string);
+            $line = '';
+            $lineNo = 0;
+            foreach ($array as $char) {
+                $charLen = strlen($char);
+                $lineLen = strlen($line);
+                if ($lineLen + $charLen > 75) {
+                    $line = ' ' . $char;
+                    ++$lineNo;
+                } else {
+                    $line .= $char;
+                }
+                $lines[$lineNo] = $line;
             }
         }
+
         return $lines;
     }
 }
