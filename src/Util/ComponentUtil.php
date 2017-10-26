@@ -27,7 +27,7 @@ class ComponentUtil
      */
     public static function fold($string)
     {
-        $lines = array();
+        $lines = [];
 
         if (function_exists('mb_strcut')) {
             while (strlen($string) > 0) {
