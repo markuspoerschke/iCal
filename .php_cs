@@ -17,7 +17,8 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'concat_space' => ['spacing' => 'one'],
         'array_syntax' => ['syntax' => 'short'],
-        'header_comment' => ['header' => $headerComment]
+        'header_comment' => ['header' => $headerComment],
+        'yoda_style' => false,
     ])
     ->setFinder($finder)
 ;
