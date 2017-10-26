@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.13.0]
+## [0.13.0] - 2017-10-26
 ### Changed
 - Improve performance for long lines. By using mbstring the folding of lines is much faster and consumes less CPU and memory. [#103](https://github.com/markuspoerschke/iCal/pull/103)
 - In UTC mode the time will be converted to UTC timezone. [#106](https://github.com/markuspoerschke/iCal/pull/106)
