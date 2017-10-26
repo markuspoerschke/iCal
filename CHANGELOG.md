@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.11.4] - 2017-10-26
+### Changed
+- Improve performance for long lines. By using mbstring the folding of lines is much faster and consumes less CPU and memory. [#104](https://github.com/markuspoerschke/iCal/pull/104)
+
 ## [0.11.3] - 2017-04-25
 ### Fixed
 - Fix the GEO property (compatibility to PHP < 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
@@ -49,6 +53,7 @@ All notable changes to this project will be documented in this file.
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
+[0.11.4]: https://github.com/markuspoerschke/iCal/compare/0.11.3...0.11.4
 [0.11.3]: https://github.com/markuspoerschke/iCal/compare/0.11.2...0.11.3
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
