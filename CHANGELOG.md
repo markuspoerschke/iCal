@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+* In UTC mode the time will be converted to UTC timezone. [#106](https://github.com/markuspoerschke/iCal/pull/106)
+
 ## [0.12.1] - 2017-06-07
 ### Fixed
 - `\DateTimeImmutable` is now supported by events. When using `\DateTime` there will be no side effect anymore that will change the original date time object. [#98](https://github.com/markuspoerschke/iCal/pull/98), [#99](https://github.com/markuspoerschke/iCal/pull/99), [#100](https://github.com/markuspoerschke/iCal/pull/100)
@@ -68,6 +72,7 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.12.1...master
 [0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
 [0.12.0]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.12.0
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
