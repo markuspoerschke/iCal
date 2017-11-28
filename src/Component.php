@@ -60,7 +60,7 @@ abstract class Component
      * @param Component $component The Component that will be added
      * @param null      $key       The key of the Component
      */
-    public function addComponent(Component $component, $key = null)
+    public function addComponent(self $component, $key = null)
     {
         if (null == $key) {
             $this->components[] = $component;
@@ -163,7 +163,7 @@ abstract class Component
      * @param array     $lines
      * @param Component $component
      */
-    private function addComponentLines(array &$lines, Component $component)
+    private function addComponentLines(array &$lines, self $component)
     {
         foreach ($component->build() as $l) {
             $lines[] = $l;
