@@ -159,6 +159,11 @@ class Event extends Component
     protected $recurrenceRules = [];
 
     /**
+     * @var array
+     */
+    protected $images = [];
+
+    /**
      * This property specifies the date and time that the calendar
      * information was created.
      *
@@ -364,6 +369,20 @@ class Event extends Component
 
         if ($this->modified) {
             $propertyBag->add(new DateTimeProperty('LAST-MODIFIED', $this->modified, false, false, true));
+        }
+        
+        foreach ($this->images as $image) {
+            $propertyBag->add(
+                new Property(
+                    'IMAGE',
+                    new RawStringValue($image["CONTENT"]),
+                    [
+                        'VALUE' => $image["VALUE"],
+                        'DISPLAY' => $image["DISPLAY"],
+                        'FMTTYPE' => $image["FMTTYPE"],
+                    ]
+                )
+            );
         }
 
         return $propertyBag;
@@ -774,6 +793,27 @@ class Event extends Component
     public function getRecurrenceRules()
     {
         return $this->recurrenceRules;
+    }
+    
+    
+    /**
+     * @param array $image
+     *
+     * @return $this
+     */
+    public function addImage($image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 
     /**

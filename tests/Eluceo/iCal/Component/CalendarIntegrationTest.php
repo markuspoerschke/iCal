@@ -141,4 +141,55 @@ class CalendarIntegrationTest extends TestCase
 
         $this->assertEquals($vCalendar->render(), $vCalendar->render());
     }
+    
+    /**
+     * This test was introduced because of the added IMAGE property to the Event class.
+     *
+     * @covers \Eluceo\iCal\Component\Event::addImage()
+     */
+    public function testEventAddImage()
+    {
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+
+        $vEvent = new \Eluceo\iCal\Component\Event('123456');
+        $vEvent->setDtStart(new \DateTime('2012-12-24'));
+        $vEvent->setDtEnd(new \DateTime('2012-12-24'));
+        $vEvent->setSummary('Vacations');
+        $image = Array(
+            "VALUE" => "URI",
+            "CONTENT" => "https://www.google.nl/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png",
+            "DISPLAY" => "FULLSIZE",
+            "FMTTYPE" => "image/png",
+        );
+        $vEvent->addImage($image);
+
+        $vCalendar->addComponent($vEvent);
+        
+        $lines = array(
+            '/BEGIN:VCALENDAR/',
+            '/VERSION:2\.0/',
+            '/PRODID:www\.example\.com/',
+            '/BEGIN:VEVENT/',
+            '/UID:123456/',
+            '/DTSTART:20121223T230000Z/',
+            '/SEQUENCE:0/',
+            '/TRANSP:OPAQUE/',
+            '/DTEND:20121223T230000Z/',
+            '/SUMMARY:Vacations/',
+            '/CLASS:PUBLIC/',
+            '/DTSTAMP:20\d{6}T\d{6}Z/',
+            '/IMAGE;VALUE=URI;DISPLAY=FULLSIZE;FMTTYPE=image\/png:https:\/\/www.google.nl\/im/',
+            '/ages\/branding\/googlelogo\/2x\/googlelogo_color_120x44dp\.png/',
+            '/END:VEVENT/',
+            '/END:VCALENDAR/',
+        );
+
+        foreach (explode("\n", $vCalendar->render()) as $key => $line)
+        {
+            $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
+
+            $this->assertRegExp($lines[$key], $line);
+        }
+        
+    }
 }
