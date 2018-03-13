@@ -45,6 +45,13 @@ class DateUtil
             $dateTime = new \DateTime();
         }
 
+        // Only convert the DateTime to UTC if there is a time present. For date-only the
+        // timezone is meaningless and converting it might shift it to the wrong date.
+        if (!$noTime && $useUtc) {
+            $dateTime = clone $dateTime;
+            $dateTime->setTimezone(new \DateTimeZone('UTC'));
+        }
+
         return $dateTime->format(self::getDateFormat($noTime, $useTimezone, $useUtc));
     }
 
