@@ -29,6 +29,14 @@ The former default value was set to one week. If you want the behavior from vers
 - Remove class `\Eluceo\iCal\Property\Event\Description` [#61](https://github.com/markuspoerschke/iCal/pull/61)
 - Remove class `\Eluceo\iCal\Util\PropertyValueUtil` [#61](https://github.com/markuspoerschke/iCal/pull/61)
 
+## [0.11.4] - 2017-10-26
+### Changed
+- Improve performance for long lines. By using mbstring the folding of lines is much faster and consumes less CPU and memory. [#104](https://github.com/markuspoerschke/iCal/pull/104)
+
+## [0.11.3] - 2017-04-25
+### Fixed
+- Fix the GEO property (compatibility to PHP < 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
+
 ## [0.11.2] - 2017-04-21
 ### Fixed
 - Do not escape value of the GEO property [#79](https://github.com/markuspoerschke/iCal/pull/79)
@@ -76,6 +84,8 @@ The former default value was set to one week. If you want the behavior from vers
 [0.13.0]: https://github.com/markuspoerschke/iCal/compare/0.12.1...0.13.0
 [0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
 [0.12.0]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.12.0
+[0.11.4]: https://github.com/markuspoerschke/iCal/compare/0.11.3...0.11.4
+[0.11.3]: https://github.com/markuspoerschke/iCal/compare/0.11.2...0.11.3
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
 [0.11.0]: https://github.com/markuspoerschke/iCal/compare/0.10.1...0.11.0
