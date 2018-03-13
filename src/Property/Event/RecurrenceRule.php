@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\ParameterBag;
+use Eluceo\iCal\Property\ArrayValue;
 use Eluceo\iCal\Property\ValueInterface;
 use InvalidArgumentException;
 
@@ -136,35 +137,35 @@ class RecurrenceRule implements ValueInterface
         }
 
         if (null !== $this->byMonth) {
-            $parameterBag->setParam('BYMONTH', $this->byMonth);
+            $parameterBag->setParam('BYMONTH', explode(',', $this->byMonth));
         }
 
         if (null !== $this->byWeekNo) {
-            $parameterBag->setParam('BYWEEKNO', $this->byWeekNo);
+            $parameterBag->setParam('BYWEEKNO', explode(',', $this->byWeekNo));
         }
 
         if (null !== $this->byYearDay) {
-            $parameterBag->setParam('BYYEARDAY', $this->byYearDay);
+            $parameterBag->setParam('BYYEARDAY', explode(',', $this->byYearDay));
         }
 
         if (null !== $this->byMonthDay) {
-            $parameterBag->setParam('BYMONTHDAY', $this->byMonthDay);
+            $parameterBag->setParam('BYMONTHDAY', explode(',', $this->byMonthDay));
         }
 
         if (null !== $this->byDay) {
-            $parameterBag->setParam('BYDAY', $this->byDay);
+            $parameterBag->setParam('BYDAY', explode(',', $this->byDay));
         }
 
         if (null !== $this->byHour) {
-            $parameterBag->setParam('BYHOUR', $this->byHour);
+            $parameterBag->setParam('BYHOUR', explode(',', $this->byHour));
         }
 
         if (null !== $this->byMinute) {
-            $parameterBag->setParam('BYMINUTE', $this->byMinute);
+            $parameterBag->setParam('BYMINUTE', explode(',', $this->byMinute));
         }
 
         if (null !== $this->bySecond) {
-            $parameterBag->setParam('BYSECOND', $this->bySecond);
+            $parameterBag->setParam('BYSECOND', explode(',', $this->bySecond));
         }
 
         return $parameterBag;
@@ -365,7 +366,7 @@ class RecurrenceRule implements ValueInterface
      *
      * @return $this
      */
-    public function setByDay($day)
+    public function setByDay(string $day)
     {
         $this->byDay = $day;
 

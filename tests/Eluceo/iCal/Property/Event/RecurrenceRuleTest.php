@@ -20,4 +20,17 @@ class RecurrenceRuleTest extends TestCase
             $rule->getEscapedValue()
         );
     }
+
+    public function testMultipleDaysByDay()
+    {
+        $rule = new RecurrenceRule();
+        $rule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+        $rule->setInterval(20);
+        $rule->setByDay('MO,WE,FR');
+
+        $this->assertEquals(
+            'FREQ=WEEKLY;INTERVAL=20;BYDAY=MO,WE,FR',
+            $rule->getEscapedValue()
+        );
+    }
 }
