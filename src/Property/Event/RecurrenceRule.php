@@ -12,7 +12,6 @@
 namespace Eluceo\iCal\Property\Event;
 
 use Eluceo\iCal\ParameterBag;
-use Eluceo\iCal\Property\ArrayValue;
 use Eluceo\iCal\Property\ValueInterface;
 use InvalidArgumentException;
 
