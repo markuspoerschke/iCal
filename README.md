@@ -133,7 +133,7 @@ DTSTART:20121224T180000
 
 This package is released under the __MIT license__.
 
-Copyright (c) 2012-2017 Markus Poerschke
+Copyright (c) 2012-2018 Markus Poerschke
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
