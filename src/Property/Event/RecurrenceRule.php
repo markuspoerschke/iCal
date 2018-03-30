@@ -44,11 +44,11 @@ class RecurrenceRule implements ValueInterface
      * @var string
      */
     protected $freq = self::FREQ_YEARLY;
-    
+
     /**
-     * BYSETPOS must require use of other BY*
+     * BYSETPOS must require use of other BY*.
      *
-     * @var boolean
+     * @var bool
      */
     protected $canUseBySetPos = false;
 
@@ -71,7 +71,7 @@ class RecurrenceRule implements ValueInterface
      * @var null|string
      */
     protected $wkst;
-    
+
     /**
      * @var null|array
      */
@@ -146,7 +146,7 @@ class RecurrenceRule implements ValueInterface
         if (null !== $this->wkst) {
             $parameterBag->setParam('WKST', $this->wkst);
         }
-        
+
         if (null !== $this->bySetPos && $this->canUseBySetPos) {
             $parameterBag->setParam('BYSETPOS', $this->bySetPos);
         }
@@ -301,7 +301,7 @@ class RecurrenceRule implements ValueInterface
 
         return $this;
     }
-    
+
     /**
      * The BYSETPOS filters one interval of events by the specified position.
      * A positive position will start from the beginning and go forward while
@@ -318,26 +318,26 @@ class RecurrenceRule implements ValueInterface
      */
     public function setBySetPos($value)
     {
-        if(null === $value) {
+        if (null === $value) {
             $this->bySetPos = $value;
             return $this;
         }
-        if(!(is_string($value) || is_array($value) || is_int($value))) {
+        if (!(is_string($value) || is_array($value) || is_int($value))) {
             throw new InvalidArgumentException('Invalid value for BYSETPOS');
         }
         $list = $value;
-        if(is_int($value)) {
-            if($value === 0 || $value < -366 || $value > 366) {
+        if (is_int($value)) {
+            if ($value === 0 || $value < -366 || $value > 366) {
                 throw new InvalidArgumentException('Invalid value for BYSETPOS');
             }
-            $this->bySetPos = array($value);
+            $this->bySetPos = [$value];
             return $this;
         }
-        if(is_string($value)) $list = explode(',', $value);
-        $output = array();
-        foreach($list as $item) {
-            if(is_string($item)) {
-                if(!preg_match('/^ *-?[0-9]* *$/', $item)) {
+        if (is_string($value)) $list = explode(',', $value);
+        $output = [];
+        foreach ($list as $item) {
+            if (is_string($item)) {
+                if (!preg_match('/^ *-?[0-9]* *$/', $item)) {
                     throw new InvalidArgumentException('Invalid value for BYSETPOS');
                 }
                 $item = intval($item);
