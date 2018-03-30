@@ -44,6 +44,13 @@ class RecurrenceRule implements ValueInterface
      * @var string
      */
     protected $freq = self::FREQ_YEARLY;
+    
+    /**
+     * BYSETPOS must require use of other BY*
+     *
+     * @var boolean
+     */
+    protected $canUseBySetPos = false;
 
     /**
      * @var null|int
@@ -64,6 +71,11 @@ class RecurrenceRule implements ValueInterface
      * @var null|string
      */
     protected $wkst;
+    
+    /**
+     * @var null|array
+     */
+    protected $bySetPos = null;
 
     /**
      * @var null|string
@@ -133,6 +145,10 @@ class RecurrenceRule implements ValueInterface
 
         if (null !== $this->wkst) {
             $parameterBag->setParam('WKST', $this->wkst);
+        }
+        
+        if (null !== $this->bySetPos && $this->canUseBySetPos) {
+            $parameterBag->setParam('BYSETPOS', $this->bySetPos);
         }
 
         if (null !== $this->byMonth) {
@@ -285,6 +301,56 @@ class RecurrenceRule implements ValueInterface
 
         return $this;
     }
+    
+    /**
+     * The BYSETPOS filters one interval of events by the specified position.
+     * A positive position will start from the beginning and go forward while
+     * a negative position will start at the end and move backward.
+     *
+     * Valid values are a comma separated string or an array of integers
+     * from 1 to 366 or negative integers from -1 to -366.
+     *
+     * @param null|int|string|array $value
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return $this
+     */
+    public function setBySetPos($value)
+    {
+        if(null === $value) {
+            $this->bySetPos = $value;
+            return $this;
+        }
+        if(!(is_string($value) || is_array($value) || is_int($value))) {
+            throw new InvalidArgumentException('Invalid value for BYSETPOS');
+        }
+        $list = $value;
+        if(is_int($value)) {
+            if($value === 0 || $value < -366 || $value > 366) {
+                throw new InvalidArgumentException('Invalid value for BYSETPOS');
+            }
+            $this->bySetPos = array($value);
+            return $this;
+        }
+        if(is_string($value)) $list = explode(',', $value);
+        $output = array();
+        foreach($list as $item) {
+            if(is_string($item)) {
+                if(!preg_match('/^ *-?[0-9]* *$/', $item)) {
+                    throw new InvalidArgumentException('Invalid value for BYSETPOS');
+                }
+                $item = intval($item);
+            }
+            if (!is_int($item) || $item === 0 || $item < -366 || $item > 366) {
+                throw new InvalidArgumentException('Invalid value for BYSETPOS');
+            }
+            $output[] = $item;
+        }
+        $this->bySetPos = $output;
+
+        return $this;
+    }
 
     /**
      * The BYMONTH rule part specifies a COMMA-separated list of months of the year.
@@ -304,6 +370,8 @@ class RecurrenceRule implements ValueInterface
 
         $this->byMonth = $month;
 
+        $this->canUseBySetPos = true;
+
         return $this;
     }
 
@@ -318,6 +386,8 @@ class RecurrenceRule implements ValueInterface
     public function setByWeekNo($value)
     {
         $this->byWeekNo = $value;
+
+        $this->canUseBySetPos = true;
 
         return $this;
     }
@@ -334,6 +404,8 @@ class RecurrenceRule implements ValueInterface
     {
         $this->byYearDay = $day;
 
+        $this->canUseBySetPos = true;
+
         return $this;
     }
 
@@ -348,6 +420,8 @@ class RecurrenceRule implements ValueInterface
     public function setByMonthDay($day)
     {
         $this->byMonthDay = $day;
+
+        $this->canUseBySetPos = true;
 
         return $this;
     }
@@ -368,6 +442,8 @@ class RecurrenceRule implements ValueInterface
     public function setByDay(string $day)
     {
         $this->byDay = $day;
+
+        $this->canUseBySetPos = true;
 
         return $this;
     }
@@ -390,6 +466,8 @@ class RecurrenceRule implements ValueInterface
 
         $this->byHour = $value;
 
+        $this->canUseBySetPos = true;
+
         return $this;
     }
 
@@ -411,6 +489,8 @@ class RecurrenceRule implements ValueInterface
 
         $this->byMinute = $value;
 
+        $this->canUseBySetPos = true;
+
         return $this;
     }
 
@@ -431,6 +511,8 @@ class RecurrenceRule implements ValueInterface
         }
 
         $this->bySecond = $value;
+
+        $this->canUseBySetPos = true;
 
         return $this;
     }
