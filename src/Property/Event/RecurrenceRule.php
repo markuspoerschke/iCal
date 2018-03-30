@@ -319,22 +319,32 @@ class RecurrenceRule implements ValueInterface
     public function setBySetPos($value)
     {
         if (null === $value) {
-            $this->bySetPos = $value;
+            $this->bySetPos = value;
+
             return $this;
         }
+
         if (!(is_string($value) || is_array($value) || is_int($value))) {
             throw new InvalidArgumentException('Invalid value for BYSETPOS');
         }
+
         $list = $value;
+
         if (is_int($value)) {
             if ($value === 0 || $value < -366 || $value > 366) {
                 throw new InvalidArgumentException('Invalid value for BYSETPOS');
             }
             $this->bySetPos = [$value];
+
             return $this;
         }
-        if (is_string($value)) $list = explode(',', $value);
+
+        if (is_string($value)) {
+            $list = explode(',', $value);
+        }
+
         $output = [];
+
         foreach ($list as $item) {
             if (is_string($item)) {
                 if (!preg_match('/^ *-?[0-9]* *$/', $item)) {
@@ -342,11 +352,14 @@ class RecurrenceRule implements ValueInterface
                 }
                 $item = intval($item);
             }
+
             if (!is_int($item) || $item === 0 || $item < -366 || $item > 366) {
                 throw new InvalidArgumentException('Invalid value for BYSETPOS');
             }
+
             $output[] = $item;
         }
+
         $this->bySetPos = $output;
 
         return $this;
