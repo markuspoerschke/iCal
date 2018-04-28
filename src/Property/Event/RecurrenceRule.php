@@ -292,13 +292,13 @@ class RecurrenceRule implements ValueInterface
      *
      * @param int $month
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return $this
      */
     public function setByMonth($month)
     {
-        if (!is_integer($month) || $month < 0 || $month > 12) {
+        if (!is_integer($month) || $month <= 0 || $month > 12) {
             throw new InvalidArgumentException('Invalid value for BYMONTH');
         }
 
@@ -313,10 +313,16 @@ class RecurrenceRule implements ValueInterface
      *
      * @param int $value
      *
+     * @throws \InvalidArgumentException
+     *
      * @return $this
      */
     public function setByWeekNo($value)
     {
+        if (!is_integer($value) || $value > 53 || $value < -53 || $value === 0) {
+            throw new InvalidArgumentException('Invalid value for BYWEEKNO');
+        }
+
         $this->byWeekNo = $value;
 
         return $this;
@@ -328,10 +334,16 @@ class RecurrenceRule implements ValueInterface
      *
      * @param int $day
      *
+     * @throws \InvalidArgumentException
+     *
      * @return $this
      */
     public function setByYearDay($day)
     {
+        if (!is_integer($day) || $day > 366 || $day < -366 || $day === 0) {
+            throw new InvalidArgumentException('Invalid value for BYYEARDAY');
+        }
+
         $this->byYearDay = $day;
 
         return $this;
@@ -344,9 +356,15 @@ class RecurrenceRule implements ValueInterface
      * @param int $day
      *
      * @return $this
+     *
+     * @throws \InvalidArgumentException
      */
     public function setByMonthDay($day)
     {
+        if (!is_integer($day) || $day > 31 || $day < -31 || $day === 0) {
+            throw new InvalidArgumentException('Invalid value for BYMONTHDAY');
+        }
+
         $this->byMonthDay = $day;
 
         return $this;

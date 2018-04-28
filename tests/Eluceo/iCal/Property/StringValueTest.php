@@ -60,4 +60,19 @@ class StringValueTest extends TestCase
             'Escape new line to text'
         );
     }
+
+    public function testSetValue()
+    {
+        $stringValue = new StringValue("Text with new\n line");
+        $stringValue->setValue("Text with setting new value");
+
+        $this->assertSame("Text with setting new value", $stringValue->getValue());
+    }
+
+    public function testGetValue()
+    {
+        $stringValue = new StringValue("Text with new\n line");
+
+        $this->assertSame("Text with new\n line", $stringValue->getValue()); 
+    }
 }

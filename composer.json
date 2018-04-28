@@ -26,6 +26,11 @@
             "Eluceo\\iCal\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Eluceo\\iCal\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=7.0"
     },
