@@ -25,4 +25,15 @@ class ArrayValueTest extends TestCase
             array(array('Lorem', '"doublequotes"'), 'Lorem,\"doublequotes\"'),
         );
     }
+
+    /**
+     * @dataProvider arrayValuesProvider
+     */
+    public function testSetValues($values, $expectedOutput)
+    {
+        $arrayValue = new ArrayValue([]);
+        $arrayValue->setValues($values);
+
+        $this->assertSame($expectedOutput, $arrayValue->getEscapedValue());
+    }
 }

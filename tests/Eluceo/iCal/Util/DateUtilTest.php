@@ -30,4 +30,14 @@ class DateUtilTest extends TestCase
 
         $this->assertEquals('20000101T000000', $dateString);
     }
+
+    public function testGetDefaultParamsOnNoTime()
+    {
+        $this->assertSame(['VALUE' => 'DATE'], DateUtil::getDefaultParams(null, true));
+    }
+
+    public function testGetDefaultParamsOnUseTimezone()
+    {
+        $this->assertSame(['TZID' => 'Asia/Taipei'], DateUtil::getDefaultParams(new \DateTime(null, new \DateTimeZone('Asia/Taipei')), false, true));
+    }
 }

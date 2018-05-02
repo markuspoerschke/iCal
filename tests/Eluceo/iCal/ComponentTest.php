@@ -44,4 +44,27 @@ class ComponentTest extends TestCase
         $output = $vCalendar->render();
         $this->assertContains(str_replace("\n", "\\n", $input), $output);
     }
+
+    public function testAddComponentOnKey()
+    {
+        $input = "new string \n new line \n new line \n new string";
+
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+        $vEvent    = new \Eluceo\iCal\Component\Event();
+        $vEvent->setDtStart(new \DateTime('2014-12-24'));
+        $vEvent->setDtEnd(new \DateTime('2014-12-24'));
+        $vEvent->setDescription($input);
+
+        $vCalendar->addComponent($vEvent, 'eventKey');
+
+        $output = $vCalendar->render();
+        $this->assertContains(str_replace("\n", "\\n", $input), $output);    
+    }
+
+    public function testToString()
+    {
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+
+        $this->assertSame("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:www.example.com\r\nEND:VCALENDAR", (string) $vCalendar);
+    }
 }

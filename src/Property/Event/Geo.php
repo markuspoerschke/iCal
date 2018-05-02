@@ -60,6 +60,7 @@ class Geo extends Property
     public static function fromString(string $geoLocationString): self
     {
         $geoLocationString = str_replace(',', ';', $geoLocationString);
+        $geoLocationString = str_replace('GEO:', '', $geoLocationString);
         $parts = explode(';', $geoLocationString);
 
         return new static((float) $parts[0], (float) $parts[1]);

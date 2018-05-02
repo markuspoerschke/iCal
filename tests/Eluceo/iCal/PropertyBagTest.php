@@ -16,4 +16,13 @@ class PropertyBagTest extends TestCase
         $propertyBag->add(new Property('propName', ''));
         $propertyBag->add(new Property('propName', ''));
     }
+
+    public function testGet()
+    {
+        $propertyBag = new PropertyBag();
+        $propertyBag->add(new Property('propName', 'propValue'));
+        $this->assertInstanceOf(Property::class, $propertyBag->get('propName'));
+        $this->assertSame('propName', $propertyBag->get('propName')->getName());
+        $this->assertNull($propertyBag->get('invalidPropName'));
+    }
 }

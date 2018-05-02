@@ -29,4 +29,17 @@ class ParameterBagTest extends TestCase
             'Text with colon' => ['Containing forbidden chars like a :', 'TEST="Containing forbidden chars like a :"'],
         ];
     }
+
+    public function testGetParamOnNonExistedParamName()
+    {
+        $propertyObject = new ParameterBag;
+        $this->assertNull($propertyObject->getParam('nonExistedParamName'));
+    }
+
+    public function testToString()
+    {
+        $propertyObject = new ParameterBag;
+        $propertyObject->setParam('TEST', 'value');
+        $this->assertSame('TEST=value', (string) $propertyObject);
+    }
 }
