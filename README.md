@@ -17,6 +17,8 @@ The following components are supported at this time:
 * VALARM
 * VTIMEZONE
 
+´PHP Version >=7.0´
+
 ## Installation
 
 You can install this package by using [Composer](http://getcomposer.org), running this command:
