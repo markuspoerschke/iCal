@@ -17,7 +17,8 @@ The following components are supported at this time:
 * VALARM
 * VTIMEZONE
 
-```PHP Version >=7.0
+```PHP Version >=7.0```
+
 
 ## Installation
 
