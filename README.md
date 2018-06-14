@@ -19,7 +19,7 @@ The following components are supported at this time:
 
 ## Requirements
 
-```*PHP Version* >=7.0```
+**PHP** ```>=7.0```
 
 
 ## Installation
