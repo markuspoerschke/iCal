@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+### Added
+- BYSETPOS to RecurrenceRule [#113](https://github.com/markuspoerschke/iCal/issues/113)
+
 ## [0.14.0] - 2018-03-13
 ### Fixed
 - Properly escape `BY*` rules like `BYDAY`. [#105](https://github.com/markuspoerschke/iCal/issues/105)
@@ -89,6 +93,7 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.14.0...master
 [0.14.0]: https://github.com/markuspoerschke/iCal/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/markuspoerschke/iCal/compare/0.12.1...0.13.0
 [0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
