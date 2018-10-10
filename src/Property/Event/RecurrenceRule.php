@@ -319,7 +319,7 @@ class RecurrenceRule implements ValueInterface
     public function setBySetPos($value)
     {
         if (null === $value) {
-            $this->bySetPos = value;
+            $this->bySetPos = $value;
 
             return $this;
         }
