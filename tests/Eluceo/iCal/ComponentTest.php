@@ -61,6 +61,29 @@ class ComponentTest extends TestCase
         $this->assertContains(str_replace("\n", "\\n", $input), $output);    
     }
 
+    public function testSetComponents()
+    {
+        $shouldNotBeFound = 'should-not-be-found';
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+        $vEvent    = new \Eluceo\iCal\Component\Event();
+        $vEvent->setDtStart(new \DateTime('2014-12-24'));
+        $vEvent->setDtEnd(new \DateTime('2014-12-24'));
+        $vEvent->setDescription($shouldNotBeFound);
+        $vCalendar->addComponent($vEvent);
+
+        $shouldBeFound = 'this-should-be-found';
+        $vEventTwo = new \Eluceo\iCal\Component\Event();
+        $vEventTwo->setDtStart(new \DateTime('2015-12-24'));
+        $vEventTwo->setDtEnd(new \DateTime('2015-12-24'));
+        $vEventTwo->setDescription($shouldBeFound);
+
+        $vCalendar->setComponents([$vEventTwo]);
+
+        $output = $vCalendar->render();
+        $this->assertContains($shouldBeFound, $output);
+        $this->assertNotContains($shouldNotBeFound, $output);
+    }
+
     public function testToString()
     {
         $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
