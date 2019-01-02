@@ -72,8 +72,8 @@ abstract class Component
     /**
      * Set all Components.
      *
-     * @param array $components The array of Component that will be set
-     * @param null  $key        The key of the Component
+     * @param Component[] $components The array of Component that will be set
+     * @param null        $key        The key of the Component
      */
     public function setComponents(array $components)
     {
