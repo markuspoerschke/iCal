@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [unreleased]
 ### Added
 - BYSETPOS to RecurrenceRule [#113](https://github.com/markuspoerschke/iCal/issues/113)
+- Add method `Component::setComponents(array $components)` [#124](https://github.com/markuspoerschke/iCal/issues/124)
 
 ## [0.14.0] - 2018-03-13
 ### Fixed
