@@ -53,67 +53,67 @@ class RecurrenceRule implements ValueInterface
     protected $canUseBySetPos = false;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $interval = 1;
 
     /**
-     * @var null|int
+     * @var int|null
      */
     protected $count = null;
 
     /**
-     * @var null|\DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     protected $until = null;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $wkst;
 
     /**
-     * @var null|array
+     * @var array|null
      */
     protected $bySetPos = null;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byMonth;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byWeekNo;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byYearDay;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byMonthDay;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byDay;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byHour;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $byMinute;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $bySecond;
 
@@ -310,7 +310,7 @@ class RecurrenceRule implements ValueInterface
      * Valid values are a comma separated string or an array of integers
      * from 1 to 366 or negative integers from -1 to -366.
      *
-     * @param null|int|string|array $value
+     * @param int|string|array|null $value
      *
      * @throws InvalidArgumentException
      *

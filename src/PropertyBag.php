@@ -37,7 +37,7 @@ class PropertyBag implements \IteratorAggregate
     /**
      * @param string $name
      *
-     * @return null|Property
+     * @return Property|null
      */
     public function get(string $name)
     {

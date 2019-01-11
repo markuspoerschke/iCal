@@ -312,7 +312,7 @@ class Calendar extends Component
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getProdId()
     {
