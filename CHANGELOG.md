@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [unreleased]
+
+## [0.15.0] - 2019-01-13
 ### Added
 - BYSETPOS to RecurrenceRule [#113](https://github.com/markuspoerschke/iCal/issues/113)
 - Add method `Component::setComponents(array $components)` [#124](https://github.com/markuspoerschke/iCal/issues/124)
@@ -97,7 +99,8 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.14.0...master
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.15.0...master
+[0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
 [0.14.0]: https://github.com/markuspoerschke/iCal/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/markuspoerschke/iCal/compare/0.12.1...0.13.0
 [0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
