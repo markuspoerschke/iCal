@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 - BYSETPOS to RecurrenceRule [#113](https://github.com/markuspoerschke/iCal/issues/113)
 - Add method `Component::setComponents(array $components)` [#124](https://github.com/markuspoerschke/iCal/issues/124)
 
+### Changed
+- DateUtil - only convert to UTC if no timezone is specified [#123](https://github.com/markuspoerschke/iCal/issues/123)
+
 ## [0.14.0] - 2018-03-13
 ### Fixed
 - Properly escape `BY*` rules like `BYDAY`. [#105](https://github.com/markuspoerschke/iCal/issues/105)
