@@ -22,6 +22,7 @@ use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\Property\RawStringValue;
 use Eluceo\iCal\PropertyBag;
+use Eluceo\iCal\Property\Event\Attachment;
 
 /**
  * Implementation of the EVENT component.
@@ -220,6 +221,11 @@ class Event extends Component
      */
     protected $recurrenceId;
 
+    /**
+     * @var Attachment[]
+     */
+    protected $attachments = [];
+
     public function __construct(string $uniqueId = null)
     {
         if (null == $uniqueId) {
@@ -364,6 +370,10 @@ class Event extends Component
 
         if ($this->modified) {
             $propertyBag->add(new DateTimeProperty('LAST-MODIFIED', $this->modified, false, false, true));
+        }
+
+        foreach ($this->attachments as $attachment) {
+            $propertyBag->add($attachment);
         }
 
         return $propertyBag;
@@ -876,5 +886,33 @@ class Event extends Component
         $this->recurrenceId = $recurrenceId;
 
         return $this;
+    }
+
+    /**
+     * @param array $attachment
+     *
+     * @return $this
+     */
+    public function addAttachment(Attachment $attachment)
+    {
+        $this->attachments[] = $attachment;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function addUrlAttachment(string $url)
+    {
+        $this->addAttachment(new Attachment($url));
     }
 }
