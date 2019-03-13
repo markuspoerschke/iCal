@@ -141,4 +141,45 @@ class CalendarIntegrationTest extends TestCase
 
         $this->assertEquals($vCalendar->render(), $vCalendar->render());
     }
+
+
+    /**
+     * This test was introduced because of the added ATTACH property to the Event class.
+     *
+     * @covers \Eluceo\iCal\Component\Event::addAttachment()
+     */
+    public function testEventAddAttachment()
+    {
+        $vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
+        $vEvent = new \Eluceo\iCal\Component\Event('123456');
+        $vEvent->setDtStart(new \DateTime('2012-12-24'));
+        $vEvent->setDtEnd(new \DateTime('2012-12-24'));
+        $vEvent->setSummary('Vacations');
+        $vEvent->addAttachment(new \Eluceo\iCal\Property\Event\Attachment('http://attach.example.com'));
+
+        $vCalendar->addComponent($vEvent);
+
+        $lines = array(
+            '/BEGIN:VCALENDAR/',
+            '/VERSION:2\.0/',
+            '/PRODID:www\.example\.com/',
+            '/BEGIN:VEVENT/',
+            '/UID:123456/',
+            '/DTSTART:20121223T230000Z/',
+            '/SEQUENCE:0/',
+            '/TRANSP:OPAQUE/',
+            '/DTEND:20121223T230000Z/',
+            '/SUMMARY:Vacations/',
+            '/CLASS:PUBLIC/',
+            '/DTSTAMP:20\d{6}T\d{6}Z/',
+            '/ATTACH:http:\/\/attach.example.com/',
+            '/END:VEVENT/',
+            '/END:VCALENDAR/',
+        );
+        foreach (explode("\n", $vCalendar->render()) as $key => $line)
+        {
+            $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
+            $this->assertRegExp($lines[$key], $line);
+        }
+    }
 }
