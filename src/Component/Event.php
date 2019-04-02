@@ -15,6 +15,7 @@ use Eluceo\iCal\Component;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\Property\DateTimesProperty;
+use Eluceo\iCal\Property\Event\Attachment;
 use Eluceo\iCal\Property\Event\Attendees;
 use Eluceo\iCal\Property\Event\Geo;
 use Eluceo\iCal\Property\Event\Organizer;
@@ -22,7 +23,6 @@ use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\Property\RawStringValue;
 use Eluceo\iCal\PropertyBag;
-use Eluceo\iCal\Property\Event\Attachment;
 
 /**
  * Implementation of the EVENT component.

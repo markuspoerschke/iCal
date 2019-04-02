@@ -14,8 +14,7 @@ namespace Eluceo\iCal\Property\Event;
 use Eluceo\iCal\Property;
 
 /**
- * Class Attachment
- * @package Eluceo\iCal\Property\Event
+ * Class Attachment.
  */
 class Attachment extends Property
 {
@@ -30,6 +29,7 @@ class Attachment extends Property
 
     /**
      * @param $url
+     *
      * @throws \Exception
      */
     public function setUrl($url)
@@ -37,4 +37,3 @@ class Attachment extends Property
         $this->setValue($url);
     }
 }
-
