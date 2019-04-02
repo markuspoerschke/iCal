@@ -50,7 +50,7 @@ class DateUtil
         // Do not convert DateTime to UTC if a timezone it specified, as it should be local time.
         if (!$noTime && $useUtc && !$useTimezone) {
             $dateTime = clone $dateTime;
-            $dateTime->setTimezone(new \DateTimeZone('UTC'));
+            $dateTime = $dateTime->setTimezone(new \DateTimeZone('UTC'));
         }
 
         return $dateTime->format(self::getDateFormat($noTime, $useTimezone, $useUtc));
