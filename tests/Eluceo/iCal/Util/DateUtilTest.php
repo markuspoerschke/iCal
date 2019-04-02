@@ -14,6 +14,14 @@ class DateUtilTest extends TestCase
 
         $this->assertEquals('19991231T140000Z', $dateString);
     }
+    
+    public function testTimeConvertsToUTCWithDateTimeImmutable()
+    {
+        $dateTime   = new \DateTimeImmutable('2000-01-01T00:00:00+1000');
+        $dateString = DateUtil::getDateString($dateTime, false, false, true);
+
+        $this->assertEquals('19991231T140000Z', $dateString);
+    }
 
     public function testNoTimezoneConversionForDateOnly()
     {
