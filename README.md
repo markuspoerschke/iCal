@@ -59,17 +59,29 @@ $vEvent
 $vCalendar->addComponent($vEvent);
 ```
 
-#### 5. Set HTTP-headers
+#### 5. Genreate a unique filename
 
 ```PHP
-header('Content-Type: text/calendar; charset=utf-8');
-header('Content-Disposition: attachment; filename="cal.ics"');
+$fileName = sha1(time() . time());
 ```
 
-#### 6. Send output
+#### 5. Render Calendar content
 
 ```PHP
-echo $vCalendar->render();
+$content = $vCalendar->render();
+```
+
+#### 6. Set HTTP-headers & Send output
+
+```PHP
+$headers = [
+    'Content-type' => 'text/calendar; charset=utf-8',
+    'Content-Disposition' => sprintf('attachment; filename="%s.ics"', $fileName),
+    'Content-Length' => strlen($content)
+];
+
+// make a response, with the content, a 200 response code and the headers
+return response()->make($content, 200, $headers);
 ```
 
 ### Timezone support
