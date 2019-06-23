@@ -117,7 +117,7 @@ class Event extends Component
     protected $useTimezone = false;
 
     /**
-     * If set will we used as the timezone identifier.
+     * If set will be used as the timezone identifier.
      *
      * @var string
      */
