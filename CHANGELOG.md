@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Added
+- Allow to add `ATTACH` property to an event [#128](https://github.com/markuspoerschke/iCal/pull/128)
+
 ## [0.15.1] - 2019-08-06
 
 ### Fixed
