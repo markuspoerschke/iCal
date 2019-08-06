@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Fixed
+- TimeZone will be correctly applied if instance of `\DateTimeImmutable` is used [#131](https://github.com/markuspoerschke/iCal/pull/131)
+
 ## [0.15.0] - 2019-01-13
 ### Added
 - BYSETPOS to RecurrenceRule [#113](https://github.com/markuspoerschke/iCal/issues/113)
