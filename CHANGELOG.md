@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.15.1] - 2019-08-06
+
 ### Fixed
 - TimeZone will be correctly applied if instance of `\DateTimeImmutable` is used [#131](https://github.com/markuspoerschke/iCal/pull/131)
 
@@ -102,7 +104,8 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.15.0...master
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.15.1...master
+[0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
 [0.14.0]: https://github.com/markuspoerschke/iCal/compare/0.13.0...0.14.0
 [0.13.0]: https://github.com/markuspoerschke/iCal/compare/0.12.1...0.13.0
