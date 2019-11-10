@@ -3,14 +3,18 @@ language: php
 php:
   - 7.4snapshot
 
-sudo: false
-
 cache:
   directories:
     - $HOME/.composer/cache
 
+install:
+  - composer install --no-interaction --prefer-dist
+
 before_script:
-  - travis_retry composer install --no-interaction --prefer-dist
+  - echo 'zend.assertions=1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'assert.exception=On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - yes | pecl install xdebug
+  - echo 'zend_extension=xdebug.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 script:
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
