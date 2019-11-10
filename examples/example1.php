@@ -1,7 +1,11 @@
 <?php
 
 // use composer autoloader
+use Eluceo\iCal\Domain\Entity\Event;
+
 require_once __DIR__ . '/../vendor/autoload.php';
+
+$event = (new Event())->withSummary('Christmas');
 
 // set default timezone (PHP 5.4)
 date_default_timezone_set('Europe/Berlin');

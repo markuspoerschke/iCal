@@ -6,7 +6,7 @@
     "authors": [
         {
             "name": "Markus Poerschke",
-            "email": "markus@eluceo.de",
+            "email": "markus@poerschke.nrw",
             "role": "Developer"
         }
     ],
@@ -32,13 +32,11 @@
         }
     },
     "require": {
-        "php": ">=7.0"
-    },
-    "suggest": {
-        "ext-mbstring" : "Massive performance enhancement of line folding"
+        "php": ">=7.4",
+        "ext-mbstring": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^8"
     },
     "scripts": {
         "test": "phpunit"
