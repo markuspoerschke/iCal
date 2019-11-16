@@ -55,9 +55,9 @@ class StringValueTest extends TestCase
         $stringValue = new StringValue("Text with new\n line");
 
         $this->assertEquals(
-            'Text with new\\n line',
+            "Text with new\n line",
             $stringValue->getEscapedValue(),
-            'Escape new line to text'
+            'Do not escape new line to text'
         );
     }
 

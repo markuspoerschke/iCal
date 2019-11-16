@@ -42,7 +42,7 @@ class ComponentTest extends TestCase
         $vCalendar->addComponent($vEvent);
 
         $output = $vCalendar->render();
-        $this->assertContains(str_replace("\n", "\\n", $input), $output);
+        $this->assertNotContains(str_replace("\n", "\\n", $input), $output);
     }
 
     public function testAddComponentOnKey()
@@ -58,7 +58,7 @@ class ComponentTest extends TestCase
         $vCalendar->addComponent($vEvent, 'eventKey');
 
         $output = $vCalendar->render();
-        $this->assertContains(str_replace("\n", "\\n", $input), $output);    
+        $this->assertNotContains(str_replace("\n", "\\n", $input), $output);
     }
 
     public function testSetComponents()
