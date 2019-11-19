@@ -1,34 +1,25 @@
 <?php
 
-// use composer autoloader
+use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$event = (new Event())->withSummary('Christmas');
+// 1. Create Event domain entity
+$event = Event::create();
+$event->withSummary('Christmas Eve');
 
-// set default timezone (PHP 5.4)
-date_default_timezone_set('Europe/Berlin');
+// 2. Create Calendar domain entity
+$calendar = Calendar::create([$event]);
 
-// 1. Create new calendar
-$vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
-
-// 2. Create an event
-$vEvent = new \Eluceo\iCal\Component\Event();
-$vEvent->setDtStart(new \DateTime('2012-12-24'));
-$vEvent->setDtEnd(new \DateTime('2012-12-24'));
-$vEvent->setNoTime(true);
-$vEvent->setSummary('Christmas');
-
-// Adding Timezone (optional)
-$vEvent->setUseTimezone(true);
-
-// 3. Add event to calendar
-$vCalendar->addComponent($vEvent);
+// 3. Transform domain entity into an iCalendar component
+$componentFactory = new CalendarFactory();
+$calendarComponent = $componentFactory->createCalendar($calendar);
 
 // 4. Set headers
 header('Content-Type: text/calendar; charset=utf-8');
 header('Content-Disposition: attachment; filename="cal.ics"');
 
 // 5. Output
-echo $vCalendar->render();
+echo $calendarComponent;
