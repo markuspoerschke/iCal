@@ -17,10 +17,10 @@ class CalendarFactoryTest extends TestCase
 {
     public function testRenderEmptyCalendar()
     {
-        $calendar = Calendar::create(UniqueIdentifier::fromString('1234'));
+        $calendar = Calendar::create();
         $expected = implode(Component::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
-            'PRODID:1234',
+            'PRODID:' . $calendar->getProductIdentifier(),
             'VERSION:2.0',
             'END:VCALENDAR'
         ]);
@@ -38,16 +38,15 @@ class CalendarFactoryTest extends TestCase
             )
         );
         $calendar = Calendar::create(
-            UniqueIdentifier::fromString('1234'),
             [
                 Event::create(UniqueIdentifier::fromString('event1'))->touch($currentTime),
                 Event::create(UniqueIdentifier::fromString('event2'))->touch($currentTime),
-            ],
+            ]
         );
 
         $expected = implode(Component::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
-            'PRODID:1234',
+            'PRODID:' . $calendar->getProductIdentifier(),
             'VERSION:2.0',
             'BEGIN:VEVENT',
             'UID:event1',

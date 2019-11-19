@@ -2,31 +2,36 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
-use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
-
 class Calendar
 {
-    private UniqueIdentifier $productIdentifier;
+    private string $productIdentifier = '-//eluceo/ical//2.0/EN';
 
     /**
      * @var Event[]
      */
     private array $events = [];
 
-    private function __construct(UniqueIdentifier $productIdentifier, array $events)
+    private function __construct(array $events)
     {
-        $this->productIdentifier = $productIdentifier;
         array_walk($events, [$this, 'addEvent']);
     }
 
-    public static function create(?UniqueIdentifier $productIdentifier = null, array $events = []): self
+    public static function create(array $events = []): self
     {
-        return new static($productIdentifier ?? UniqueIdentifier::create(), $events);
+        return new static($events);
     }
 
-    public function getProductIdentifier(): UniqueIdentifier
+    public function getProductIdentifier(): string
     {
         return $this->productIdentifier;
+    }
+
+    public function withProductIdentifier(string $productIdentifier): self
+    {
+        $new = clone $this;
+        $new->productIdentifier = $productIdentifier;
+
+        return $new;
     }
 
     public function getEvents(): array
