@@ -76,8 +76,6 @@ class RecurrenceId extends Property
     }
 
     /**
-     * @param \DateTimeInterface $dateTime
-     *
      * @return \Eluceo\iCal\Property\Event\RecurrenceId
      */
     public function setDatetime(\DateTimeInterface $dateTime)

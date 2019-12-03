@@ -36,15 +36,11 @@ class Geo extends Property
         $this->longitude = $longitude;
 
         if ($this->latitude < -90 || $this->latitude > 90) {
-            throw new \InvalidArgumentException(
-                "The geographical latitude must be a value between -90 and 90 degrees. '{$this->latitude}' was given."
-            );
+            throw new \InvalidArgumentException("The geographical latitude must be a value between -90 and 90 degrees. '{$this->latitude}' was given.");
         }
 
         if ($this->longitude < -180 || $this->longitude > 180) {
-            throw new \InvalidArgumentException(
-                "The geographical longitude must be a value between -180 and 180 degrees. '{$this->longitude}' was given."
-            );
+            throw new \InvalidArgumentException("The geographical longitude must be a value between -180 and 180 degrees. '{$this->longitude}' was given.");
         }
 
         parent::__construct('GEO', new Property\RawStringValue($this->getGeoLocationAsString()));
@@ -52,8 +48,6 @@ class Geo extends Property
 
     /**
      * @deprecated This method is used to allow backwards compatibility for Event::setLocation
-     *
-     * @param string $geoLocationString
      *
      * @return Geo
      */
@@ -70,8 +64,6 @@ class Geo extends Property
      * Returns the coordinates as a string.
      *
      * @example 37.386013;-122.082932
-     *
-     * @param string $separator
      *
      * @return string
      */
