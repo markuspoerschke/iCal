@@ -36,6 +36,11 @@ class Event extends Component
     const STATUS_CONFIRMED = 'CONFIRMED';
     const STATUS_CANCELLED = 'CANCELLED';
 
+    const MS_BUSYSTATUS_FREE = 'FREE';
+    const MS_BUSYSTATUS_TENTATIVE = 'TENTATIVE';
+    const MS_BUSYSTATUS_BUSY = 'BUSY';
+    const MS_BUSYSTATUS_OOF = 'OOF';
+
     /**
      * @var string
      */
@@ -72,6 +77,11 @@ class Event extends Component
      * @var bool
      */
     protected $noTime = false;
+
+    /**
+     * @var string
+     */
+    protected $msBusyStatus = null;
 
     /**
      * @var string
@@ -356,6 +366,11 @@ class Event extends Component
             $propertyBag->set('X-MICROSOFT-CDO-ALLDAYEVENT', 'TRUE');
         }
 
+        if (null != $this->msBusyStatus) {
+            $propertyBag->set('X-MICROSOFT-CDO-BUSYSTATUS', $this->msBusyStatus);
+            $propertyBag->set('X-MICROSOFT-CDO-INTENDEDSTATUS', $this->msBusyStatus);
+        }
+
         if (null != $this->categories) {
             $propertyBag->set('CATEGORIES', $this->categories);
         }
@@ -480,6 +495,37 @@ class Event extends Component
         $this->noTime = $noTime;
 
         return $this;
+    }
+
+    /**
+     * @param $msBusyStatus
+     *
+     * @return $this
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setMsBusyStatus($msBusyStatus)
+    {
+        $msBusyStatus = strtoupper($msBusyStatus);
+        if ($msBusyStatus == self::MS_BUSYSTATUS_FREE
+            || $msBusyStatus == self::MS_BUSYSTATUS_TENTATIVE
+            || $msBusyStatus == self::MS_BUSYSTATUS_BUSY
+            || $msBusyStatus == self::MS_BUSYSTATUS_OOF
+        ) {
+            $this->msBusyStatus = $msBusyStatus;
+        } else {
+            throw new \InvalidArgumentException('Invalid value for status');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMsBusyStatus()
+    {
+        return $this->msBusyStatus;
     }
 
     /**
