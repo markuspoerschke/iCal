@@ -64,25 +64,17 @@ class Geo extends Property
      * Returns the coordinates as a string.
      *
      * @example 37.386013;-122.082932
-     *
-     * @return string
      */
     public function getGeoLocationAsString(string $separator = ';'): string
     {
         return number_format($this->latitude, 6) . $separator . number_format($this->longitude, 6);
     }
 
-    /**
-     * @return float
-     */
     public function getLatitude(): float
     {
         return $this->latitude;
     }
 
-    /**
-     * @return float
-     */
     public function getLongitude(): float
     {
         return $this->longitude;

@@ -660,9 +660,6 @@ class Event extends Component
         return $this;
     }
 
-    /**
-     * @return Attendees
-     */
     public function getAttendees(): Attendees
     {
         return $this->attendees;
