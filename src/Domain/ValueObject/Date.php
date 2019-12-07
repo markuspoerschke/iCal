@@ -11,10 +11,12 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+use DateInterval;
 use DateTimeImmutable as PhpDateTimeImmutable;
 use DateTimeInterface as PhpDateTimeInterface;
+use InvalidArgumentException;
 
-class Timestamp extends PointInTime
+class Date extends PointInTime
 {
     public static function fromDateTimeInterface(PhpDateTimeInterface $dateTime): self
     {
@@ -26,8 +28,22 @@ class Timestamp extends PointInTime
         );
     }
 
-    public static function fromCurrentTime(): self
+    public static function fromCurrentDay(): self
     {
         return static::fromDateTimeInterface(new PhpDateTimeImmutable());
+    }
+
+    public function add(DateInterval $interval): self
+    {
+        if (
+            $interval->h > 0
+            || $interval->i > 0
+            || $interval->s > 0
+            || $interval->f > 0
+        ) {
+            throw new InvalidArgumentException('Cannot add time interval to a date.');
+        }
+
+        return parent::add($interval);
     }
 }

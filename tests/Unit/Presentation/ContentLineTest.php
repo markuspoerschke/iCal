@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Test\Unit\Presentation;
 
 use Eluceo\iCal\Presentation\Component;
@@ -13,7 +22,7 @@ class ContentLineTest extends TestCase
         $lineAsString = 'BEGIN:EVENT';
         $contentLine = ContentLine::fromString($lineAsString);
 
-        self::assertSame($lineAsString, (string)$contentLine);
+        self::assertSame($lineAsString, (string) $contentLine);
     }
 
     public function testLongLinesAreFolder()
@@ -25,6 +34,6 @@ class ContentLineTest extends TestCase
         ]);
 
         $contentLine = ContentLine::fromString($lineAsString);
-        self::assertSame($expected, (string)$contentLine);
+        self::assertSame($expected, (string) $contentLine);
     }
 }

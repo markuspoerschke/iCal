@@ -1,10 +1,19 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Test\Unit\Presentation;
 
 use Eluceo\iCal\Presentation\Component;
-use Eluceo\iCal\Presentation\Component\Property\Value\StringValue;
 use Eluceo\iCal\Presentation\Component\Property;
+use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use PHPUnit\Framework\TestCase;
 
 class ComponentTest extends TestCase
@@ -18,15 +27,15 @@ class ComponentTest extends TestCase
 
         self::assertSame(
             $expected,
-            (string)Component::create('VEVENT')
+            (string) Component::create('VEVENT')
         );
     }
 
     public function testComponentWithPropertiesToString()
     {
         $properties = [
-            Property::create('TEST', StringValue::fromString('value')),
-            Property::create('TEST2', StringValue::fromString('value2')),
+            Property::create('TEST', TextValue::fromString('value')),
+            Property::create('TEST2', TextValue::fromString('value2')),
         ];
 
         $expected = implode(Component::LINE_SEPARATOR, [
@@ -38,7 +47,7 @@ class ComponentTest extends TestCase
 
         self::assertSame(
             $expected,
-            (string)Component::create('VEVENT', $properties)
+            (string) Component::create('VEVENT', $properties)
         );
     }
 }

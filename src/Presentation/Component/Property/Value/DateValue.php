@@ -11,29 +11,26 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
+use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
-class ListValue extends Value
+class DateValue extends Value
 {
-    private array $values = [];
+    private const FORMAT = 'Ymd';
+    private string $valueAsString;
 
-    private function __construct(array $values)
+    private function __construct(string $valueAsString)
     {
-        array_walk($values, [$this, 'addValue']);
+        $this->valueAsString = $valueAsString;
     }
 
-    public static function fromStringValues(array $values): self
+    public static function fromDate(Date $date): self
     {
-        return new static($values);
+        return new static($date->getDateTime()->format(static::FORMAT));
     }
 
     public function __toString(): string
     {
-        return implode(',', array_map('strval', $this->values));
-    }
-
-    private function addValue(Value $value): void
-    {
-        $this->values[] = $value;
+        return $this->valueAsString;
     }
 }

@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace Eluceo\iCal\Test\Unit\Presentation\Factory;
 
@@ -22,10 +30,10 @@ class CalendarFactoryTest extends TestCase
             'BEGIN:VCALENDAR',
             'PRODID:' . $calendar->getProductIdentifier(),
             'VERSION:2.0',
-            'END:VCALENDAR'
+            'END:VCALENDAR',
         ]);
 
-        self::assertSame($expected, (string)(new CalendarFactory())->createCalendar($calendar));
+        self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));
     }
 
     public function testRenderWithEvents()
@@ -59,6 +67,6 @@ class CalendarFactoryTest extends TestCase
             'END:VCALENDAR',
         ]);
 
-        self::assertSame($expected, (string)(new CalendarFactory())->createCalendar($calendar));
+        self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));
     }
 }

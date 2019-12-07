@@ -9,9 +9,8 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Eluceo\iCal\Presentation\Component\Property;
+namespace Eluceo\iCal\Domain\ValueObject;
 
-abstract class Value
+abstract class Occurrence
 {
-    abstract public function __toString(): string;
 }

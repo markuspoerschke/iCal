@@ -1,139 +1,128 @@
-# eluceo — iCal
+# eluceo — iCal 2
 
+[![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=2.x)](https://travis-ci.org/markuspoerschke/iCal)
+[![codecov](https://codecov.io/gh/markuspoerschke/iCal/branch/2.x/graph/badge.svg)](https://codecov.io/gh/markuspoerschke/iCal)
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
 [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable)](https://packagist.org/packages/eluceo/ical)
-[![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master) 
-[![Code Coverage](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master) 
-[![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=master)](https://travis-ci.org/markuspoerschke/iCal)
+[![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical) 
 
-This package offers a abstraction layer for creating iCalendars. The output will
-follow [RFC 5545](http://www.ietf.org/rfc/rfc5545.txt) as best as possible.
-
-The following components are supported at this time:
-
-* VCALENDAR
-* VEVENT
-* VALARM
-* VTIMEZONE
+This package offers an abstraction layer for creating iCalendars files.
+By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
+The output itself will follow [RFC 5545](http://www.ietf.org/rfc/rfc5545.txt) as best as possible.
 
 ## Installation
 
-You can install this package by using [Composer](http://getcomposer.org), running this command:
+You can install this package by using [Composer](http://getcomposer.org), running the following command:
 
 ```sh
 composer require eluceo/ical
 ```
-Link to Packagist: https://packagist.org/packages/eluceo/ical
+
+## Version / Upgrade
+
+The initial version was released back in 2012.
+The version 2 of this package is a complete rewrite of the package and is not compatible to older version.
+Please see the upgrade guide if you want to migrate from `0.*` to `2.*`.
+If you just start using this package, you should install version 2.
+
+Version | PHP Version
+------- | -----------
+0.11.*  | 5.3.0 - 7.4
+0.15.*  | 7.0 - 7.4
+2.*     | 7.4 only
 
 ## Usage
 
-### Basic Usage
+The classes within this package are grouped into two namespaces:
 
-#### 1. Create a Calendar object
+* The `Domain` contains the information about the events.
+* The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
 
-```PHP
-$vCalendar = new \Eluceo\iCal\Component\Calendar('www.example.com');
-```
+To create a calendar, the first step will be to create the corresponding domain objects.
+Then these objects can be transformed into a iCalendar PHP representation, which can be cast to string.
 
-#### 2. Create an Event object
+Please note, that all classes in this package are immutable.
 
-```PHP
-$vEvent = new \Eluceo\iCal\Component\Event();
-```
+### Empty event
 
-#### 3. Add your information to the Event
+In this very basic example, an empty event is rendered.
+You will learn how to create an event domain object, how to add it to a calendar and how to transform it to a iCalendar component.
 
-```PHP
-$vEvent
-    ->setDtStart(new \DateTime('2012-12-24'))
-    ->setDtEnd(new \DateTime('2012-12-24'))
-    ->setNoTime(true)
-    ->setSummary('Christmas')
-;
-```
-
-#### 4. Add Event to Calendar
+#### 1. Create an event domain entity
 
 ```PHP
-$vCalendar->addComponent($vEvent);
+$event = \Eluceo\iCal\Domain\Entity\Event::create();
 ```
 
-#### 5. Set HTTP-headers
+#### 2. Create an calendar domain entity
+
+```PHP
+$calendar = \Eluceo\iCal\Domain\Entity\Calendar::create([$event]);
+```
+
+#### 3. Transform calendar domain object into a presentation object
+
+```PHP
+$iCalendarComponent = (new \Eluceo\iCal\Presentation\Factory\CalendarFactory())->createCalendar($calendar);
+```
+
+#### 4. a) Save to file
+
+```PHP
+file_put_contents('calendar.ics', (string) $iCalendarComponent);
+```
+
+#### 4. b) Send via HTTP
 
 ```PHP
 header('Content-Type: text/calendar; charset=utf-8');
 header('Content-Disposition: attachment; filename="cal.ics"');
+
+echo $iCalendarComponent;
 ```
 
-#### 6. Send output
+### Full example
 
-```PHP
-echo $vCalendar->render();
-```
+The following example will create a single day event with a summary and a description.
+More examples can be found in the [examples/](examples) folder.
 
-### Timezone support
+```php
+<?php
 
-This package supports three different types of handling timezones:
+require_once __DIR__ . '/../vendor/autoload.php';
 
-#### 1. UTC (default)
+// 1. Create Event domain entity
+$event = Eluceo\iCal\Domain\Entity\Event::create()
+    ->withSummary('Christmas Eve')
+    ->withDescription('Lorem Ipsum Dolor...')
+    ->withOccurrence(
+        Eluceo\iCal\Domain\ValueObject\SingleDay::fromDate(
+            Eluceo\iCal\Domain\ValueObject\Date::fromDateTimeInterface(
+                \DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24')
+            )
+        )
+    );
 
-In the default setting, UTC/GMT will be used as Timezone. The time will be formated as following:
+// 2. Create Calendar domain entity
+$calendar = Eluceo\iCal\Domain\Entity\Calendar::create([$event]);
 
-```
-DTSTART:20121224T180000Z
-```
+// 3. Transform domain entity into an iCalendar component
+$componentFactory = new Eluceo\iCal\Presentation\Factory\CalendarFactory();
+$calendarComponent = $componentFactory->createCalendar($calendar);
 
-#### 2. Use explicit timezone
+// 4. Set headers
+header('Content-Type: text/calendar; charset=utf-8');
+header('Content-Disposition: attachment; filename="cal.ics"');
 
-You can use an explicit timezone by calling `$vEvent->setUseTimezone(true);`. The timezone of your
-`\DateTime` object will be used. In this case the non-standard field "X-WR-TIMEZONE" will be used.
-Be awre that this is a simple solution which is not supported by all calendar clients.
-The output will be as following:
-
-```
-DTSTART;TZID=Europe/Berlin:20121224T180000
-```
-
-#### 3. Use explicit timezone with definition
-
-You can use an explicit timezone and define it using `Timezone()` and `TimezoneRule()` (see example5.php).
-The timezone of your `\DateTime` object will be used. The output will be as following:
-
-```
-BEGIN:VTIMEZONE
-TZID:Europe/Berlin
-X-LIC-LOCATION:Europe/Berlin
-BEGIN:DAYLIGHT
-TZOFFSETFROM:+0100
-TZOFFSETTO:+0200
-DTSTART:19810329T030000
-RRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=3;BYDAY=-1SU
-END:DAYLIGHT
-BEGIN:STANDARD
-TZOFFSETFROM:+0200
-TZOFFSETTO:+0100
-DTSTART:19961027T030000
-RRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=10;BYDAY=-1SU
-END:STANDARD
-END:VTIMEZONE
-...
-DTSTART;TZID=Europe/Berlin:20121224T180000
-```
-
-#### 4. Use locale time
-
-You can use local time by calling `$vEvent->setUseUtc(false);`. The output will be:
-
-```
-DTSTART:20121224T180000
+// 5. Output
+echo $calendarComponent;
 ```
 
 ## License
 
 This package is released under the __MIT license__.
 
-Copyright (c) 2012-2019 Markus Poerschke
+Copyright (c) 2019 Markus Poerschke
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

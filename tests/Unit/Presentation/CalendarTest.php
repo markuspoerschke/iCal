@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Test\Unit\Presentation;
 
 use Eluceo\iCal\Presentation\Calendar;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
-use Eluceo\iCal\Presentation\Component\Property\Value\StringValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
@@ -17,7 +26,7 @@ class CalendarTest extends TestCase
             'END:VCALENDAR',
         ]);
 
-        self::assertSame($expected, (string)Calendar::createCalendar());
+        self::assertSame($expected, (string) Calendar::createCalendar());
     }
 
     public function testWithSingleComponentToString()
@@ -35,7 +44,7 @@ class CalendarTest extends TestCase
 
         $calendar = Calendar::createCalendar($components);
 
-        self::assertSame($expected, (string)$calendar);
+        self::assertSame($expected, (string) $calendar);
     }
 
     public function testWithMultipleComponentsToString()
@@ -55,20 +64,20 @@ class CalendarTest extends TestCase
             Component::create(
                 'VEVENT',
                 [
-                    Property::create('UID', StringValue::fromString('event1')),
+                    Property::create('UID', TextValue::fromString('event1')),
                 ]
             ),
             Component::create(
                 'VEVENT',
                 [
-                    Property::create('UID', StringValue::fromString('event2')),
+                    Property::create('UID', TextValue::fromString('event2')),
                 ]
             ),
         ];
 
         $calendar = Calendar::createCalendar($components);
 
-        self::assertSame($expected, (string)$calendar);
+        self::assertSame($expected, (string) $calendar);
     }
 
     public function testRenderOwnPropertiesBeforeComponents()
@@ -83,8 +92,8 @@ class CalendarTest extends TestCase
         ]);
 
         $properties = [
-            Property::create('TEST', StringValue::fromString('value')),
-            Property::create('TEST2', StringValue::fromString('value2')),
+            Property::create('TEST', TextValue::fromString('value')),
+            Property::create('TEST2', TextValue::fromString('value2')),
         ];
 
         $components = [
@@ -93,6 +102,6 @@ class CalendarTest extends TestCase
 
         $calendar = Calendar::createCalendar($components, $properties);
 
-        self::assertSame($expected, (string)$calendar);
+        self::assertSame($expected, (string) $calendar);
     }
 }

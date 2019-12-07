@@ -1,9 +1,18 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Test\Unit\Presentation\Component\Property\Value;
 
 use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
-use Eluceo\iCal\Presentation\Component\Property\Value\StringValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use PHPUnit\Framework\TestCase;
 
 class ListValueTest extends TestCase
@@ -13,7 +22,7 @@ class ListValueTest extends TestCase
      */
     public function testStringValueEscaping(array $values, string $expected)
     {
-        self::assertSame($expected, (string)ListValue::fromStringValues($values));
+        self::assertSame($expected, (string) ListValue::fromStringValues($values));
     }
 
     public function provideTestData()
@@ -23,24 +32,24 @@ class ListValueTest extends TestCase
             '',
         ];
         yield 'single value' => [
-            [StringValue::fromString('Lorem')],
-            'Lorem'
+            [TextValue::fromString('Lorem')],
+            'Lorem',
         ];
         yield 'multiple values without escaping' => [
             [
-                StringValue::fromString('Lorem'),
-                StringValue::fromString('Ipsum'),
-                StringValue::fromString('Dolor')
+                TextValue::fromString('Lorem'),
+                TextValue::fromString('Ipsum'),
+                TextValue::fromString('Dolor'),
             ],
-            'Lorem,Ipsum,Dolor'
+            'Lorem,Ipsum,Dolor',
         ];
         yield 'multiple values with escaping' => [
             [
-                StringValue::fromString('Lorem'),
-                StringValue::fromString('Ips,um'),
-                StringValue::fromString('"doublequotes"')
+                TextValue::fromString('Lorem'),
+                TextValue::fromString('Ips,um'),
+                TextValue::fromString('semi;colon:'),
             ],
-            'Lorem,Ips\,um,\"doublequotes\"'
+            'Lorem,Ips\\,um,semi\\;colon:',
         ];
     }
 }

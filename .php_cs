@@ -1,15 +1,20 @@
 <?php
 
+$year = date('Y');
+
 $headerComment = <<<EOF
 This file is part of the eluceo/iCal package.
 
-(c) Markus Poerschke <markus@eluceo.de>
+(c) {$year} Markus Poerschke <markus@poerschke.nrw>
 
 This source file is subject to the MIT license that is bundled
 with this source code in the file LICENSE.
 EOF;
 
-$finder = PhpCsFixer\Finder::create()->in(__DIR__ . '/src');
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__ . '/src')
+    ->in(__DIR__ . '/tests')
+    ->in(__DIR__ . '/examples');
 
 return PhpCsFixer\Config::create()
     ->setRules([
@@ -20,5 +25,4 @@ return PhpCsFixer\Config::create()
         'header_comment' => ['header' => $headerComment],
         'yoda_style' => false,
     ])
-    ->setFinder($finder)
-;
+    ->setFinder($finder);

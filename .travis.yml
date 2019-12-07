@@ -18,6 +18,8 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+  # Ensure that examples are executable:
+  - find examples/*.php | xargs php
 
 after_script:
   - travis_retry wget https://scrutinizer-ci.com/ocular.phar

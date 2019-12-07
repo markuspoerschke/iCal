@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Presentation;
 
 use Eluceo\iCal\Presentation\Component\Property;
@@ -44,7 +53,7 @@ class Component
     protected function getContentLinesGenerator(): Generator
     {
         foreach ($this->properties as $property) {
-            yield ContentLine::fromString((string)$property);
+            yield ContentLine::fromString((string) $property);
         }
     }
 

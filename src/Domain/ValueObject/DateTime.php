@@ -1,13 +1,21 @@
 <?php
 
+/*
+ * This file is part of the eluceo/iCal package.
+ *
+ * (c) 2019 Markus Poerschke <markus@poerschke.nrw>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Eluceo\iCal\Domain\ValueObject;
 
 use DateTimeZone as PhpDateTimeZone;
 
 final class DateTime extends Timestamp
 {
-    private ?PhpDateTimeZone $dateTimeZone;
-    private bool $hasTime = true;
+    private ?PhpDateTimeZone $dateTimeZone = null;
 
     public function getDateTimeZone(): PhpDateTimeZone
     {
@@ -19,8 +27,11 @@ final class DateTime extends Timestamp
         return $this->dateTimeZone !== null;
     }
 
-    public function hasTime(): bool
+    public function withDateTimeZone(PhpDateTimeZone $dateTimeZone): self
     {
-        return $this->hasTime;
+        $new = clone $this;
+        $new->dateTimeZone = $dateTimeZone;
+
+        return $new;
     }
 }
