@@ -1,0 +1,44 @@
+on:
+  - push
+  - pull_request
+
+name: CI
+
+jobs:
+  coding-guidelines:
+    name: Coding Guidelines
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Run friendsofphp/php-cs-fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+        with:
+          args: --diff --dry-run
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install PHP 7.4
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: 7.4
+          coverage: xdebug
+          extension-csv: json, mbstring
+          ini-values-csv: assert.exception=1, zend.assertions=1
+      - name: Cache dependencies installed with composer
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('**/composer.json') }}
+      - name: Install composer dependencies
+        run: composer install
+      - name: Run tests with PHPUnit
+        run: php ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: Send code coverage report to Codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: bash <(curl -s https://codecov.io/bash) || true
