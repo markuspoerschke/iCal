@@ -43,6 +43,9 @@ class Calendar
         return $new;
     }
 
+    /**
+     * @return Event[]
+     */
     public function getEvents(): array
     {
         return $this->events;

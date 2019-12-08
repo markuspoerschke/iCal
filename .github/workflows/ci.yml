@@ -42,3 +42,25 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: bash <(curl -s https://codecov.io/bash) || true
+
+  type-checker:
+    name: Type Checker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install PHP 7.4
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: 7.4
+          extension-csv: json, mbstring
+          ini-values-csv: assert.exception=1, zend.assertions=1
+      - name: Cache dependencies installed with composer
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('**/composer.json') }}
+      - name: Install composer dependencies
+        run: composer install
+      - name: Run vimeo/psalm
+        run: php ./vendor/bin/psalm --shepherd

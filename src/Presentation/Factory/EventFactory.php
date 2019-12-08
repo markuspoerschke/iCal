@@ -33,7 +33,7 @@ class EventFactory
 
     private function getProperties(Event $event): Generator
     {
-        yield Property::create('UID', TextValue::fromString($event->getUniqueIdentifier()));
+        yield Property::create('UID', TextValue::fromString((string) $event->getUniqueIdentifier()));
         yield Property::create('DTSTAMP', DateTimeValue::fromTimestamp($event->getTouchedAt()));
 
         if ($event->hasSummary()) {

@@ -46,12 +46,20 @@ class Event
 
     public function touch(?Timestamp $dateTime = null): self
     {
+        if ($dateTime === null) {
+            $dateTime = Timestamp::fromCurrentTime();
+        }
+
         $new = clone $this;
         $new->touchedAt = $dateTime;
 
         return $new;
     }
 
+    /**
+     * @psalm-suppress InvalidNullableReturnType
+     * @psalm-suppress NullableReturnStatement
+     */
     public function getSummary(): string
     {
         return $this->summary;
@@ -70,6 +78,10 @@ class Event
         return $new;
     }
 
+    /**
+     * @psalm-suppress InvalidNullableReturnType
+     * @psalm-suppress NullableReturnStatement
+     */
     public function getDescription(): string
     {
         return $this->description;
@@ -101,6 +113,10 @@ class Event
         return $this->occurrence !== null;
     }
 
+    /**
+     * @psalm-suppress InvalidNullableReturnType
+     * @psalm-suppress NullableReturnStatement
+     */
     public function getOccurrence(): Occurrence
     {
         return $this->occurrence;

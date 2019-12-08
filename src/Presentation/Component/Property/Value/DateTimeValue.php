@@ -30,12 +30,12 @@ class DateTimeValue extends Value
     {
         $dateTime = $timestamp->getDateTime()->setTimezone(new \DateTimeZone('UTC'));
 
-        return new static($dateTime->format(static::FORMAT_UTC_DATE_TIME));
+        return new static($dateTime->format(self::FORMAT_UTC_DATE_TIME));
     }
 
     public static function fromDateTime(DateTime $dateTime): self
     {
-        $format = static::FORMAT_NO_TIMEZONE;
+        $format = self::FORMAT_NO_TIMEZONE;
 
         if ($dateTime->hasDateTimeZone()) {
             throw new \BadMethodCallException('not implemented yet');
