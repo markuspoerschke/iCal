@@ -44,6 +44,9 @@ class Date extends PointInTime
             throw new InvalidArgumentException('Cannot add time interval to a date.');
         }
 
-        return parent::add($interval);
+        $new = parent::add($interval);
+        assert($new instanceof static);
+
+        return $new;
     }
 }

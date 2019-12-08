@@ -30,7 +30,7 @@ class Component
         array_walk($properties, [$this, 'addProperty']);
     }
 
-    public static function create(string $componentName, array $properties = [])
+    public static function create(string $componentName, array $properties = []): self
     {
         return new static($componentName, $properties);
     }

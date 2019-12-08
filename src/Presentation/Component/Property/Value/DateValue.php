@@ -26,7 +26,7 @@ class DateValue extends Value
 
     public static function fromDate(Date $date): self
     {
-        return new static($date->getDateTime()->format(static::FORMAT));
+        return new static($date->getDateTime()->format(self::FORMAT));
     }
 
     public function __toString(): string

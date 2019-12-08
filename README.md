@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=2.x)](https://travis-ci.org/markuspoerschke/iCal)
 [![codecov](https://codecov.io/gh/markuspoerschke/iCal/branch/2.x/graph/badge.svg)](https://codecov.io/gh/markuspoerschke/iCal)
+[![Psalm coverage](https://shepherd.dev/github/markuspoerschke/ical/coverage.svg?)](https://shepherd.dev/github/markuspoerschke/ical)
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
 [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable)](https://packagist.org/packages/eluceo/ical)
 [![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical) 

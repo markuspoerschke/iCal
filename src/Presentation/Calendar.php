@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Presentation;
 
+use Eluceo\iCal\Presentation\Component\Property;
 use Generator;
 
 class Calendar extends Component
@@ -20,9 +21,14 @@ class Calendar extends Component
      */
     private array $components = [];
 
+    /**
+     * @param Component[] $components
+     * @param Property[]  $properties
+     */
     public static function createCalendar(array $components = [], array $properties = []): self
     {
         $new = static::create('VCALENDAR', $properties);
+        assert($new instanceof static);
         array_walk($components, [$new, 'addComponent']);
 
         return $new;

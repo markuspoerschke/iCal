@@ -28,6 +28,9 @@ abstract class PointInTime
         return $this->dateTime;
     }
 
+    /**
+     * @psalm-suppress MoreSpecificReturnType
+     */
     public function add(DateInterval $interval): self
     {
         $new = clone $this;
