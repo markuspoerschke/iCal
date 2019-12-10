@@ -445,10 +445,7 @@ class Event extends Component
             $geo = Geo::fromString($geo);
         } elseif (!is_null($geo) && !$geo instanceof Geo) {
             $className = get_class($geo);
-            throw new \InvalidArgumentException(
-                "The parameter 'geo' must be a string or an instance of " . Geo::class
-                . " but an instance of {$className} was given."
-            );
+            throw new \InvalidArgumentException("The parameter 'geo' must be a string or an instance of " . Geo::class . " but an instance of {$className} was given.");
         }
 
         $this->location = $location;
@@ -459,8 +456,6 @@ class Event extends Component
     }
 
     /**
-     * @param Geo $geoProperty
-     *
      * @return $this
      */
     public function setGeoLocation(Geo $geoProperty)
@@ -503,8 +498,6 @@ class Event extends Component
     }
 
     /**
-     * @param Organizer $organizer
-     *
      * @return $this
      */
     public function setOrganizer(Organizer $organizer)
@@ -599,8 +592,6 @@ class Event extends Component
     }
 
     /**
-     * @param Attendees $attendees
-     *
      * @return $this
      */
     public function setAttendees(Attendees $attendees)
@@ -623,9 +614,6 @@ class Event extends Component
         return $this;
     }
 
-    /**
-     * @return Attendees
-     */
     public function getAttendees(): Attendees
     {
         return $this->attendees;
@@ -741,8 +729,6 @@ class Event extends Component
     /**
      * @deprecated Deprecated since version 0.11.0, to be removed in 1.0. Use addRecurrenceRule instead.
      *
-     * @param RecurrenceRule $recurrenceRule
-     *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
@@ -767,8 +753,6 @@ class Event extends Component
     }
 
     /**
-     * @param RecurrenceRule $recurrenceRule
-     *
      * @return $this
      */
     public function addRecurrenceRule(RecurrenceRule $recurrenceRule)
@@ -837,8 +821,6 @@ class Event extends Component
     }
 
     /**
-     * @param \DateTimeInterface $dateTime
-     *
      * @return \Eluceo\iCal\Component\Event
      */
     public function addExDate(\DateTimeInterface $dateTime)
@@ -877,8 +859,6 @@ class Event extends Component
     }
 
     /**
-     * @param RecurrenceId $recurrenceId
-     *
      * @return \Eluceo\iCal\Component\Event
      */
     public function setRecurrenceId(RecurrenceId $recurrenceId)
@@ -908,9 +888,6 @@ class Event extends Component
         return $this->attachments;
     }
 
-    /**
-     * @param string $url
-     */
     public function addUrlAttachment(string $url)
     {
         $this->addAttachment(new Attachment($url));

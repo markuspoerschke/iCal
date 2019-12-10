@@ -138,8 +138,6 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @param \DateTimeInterface $dtStart
-     *
      * @return $this
      */
     public function setDtStart(\DateTimeInterface $dtStart)
@@ -150,8 +148,6 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @param RecurrenceRule $recurrenceRule
-     *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
