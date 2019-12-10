@@ -173,7 +173,6 @@ abstract class Component
     }
 
     /**
-     * @param array     $lines
      * @param Component $component
      */
     private function addComponentLines(array &$lines, self $component)

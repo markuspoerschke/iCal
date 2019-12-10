@@ -50,17 +50,12 @@ class ParameterBag
 
     /**
      * Checks if there are any params.
-     *
-     * @return bool
      */
     public function hasParams(): bool
     {
         return count($this->params) > 0;
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         $line = '';

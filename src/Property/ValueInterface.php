@@ -19,8 +19,6 @@ interface ValueInterface
      * Escape values as per RFC 5545.
      *
      * @see https://tools.ietf.org/html/rfc5545#section-3.3.11
-     *
-     * @return string
      */
     public function getEscapedValue(): string;
 }

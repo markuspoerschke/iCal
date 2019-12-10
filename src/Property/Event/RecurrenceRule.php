@@ -207,8 +207,6 @@ class RecurrenceRule implements ValueInterface
     }
 
     /**
-     * @param \DateTimeInterface|null $until
-     *
      * @return $this
      */
     public function setUntil(\DateTimeInterface $until = null)
@@ -465,8 +463,6 @@ class RecurrenceRule implements ValueInterface
      *
      * Each BYDAY value can also be preceded by a positive (+n) or negative (-n) integer.
      * If present, this indicates the nth occurrence of a specific day within the MONTHLY or YEARLY "RRULE".
-     *
-     * @param string $day
      *
      * @return $this
      */
