@@ -11,7 +11,7 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-class MultiDay extends Occurrence
+final class MultiDay extends Occurrence
 {
     private Date $firstDay;
     private Date $lastDay;

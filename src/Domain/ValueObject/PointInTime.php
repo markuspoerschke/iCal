@@ -14,6 +14,9 @@ namespace Eluceo\iCal\Domain\ValueObject;
 use DateInterval;
 use DateTimeImmutable as PhpDateTimeImmutable;
 
+/**
+ * @internal
+ */
 abstract class PointInTime
 {
     private PhpDateTimeImmutable $dateTime;

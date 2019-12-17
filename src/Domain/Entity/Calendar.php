@@ -35,12 +35,11 @@ class Calendar
         return $this->productIdentifier;
     }
 
-    public function withProductIdentifier(string $productIdentifier): self
+    public function setProductIdentifier(string $productIdentifier): self
     {
-        $new = clone $this;
-        $new->productIdentifier = $productIdentifier;
+        $this->productIdentifier = $productIdentifier;
 
-        return $new;
+        return $this;
     }
 
     /**
@@ -51,8 +50,10 @@ class Calendar
         return $this->events;
     }
 
-    private function addEvent(Event $event): void
+    public function addEvent(Event $event): self
     {
         $this->events[] = $event;
+
+        return $this;
     }
 }

@@ -42,8 +42,6 @@ The classes within this package are grouped into two namespaces:
 To create a calendar, the first step will be to create the corresponding domain objects.
 Then these objects can be transformed into a iCalendar PHP representation, which can be cast to string.
 
-Please note, that all classes in this package are immutable.
-
 ### Empty event
 
 In this very basic example, an empty event is rendered.
@@ -94,9 +92,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 // 1. Create Event domain entity
 $event = Eluceo\iCal\Domain\Entity\Event::create()
-    ->withSummary('Christmas Eve')
-    ->withDescription('Lorem Ipsum Dolor...')
-    ->withOccurrence(
+    ->setSummary('Christmas Eve')
+    ->setDescription('Lorem Ipsum Dolor...')
+    ->setOccurrence(
         Eluceo\iCal\Domain\ValueObject\SingleDay::fromDate(
             Eluceo\iCal\Domain\ValueObject\Date::fromDateTimeInterface(
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24')

@@ -33,8 +33,8 @@ class CalendarFactoryTest extends TestCase
         );
         $event = Event::create(UniqueIdentifier::fromString('event1'))
             ->touch($currentTime)
-            ->withSummary('Lorem Summary')
-            ->withDescription('Lorem Description');
+            ->setSummary('Lorem Summary')
+            ->setDescription('Lorem Description');
 
         $expected = implode(Component::LINE_SEPARATOR, [
             'BEGIN:VEVENT',

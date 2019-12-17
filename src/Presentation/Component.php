@@ -30,6 +30,9 @@ class Component
         array_walk($properties, [$this, 'addProperty']);
     }
 
+    /**
+     * @param Property[] $properties
+     */
     public static function create(string $componentName, array $properties = []): self
     {
         return new static($componentName, $properties);
@@ -52,13 +55,13 @@ class Component
 
     protected function getContentLinesGenerator(): Generator
     {
-        foreach ($this->properties as $property) {
-            yield ContentLine::fromString((string) $property);
-        }
+        yield from array_map([ContentLine::class, 'fromString'], $this->properties);
     }
 
-    private function addProperty(Property $property): void
+    private function addProperty(Property $property): self
     {
         $this->properties[] = $property;
+
+        return $this;
     }
 }

@@ -31,6 +31,9 @@ class EventFactory
         return Component::create('VEVENT', iterator_to_array($this->getProperties($event)));
     }
 
+    /**
+     * @return Generator<Property>
+     */
     private function getProperties(Event $event): Generator
     {
         yield Property::create('UID', TextValue::fromString((string) $event->getUniqueIdentifier()));
@@ -49,14 +52,21 @@ class EventFactory
         }
     }
 
+    /**
+     * @return Generator<Property>
+     */
     private function getOccurrenceProperties(Occurrence $occurrence): Generator
     {
         if ($occurrence instanceof SingleDay) {
             yield Property::create('DTSTART', DateValue::fromDate($occurrence->getDate()));
-        } elseif ($occurrence instanceof MultiDay) {
+        }
+
+        if ($occurrence instanceof MultiDay) {
             yield Property::create('DTSTART', DateValue::fromDate($occurrence->getFirstDay()));
             yield Property::create('DTEND', DateValue::fromDate($occurrence->getLastDay()->add(new DateInterval('P1D'))));
-        } elseif ($occurrence instanceof TimeSpan) {
+        }
+
+        if ($occurrence instanceof TimeSpan) {
             yield Property::create('DTSTART', DateTimeValue::fromDateTime($occurrence->getBegin()));
             yield Property::create('DTEND', DateTimeValue::fromDateTime($occurrence->getEnd()));
         }

@@ -16,7 +16,7 @@ use DateTimeImmutable as PhpDateTimeImmutable;
 use DateTimeInterface as PhpDateTimeInterface;
 use InvalidArgumentException;
 
-class Date extends PointInTime
+final class Date extends PointInTime
 {
     public static function fromDateTimeInterface(PhpDateTimeInterface $dateTime): self
     {

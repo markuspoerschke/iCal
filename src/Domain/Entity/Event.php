@@ -50,10 +50,9 @@ class Event
             $dateTime = Timestamp::fromCurrentTime();
         }
 
-        $new = clone $this;
-        $new->touchedAt = $dateTime;
+        $this->touchedAt = $dateTime;
 
-        return $new;
+        return $this;
     }
 
     /**
@@ -70,12 +69,18 @@ class Event
         return $this->summary !== null;
     }
 
-    public function withSummary(string $summary): self
+    public function setSummary(string $summary): self
     {
-        $new = clone $this;
-        $new->summary = $summary;
+        $this->summary = $summary;
 
-        return $new;
+        return $this;
+    }
+
+    public function unsetSummary(): self
+    {
+        $this->summary = null;
+
+        return $this;
     }
 
     /**
@@ -92,20 +97,18 @@ class Event
         return $this->description !== null;
     }
 
-    public function withDescription(string $description): self
+    public function setDescription(string $description): self
     {
-        $new = clone $this;
-        $new->description = $description;
+        $this->description = $description;
 
-        return $new;
+        return $this;
     }
 
-    public function withoutDescription(): self
+    public function unsetDescription(): self
     {
-        $new = clone $this;
-        $new->description = null;
+        $this->description = null;
 
-        return $new;
+        return $this;
     }
 
     public function hasOccurrence(): bool
@@ -122,11 +125,10 @@ class Event
         return $this->occurrence;
     }
 
-    public function withOccurrence(Occurrence $occurrence): self
+    public function setOccurrence(Occurrence $occurrence): self
     {
-        $new = clone $this;
-        $new->occurrence = $occurrence;
+        $this->occurrence = $occurrence;
 
-        return $new;
+        return $this;
     }
 }
