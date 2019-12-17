@@ -1,0 +1,22 @@
+{
+    "private": true,
+    "devDependencies": {
+        "css-loader": "^3.2.1",
+        "file-loader": "^5.0.2",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.13.0",
+        "sass-loader": "^8.0.0",
+        "style-loader": "^1.0.1",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.11.2",
+        "@openfonts/raleway_latin": "^1.44.0",
+        "ackee-tracker": "^3.2.2",
+        "highlight.js": "^9.16.2"
+    },
+    "scripts": {
+        "build": "webpack-cli -p"
+    }
+}

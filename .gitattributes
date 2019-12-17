@@ -4,9 +4,10 @@
 /.travis.yml export-ignore
 /CHANGELOG.md export-ignore
 /CONTRIBUTING.md export-ignore
-/UPGRADE.md export-ignore
 /examples export-ignore
 /phpunit.xml.dist export-ignore
+/psalm.xml export-ignore
 /README.md export-ignore
 /tests export-ignore
-/psalm.xml export-ignore
+/UPGRADE.md export-ignore
+/website
