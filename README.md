@@ -9,7 +9,7 @@
 
 This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
-The output itself will follow [RFC 5545](http://www.ietf.org/rfc/rfc5545.txt) as best as possible.
+The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) as best as possible.
 
 ## Installation
 

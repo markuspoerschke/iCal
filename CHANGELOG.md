@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2.0.0
+
+This version is complete rewrite.
+Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*` to `2.0.0`.
+
+### Changed
+- Separate domain and presentation logic
+
+### Removed
+- Support for PHP `<=7.3`
+
 ## [unreleased]
 
 ### Added
