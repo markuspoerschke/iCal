@@ -38,6 +38,8 @@ jobs:
         run: composer install
       - name: Run tests with PHPUnit
         run: php ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: Ensure that the examples are working
+        run: find examples/*.php | xargs php
       - name: Send code coverage report to Codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
