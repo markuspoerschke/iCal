@@ -25,3 +25,8 @@ menu:
       advanced/maturity-matrix:
         text: Maturity Matrix
         url: /advanced/maturity-matrix.html
+  - section: Legal
+    items:
+      imprint:
+        text: Imprint
+        url: https://markus.poerschke.nrw/imprint/
