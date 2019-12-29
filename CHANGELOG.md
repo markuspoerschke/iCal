@@ -1,10 +1,17 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0]
 ### Added
 - Allow to add `ATTACH` property to an event [#128](https://github.com/markuspoerschke/iCal/pull/128)
+- Support for PHP 7.4 [#141](https://github.com/markuspoerschke/iCal/pull/141)
+- Add property `X-MICROSOFT-CDO-BUSYSTATUS` [#32](https://github.com/markuspoerschke/iCal/issues/32) [#146](https://github.com/markuspoerschke/iCal/pull/146)
+
+### Removed
+- Support for PHP 7.0 [#126](https://github.com/markuspoerschke/iCal/pull/126)
 
 ## [0.15.1] - 2019-08-06
 
@@ -107,7 +114,7 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.15.1...master
+[0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
 [0.14.0]: https://github.com/markuspoerschke/iCal/compare/0.13.0...0.14.0
