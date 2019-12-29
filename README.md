@@ -23,7 +23,7 @@ composer require eluceo/ical
 
 The initial version was released back in 2012.
 The version 2 of this package is a complete rewrite of the package and is not compatible to older version.
-Please see the upgrade guide if you want to migrate from `0.*` to `2.*`.
+Please see the upgrade guide if you want to migrate from version `0.*` to `2.*`.
 If you just start using this package, you should install version 2.
 
 Version | PHP Version
@@ -31,6 +31,10 @@ Version | PHP Version
 0.11.*  | 5.3.0 - 7.4
 0.15.*  | 7.0 - 7.4
 2.*     | 7.4 only
+
+## Documentation
+
+Visit [ical.poerschke.nrw](https://ical.poerschke.nrw/) for complete documentation.
 
 ## Usage
 
