@@ -1,0 +1,22 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - 2.x
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Dokku Deployment
+        uses: vitalyliber/dokku-github-action@master
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+          HOST: ical.poerschke.nrw
+          PROJECT: ical
+          BRANCH: 2.x
