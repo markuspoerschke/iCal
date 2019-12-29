@@ -105,6 +105,23 @@ class EventTest extends TestCase
         $this->assertArrayHasKey('DTSTAMP', $result);
     }
 
+    public function testSetMsBusyTime()
+    {
+        $event = new Event('19960401T080045Z-4000F192713-0052@host1.com');
+        $event->setMsBusyStatus("FREE");
+        $result = $event->buildPropertyBag()->getIterator()->getArrayCopy();
+
+        $this->assertSame('X-MICROSOFT-CDO-BUSYSTATUS:FREE', $result['X-MICROSOFT-CDO-BUSYSTATUS']->toLine());
+    }
+
+    public function testGetMsBusyTime()
+    {
+        $event = new Event('19960401T080045Z-4000F192713-0052@host1.com');
+        $event->setMsBusyStatus("FREE");
+
+        $this->assertSame("FREE", $event->getMsBusyStatus());
+    }
+
     public function testSetSequence()
     {
         $event = new Event('19960401T080045Z-4000F192713-0052@host1.com');
