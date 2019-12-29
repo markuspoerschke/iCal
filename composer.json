@@ -32,13 +32,13 @@
         }
     },
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.1"
     },
     "suggest": {
         "ext-mbstring" : "Massive performance enhancement of line folding"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^7.0"
     },
     "scripts": {
         "test": "phpunit"
