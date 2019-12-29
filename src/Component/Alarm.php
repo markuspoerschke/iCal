@@ -12,7 +12,6 @@
 namespace Eluceo\iCal\Component;
 
 use Eluceo\iCal\Component;
-use Eluceo\iCal\Property;
 use Eluceo\iCal\PropertyBag;
 
 /**
