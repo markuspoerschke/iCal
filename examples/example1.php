@@ -11,6 +11,7 @@
 
 namespace Example;
 
+use \DateTimeImmutable;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
