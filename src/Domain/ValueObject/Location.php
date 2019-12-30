@@ -33,6 +33,7 @@ final class Location
 
         return $new;
     }
+
     public function hasGeographicalPosition(): bool
     {
         return $this->geographicPosition !== null;
