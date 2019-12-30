@@ -2,6 +2,11 @@ name: Deploy Website
 
 on:
   push:
+    paths:
+      - 'docs/**'
+      - 'website/**'
+      - 'couscous.yml'
+      - 'Dockerfile'
     branches:
       - 2.x
 
