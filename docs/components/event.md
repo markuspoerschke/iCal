@@ -41,6 +41,7 @@ In this section, the properties of the domain object are explained:
 * [Summary](#summary)
 * [Description](#description)
 * [Occurrence](#occurrence)
+* [Location](#location)
 
 ### Unique Identifier
 
@@ -79,7 +80,6 @@ $event->touch(Timestamp::fromCurrentTime());
 A timestamp object can be also created from a object that implements `\DateTimeInterface` like this:
 
 ```php
-use \DateTimeImmutable;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 
@@ -127,7 +127,6 @@ The event will take place all day on the specified date.
 The following example shows how to set the occurrence for an event that takes place on 24th of december 2019:
 
 ```php
-use DateTimeImmutable;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\Entity\Event;
@@ -152,7 +151,6 @@ The named constructor `MultiDay::fromDates()` accepts two dates:
 The given example
 
 ```php
-use DateTimeImmutable;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\Entity\Event;
@@ -176,7 +174,6 @@ These times define the span within the event will take place.
 The following code example
 
 ```php
-use DateTimeImmutable;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\Entity\Event;
@@ -190,3 +187,22 @@ $event->setOccurrence($occurrence);
 ```
 
 describes an event that takes place between 1pm and 2pm on 3rd of january 2020.
+
+### Location
+
+The location defines where an event takes place.
+The value can be a generic name like the name of a meeting room or an address.
+As an optional property, the exact [geographic position](https://en.wikipedia.org/wiki/Geographic_coordinate_system#Latitude_and_longitude) can be added.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Location;
+use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
+
+$location = Location::fromString('North Pole');
+
+// optionally a location with a geographical position can be created
+$location = $location->withGeographicPosition(GeographicPosition::fromLatitudeAndLongitude(64.751111,147.349444));
+
+$event = Event::create();
+```
