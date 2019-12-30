@@ -21,6 +21,7 @@ use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Generator;
 
@@ -28,7 +29,7 @@ class EventFactory
 {
     public function createComponent(Event $event): Component
     {
-        return Component::create('VEVENT', iterator_to_array($this->getProperties($event)));
+        return Component::create('VEVENT', iterator_to_array($this->getProperties($event), false));
     }
 
     /**
@@ -36,7 +37,7 @@ class EventFactory
      */
     private function getProperties(Event $event): Generator
     {
-        yield Property::create('UID', TextValue::fromString((string) $event->getUniqueIdentifier()));
+        yield Property::create('UID', TextValue::fromString((string)$event->getUniqueIdentifier()));
         yield Property::create('DTSTAMP', DateTimeValue::fromTimestamp($event->getTouchedAt()));
 
         if ($event->hasSummary()) {
@@ -49,6 +50,10 @@ class EventFactory
 
         if ($event->hasOccurrence()) {
             yield from $this->getOccurrenceProperties($event->getOccurrence());
+        }
+
+        if ($event->hasLocation()) {
+            yield from $this->getLocationProperties($event);
         }
     }
 
@@ -69,6 +74,18 @@ class EventFactory
         if ($occurrence instanceof TimeSpan) {
             yield Property::create('DTSTART', DateTimeValue::fromDateTime($occurrence->getBegin()));
             yield Property::create('DTEND', DateTimeValue::fromDateTime($occurrence->getEnd()));
+        }
+    }
+
+    /**
+     * @return Generator<Property>
+     */
+    private function getLocationProperties(Event $event): Generator
+    {
+        yield Property::create('LOCATION', TextValue::fromString((string)$event->getLocation()));
+
+        if ($event->getLocation()->hasGeographicalPosition()) {
+            yield Property::create('GEO', GeoValue::fromGeographicPosition($event->getLocation()->getGeographicPosition()));
         }
     }
 }

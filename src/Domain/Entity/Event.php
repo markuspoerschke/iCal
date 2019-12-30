@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
@@ -22,6 +23,7 @@ class Event
     private ?string $summary = null;
     private ?string $description = null;
     private ?Occurrence $occurrence = null;
+    private ?Location $location = null;
 
     private function __construct(UniqueIdentifier $uniqueIdentifier)
     {
@@ -130,5 +132,26 @@ class Event
         $this->occurrence = $occurrence;
 
         return $this;
+    }
+
+    /**
+     * @psalm-suppress InvalidNullableReturnType
+     * @psalm-suppress NullableReturnStatement
+     */
+    public function getLocation(): Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function hasLocation(): bool
+    {
+        return $this->location !== null;
     }
 }
