@@ -125,7 +125,7 @@ echo $calendarComponent;
 
 This package is released under the __MIT license__.
 
-Copyright (c) 2019 Markus Poerschke
+Copyright (c) 2020 Markus Poerschke
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
