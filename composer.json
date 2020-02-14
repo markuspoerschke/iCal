@@ -37,14 +37,18 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^8",
-        "vimeo/psalm": "^3.7"
+        "vimeo/psalm": "^3.7",
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "scripts": {
         "test": [
+            "@test:code-style",
             "@test:psalm",
             "@test:phpunit"
         ],
+        "test:code-style": "php-cs-fixer fix --dry-run --diff",
         "test:psalm": "psalm",
-        "test:phpunit": "phpunit"
+        "test:phpunit": "phpunit",
+        "fix:code-style": "php-cs-fixer fix"
     }
 }

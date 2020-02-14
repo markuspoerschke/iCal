@@ -3,5 +3,7 @@
 /.phpunit.result.cache
 /build
 /composer.lock
+/couscous.phar
 /phpunit.xml
 /vendor
+.idea
