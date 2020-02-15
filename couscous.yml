@@ -22,6 +22,9 @@ menu:
         url: /components/calendar.html
   - section: Advanced
     items:
+      advanced/custom-properties:
+        text: Custom Properties
+        url: /advanced/custom-properties.html
       advanced/maturity-matrix:
         text: Maturity Matrix
         url: /advanced/maturity-matrix.html

@@ -1,4 +1,4 @@
-# eluceo — iCal 2
+# 📅 eluceo — iCal 2
 
 [![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=2.x)](https://travis-ci.org/markuspoerschke/iCal)
 [![codecov](https://codecov.io/gh/markuspoerschke/iCal/branch/2.x/graph/badge.svg)](https://codecov.io/gh/markuspoerschke/iCal)
