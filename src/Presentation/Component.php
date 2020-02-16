@@ -38,6 +38,14 @@ class Component
         return new static($componentName, $properties);
     }
 
+    public function withProperty(Property $property): self
+    {
+        $new = clone $this;
+        $new->addProperty($property);
+
+        return $new;
+    }
+
     public function __toString(): string
     {
         return implode(
