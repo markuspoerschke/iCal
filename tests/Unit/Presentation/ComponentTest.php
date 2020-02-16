@@ -50,4 +50,28 @@ class ComponentTest extends TestCase
             (string) Component::create('VEVENT', $properties)
         );
     }
+
+    public function testWithProperties()
+    {
+        $component = Component::create('VEVENT', [Property::create('TEST', TextValue::fromString('value'))]);
+        $newComponent = $component->withProperty(Property::create('TEST2', TextValue::fromString('value2')));
+
+        self::assertNotSame($component, $newComponent);
+
+        $expectedOutputFromComponent = implode(Component::LINE_SEPARATOR, [
+            'BEGIN:VEVENT',
+            'TEST:value',
+            'END:VEVENT',
+        ]);
+
+        $expectedOutputFromNewComponent = implode(Component::LINE_SEPARATOR, [
+            'BEGIN:VEVENT',
+            'TEST:value',
+            'TEST2:value2',
+            'END:VEVENT',
+        ]);
+
+        self::assertSame($expectedOutputFromComponent, (string) $component);
+        self::assertSame($expectedOutputFromNewComponent, (string) $newComponent);
+    }
 }
