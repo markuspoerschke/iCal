@@ -25,6 +25,10 @@ final class UniqueIdentifier
 
     public static function create(): self
     {
+        if (function_exists('uuid_create') && defined('UUID_TYPE_RANDOM')) {
+            return static::fromString((string) uuid_create(UUID_TYPE_RANDOM));
+        }
+
         return static::fromString(uniqid());
     }
 
@@ -33,7 +37,7 @@ final class UniqueIdentifier
         $this->uid = $uid;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->uid;
     }

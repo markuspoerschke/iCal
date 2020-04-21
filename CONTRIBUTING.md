@@ -19,7 +19,7 @@ This project uses the [PHP Coding Standards Fixer](http://cs.sensiolabs.org/).
 To fix or to check the code stlye download the tool and execute it on your command line:
 
 ```
-make fix-code-style
+make fix
 ```
 
 ## Documentation

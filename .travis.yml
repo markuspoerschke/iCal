@@ -1,0 +1,11 @@
+language: php
+
+php:
+  - '7.4'
+
+script:
+  - export PHPUNIT_FLAGS="--coverage-clover=coverage.xml"
+  - make -j -O test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) || true
