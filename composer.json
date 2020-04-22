@@ -1,15 +1,6 @@
 {
     "name": "eluceo/ical",
     "description": "The eluceo/iCal package offers an abstraction layer for creating iCalendars. You can easily create iCal files by using PHP objects instead of typing your *.ics file by hand. The output will follow RFC 5545 as best as possible.",
-    "license": "MIT",
-    "homepage": "https://github.com/markuspoerschke/iCal",
-    "authors": [
-        {
-            "name": "Markus Poerschke",
-            "email": "markus@poerschke.nrw",
-            "role": "Developer"
-        }
-    ],
     "keywords": [
         "ical",
         "php calendar",
@@ -17,9 +8,24 @@
         "ics",
         "calendar"
     ],
-    "support": {
-        "issues": "https://github.com/markuspoerschke/iCal/issues",
-        "source": "https://github.com/markuspoerschke/iCal"
+    "homepage": "https://github.com/markuspoerschke/iCal",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Markus Poerschke",
+            "email": "markus@poerschke.nrw",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.2",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "^8",
+        "vimeo/psalm": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -31,24 +37,8 @@
             "Eluceo\\iCal\\": "tests/"
         }
     },
-    "require": {
-        "php": ">=7.4",
-        "ext-mbstring": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8",
-        "vimeo/psalm": "^3.7",
-        "friendsofphp/php-cs-fixer": "^2.16"
-    },
-    "scripts": {
-        "test": [
-            "@test:code-style",
-            "@test:psalm",
-            "@test:phpunit"
-        ],
-        "test:code-style": "php-cs-fixer fix --dry-run --diff",
-        "test:psalm": "psalm",
-        "test:phpunit": "phpunit",
-        "fix:code-style": "php-cs-fixer fix"
+    "support": {
+        "issues": "https://github.com/markuspoerschke/iCal/issues",
+        "source": "https://github.com/markuspoerschke/iCal"
     }
 }

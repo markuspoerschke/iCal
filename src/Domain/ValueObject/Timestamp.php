@@ -18,12 +18,16 @@ class Timestamp extends PointInTime
 {
     public static function fromDateTimeInterface(PhpDateTimeInterface $dateTime): self
     {
-        return new static(
-            PhpDateTimeImmutable::createFromFormat(
-                PhpDateTimeInterface::ATOM,
-                $dateTime->format(PhpDateTimeInterface::ATOM), $dateTime->getTimezone()
-            )
+        $dateTime = PhpDateTimeImmutable::createFromFormat(
+            PhpDateTimeInterface::ATOM,
+            $dateTime->format(PhpDateTimeInterface::ATOM), $dateTime->getTimezone()
         );
+
+        if ($dateTime === false) {
+            throw new \RuntimeException('Unexpected date time value.');
+        }
+
+        return new static($dateTime);
     }
 
     public static function fromCurrentTime(): self
