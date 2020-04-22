@@ -1,19 +1,28 @@
-MAKE_COMPOSER_EXEC := composer exec -v
+MAKEFLAGS += --warn-undefined-variables
+SHELL := bash
+PATH := $(PATH):$(CURDIR)/vendor/bin
 
 .PHONY: test
-test: test-validate-composer test-code-style test-psalm test-phpunit test-composer-normalize
+test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize
 
 .PHONY: test-code-style
 test-code-style: dependencies
-	${MAKE_COMPOSER_EXEC} php-cs-fixer -- fix --dry-run --diff
+	php-cs-fixer fix --dry-run --diff
 
 .PHONY: test-psalm
 test-psalm: dependencies
-	${MAKE_COMPOSER_EXEC} psalm -- -m --no-progress
+	psalm -m --no-progress
 
 .PHONY: test-phpunit
 test-phpunit: dependencies
-	${MAKE_COMPOSER_EXEC} phpunit -- ${PHPUNIT_FLAGS}
+	phpunit ${PHPUNIT_FLAGS}
+
+.PHONY: test-examples
+EXAMPLE_FILES := $(wildcard examples/*.php)
+test-examples: $(EXAMPLE_FILES)
+
+examples/example*.php: dependencies
+	php $@ > /dev/null
 
 .PHONY: test-validate-composer
 test-validate-composer:
@@ -34,7 +43,7 @@ fix: fix-code-style fix-composer
 .PHONY: fix-code-style
 fix-code-style: dependencies
 fix-code-style:
-	${MAKE_COMPOSER_EXEC} php-cs-fixer -- fix
+	php-cs-fixer -- fix
 
 .PHONY: fix-composer
 fix-composer: dependencies
