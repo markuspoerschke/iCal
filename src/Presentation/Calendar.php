@@ -17,26 +17,21 @@ use Generator;
 class Calendar extends Component
 {
     /**
-     * @var Component[]
+     * @var iterable<Component>
      */
-    private array $components = [];
+    private iterable $components;
 
     /**
-     * @param Component[] $components
-     * @param Property[]  $properties
+     * @param iterable<Component> $components
+     * @param Property[]          $properties
      */
-    public static function createCalendar(array $components = [], array $properties = []): self
+    public static function createCalendar(iterable $components = [], array $properties = []): self
     {
         $new = static::create('VCALENDAR', $properties);
+        $new->components = $components;
         assert($new instanceof static);
-        array_walk($components, [$new, 'addComponent']);
 
         return $new;
-    }
-
-    private function addComponent(Component $component): void
-    {
-        $this->components[] = $component;
     }
 
     protected function getContentLinesGenerator(): Generator

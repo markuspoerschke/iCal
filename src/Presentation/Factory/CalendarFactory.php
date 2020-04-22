@@ -28,7 +28,7 @@ class CalendarFactory
 
     public function createCalendar(CalendarEntity $calendar): Calendar
     {
-        $components = array_map([$this->eventFactory, 'createComponent'], $calendar->getEvents());
+        $components = $this->eventFactory->createComponents($calendar->getEvents());
         $properties = iterator_to_array($this->getProperties($calendar), false);
 
         return Calendar::createCalendar($components, $properties);

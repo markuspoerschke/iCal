@@ -17,7 +17,7 @@ use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
-use Eluceo\iCal\Presentation\Component;
+use Eluceo\iCal\Presentation\ContentLine;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -26,11 +26,12 @@ class CalendarFactoryTest extends TestCase
     public function testRenderEmptyCalendar()
     {
         $calendar = Calendar::create();
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'PRODID:' . $calendar->getProductIdentifier(),
             'VERSION:2.0',
             'END:VCALENDAR',
+            '',
         ]);
 
         self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));
@@ -52,7 +53,7 @@ class CalendarFactoryTest extends TestCase
             ]
         );
 
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'PRODID:' . $calendar->getProductIdentifier(),
             'VERSION:2.0',
@@ -65,6 +66,7 @@ class CalendarFactoryTest extends TestCase
             'DTSTAMP:20191110T112233Z',
             'END:VEVENT',
             'END:VCALENDAR',
+            '',
         ]);
 
         self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));

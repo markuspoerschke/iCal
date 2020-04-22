@@ -23,7 +23,7 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
-use Eluceo\iCal\Presentation\Component;
+use Eluceo\iCal\Presentation\ContentLine;
 use Eluceo\iCal\Presentation\Factory\EventFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -41,11 +41,12 @@ class CalendarFactoryTest extends TestCase
 
         $event = Event::create(UniqueIdentifier::fromString('event1'))->touch($currentTime);
 
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
             'UID:event1',
             'DTSTAMP:20191110T112233Z',
             'END:VEVENT',
+            '',
         ]);
 
         self::assertSame($expected, (string) (new EventFactory())->createComponent($event));
@@ -57,7 +58,7 @@ class CalendarFactoryTest extends TestCase
             ->setSummary('Lorem Summary')
             ->setDescription('Lorem Description');
 
-        $this->assertEventRendersCorrect($event, [
+        self::assertEventRendersCorrect($event, [
             'SUMMARY:Lorem Summary',
             'DESCRIPTION:Lorem Description',
         ]);
@@ -69,7 +70,7 @@ class CalendarFactoryTest extends TestCase
         $location = Location::fromString('Location Name')->withGeographicPosition($geographicalPosition);
         $event = Event::create()->setLocation($location);
 
-        $this->assertEventRendersCorrect(
+        self::assertEventRendersCorrect(
             $event,
             [
                 'LOCATION:Location Name',
@@ -82,7 +83,7 @@ class CalendarFactoryTest extends TestCase
     {
         $event = Event::create()->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
 
-        $this->assertEventRendersCorrect($event, [
+        self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
         ]);
     }
@@ -94,7 +95,7 @@ class CalendarFactoryTest extends TestCase
         $occurrence = MultiDay::fromDates($firstDay, $lastDay);
         $event = Event::create()->setOccurrence($occurrence);
 
-        $this->assertEventRendersCorrect($event, [
+        self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
             'DTEND:20301227',
         ]);
@@ -107,21 +108,21 @@ class CalendarFactoryTest extends TestCase
         $occurrence = TimeSpan::create($begin, $end);
         $event = Event::create()->setOccurrence($occurrence);
 
-        $this->assertEventRendersCorrect($event, [
+        self::assertEventRendersCorrect($event, [
             'DTSTART:20301224T121500',
             'DTEND:20301224T134500',
         ]);
     }
 
-    private function assertEventRendersCorrect(Event $event, array $expected)
+    private static function assertEventRendersCorrect(Event $event, array $expected)
     {
         $resultAsString = (string) (new EventFactory())->createComponent($event);
 
-        $resultAsArray = explode(Component::LINE_SEPARATOR, $resultAsString);
+        $resultAsArray = explode(ContentLine::LINE_SEPARATOR, $resultAsString);
 
-        self::assertGreaterThan(4, count($resultAsArray), 'No additional content lines were produced.');
+        self::assertGreaterThan(5, count($resultAsArray), 'No additional content lines were produced.');
 
-        $resultAsArray = array_slice($resultAsArray, 3, -1);
+        $resultAsArray = array_slice($resultAsArray, 3, -2);
         self::assertSame($expected, $resultAsArray);
     }
 }

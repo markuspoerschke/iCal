@@ -14,15 +14,17 @@ namespace Eluceo\iCal\Test\Unit\Presentation;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use Eluceo\iCal\Presentation\ContentLine;
 use PHPUnit\Framework\TestCase;
 
 class ComponentTest extends TestCase
 {
     public function testEmptyComponentToString()
     {
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
             'END:VEVENT',
+            '',
         ]);
 
         self::assertSame(
@@ -38,11 +40,12 @@ class ComponentTest extends TestCase
             Property::create('TEST2', TextValue::fromString('value2')),
         ];
 
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
             'TEST:value',
             'TEST2:value2',
             'END:VEVENT',
+            '',
         ]);
 
         self::assertSame(
@@ -58,17 +61,19 @@ class ComponentTest extends TestCase
 
         self::assertNotSame($component, $newComponent);
 
-        $expectedOutputFromComponent = implode(Component::LINE_SEPARATOR, [
+        $expectedOutputFromComponent = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
             'TEST:value',
             'END:VEVENT',
+            '',
         ]);
 
-        $expectedOutputFromNewComponent = implode(Component::LINE_SEPARATOR, [
+        $expectedOutputFromNewComponent = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
             'TEST:value',
             'TEST2:value2',
             'END:VEVENT',
+            '',
         ]);
 
         self::assertSame($expectedOutputFromComponent, (string) $component);

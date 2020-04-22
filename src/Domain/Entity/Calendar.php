@@ -11,22 +11,36 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use Eluceo\iCal\Domain\Collection\Events;
+use Eluceo\iCal\Domain\Collection\EventsArray;
+use Iterator;
+
 class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
 
-    /**
-     * @var Event[]
-     */
-    private array $events = [];
+    private Events $events;
 
-    private function __construct(array $events)
+    private function __construct(Events $events)
     {
-        array_walk($events, [$this, 'addEvent']);
+        $this->events = $events;
     }
 
-    public static function create(array $events = []): self
+    /**
+     * @param array<Event>|Iterator<Event>|Events $events
+     */
+    public static function create($events = []): self
     {
+        if (is_array($events)) {
+            $events = EventsArray::fromArray($events);
+        } elseif (is_object($events) && $events instanceof Iterator) {
+            $events = Events::fromGenerator($events);
+        }
+
+        if (!is_object($events) || !$events instanceof Events) {
+            throw new \InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
+        }
+
         return new static($events);
     }
 
@@ -42,17 +56,14 @@ class Calendar
         return $this;
     }
 
-    /**
-     * @return Event[]
-     */
-    public function getEvents(): array
+    public function getEvents(): Events
     {
         return $this->events;
     }
 
     public function addEvent(Event $event): self
     {
-        $this->events[] = $event;
+        $this->events->addEvent($event);
 
         return $this;
     }

@@ -15,15 +15,17 @@ use Eluceo\iCal\Presentation\Calendar;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use Eluceo\iCal\Presentation\ContentLine;
 use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
     public function testEmptyCalendarToString()
     {
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'END:VCALENDAR',
+            '',
         ]);
 
         self::assertSame($expected, (string) Calendar::createCalendar());
@@ -31,11 +33,12 @@ class CalendarTest extends TestCase
 
     public function testWithSingleComponentToString()
     {
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'BEGIN:VEVENT',
             'END:VEVENT',
             'END:VCALENDAR',
+            '',
         ]);
 
         $components = [
@@ -49,7 +52,7 @@ class CalendarTest extends TestCase
 
     public function testWithMultipleComponentsToString()
     {
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'BEGIN:VEVENT',
             'UID:event1',
@@ -58,6 +61,7 @@ class CalendarTest extends TestCase
             'UID:event2',
             'END:VEVENT',
             'END:VCALENDAR',
+            '',
         ]);
 
         $components = [
@@ -82,13 +86,14 @@ class CalendarTest extends TestCase
 
     public function testRenderOwnPropertiesBeforeComponents()
     {
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'TEST:value',
             'TEST2:value2',
             'BEGIN:VEVENT',
             'END:VEVENT',
             'END:VCALENDAR',
+            '',
         ]);
 
         $properties = [

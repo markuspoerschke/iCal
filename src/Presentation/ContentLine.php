@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Presentation;
 
 final class ContentLine
 {
+    public const LINE_SEPARATOR = "\r\n";
     private const LINE_LENGTH = 75;
     private string $line;
 
@@ -37,6 +38,6 @@ final class ContentLine
         }
         $lines[] = $string;
 
-        return implode(Component::LINE_SEPARATOR, $lines);
+        return implode(self::LINE_SEPARATOR, $lines) . self::LINE_SEPARATOR;
     }
 }

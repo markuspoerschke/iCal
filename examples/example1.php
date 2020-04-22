@@ -34,7 +34,8 @@ $event
                 DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2030-12-24 14:30:00')
             )
         )
-    );
+    )
+;
 
 // 2. Create Calendar domain entity.
 $calendar = Calendar::create([$event]);
