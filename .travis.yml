@@ -3,6 +3,10 @@ language: php
 php:
   - '7.4'
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 script:
   - export PHPUNIT_FLAGS="--coverage-clover=coverage.xml"
   - make -j -O test
