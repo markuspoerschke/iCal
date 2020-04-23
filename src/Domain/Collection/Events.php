@@ -23,20 +23,4 @@ abstract class Events implements IteratorAggregate
     abstract public function getIterator();
 
     abstract public function addEvent(Event $event): void;
-
-    /**
-     * @param Event[] $events
-     */
-    public static function fromArray(array $events): self
-    {
-        return EventsArray::fromArray($events);
-    }
-
-    /**
-     * @param Iterator<Event> $generator
-     */
-    public static function fromGenerator(Iterator $generator): self
-    {
-        return EventsGenerator::fromGenerator($generator);
-    }
 }

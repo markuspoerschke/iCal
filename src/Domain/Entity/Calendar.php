@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Collection\EventsArray;
+use Eluceo\iCal\Domain\Collection\EventsGenerator;
 use InvalidArgumentException;
 use Iterator;
 
@@ -41,7 +42,7 @@ class Calendar
         }
 
         if ($events instanceof Iterator) {
-            return new static(Events::fromGenerator($events));
+            return new static(EventsGenerator::fromGenerator($events));
         }
 
         throw new InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
