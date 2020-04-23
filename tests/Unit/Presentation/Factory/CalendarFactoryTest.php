@@ -51,10 +51,11 @@ class CalendarFactoryTest extends TestCase
                 Event::create(UniqueIdentifier::fromString('event2'))->touch($currentTime),
             ]
         );
+        $calendar->setProductIdentifier('-//test/ical//2.0/EN');
 
         $expected = implode(Component::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
-            'PRODID:' . $calendar->getProductIdentifier(),
+            'PRODID:-//test/ical//2.0/EN',
             'VERSION:2.0',
             'BEGIN:VEVENT',
             'UID:event1',
