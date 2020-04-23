@@ -19,7 +19,7 @@ class Calendar extends Component
     /**
      * @var iterable<Component>
      */
-    private iterable $components;
+    private iterable $components = [];
 
     /**
      * @param iterable<Component> $components

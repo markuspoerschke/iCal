@@ -13,8 +13,9 @@ namespace Eluceo\iCal\Presentation;
 
 use Eluceo\iCal\Presentation\Component\Property;
 use Generator;
+use IteratorAggregate;
 
-class Component implements \IteratorAggregate
+class Component implements IteratorAggregate
 {
     /**
      * @var array<int, Property>
@@ -30,6 +31,8 @@ class Component implements \IteratorAggregate
 
     /**
      * @param Property[] $properties
+     *
+     * @return static
      */
     public static function create(string $componentName, array $properties = []): self
     {

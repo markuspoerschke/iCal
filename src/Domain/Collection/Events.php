@@ -12,23 +12,30 @@
 namespace Eluceo\iCal\Domain\Collection;
 
 use Eluceo\iCal\Domain\Entity\Event;
+use Iterator;
 use IteratorAggregate;
 
 abstract class Events implements IteratorAggregate
 {
     /**
-     * @return \Traversable|Event[]
+     * @return Iterator<Event>
      */
     abstract public function getIterator();
 
     abstract public function addEvent(Event $event): void;
 
+    /**
+     * @param Event[] $events
+     */
     public static function fromArray(array $events): self
     {
         return EventsArray::fromArray($events);
     }
 
-    public static function fromGenerator(\Iterator $generator): self
+    /**
+     * @param Iterator<Event> $generator
+     */
+    public static function fromGenerator(Iterator $generator): self
     {
         return EventsGenerator::fromGenerator($generator);
     }

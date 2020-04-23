@@ -17,13 +17,22 @@ use Iterator;
 
 final class EventsGenerator extends Events
 {
+    /**
+     * @var Iterator<Event>
+     */
     private Iterator $generator;
 
+    /**
+     * @param Iterator<Event> $generator
+     */
     private function __construct(Iterator $generator)
     {
         $this->generator = $generator;
     }
 
+    /**
+     * @param Iterator<Event> $generator
+     */
     public static function fromGenerator(Iterator $generator): self
     {
         return new static($generator);

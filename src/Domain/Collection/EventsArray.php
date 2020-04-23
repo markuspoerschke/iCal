@@ -26,6 +26,9 @@ final class EventsArray extends Events
         array_walk($events, [$this, 'addEvent']);
     }
 
+    /**
+     * @param Event[] $events
+     */
     public static function fromArray(array $events): self
     {
         return new static($events);

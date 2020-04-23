@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Collection\EventsArray;
+use InvalidArgumentException;
 use Iterator;
 
 class Calendar
@@ -27,21 +28,23 @@ class Calendar
     }
 
     /**
-     * @param array<Event>|Iterator<Event>|Events $events
+     * @param Event[]|Iterator<Event>|Events $events
      */
     public static function create($events = []): self
     {
         if (is_array($events)) {
-            $events = EventsArray::fromArray($events);
-        } elseif (is_object($events) && $events instanceof Iterator) {
-            $events = Events::fromGenerator($events);
+            return new static(EventsArray::fromArray($events));
         }
 
-        if (!is_object($events) || !$events instanceof Events) {
-            throw new \InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
+        if ($events instanceof Events) {
+            return new static($events);
         }
 
-        return new static($events);
+        if ($events instanceof Iterator) {
+            return new static(Events::fromGenerator($events));
+        }
+
+        throw new InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
     }
 
     public function getProductIdentifier(): string

@@ -31,7 +31,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $generator = function (): Generator {
     $day = new DateTimeImmutable();
     $dayInterval = new DateInterval('P1D');
-    for ($i = 0; $i < 100000; ++$i) {
+    for ($i = 0; $i < 10; ++$i) {
         yield Event::create()
             ->setSummary('Event ' . $i)
             ->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface($day)))
