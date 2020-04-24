@@ -35,3 +35,17 @@ $calendar
     ->addEvent(Event::create())
     ->addEvent(Event::create());
 ```
+
+or providing a generator, that creates events:
+
+```php
+use Eluceo\iCal\Domain\Entity\Calendar;
+use Eluceo\iCal\Domain\Entity\Event;
+
+$eventGenerator = function(): Generator {
+    yield Event::create();
+    yield Event::create();
+};
+
+$calendar = Calendar::create($eventGenerator());
+```
