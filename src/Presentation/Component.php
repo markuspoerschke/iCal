@@ -13,11 +13,10 @@ namespace Eluceo\iCal\Presentation;
 
 use Eluceo\iCal\Presentation\Component\Property;
 use Generator;
+use IteratorAggregate;
 
-class Component
+class Component implements IteratorAggregate
 {
-    public const LINE_SEPARATOR = "\r\n";
-
     /**
      * @var array<int, Property>
      */
@@ -32,6 +31,8 @@ class Component
 
     /**
      * @param Property[] $properties
+     *
+     * @return static
      */
     public static function create(string $componentName, array $properties = []): self
     {
@@ -49,9 +50,14 @@ class Component
     public function __toString(): string
     {
         return implode(
-            Component::LINE_SEPARATOR,
+            '',
             iterator_to_array($this->getContentLines(), false)
         );
+    }
+
+    public function getIterator()
+    {
+        return $this->getContentLines();
     }
 
     protected function getContentLines(): Generator

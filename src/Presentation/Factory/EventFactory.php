@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Presentation\Factory;
 
 use DateInterval;
+use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
@@ -27,6 +28,16 @@ use Generator;
 
 class EventFactory
 {
+    /**
+     * @return Generator<Component>
+     */
+    final public function createComponents(Events $events): Generator
+    {
+        foreach ($events as $event) {
+            yield $this->createComponent($event);
+        }
+    }
+
     public function createComponent(Event $event): Component
     {
         return Component::create('VEVENT', iterator_to_array($this->getProperties($event), false));

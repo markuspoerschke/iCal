@@ -11,7 +11,6 @@
 
 namespace Eluceo\iCal\Test\Unit\Presentation;
 
-use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\ContentLine;
 use PHPUnit\Framework\TestCase;
 
@@ -22,15 +21,16 @@ class ContentLineTest extends TestCase
         $lineAsString = 'BEGIN:EVENT';
         $contentLine = ContentLine::fromString($lineAsString);
 
-        self::assertSame($lineAsString, (string) $contentLine);
+        self::assertSame($lineAsString . ContentLine::LINE_SEPARATOR, (string) $contentLine);
     }
 
     public function testLongLinesAreFolder()
     {
         $lineAsString = 'SOMEPROPERTY:somesuperduperlongvaluethatneedstoobefoldedbecauseitistoolongtobedisplayedinasingleline';
-        $expected = implode(Component::LINE_SEPARATOR, [
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
             'SOMEPROPERTY:somesuperduperlongvaluethatneedstoobefoldedbecauseitistoolongt',
             ' obedisplayedinasingleline',
+            '',
         ]);
 
         $contentLine = ContentLine::fromString($lineAsString);
