@@ -88,7 +88,7 @@ DTSTART:20121224T180000Z
 
 You can use an explicit timezone by calling `$vEvent->setUseTimezone(true);`. The timezone of your
 `\DateTime` object will be used. In this case the non-standard field "X-WR-TIMEZONE" will be used.
-Be awre that this is a simple solution which is not supported by all calendar clients.
+Be aware that this is a simple solution which is not supported by all calendar clients.
 The output will be as following:
 
 ```
