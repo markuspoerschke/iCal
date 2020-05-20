@@ -21,6 +21,9 @@
         "php": ">=7.4",
         "ext-mbstring": "*"
     },
+    "conflict": {
+        "php": "7.4.6"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.2",
         "friendsofphp/php-cs-fixer": "^2.16",
