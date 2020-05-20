@@ -5,13 +5,13 @@ currentMenu: home
 # iCalendar Generator for PHP
 
 The `eluceo/ical` package provides classes to generate `.ics` files.
-The iCalendar specification is defined in [RFC 5545](https://tools.ietf.org/html/rfc5545) and allows to share calendar information among different systems.
+The iCalendar specification is defined in [RFC 5545](https://tools.ietf.org/html/rfc5545) and allows sharing calendar information among different systems.
 
 This package gives developers an abstraction, so that no deep knowledge of the iCalendar specification is needed.
 The classes within the `Eluceo\iCal\Domain` namespace allow to store the information related to an event in simple PHP objects.
-These domain object can be transformed into a PHP representation of the iCalendar file format using the classes in the `Eluceo\iCal\Presentation` namespace.
+These domain objects can be transformed into a PHP representation of the iCalendar file format using the classes in the `Eluceo\iCal\Presentation` namespace.
 
-The following code shows an minimal example how to render calendar with a single event:
+The following code shows a minimal example how to render calendar with a single event:
 
 ```php
 <?php

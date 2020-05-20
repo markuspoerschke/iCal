@@ -5,7 +5,7 @@ title: Custom Properties
 
 # Custom Properties
 
-The domain entities in this packages are equipped with the commonly needed properties.
+The domain entities in these packages are equipped with the commonly needed properties.
 In some cases these properties do not fully cover every use case.
 In the following, a way how to add custom properties to the event entity and in result to the generated iCal file is described.
 

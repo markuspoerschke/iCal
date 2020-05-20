@@ -9,7 +9,7 @@
 
 This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
-The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) as best as possible.
+The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) as good as possible.
 
 ## Installation
 
@@ -48,7 +48,7 @@ Then these objects can be transformed into a iCalendar PHP representation, which
 
 ### Empty event
 
-In this very basic example, an empty event is rendered.
+In this very basic example, that renders an empty event.
 You will learn how to create an event domain object, how to add it to a calendar and how to transform it to a iCalendar component.
 
 #### 1. Create an event domain entity
@@ -57,7 +57,7 @@ You will learn how to create an event domain object, how to add it to a calendar
 $event = \Eluceo\iCal\Domain\Entity\Event::create();
 ```
 
-#### 2. Create an calendar domain entity
+#### 2. Create a calendar domain entity
 
 ```PHP
 $calendar = \Eluceo\iCal\Domain\Entity\Calendar::create([$event]);

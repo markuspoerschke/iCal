@@ -5,13 +5,13 @@ title: Event Component
 
 # Event
 
-The event domain Object `\Eluceo\iCal\Domain\Entity\Event` represents a scheduled amount of time on a calendar.
-For example, it can be an one hour lunch meeting from 12:00 to 13:00 on 24th of december.
+The event domain object `\Eluceo\iCal\Domain\Entity\Event` represents a scheduled amount of time on a calendar.
+For example, it can be an one-hour lunch meeting from 12:00 to 13:00 on 24th of december.
 
 ## Create new instance
 
 When creating a new instance with the static method `Event::create`, the optional parameter `$uniqueIdentifier` can be set.
-If it is not set, than a random, but unique identifier is created.
+If it is not set, then a random, but unique identifier is created.
 
 ```php
 use Eluceo\iCal\Domain\Entity\Event;
@@ -34,7 +34,7 @@ $event = Event::create()
 
 ## Properties
 
-In this section, the properties of the domain object are explained:
+The following sections explain the properties of the domain object:
 
 * [Unique Identifier](#unique-identifier)
 * [Touched at](#touched-at)
@@ -66,7 +66,7 @@ $event = Event::create($uniqueIdentifier);
 
 The `$touchedAt` property is a `Timestamp` that indicates when the event was changed.
 If the event was just created, the value is equal to the creation time.
-Therefore the default value will be the current time.
+Therefore, the default value will be the current time.
 The value can be changed using the `touch` method.
 
 ```php
@@ -77,7 +77,7 @@ $event = Event::create();
 $event->touch(Timestamp::fromCurrentTime());
 ```
 
-A timestamp object can be also created from a object that implements `\DateTimeInterface` like this:
+A timestamp object can be also created from an object that implements `\DateTimeInterface` like this:
 
 ```php
 use Eluceo\iCal\Domain\Entity\Event;
@@ -124,7 +124,7 @@ There are currently three different types of occurrences possible:
 
 The event will take place all day on the specified date.
 
-The following example shows how to set the occurrence for an event that takes place on 24th of december 2019:
+The following example shows how to set the occurrence for an event that takes place on 24th of December 2019:
 
 ```php
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
@@ -168,7 +168,7 @@ will create an event that takes place on the 24th, 25th and 26th of december 201
 #### Timespan
 
 Unlike the previous types of occurrence, the timespan will consider the actual time, the event takes place.
-A timespan begins a beginning and an end time of an event.
+A timespan defines the start and end time of an event.
 These times define the span within the event will take place.
 
 The following code example

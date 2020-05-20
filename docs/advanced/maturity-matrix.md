@@ -5,9 +5,9 @@ title: Maturity Matrix
 
 # Maturity Matrix
 
-The generation of the `.ics` file follows the "Internet Calendaring and Scheduling Core Object Specification" ([RFC 5545](https://tools.ietf.org/html/rfc5545)).
+The generation of the `.ics` file follows the “Internet Calendaring and Scheduling Core Object Specification” ([RFC 5545](https://tools.ietf.org/html/rfc5545)).
 The domain objects in this package do not fully support all possibilities, that the specification provides.
-The following tables gives an overview about the supported features.
+The following tables give an overview about the supported features.
 
 In the compatibility matrix, the icons from the following table are used.
 Each icon marks the level of support for the corresponding property or component.
