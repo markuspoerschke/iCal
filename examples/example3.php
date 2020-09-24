@@ -32,7 +32,7 @@ $generator = function (): Generator {
     $day = new DateTimeImmutable();
     $dayInterval = new DateInterval('P1D');
     for ($i = 0; $i < 10; ++$i) {
-        yield Event::create()
+        yield (new Event())
             ->setSummary('Event ' . $i)
             ->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface($day)))
         ;
@@ -41,7 +41,7 @@ $generator = function (): Generator {
 };
 
 // 2. Create Calendar domain entity.
-$calendar = Calendar::create($generator());
+$calendar = new Calendar($generator());
 
 // 3. Transform domain entity into an iCalendar component
 $componentFactory = new CalendarFactory();

@@ -24,33 +24,33 @@ class PropertyTest extends TestCase
      */
     public function testPropertyToString(string $name, Value $value, array $parameters, string $expected)
     {
-        self::assertSame($expected, (string) Property::create($name, $value, $parameters));
+        self::assertSame($expected, (string) new Property($name, $value, $parameters));
     }
 
     public function provideTestData()
     {
         yield 'property with simple value' => [
             'LOREM',
-            TextValue::fromString('Ipsum'),
+            new TextValue('Ipsum'),
             [],
             'LOREM:Ipsum',
         ];
 
         yield 'property with parameters' => [
             'LOREM',
-            TextValue::fromString('Ipsum'),
+            new TextValue('Ipsum'),
             [
-                Parameter::create('TEST', TextValue::fromString('value')),
+                Parameter::create('TEST', new TextValue('value')),
             ],
             'LOREM:TEST=value:Ipsum',
         ];
 
         yield 'property with multiple parameters' => [
             'LOREM',
-            TextValue::fromString('Ipsum'),
+            new TextValue('Ipsum'),
             [
-                Parameter::create('TEST', TextValue::fromString('value')),
-                Parameter::create('TEST2', TextValue::fromString('value2')),
+                Parameter::create('TEST', new TextValue('value')),
+                Parameter::create('TEST2', new TextValue('value2')),
             ],
             'LOREM:TEST=value;TEST2=value2:Ipsum',
         ];

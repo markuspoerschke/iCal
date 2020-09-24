@@ -27,9 +27,8 @@ class Calendar extends Component
      */
     public static function createCalendar(iterable $components = [], array $properties = []): self
     {
-        $new = static::create('VCALENDAR', $properties);
+        $new = new self('VCALENDAR', $properties);
         $new->components = $components;
-        assert($new instanceof static);
 
         return $new;
     }

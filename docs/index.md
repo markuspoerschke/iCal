@@ -23,7 +23,7 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 
 // 1. Create Event domain entity
-$event = Event::create();
+$event = new Event();
 $event
     ->setSummary('Christmas Eve')
     ->setOccurrence(
@@ -35,7 +35,7 @@ $event
     );
 
 // 2. Create Calendar domain entity
-$calendar = Calendar::create([$event]);
+$calendar = new Calendar([$event]);
 
 // 3. Transform domain entity into an iCalendar component
 $componentFactory = new CalendarFactory();

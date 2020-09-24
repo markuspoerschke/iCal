@@ -25,15 +25,10 @@ class Event
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
 
-    private function __construct(UniqueIdentifier $uniqueIdentifier)
+    public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
-        $this->uniqueIdentifier = $uniqueIdentifier;
+        $this->uniqueIdentifier = $uniqueIdentifier ?? UniqueIdentifier::createRandom();
         $this->touchedAt = Timestamp::fromCurrentTime();
-    }
-
-    public static function create(?UniqueIdentifier $uniqueIdentifier = null): self
-    {
-        return new static($uniqueIdentifier ?? UniqueIdentifier::create());
     }
 
     public function getUniqueIdentifier(): ?UniqueIdentifier

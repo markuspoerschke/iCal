@@ -22,7 +22,7 @@ class ListValueTest extends TestCase
      */
     public function testStringValueEscaping(array $values, string $expected)
     {
-        self::assertSame($expected, (string) ListValue::fromStringValues($values));
+        self::assertSame($expected, (string) (new ListValue($values)));
     }
 
     public function provideTestData()
@@ -32,22 +32,22 @@ class ListValueTest extends TestCase
             '',
         ];
         yield 'single value' => [
-            [TextValue::fromString('Lorem')],
+            [new TextValue('Lorem')],
             'Lorem',
         ];
         yield 'multiple values without escaping' => [
             [
-                TextValue::fromString('Lorem'),
-                TextValue::fromString('Ipsum'),
-                TextValue::fromString('Dolor'),
+                new TextValue('Lorem'),
+                new TextValue('Ipsum'),
+                new TextValue('Dolor'),
             ],
             'Lorem,Ipsum,Dolor',
         ];
         yield 'multiple values with escaping' => [
             [
-                TextValue::fromString('Lorem'),
-                TextValue::fromString('Ips,um'),
-                TextValue::fromString('semi;colon:'),
+                new TextValue('Lorem'),
+                new TextValue('Ips,um'),
+                new TextValue('semi;colon:'),
             ],
             'Lorem,Ips\\,um,semi\\;colon:',
         ];

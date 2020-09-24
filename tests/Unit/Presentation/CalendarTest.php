@@ -42,7 +42,7 @@ class CalendarTest extends TestCase
         ]);
 
         $components = [
-            Component::create('VEVENT'),
+            new Component('VEVENT'),
         ];
 
         $calendar = Calendar::createCalendar($components);
@@ -65,16 +65,16 @@ class CalendarTest extends TestCase
         ]);
 
         $components = [
-            Component::create(
+            new Component(
                 'VEVENT',
                 [
-                    Property::create('UID', TextValue::fromString('event1')),
+                    new Property('UID', new TextValue('event1')),
                 ]
             ),
-            Component::create(
+            new Component(
                 'VEVENT',
                 [
-                    Property::create('UID', TextValue::fromString('event2')),
+                    new Property('UID', new TextValue('event2')),
                 ]
             ),
         ];
@@ -97,12 +97,12 @@ class CalendarTest extends TestCase
         ]);
 
         $properties = [
-            Property::create('TEST', TextValue::fromString('value')),
-            Property::create('TEST2', TextValue::fromString('value2')),
+            new Property('TEST', new TextValue('value')),
+            new Property('TEST2', new TextValue('value2')),
         ];
 
         $components = [
-            Component::create('VEVENT'),
+            new Component('VEVENT'),
         ];
 
         $calendar = Calendar::createCalendar($components, $properties);

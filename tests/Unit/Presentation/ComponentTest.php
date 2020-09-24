@@ -29,15 +29,15 @@ class ComponentTest extends TestCase
 
         self::assertSame(
             $expected,
-            (string) Component::create('VEVENT')
+            (string) (new Component('VEVENT'))
         );
     }
 
     public function testComponentWithPropertiesToString()
     {
         $properties = [
-            Property::create('TEST', TextValue::fromString('value')),
-            Property::create('TEST2', TextValue::fromString('value2')),
+            new Property('TEST', new TextValue('value')),
+            new Property('TEST2', new TextValue('value2')),
         ];
 
         $expected = implode(ContentLine::LINE_SEPARATOR, [
@@ -50,14 +50,14 @@ class ComponentTest extends TestCase
 
         self::assertSame(
             $expected,
-            (string) Component::create('VEVENT', $properties)
+            (string) (new Component('VEVENT', $properties))
         );
     }
 
     public function testWithProperties()
     {
-        $component = Component::create('VEVENT', [Property::create('TEST', TextValue::fromString('value'))]);
-        $newComponent = $component->withProperty(Property::create('TEST2', TextValue::fromString('value2')));
+        $component = new Component('VEVENT', [new Property('TEST', new TextValue('value'))]);
+        $newComponent = $component->withProperty(new Property('TEST2', new TextValue('value2')));
 
         self::assertNotSame($component, $newComponent);
 

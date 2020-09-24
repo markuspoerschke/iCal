@@ -13,18 +13,19 @@ namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
-class ListValue extends Value
+final class ListValue extends Value
 {
+    /**
+     * @var Value[]
+     */
     private array $values = [];
 
-    private function __construct(array $values)
+    /**
+     * @param Value[] $values
+     */
+    public function __construct(array $values)
     {
         array_walk($values, [$this, 'addValue']);
-    }
-
-    public static function fromStringValues(array $values): self
-    {
-        return new static($values);
     }
 
     public function __toString(): string

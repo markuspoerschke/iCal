@@ -23,26 +23,29 @@ class Calendar
 
     private Events $events;
 
-    private function __construct(Events $events)
+    /**
+     * @param Event[]|Iterator<Event>|Events $events
+     */
+    public function __construct($events = [])
     {
-        $this->events = $events;
+        $this->events = $this->ensureEventsObject($events);
     }
 
     /**
      * @param Event[]|Iterator<Event>|Events $events
      */
-    public static function create($events = []): self
+    private function ensureEventsObject($events = []): Events
     {
-        if (is_array($events)) {
-            return new static(EventsArray::fromArray($events));
+        if ($events instanceof Events) {
+            return $events;
         }
 
-        if ($events instanceof Events) {
-            return new static($events);
+        if (is_array($events)) {
+            return new EventsArray($events);
         }
 
         if ($events instanceof Iterator) {
-            return new static(EventsGenerator::fromGenerator($events));
+            return new EventsGenerator($events);
         }
 
         throw new InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');

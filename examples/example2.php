@@ -42,9 +42,9 @@ class CustomEventFactory extends EventFactory
 
         if ($event instanceof CustomEvent) {
             $component = $component->withProperty(
-                Property::create(
+                new Property(
                     'X-CUSTOM',
-                    TextValue::fromString($event->getMyCustomProperty())
+                    new TextValue($event->getMyCustomProperty())
                 )
             );
         }
@@ -54,9 +54,9 @@ class CustomEventFactory extends EventFactory
 }
 
 // 3. Create events and calendar objects as normal.
-$event = CustomEvent::create();
+$event = new CustomEvent();
 $event->setSummary('This is a test event');
-$calendar = Calendar::create([$event]);
+$calendar = new Calendar([$event]);
 
 // 4. Pass your custom event factory to the calendar factory via the constructor call.
 $calendarComponentFactory = new CalendarFactory(new CustomEventFactory());

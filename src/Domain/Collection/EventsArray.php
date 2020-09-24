@@ -21,17 +21,12 @@ final class EventsArray extends Events
      */
     private array $events = [];
 
-    private function __construct(array $events)
-    {
-        array_walk($events, [$this, 'addEvent']);
-    }
-
     /**
      * @param Event[] $events
      */
-    public static function fromArray(array $events): self
+    public function __construct(array $events)
     {
-        return new static($events);
+        array_walk($events, [$this, 'addEvent']);
     }
 
     public function getIterator()

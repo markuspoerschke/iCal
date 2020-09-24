@@ -14,7 +14,7 @@ namespace Eluceo\iCal\Presentation\Component\Property\Value;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
-class DateValue extends Value
+final class DateValue extends Value
 {
     private const FORMAT = 'Ymd';
     private string $valueAsString;

@@ -25,17 +25,9 @@ final class EventsGenerator extends Events
     /**
      * @param Iterator<Event> $generator
      */
-    private function __construct(Iterator $generator)
+    public function __construct(Iterator $generator)
     {
         $this->generator = $generator;
-    }
-
-    /**
-     * @param Iterator<Event> $generator
-     */
-    public static function fromGenerator(Iterator $generator): self
-    {
-        return new static($generator);
     }
 
     public function getIterator()

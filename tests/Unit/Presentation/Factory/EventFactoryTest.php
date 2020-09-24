@@ -39,7 +39,7 @@ class CalendarFactoryTest extends TestCase
             )
         );
 
-        $event = Event::create(UniqueIdentifier::fromString('event1'))->touch($currentTime);
+        $event = (new Event(UniqueIdentifier::fromString('event1')))->touch($currentTime);
 
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
@@ -54,7 +54,7 @@ class CalendarFactoryTest extends TestCase
 
     public function testEventWithSummaryAndDescription()
     {
-        $event = Event::create()
+        $event = (new Event())
             ->setSummary('Lorem Summary')
             ->setDescription('Lorem Description');
 
@@ -67,8 +67,8 @@ class CalendarFactoryTest extends TestCase
     public function testEventWithLocation()
     {
         $geographicalPosition = GeographicPosition::fromLatitudeAndLongitude(51.333333333333, 7.05);
-        $location = Location::fromString('Location Name')->withGeographicPosition($geographicalPosition);
-        $event = Event::create()->setLocation($location);
+        $location = (new Location('Location Name'))->withGeographicPosition($geographicalPosition);
+        $event = (new Event())->setLocation($location);
 
         self::assertEventRendersCorrect(
             $event,
@@ -81,7 +81,7 @@ class CalendarFactoryTest extends TestCase
 
     public function testSingleDayEvent()
     {
-        $event = Event::create()->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
+        $event = (new Event())->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
 
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
@@ -93,7 +93,7 @@ class CalendarFactoryTest extends TestCase
         $firstDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'));
         $lastDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-26'));
         $occurrence = MultiDay::fromDates($firstDay, $lastDay);
-        $event = Event::create()->setOccurrence($occurrence);
+        $event = (new Event())->setOccurrence($occurrence);
 
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
@@ -106,7 +106,7 @@ class CalendarFactoryTest extends TestCase
         $begin = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'));
         $end = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'));
         $occurrence = TimeSpan::create($begin, $end);
-        $event = Event::create()->setOccurrence($occurrence);
+        $event = (new Event())->setOccurrence($occurrence);
 
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224T121500',

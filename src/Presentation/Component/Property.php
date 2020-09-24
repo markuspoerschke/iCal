@@ -25,16 +25,14 @@ class Property
 
     private Value $value;
 
-    private function __construct(string $name, Value $value, array $parameters)
+    /**
+     * @param Parameter[] $parameters
+     */
+    public function __construct(string $name, Value $value, array $parameters = [])
     {
         $this->name = strtoupper($name);
         $this->value = $value;
         array_walk($parameters, [$this, 'addParameter']);
-    }
-
-    public static function create(string $name, Value $value, array $parameters = []): self
-    {
-        return new static($name, $value, $parameters);
     }
 
     public function __toString(): string

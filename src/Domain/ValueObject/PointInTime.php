@@ -21,7 +21,7 @@ abstract class PointInTime
 {
     private PhpDateTimeImmutable $dateTime;
 
-    protected function __construct(PhpDateTimeImmutable $dateTime)
+    final protected function __construct(PhpDateTimeImmutable $dateTime)
     {
         $this->dateTime = $dateTime;
     }

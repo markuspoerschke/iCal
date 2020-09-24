@@ -25,7 +25,7 @@ class CalendarFactoryTest extends TestCase
 {
     public function testRenderEmptyCalendar()
     {
-        $calendar = Calendar::create();
+        $calendar = new Calendar();
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'PRODID:' . $calendar->getProductIdentifier(),
@@ -46,10 +46,10 @@ class CalendarFactoryTest extends TestCase
                 new DateTimeZone('UTC')
             )
         );
-        $calendar = Calendar::create(
+        $calendar = new Calendar(
             [
-                Event::create(UniqueIdentifier::fromString('event1'))->touch($currentTime),
-                Event::create(UniqueIdentifier::fromString('event2'))->touch($currentTime),
+                (new Event(UniqueIdentifier::fromString('event1')))->touch($currentTime),
+                (new Event(UniqueIdentifier::fromString('event2')))->touch($currentTime),
             ]
         );
         $calendar->setProductIdentifier('-//test/ical//2.0/EN');

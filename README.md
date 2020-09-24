@@ -54,13 +54,13 @@ You will learn how to create an event domain object, how to add it to a calendar
 #### 1. Create an event domain entity
 
 ```PHP
-$event = \Eluceo\iCal\Domain\Entity\Event::create();
+$event = new \Eluceo\iCal\Domain\Entity\Event();
 ```
 
 #### 2. Create a calendar domain entity
 
 ```PHP
-$calendar = \Eluceo\iCal\Domain\Entity\Calendar::create([$event]);
+$calendar = new \Eluceo\iCal\Domain\Entity\Calendar([$event]);
 ```
 
 #### 3. Transform calendar domain object into a presentation object
@@ -95,7 +95,7 @@ More examples can be found in the [examples/](examples) folder.
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // 1. Create Event domain entity
-$event = Eluceo\iCal\Domain\Entity\Event::create()
+$event = (new Eluceo\iCal\Domain\Entity\Event())
     ->setSummary('Christmas Eve')
     ->setDescription('Lorem Ipsum Dolor...')
     ->setOccurrence(

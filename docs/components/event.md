@@ -16,7 +16,7 @@ If it is not set, then a random, but unique identifier is created.
 ```php
 use Eluceo\iCal\Domain\Entity\Event;
 
-$event = Event::create();
+$event = new Event();
 ```
 
 To set the properties, a fluent interface can be used:
@@ -26,7 +26,7 @@ use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 
-$event = Event::create()
+$event = (new Event())
     ->setSummary('Lunch Meeting')
     ->setDescription('Lorem Ipsum...')
     ->setOccurrence(SingleDay::fromDate(Date::fromCurrentDay()));
@@ -58,8 +58,8 @@ use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
 
 $myEventUid = 'example.com/event/1234';
-$uniqueIdentifier = UniqueIdentifier::fromString($myEventUid);
-$event = Event::create($uniqueIdentifier);
+$uniqueIdentifier = new UniqueIdentifier($myEventUid);
+$event = new Event($uniqueIdentifier);
 ```
 
 ### Touched at
@@ -73,7 +73,7 @@ The value can be changed using the `touch` method.
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$event = Event::create();
+$event = new Event();
 $event->touch(Timestamp::fromCurrentTime());
 ```
 
@@ -83,7 +83,7 @@ A timestamp object can be also created from an object that implements `\DateTime
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 
-$event = Event::create();
+$event = new Event();
 $dateTime = DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24');
 $timestamp = Timestamp::fromDateTimeInterface($dateTime);
 $event->touch($timestamp);
@@ -96,7 +96,7 @@ The summary of an event is a short, single line text, that describes the event.
 ```php
 use Eluceo\iCal\Domain\Entity\Event;
 
-$event = Event::create();
+$event = new Event();
 $event->setSummary('Lunch Meeting');
 ```
 
@@ -107,7 +107,7 @@ In addition to the summary, the description gives more information about the eve
 ```php
 use Eluceo\iCal\Domain\Entity\Event;
 
-$event = Event::create();
+$event = new Event();
 $event->setDescription('Lorem Ipsum Dolor...');
 ```
 
@@ -134,7 +134,7 @@ use Eluceo\iCal\Domain\Entity\Event;
 $date = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24'));
 $occurrence = SingleDay::fromDate($date);
 
-$event = Event::create();
+$event = new Event();
 $event->setOccurrence($occurrence);
 ```
 
@@ -159,7 +159,7 @@ $firstDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m
 $lastDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-26'));
 $occurrence = MultiDay::fromDates($firstDay, $lastDay);
 
-$event = Event::create();
+$event = new Event();
 $event->setOccurrence($occurrence);
 ```
 
@@ -182,7 +182,7 @@ $start = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-
 $end = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00')); 
 $occurrence = TimeSpan::create($start, $end);
 
-$event = Event::create();
+$event = new Event();
 $event->setOccurrence($occurrence);
 ```
 
@@ -199,10 +199,10 @@ use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 
-$location = Location::fromString('North Pole');
+$location = new Location('North Pole');
 
 // optionally a location with a geographical position can be created
 $location = $location->withGeographicPosition(GeographicPosition::fromLatitudeAndLongitude(64.751111,147.349444));
 
-$event = Event::create();
+$event = new Event();
 ```

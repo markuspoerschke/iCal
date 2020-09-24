@@ -29,12 +29,12 @@ final class Date extends PointInTime
             throw new \RuntimeException('Unexpected date time value.');
         }
 
-        return new static($dateTime);
+        return new self($dateTime);
     }
 
     public static function fromCurrentDay(): self
     {
-        return static::fromDateTimeInterface(new PhpDateTimeImmutable());
+        return self::fromDateTimeInterface(new PhpDateTimeImmutable());
     }
 
     public function add(DateInterval $interval): self
@@ -49,7 +49,7 @@ final class Date extends PointInTime
         }
 
         $new = parent::add($interval);
-        assert($new instanceof static);
+        assert($new instanceof self);
 
         return $new;
     }

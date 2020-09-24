@@ -32,7 +32,7 @@ class EventsGeneratorTest extends TestCase
             $timestamp = Timestamp::fromDateTimeInterface($day);
             $dayInterval = new DateInterval('P1D');
             for ($i = 0; $i < 3; ++$i) {
-                yield Event::create(UniqueIdentifier::fromString('event-' . $i))
+                yield (new Event(UniqueIdentifier::fromString('event-' . $i)))
                     ->touch($timestamp)
                     ->setSummary('Event ' . $i)
                     ->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface($day)));
@@ -40,7 +40,7 @@ class EventsGeneratorTest extends TestCase
             }
         };
 
-        $calendar = Calendar::create($generator());
+        $calendar = new Calendar($generator());
         $componentFactory = new CalendarFactory();
         $calendarComponent = $componentFactory->createCalendar($calendar);
 

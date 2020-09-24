@@ -14,18 +14,13 @@ namespace Eluceo\iCal\Presentation\Component\Property\Value;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
-class GeoValue extends Value
+final class GeoValue extends Value
 {
     private GeographicPosition $geographicPosition;
 
-    private function __construct(GeographicPosition $geographicPosition)
+    public function __construct(GeographicPosition $geographicPosition)
     {
         $this->geographicPosition = $geographicPosition;
-    }
-
-    public static function fromGeographicPosition(GeographicPosition $geographicPosition): self
-    {
-        return new static($geographicPosition);
     }
 
     public function __toString(): string

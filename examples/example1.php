@@ -21,7 +21,7 @@ use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // 1. Create Event domain entity.
-$event = Event::create();
+$event = new Event();
 $event
     ->setSummary('Christmas Eve')
     ->setDescription('Lorem Ipsum Dolor...')
@@ -38,7 +38,7 @@ $event
 ;
 
 // 2. Create Calendar domain entity.
-$calendar = Calendar::create([$event]);
+$calendar = new Calendar([$event]);
 
 // 3. Transform domain entity into an iCalendar component
 $componentFactory = new CalendarFactory();

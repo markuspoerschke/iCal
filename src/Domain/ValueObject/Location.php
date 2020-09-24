@@ -16,14 +16,9 @@ final class Location
     private string $location;
     private ?GeographicPosition $geographicPosition = null;
 
-    private function __construct(string $location)
+    public function __construct(string $location)
     {
         $this->location = $location;
-    }
-
-    public static function fromString(string $location): self
-    {
-        return new static($location);
     }
 
     public function withGeographicPosition(GeographicPosition $geographicPosition): self

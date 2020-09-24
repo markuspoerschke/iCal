@@ -21,7 +21,7 @@ class TextValueTest extends TestCase
      */
     public function testStringValueEscaping(string $inputValue, string $expected)
     {
-        self::assertSame($expected, (string) TextValue::fromString($inputValue));
+        self::assertSame($expected, (string) (new TextValue($inputValue)));
     }
 
     public function provideTestData()

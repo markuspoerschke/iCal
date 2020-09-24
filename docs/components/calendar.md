@@ -17,11 +17,11 @@ use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 
 $events = [
-    Event::create(),
-    Event::create(),
+    new Event(),
+    new Event(),
 ];
 
-$calendar = Calendar::create($events);
+$calendar = new Calendar($events);
 ```
 
 or calling the `addEvent` method:
@@ -30,10 +30,10 @@ or calling the `addEvent` method:
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$calendar = Calendar::create();
+$calendar = new Calendar();
 $calendar
-    ->addEvent(Event::create())
-    ->addEvent(Event::create());
+    ->addEvent(new Event())
+    ->addEvent(new Event());
 ```
 
 or providing a generator, that creates events:
@@ -43,9 +43,9 @@ use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 
 $eventGenerator = function(): Generator {
-    yield Event::create();
-    yield Event::create();
+    yield new Event();
+    yield new Event();
 };
 
-$calendar = Calendar::create($eventGenerator());
+$calendar = new Calendar($eventGenerator());
 ```

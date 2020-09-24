@@ -40,8 +40,8 @@ class CalendarFactory
     private function getProperties(CalendarEntity $calendar): Generator
     {
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.3 */
-        yield Property::create('PRODID', TextValue::fromString($calendar->getProductIdentifier()));
+        yield new Property('PRODID', new TextValue($calendar->getProductIdentifier()));
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.4 */
-        yield Property::create('VERSION', TextValue::fromString('2.0'));
+        yield new Property('VERSION', new TextValue('2.0'));
     }
 }

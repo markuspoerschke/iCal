@@ -18,23 +18,23 @@ final class UniqueIdentifier
 {
     private string $uid;
 
+    public function __construct(string $uid)
+    {
+        $this->uid = $uid;
+    }
+
     public static function fromString(string $uid): self
     {
         return new static($uid);
     }
 
-    public static function create(): self
+    public static function createRandom(): self
     {
         if (function_exists('uuid_create') && defined('UUID_TYPE_RANDOM')) {
-            return static::fromString((string) uuid_create(UUID_TYPE_RANDOM));
+            return new self((string) uuid_create(UUID_TYPE_RANDOM));
         }
 
-        return static::fromString(uniqid());
-    }
-
-    private function __construct(string $uid)
-    {
-        $this->uid = $uid;
+        return new self(uniqid());
     }
 
     public function __toString(): string

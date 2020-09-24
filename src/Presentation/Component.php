@@ -23,20 +23,13 @@ class Component implements IteratorAggregate
     private array $properties = [];
     private string $componentName;
 
-    private function __construct(string $componentName, array $properties)
+    /**
+     * @param Property[] $properties
+     */
+    public function __construct(string $componentName, array $properties = [])
     {
         $this->componentName = strtoupper($componentName);
         array_walk($properties, [$this, 'addProperty']);
-    }
-
-    /**
-     * @param Property[] $properties
-     *
-     * @return static
-     */
-    public static function create(string $componentName, array $properties = []): self
-    {
-        return new static($componentName, $properties);
     }
 
     public function withProperty(Property $property): self
@@ -69,7 +62,10 @@ class Component implements IteratorAggregate
 
     protected function getContentLinesGenerator(): Generator
     {
-        yield from array_map([ContentLine::class, 'fromString'], $this->properties);
+        yield from array_map(
+            [ContentLine::class, 'fromString'],
+            array_map('strval', $this->properties)
+        );
     }
 
     private function addProperty(Property $property): self
