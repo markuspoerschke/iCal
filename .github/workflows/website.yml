@@ -3,6 +3,7 @@ name: Deploy Website
 on:
   push:
     paths:
+      - '.github/workflows/website.yml'
       - 'docs/**'
       - 'website/**'
       - 'couscous.yml'
