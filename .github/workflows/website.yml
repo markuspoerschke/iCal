@@ -22,4 +22,3 @@ jobs:
           PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
           HOST: ical.poerschke.nrw
           PROJECT: ical
-          BRANCH: 2.x
