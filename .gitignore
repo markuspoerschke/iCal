@@ -4,6 +4,7 @@
 /build
 /composer.lock
 /couscous.phar
+/node_modules
 /phpunit.xml
 /vendor
 .idea

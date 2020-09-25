@@ -17,6 +17,12 @@ You can run the tests with the following command:
 make test
 ```
 
+The code style for non PHP files can be checked manually by running the following command:
+
+```
+make test-prettier
+```
+
 ### Code Style
 
 This project uses the [PHP Coding Standards Fixer](http://cs.sensiolabs.org/). 

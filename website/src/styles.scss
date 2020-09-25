@@ -11,14 +11,19 @@ html {
 }
 
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     margin: 0;
     padding: 0;
     height: 100%;
     line-height: 170%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 2rem 0 0 0;
     font-weight: normal;
     line-height: 100%;
@@ -51,7 +56,12 @@ h6 {
     font-size: 1.2em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     .anchor {
         display: none;
         float: left;
@@ -81,12 +91,13 @@ table {
     padding: 0;
     margin: 0;
 
-    td, th {
+    td,
+    th {
         &:first-child {
             border-left: none;
         }
 
-        padding: .5em 1em;
+        padding: 0.5em 1em;
         border-left: 1px solid var(--light-border);
     }
 
@@ -113,11 +124,11 @@ table {
 .btn {
     color: var(--link-color);
     border: 1px solid var(--link-color);
-    font-size: .75rem;
-    padding: .5rem .5rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.5rem;
     line-height: 100%;
     display: inline-block;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 
     &:hover {
         color: var(--text-color);
@@ -129,7 +140,8 @@ table {
     display: flex;
     height: 100%;
 
-    #menu, #content {
+    #menu,
+    #content {
         flex-grow: 1;
     }
 }
@@ -165,7 +177,7 @@ pre {
     nav {
         line-height: 150%;
         margin-bottom: 2rem;
-        font-size: .75rem;
+        font-size: 0.75rem;
 
         .title {
             color: var(--men-section-title-font-color);
@@ -176,11 +188,11 @@ pre {
         ul {
             list-style: none;
             list-style-position: outside;
-            margin: .5rem 0 0 1em;
+            margin: 0.5rem 0 0 1em;
             padding: 0;
 
             li {
-                margin: .5em 0 0 0;
+                margin: 0.5em 0 0 0;
                 padding: 0;
 
                 &.active {
