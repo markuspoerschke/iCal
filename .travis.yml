@@ -3,9 +3,6 @@ language: php
 php:
   - '7.4'
 
-node_js:
-  - 13
-
 cache:
   directories:
     - $HOME/.composer/cache
@@ -13,7 +10,6 @@ cache:
 script:
   - export PHPUNIT_FLAGS="--coverage-clover=coverage.xml"
   - make -j -O test
-  - make test-prettier
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || true
