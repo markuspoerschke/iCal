@@ -10,6 +10,7 @@ cache:
 script:
   - export PHPUNIT_FLAGS="--coverage-clover=coverage.xml"
   - make -j -O test
+  - make test-prettier
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || true
