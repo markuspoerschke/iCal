@@ -3,11 +3,11 @@ name: Deploy Website
 on:
   push:
     paths:
-      - '.github/workflows/website.yml'
-      - 'docs/**'
-      - 'website/**'
-      - 'couscous.yml'
-      - 'Dockerfile'
+      - ".github/workflows/website.yml"
+      - "docs/**"
+      - "website/**"
+      - "couscous.yml"
+      - "Dockerfile"
     branches:
       - 2.x
 
