@@ -33,6 +33,11 @@ test-composer-normalize: dependencies
 test-composer-normalize:
 	composer normalize --dry-run --diff
 
+.PHONY: test-prettier
+test-prettier:
+	yarn
+	npx prettier --check ./
+
 .PHONY: dependencies
 dependencies:
 	composer install --no-interaction
@@ -49,6 +54,11 @@ fix-code-style:
 fix-composer: dependencies
 fix-composer:
 	composer normalize --no-update-lock
+
+.PHONY: fix-prettier
+fix-prettier:
+	yarn
+	npx prettier --write ./
 
 .PHONY: docs
 docs: docs-dependencies docs-frontend-build
