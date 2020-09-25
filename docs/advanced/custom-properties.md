@@ -15,7 +15,7 @@ In this tutorial, we will add a custom property called `X-CUSTOM` to the iCal fi
 X-CUSTOM: foo bar baz!
 ```
 
-## 1. Create a custom event domain entity 
+## 1. Create a custom event domain entity
 
 First we need to create a custom event entity to store the additional value.
 This can be done by extending from `\Eluceo\iCal\Domain\Entity\Event`.
@@ -82,7 +82,7 @@ A new custom event can now be created.
 $event = new CustomEvent();
 $event->setSummary('This is a test event');
 $calendar = new Calendar([$event]);
-``` 
+```
 
 To see the new property, an instance of class `CustomEventFactory` must be passed to the standard calendar factory:
 

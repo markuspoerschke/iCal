@@ -36,12 +36,12 @@ $event = (new Event())
 
 The following sections explain the properties of the domain object:
 
-* [Unique Identifier](#unique-identifier)
-* [Touched at](#touched-at)
-* [Summary](#summary)
-* [Description](#description)
-* [Occurrence](#occurrence)
-* [Location](#location)
+-   [Unique Identifier](#unique-identifier)
+-   [Touched at](#touched-at)
+-   [Summary](#summary)
+-   [Description](#description)
+-   [Occurrence](#occurrence)
+-   [Location](#location)
 
 ### Unique Identifier
 
@@ -116,9 +116,9 @@ $event->setDescription('Lorem Ipsum Dolor...');
 The occurrence property of an event defines, when the event takes place.
 There are currently three different types of occurrences possible:
 
-* [Single day](#single-day)
-* [Multi day](#multi-day)
-* [Timespan](#timespan)
+-   [Single day](#single-day)
+-   [Multi day](#multi-day)
+-   [Timespan](#timespan)
 
 #### Single day
 
@@ -145,8 +145,8 @@ The multi day occurrence defines a span of days.
 
 The named constructor `MultiDay::fromDates()` accepts two dates:
 
-* The `$firstDay` attribute defines the first inclusive day, the event will take place.
-* The `$lastDay` attribute defines the last inclusive day, the event will take place.
+-   The `$firstDay` attribute defines the first inclusive day, the event will take place.
+-   The `$lastDay` attribute defines the last inclusive day, the event will take place.
 
 The given example
 
@@ -179,7 +179,7 @@ use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\Entity\Event;
 
 $start = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'));
-$end = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00')); 
+$end = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'));
 $occurrence = TimeSpan::create($start, $end);
 
 $event = new Event();
