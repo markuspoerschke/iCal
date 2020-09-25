@@ -3,6 +3,9 @@ language: php
 php:
   - '7.4'
 
+node_js:
+  - 13
+
 cache:
   directories:
     - $HOME/.composer/cache
