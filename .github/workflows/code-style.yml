@@ -1,0 +1,28 @@
+name: Code Style Fixer
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "2.x"
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Run php-cs-fixer
+        uses: docker://oskarstark/php-cs-fixer-ga
+
+      - name: Run prettier
+        uses: actionsx/prettier@v2
+        with:
+          args: --write ./
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Fix code style!
