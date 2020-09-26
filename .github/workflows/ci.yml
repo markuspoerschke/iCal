@@ -26,3 +26,27 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Fix code style!
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP with extensions"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "7.4"
+
+      - name: "Determine composer cache directory"
+        id: "determine-composer-cache-directory"
+        run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v1"
+        with:
+          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          key: "php-composer-cache"
+
+      - name: "Run tests"
+        run: "make -j -O test"
