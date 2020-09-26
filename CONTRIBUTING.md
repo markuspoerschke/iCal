@@ -25,7 +25,7 @@ make test-prettier
 
 ### Code Style
 
-This project uses the [PHP Coding Standards Fixer](http://cs.sensiolabs.org/). 
+This project uses the [PHP Coding Standards Fixer](http://cs.sensiolabs.org/).
 To fix or to check the code style download the tool and execute it on your command line:
 
 ```
@@ -36,7 +36,7 @@ make fix
 
 The documentation will be published on the website `https://ical.poerschke.nrw`.
 The sources are available within the `docs/` folder.
-To preview the result, you can run: 
+To preview the result, you can run:
 
 ```
 make docs-preview

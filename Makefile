@@ -36,7 +36,7 @@ test-composer-normalize:
 .PHONY: test-prettier
 test-prettier:
 	yarn
-	npx prettier --check ./
+	npx prettier --check .
 
 .PHONY: dependencies
 dependencies:
@@ -58,7 +58,7 @@ fix-composer:
 .PHONY: fix-prettier
 fix-prettier:
 	yarn
-	npx prettier --write ./
+	npx prettier --write .
 
 .PHONY: docs
 docs: docs-dependencies docs-frontend-build

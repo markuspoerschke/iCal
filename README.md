@@ -5,7 +5,7 @@
 [![Psalm coverage](https://shepherd.dev/github/markuspoerschke/ical/coverage.svg?)](https://shepherd.dev/github/markuspoerschke/ical)
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
 [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable)](https://packagist.org/packages/eluceo/ical)
-[![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical) 
+[![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical)
 
 This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
@@ -26,11 +26,11 @@ The version 2 of this package is a complete rewrite of the package and is not co
 Please see the upgrade guide if you want to migrate from version `0.*` to `2.*`.
 If you just start using this package, you should install version 2.
 
-Version | PHP Version
-------- | -----------
-0.11.*  | 5.3.0 - 7.4
-0.15.*  | 7.0 - 7.4
-2.*     | 7.4 only
+| Version | PHP Version |
+| ------- | ----------- |
+| 0.11.\* | 5.3.0 - 7.4 |
+| 0.15.\* | 7.0 - 7.4   |
+| 2.\*    | 7.4 only    |
 
 ## Documentation
 
@@ -40,8 +40,8 @@ Visit [ical.poerschke.nrw](https://ical.poerschke.nrw/) for complete documentati
 
 The classes within this package are grouped into two namespaces:
 
-* The `Domain` contains the information about the events.
-* The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
+-   The `Domain` contains the information about the events.
+-   The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
 
 To create a calendar, the first step will be to create the corresponding domain objects.
 Then these objects can be transformed into a iCalendar PHP representation, which can be cast to string.
@@ -123,7 +123,7 @@ echo $calendarComponent;
 
 ## License
 
-This package is released under the __MIT license__.
+This package is released under the **MIT license**.
 
 Copyright (c) 2020 Markus Poerschke
 
