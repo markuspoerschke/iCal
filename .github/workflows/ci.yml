@@ -29,14 +29,18 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [7.4, 8]
+
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v2"
 
-      - name: "Install PHP with extensions"
+      - name: "Install PHP ${{ matrix.php-version }} with extensions"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "7.4"
+          php-version: ${{ matrix.php-version }}
 
       - name: "Determine composer cache directory"
         id: "determine-composer-cache-directory"
