@@ -7,7 +7,7 @@ on:
       - "2.x"
 
 jobs:
-  "Fix Code Style":
+  fix-code-style:
     runs-on: ubuntu-latest
 
     steps:
