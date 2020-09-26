@@ -28,7 +28,7 @@ class Calendar
      */
     public function __construct($events = [])
     {
-        $this->events = $this->ensureEventsObject( $events );
+        $this->events = $this->ensureEventsObject($events);
     }
 
     /**
