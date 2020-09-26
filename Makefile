@@ -66,7 +66,7 @@ docs: docs-dependencies docs-frontend-build
 
 .PHONY: docs-dependencies
 docs-dependencies:
-	if [ ! -f couscous.phar ]; then php -r "copy('https://github.com/CouscousPHP/Couscous/releases/download/1.7.3/couscous.phar', 'couscous.phar');"; fi
+	if [ ! -f couscous.phar ]; then php -r "copy('https://github.com/CouscousPHP/Couscous/releases/download/1.8.0/couscous.phar', 'couscous.phar');"; fi
 
 .PHONY: docs-preview
 docs-preview: docs-dependencies docs-frontend-build

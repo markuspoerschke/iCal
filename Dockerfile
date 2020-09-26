@@ -10,7 +10,7 @@ RUN yarn && yarn build
 
 FROM php:7.4-alpine AS build
 
-ADD https://github.com/CouscousPHP/Couscous/releases/download/1.7.3/couscous.phar /usr/local/bin/couscous
+ADD https://github.com/CouscousPHP/Couscous/releases/download/1.8.0/couscous.phar /usr/local/bin/couscous
 RUN chmod +x /usr/local/bin/couscous
 
 COPY ./ /app
