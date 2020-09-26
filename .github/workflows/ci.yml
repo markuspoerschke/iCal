@@ -1,4 +1,4 @@
-name: Code Style Fixer
+name: Continuous Integration
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - "2.x"
 
 jobs:
-  php-cs-fixer:
+  "Fix Code Style":
     runs-on: ubuntu-latest
 
     steps:
