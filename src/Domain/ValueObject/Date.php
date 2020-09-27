@@ -12,16 +12,10 @@
 namespace Eluceo\iCal\Domain\ValueObject;
 
 use DateInterval;
-use DateTimeInterface as PhpDateTimeInterface;
 use InvalidArgumentException;
 
 final class Date extends PointInTime
 {
-    public static function fromDateTimeInterface(PhpDateTimeInterface $dateTime): self
-    {
-        return new static($dateTime);
-    }
-
     public function add(DateInterval $interval): self
     {
         if (

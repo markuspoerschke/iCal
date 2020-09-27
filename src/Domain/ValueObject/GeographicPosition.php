@@ -32,11 +32,6 @@ final class GeographicPosition
         }
     }
 
-    public static function fromLatitudeAndLongitude(float $latitude, float $longitude): self
-    {
-        return new static($latitude, $longitude);
-    }
-
     public function getLatitude(): float
     {
         return $this->latitude;

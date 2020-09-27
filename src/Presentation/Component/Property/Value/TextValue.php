@@ -82,9 +82,4 @@ final class TextValue extends Value
 
         return $value;
     }
-
-    public static function fromString(string $value): self
-    {
-        return new static($value);
-    }
 }

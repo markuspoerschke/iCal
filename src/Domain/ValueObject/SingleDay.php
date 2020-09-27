@@ -24,9 +24,4 @@ final class SingleDay extends Occurrence
     {
         return $this->date;
     }
-
-    public static function fromDate(Date $date): self
-    {
-        return new static($date);
-    }
 }

@@ -22,11 +22,6 @@ final class ContentLine
         $this->line = $line;
     }
 
-    public static function fromString(string $line): self
-    {
-        return new static($line);
-    }
-
     public function __toString()
     {
         $string = $this->line;
