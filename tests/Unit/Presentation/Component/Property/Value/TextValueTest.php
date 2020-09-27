@@ -26,6 +26,10 @@ class TextValueTest extends TestCase
 
     public function provideTestData()
     {
+        yield 'example from RFC 5545' => [
+            "Project XYZ Final Review\nConference Room - 3B\nCome Prepared.",
+            'Project XYZ Final Review\\nConference Room - 3B\\nCome Prepared.',
+        ];
         yield 'no escaping needed' => [
             'LOREM',
             'LOREM',
@@ -34,9 +38,9 @@ class TextValueTest extends TestCase
             'text contains backslash: \\',
             'text contains backslash: \\\\',
         ];
-        yield 'double quotes are escaped' => [
-            'text with "doublequotes" will be escaped',
-            'text with \\"doublequotes\\" will be escaped',
+        yield 'do not escape double quotes' => [
+            'This is a "test".',
+            'This is a "test".',
         ];
         yield 'semicolon and comma are escaped' => [
             'text with , and ; will also be escaped',
@@ -53,10 +57,6 @@ class TextValueTest extends TestCase
         yield 'test control characters are removed' => [
             "All the controls \x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x7f are escaped",
             'All the controls \\n are escaped',
-        ];
-        yield 'escape double quotes' => [
-            'Double "quotes are escaped',
-            'Double \\"quotes are escaped',
         ];
     }
 }
