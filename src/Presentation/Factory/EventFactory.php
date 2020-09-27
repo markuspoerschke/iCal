@@ -20,6 +20,7 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
+use Eluceo\iCal\Presentation\Component\Property\Value\BooleanValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
@@ -78,11 +79,15 @@ class EventFactory
     {
         if ($occurrence instanceof SingleDay) {
             yield new Property('DTSTART', new DateValue($occurrence->getDate()));
+            // see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcical/0f262da6-c5fd-459e-9f18-145eba86b5d2
+            yield new Property('X-MICROSOFT-CDO-ALLDAYEVENT', new BooleanValue(true));
         }
 
         if ($occurrence instanceof MultiDay) {
             yield new Property('DTSTART', new DateValue($occurrence->getFirstDay()));
             yield new Property('DTEND', new DateValue($occurrence->getLastDay()->add(new DateInterval('P1D'))));
+            // see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcical/0f262da6-c5fd-459e-9f18-145eba86b5d2
+            yield new Property('X-MICROSOFT-CDO-ALLDAYEVENT', new BooleanValue(true));
         }
 
         if ($occurrence instanceof TimeSpan) {

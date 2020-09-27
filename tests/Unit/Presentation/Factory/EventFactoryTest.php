@@ -85,6 +85,7 @@ class CalendarFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
+            'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
         ]);
     }
 
@@ -98,6 +99,7 @@ class CalendarFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
             'DTEND:20301227',
+            'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
         ]);
     }
 
@@ -123,6 +125,9 @@ class CalendarFactoryTest extends TestCase
         self::assertGreaterThan(5, count($resultAsArray), 'No additional content lines were produced.');
 
         $resultAsArray = array_slice($resultAsArray, 3, -2);
-        self::assertSame($expected, $resultAsArray);
+        self::assertSame(
+            implode(PHP_EOL, $expected),
+            implode(PHP_EOL, $resultAsArray)
+        );
     }
 }

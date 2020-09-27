@@ -44,7 +44,7 @@ class EventsGeneratorTest extends TestCase
         $componentFactory = new CalendarFactory();
         $calendarComponent = $componentFactory->createCalendar($calendar);
 
-        $expected = [
+        $expected = implode(PHP_EOL, [
             'BEGIN:VCALENDAR',
             'PRODID:-//eluceo/ical//2.0/EN',
             'VERSION:2.0',
@@ -53,23 +53,26 @@ class EventsGeneratorTest extends TestCase
             'DTSTAMP:20200101T150000Z',
             'SUMMARY:Event 0',
             'DTSTART:20200101',
+            'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
             'END:VEVENT',
             'BEGIN:VEVENT',
             'UID:event-1',
             'DTSTAMP:20200101T150000Z',
             'SUMMARY:Event 1',
             'DTSTART:20200102',
+            'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
             'END:VEVENT',
             'BEGIN:VEVENT',
             'UID:event-2',
             'DTSTAMP:20200101T150000Z',
             'SUMMARY:Event 2',
             'DTSTART:20200103',
+            'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
             'END:VEVENT',
             'END:VCALENDAR',
-        ];
+        ]);
         $contentLines = array_map('trim', iterator_to_array($calendarComponent, false));
 
-        self::assertSame($expected, $contentLines);
+        self::assertSame($expected, implode(PHP_EOL, $contentLines));
     }
 }
