@@ -11,7 +11,7 @@ test-code-style: dependencies
 
 .PHONY: test-psalm
 test-psalm: dependencies
-	psalm -m --no-progress
+	psalm -m --no-progress ${PSALM_FLAGS}
 
 .PHONY: test-phpunit
 test-phpunit: dependencies
