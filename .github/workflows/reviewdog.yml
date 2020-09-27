@@ -1,5 +1,7 @@
 name: Review Dog
+
 on: [pull_request]
+
 jobs:
   spellchecker:
     name: Spell Checker (Language Tools)
@@ -7,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: reviewdog/action-languagetool@v1
-          with:
-            github_token: ${{ secrets.github_token }}
-            reporter: github-pr-review
-            level: info
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: info
