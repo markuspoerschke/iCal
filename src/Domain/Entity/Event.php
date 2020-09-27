@@ -28,7 +28,7 @@ class Event
     public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
         $this->uniqueIdentifier = $uniqueIdentifier ?? UniqueIdentifier::createRandom();
-        $this->touchedAt = Timestamp::fromCurrentTime();
+        $this->touchedAt = new Timestamp();
     }
 
     public function getUniqueIdentifier(): ?UniqueIdentifier
@@ -43,11 +43,7 @@ class Event
 
     public function touch(?Timestamp $dateTime = null): self
     {
-        if ($dateTime === null) {
-            $dateTime = Timestamp::fromCurrentTime();
-        }
-
-        $this->touchedAt = $dateTime;
+        $this->touchedAt = $dateTime ?? new Timestamp();
 
         return $this;
     }

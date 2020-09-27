@@ -34,7 +34,7 @@ $generator = function (): Generator {
     for ($i = 0; $i < 10; ++$i) {
         yield (new Event())
             ->setSummary('Event ' . $i)
-            ->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface($day)))
+            ->setOccurrence(new SingleDay(new Date($day)))
         ;
         $day = $day->add($dayInterval);
     }

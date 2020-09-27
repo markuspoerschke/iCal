@@ -24,7 +24,7 @@ class GeographicPositionTest extends TestCase
     public function testConstructorDoesNotAcceptInvalidArguments(float $latitude, float $longitude)
     {
         static::expectException(InvalidArgumentException::class);
-        GeographicPosition::fromLatitudeAndLongitude($latitude, $longitude);
+        new GeographicPosition($latitude, $longitude);
     }
 
     public function provideInvalidPositions(): Generator

@@ -100,15 +100,15 @@ $event = (new Eluceo\iCal\Domain\Entity\Event())
     ->setSummary('Christmas Eve')
     ->setDescription('Lorem Ipsum Dolor...')
     ->setOccurrence(
-        Eluceo\iCal\Domain\ValueObject\SingleDay::fromDate(
-            Eluceo\iCal\Domain\ValueObject\Date::fromDateTimeInterface(
+        new Eluceo\iCal\Domain\ValueObject\SingleDay(
+            new Eluceo\iCal\Domain\ValueObject\Date(
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24')
             )
         )
     );
 
 // 2. Create Calendar domain entity
-$calendar = Eluceo\iCal\Domain\Entity\Calendar::create([$event]);
+$calendar = new Eluceo\iCal\Domain\Entity\Calendar([$event]);
 
 // 3. Transform domain entity into an iCalendar component
 $componentFactory = new Eluceo\iCal\Presentation\Factory\CalendarFactory();

@@ -23,11 +23,6 @@ final class UniqueIdentifier
         $this->uid = $uid;
     }
 
-    public static function fromString(string $uid): self
-    {
-        return new static($uid);
-    }
-
     public static function createRandom(): self
     {
         if (function_exists('uuid_create') && defined('UUID_TYPE_RANDOM')) {

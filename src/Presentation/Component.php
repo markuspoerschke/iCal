@@ -57,15 +57,15 @@ class Component implements IteratorAggregate
 
     protected function getContentLines(): Generator
     {
-        yield ContentLine::fromString('BEGIN:' . $this->componentName);
+        yield new ContentLine('BEGIN:' . $this->componentName);
         yield from $this->getContentLinesGenerator();
-        yield ContentLine::fromString('END:' . $this->componentName);
+        yield new ContentLine('END:' . $this->componentName);
     }
 
     protected function getContentLinesGenerator(): Generator
     {
         yield from array_map(
-            [ContentLine::class, 'fromString'],
+            fn (string $string) => new ContentLine($string),
             array_map('strval', $this->properties)
         );
     }

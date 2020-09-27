@@ -12,32 +12,10 @@
 namespace Eluceo\iCal\Domain\ValueObject;
 
 use DateInterval;
-use DateTimeImmutable as PhpDateTimeImmutable;
-use DateTimeInterface as PhpDateTimeInterface;
 use InvalidArgumentException;
-use RuntimeException;
 
 final class Date extends PointInTime
 {
-    public static function fromDateTimeInterface(PhpDateTimeInterface $dateTime): self
-    {
-        $dateTime = PhpDateTimeImmutable::createFromFormat(
-            PhpDateTimeInterface::ATOM,
-            $dateTime->format(PhpDateTimeInterface::ATOM), $dateTime->getTimezone()
-        );
-
-        if ($dateTime === false) {
-            throw new RuntimeException('Unexpected date time value.');
-        }
-
-        return new self($dateTime);
-    }
-
-    public static function fromCurrentDay(): self
-    {
-        return self::fromDateTimeInterface(new PhpDateTimeImmutable());
-    }
-
     public function add(DateInterval $interval): self
     {
         if (

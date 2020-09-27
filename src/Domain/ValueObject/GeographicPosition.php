@@ -18,7 +18,7 @@ final class GeographicPosition
     private float $latitude;
     private float $longitude;
 
-    private function __construct(float $latitude, float $longitude)
+    public function __construct(float $latitude, float $longitude)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
@@ -30,11 +30,6 @@ final class GeographicPosition
         if ($this->longitude < -180 || $this->longitude > 180) {
             throw new InvalidArgumentException("The geographical longitude must be a value between -180 and 180 degrees. '{$this->longitude}' was given.");
         }
-    }
-
-    public static function fromLatitudeAndLongitude(float $latitude, float $longitude): self
-    {
-        return new static($latitude, $longitude);
     }
 
     public function getLatitude(): float

@@ -29,13 +29,13 @@ class EventsGeneratorTest extends TestCase
     {
         $generator = function (): Generator {
             $day = new DateTimeImmutable('2020-01-01 15:00:00');
-            $timestamp = Timestamp::fromDateTimeInterface($day);
+            $timestamp = new Timestamp($day);
             $dayInterval = new DateInterval('P1D');
             for ($i = 0; $i < 3; ++$i) {
-                yield (new Event(UniqueIdentifier::fromString('event-' . $i)))
+                yield (new Event(new UniqueIdentifier('event-' . $i)))
                     ->touch($timestamp)
                     ->setSummary('Event ' . $i)
-                    ->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface($day)));
+                    ->setOccurrence(new SingleDay(new Date($day)));
                 $day = $day->add($dayInterval);
             }
         };

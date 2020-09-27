@@ -15,7 +15,7 @@ final class SingleDay extends Occurrence
 {
     private Date $date;
 
-    private function __construct(Date $date)
+    public function __construct(Date $date)
     {
         $this->date = $date;
     }
@@ -23,10 +23,5 @@ final class SingleDay extends Occurrence
     public function getDate(): Date
     {
         return $this->date;
-    }
-
-    public static function fromDate(Date $date): self
-    {
-        return new static($date);
     }
 }

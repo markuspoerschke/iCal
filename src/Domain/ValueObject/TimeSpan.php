@@ -16,7 +16,7 @@ final class TimeSpan extends Occurrence
     private DateTime $begin;
     private DateTime $end;
 
-    private function __construct(DateTime $begin, DateTime $end)
+    public function __construct(DateTime $begin, DateTime $end)
     {
         $this->begin = $begin;
         $this->end = $end;
