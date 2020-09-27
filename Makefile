@@ -87,4 +87,4 @@ docs-frontend-build: docs-frontend-dependencies
 
 .PHONY: clean
 clean:
-	rm -rf vendor composer.lock .couscous website/node_modules website/template/static couscous.phar
+	rm -rf vendor composer.lock .couscous website/node_modules website/template/static couscous.phar node_modules .phpunit.result.cache .php_cs.cache
