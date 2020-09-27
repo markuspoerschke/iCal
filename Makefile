@@ -3,7 +3,7 @@ SHELL := bash
 PATH := $(PATH):$(CURDIR)/vendor/bin
 
 .PHONY: test
-test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize
+test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd
 
 .PHONY: test-code-style
 test-code-style: dependencies
@@ -32,6 +32,11 @@ test-validate-composer:
 test-composer-normalize: dependencies
 test-composer-normalize:
 	composer normalize --dry-run --diff
+
+.PHONY: test-phpmd
+test-phpmd: dependencies
+test-phpmd:
+	phpmd ./src text rulesets.xml
 
 .PHONY: test-prettier
 test-prettier:

@@ -15,6 +15,7 @@ use DateInterval;
 use DateTimeImmutable as PhpDateTimeImmutable;
 use DateTimeInterface as PhpDateTimeInterface;
 use InvalidArgumentException;
+use RuntimeException;
 
 final class Date extends PointInTime
 {
@@ -26,7 +27,7 @@ final class Date extends PointInTime
         );
 
         if ($dateTime === false) {
-            throw new \RuntimeException('Unexpected date time value.');
+            throw new RuntimeException('Unexpected date time value.');
         }
 
         return new self($dateTime);

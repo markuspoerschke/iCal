@@ -32,7 +32,9 @@ class Property
     {
         $this->name = strtoupper($name);
         $this->value = $value;
-        array_walk($parameters, [$this, 'addParameter']);
+        foreach ($parameters as $parameter) {
+            $this->addParameter($parameter);
+        }
     }
 
     public function __toString(): string

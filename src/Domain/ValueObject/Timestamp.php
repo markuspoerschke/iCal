@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Domain\ValueObject;
 
 use DateTimeImmutable as PhpDateTimeImmutable;
 use DateTimeInterface as PhpDateTimeInterface;
+use RuntimeException;
 
 class Timestamp extends PointInTime
 {
@@ -24,7 +25,7 @@ class Timestamp extends PointInTime
         );
 
         if ($dateTime === false) {
-            throw new \RuntimeException('Unexpected date time value.');
+            throw new RuntimeException('Unexpected date time value.');
         }
 
         return new static($dateTime);
