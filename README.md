@@ -21,7 +21,7 @@ composer require eluceo/ical
 
 ## Version / Upgrade
 
-Addd speling misstaken to test review dogg.
+This is is a tesst.
 
 The initial version was released back in 2012.
 The version 2 of this package is a complete rewrite of the package and is not compatible to older version.
