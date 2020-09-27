@@ -13,7 +13,6 @@ namespace Eluceo\iCal\Util;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use RuntimeException;
 
 /**
  * @internal
