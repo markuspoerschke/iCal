@@ -25,7 +25,7 @@ final class DateTimeImmutableFactory
             return $dateTime;
         }
 
-        return (new DateTimeImmutable(null, $dateTime->getTimezone()))
+        return (new DateTimeImmutable('now', $dateTime->getTimezone()))
             ->setTimestamp($dateTime->getTimestamp());
     }
 }
