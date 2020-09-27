@@ -25,7 +25,7 @@ final class TextValue extends Value
         '\\' => '\\\\',
         ';' => '\\;',
         ',' => '\\,',
-        "\n" => '\\n'
+        "\n" => '\\n',
     ];
 
     /**
