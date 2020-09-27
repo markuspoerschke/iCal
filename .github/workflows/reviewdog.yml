@@ -1,10 +1,10 @@
-name: Review Dog
+name: reviewdog
 
 on: [pull_request]
 
 jobs:
   spellchecker:
-    name: Spell Checker (Language Tools)
+    name: Spell check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
