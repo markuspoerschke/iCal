@@ -26,15 +26,7 @@ final class DateTimeImmutableFactory
             return $dateTime;
         }
 
-        $dateTime = DateTimeImmutable::createFromFormat(
-            DateTimeInterface::ATOM,
-            $dateTime->format(DateTimeInterface::ATOM), $dateTime->getTimezone()
-        );
-
-        if ($dateTime === false) {
-            throw new RuntimeException('Unexpected date time value.');
-        }
-
-        return $dateTime;
+        return (new DateTimeImmutable(null, $dateTime->getTimezone()))
+            ->setTimestamp($dateTime->getTimestamp());
     }
 }
