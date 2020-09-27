@@ -9,6 +9,7 @@ cache:
 
 script:
   - export PHPUNIT_FLAGS="--coverage-clover=coverage.xml"
+  - export PSALM_FLAGS="--shepherd"
   - make -j -O test
 
 after_success:
