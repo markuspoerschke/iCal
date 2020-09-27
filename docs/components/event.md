@@ -29,7 +29,7 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 $event = (new Event())
     ->setSummary('Lunch Meeting')
     ->setDescription('Lorem Ipsum...')
-    ->setOccurrence(SingleDay::fromDate(Date::fromCurrentDay()));
+    ->setOccurrence(new SingleDay(new Date()));
 ```
 
 ## Properties
@@ -74,7 +74,7 @@ use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\Entity\Event;
 
 $event = new Event();
-$event->touch(Timestamp::fromCurrentTime());
+$event->touch(new Timestamp());
 ```
 
 A timestamp object can be also created from an object that implements `\DateTimeInterface` like this:
@@ -85,7 +85,7 @@ use Eluceo\iCal\Domain\ValueObject\Timestamp;
 
 $event = new Event();
 $dateTime = DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24');
-$timestamp = Timestamp::fromDateTimeInterface($dateTime);
+$timestamp = new Timestamp($dateTime);
 $event->touch($timestamp);
 ```
 
@@ -131,8 +131,8 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$date = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24'));
-$occurrence = SingleDay::fromDate($date);
+$date = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24'));
+$occurrence = new SingleDay($date);
 
 $event = new Event();
 $event->setOccurrence($occurrence);
@@ -143,7 +143,7 @@ $event->setOccurrence($occurrence);
 A multi day event will take place on more than one consecutive day.
 The multi day occurrence defines a span of days.
 
-The named constructor `MultiDay::fromDates()` accepts two dates:
+The constructor `MultiDay($firstDay, $lastDay)` accepts two dates:
 
 -   The `$firstDay` attribute defines the first inclusive day, the event will take place.
 -   The `$lastDay` attribute defines the last inclusive day, the event will take place.
@@ -155,9 +155,9 @@ use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$firstDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24'));
-$lastDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-26'));
-$occurrence = MultiDay::fromDates($firstDay, $lastDay);
+$firstDay = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-24'));
+$lastDay = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2019-12-26'));
+$occurrence = new MultiDay($firstDay, $lastDay);
 
 $event = new Event();
 $event->setOccurrence($occurrence);
@@ -178,9 +178,9 @@ use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$start = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'));
-$end = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'));
-$occurrence = TimeSpan::create($start, $end);
+$start = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'));
+$end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'));
+$occurrence = new TimeSpan($start, $end);
 
 $event = new Event();
 $event->setOccurrence($occurrence);
@@ -202,7 +202,7 @@ use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 $location = new Location('North Pole');
 
 // optionally a location with a geographical position can be created
-$location = $location->withGeographicPosition(GeographicPosition::fromLatitudeAndLongitude(64.751111,147.349444));
+$location = $location->withGeographicPosition(new GeographicPosition(64.751111, 147.349444));
 
 $event = new Event();
 ```

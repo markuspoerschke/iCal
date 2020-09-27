@@ -31,7 +31,7 @@ class CalendarFactoryTest extends TestCase
 {
     public function testMinimalEvent()
     {
-        $currentTime = Timestamp::fromDateTimeInterface(
+        $currentTime = new Timestamp(
             DateTimeImmutable::createFromFormat(
                 'Y-m-d H:i:s',
                 '2019-11-10 11:22:33',
@@ -39,7 +39,7 @@ class CalendarFactoryTest extends TestCase
             )
         );
 
-        $event = (new Event(UniqueIdentifier::fromString('event1')))->touch($currentTime);
+        $event = (new Event(new UniqueIdentifier('event1')))->touch($currentTime);
 
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
@@ -66,7 +66,7 @@ class CalendarFactoryTest extends TestCase
 
     public function testEventWithLocation()
     {
-        $geographicalPosition = GeographicPosition::fromLatitudeAndLongitude(51.333333333333, 7.05);
+        $geographicalPosition = new GeographicPosition(51.333333333333, 7.05);
         $location = (new Location('Location Name'))->withGeographicPosition($geographicalPosition);
         $event = (new Event())->setLocation($location);
 
@@ -81,7 +81,7 @@ class CalendarFactoryTest extends TestCase
 
     public function testSingleDayEvent()
     {
-        $event = (new Event())->setOccurrence(SingleDay::fromDate(Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
+        $event = (new Event())->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
 
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224',
@@ -90,9 +90,9 @@ class CalendarFactoryTest extends TestCase
 
     public function testMultiDayEvent()
     {
-        $firstDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'));
-        $lastDay = Date::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-26'));
-        $occurrence = MultiDay::fromDates($firstDay, $lastDay);
+        $firstDay = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'));
+        $lastDay = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-26'));
+        $occurrence = new MultiDay($firstDay, $lastDay);
         $event = (new Event())->setOccurrence($occurrence);
 
         self::assertEventRendersCorrect($event, [
@@ -103,9 +103,9 @@ class CalendarFactoryTest extends TestCase
 
     public function testTimespanEvent()
     {
-        $begin = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'));
-        $end = DateTime::fromDateTimeInterface(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'));
-        $occurrence = TimeSpan::create($begin, $end);
+        $begin = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'));
+        $end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'));
+        $occurrence = new TimeSpan($begin, $end);
         $event = (new Event())->setOccurrence($occurrence);
 
         self::assertEventRendersCorrect($event, [

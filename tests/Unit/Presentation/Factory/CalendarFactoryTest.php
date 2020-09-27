@@ -39,7 +39,7 @@ class CalendarFactoryTest extends TestCase
 
     public function testRenderWithEvents()
     {
-        $currentTime = Timestamp::fromDateTimeInterface(
+        $currentTime = new Timestamp(
             DateTimeImmutable::createFromFormat(
                 'Y-m-d H:i:s',
                 '2019-11-10 11:22:33',
@@ -48,8 +48,8 @@ class CalendarFactoryTest extends TestCase
         );
         $calendar = new Calendar(
             [
-                (new Event(UniqueIdentifier::fromString('event1')))->touch($currentTime),
-                (new Event(UniqueIdentifier::fromString('event2')))->touch($currentTime),
+                (new Event(new UniqueIdentifier('event1')))->touch($currentTime),
+                (new Event(new UniqueIdentifier('event2')))->touch($currentTime),
             ]
         );
         $calendar->setProductIdentifier('-//test/ical//2.0/EN');

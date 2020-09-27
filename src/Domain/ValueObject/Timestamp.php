@@ -11,28 +11,6 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-use DateTimeImmutable as PhpDateTimeImmutable;
-use DateTimeInterface as PhpDateTimeInterface;
-use RuntimeException;
-
 class Timestamp extends PointInTime
 {
-    public static function fromDateTimeInterface(PhpDateTimeInterface $dateTime): self
-    {
-        $dateTime = PhpDateTimeImmutable::createFromFormat(
-            PhpDateTimeInterface::ATOM,
-            $dateTime->format(PhpDateTimeInterface::ATOM), $dateTime->getTimezone()
-        );
-
-        if ($dateTime === false) {
-            throw new RuntimeException('Unexpected date time value.');
-        }
-
-        return new static($dateTime);
-    }
-
-    public static function fromCurrentTime(): self
-    {
-        return static::fromDateTimeInterface(new PhpDateTimeImmutable());
-    }
 }

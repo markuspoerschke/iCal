@@ -52,7 +52,7 @@ class EventFactory
     private function getProperties(Event $event): Generator
     {
         yield new Property('UID', new TextValue((string) $event->getUniqueIdentifier()));
-        yield new Property('DTSTAMP', DateTimeValue::fromTimestamp($event->getTouchedAt()));
+        yield new Property('DTSTAMP', new DateTimeValue($event->getTouchedAt()));
 
         if ($event->hasSummary()) {
             yield new Property('SUMMARY', new TextValue($event->getSummary()));
@@ -77,17 +77,17 @@ class EventFactory
     private function getOccurrenceProperties(Occurrence $occurrence): Generator
     {
         if ($occurrence instanceof SingleDay) {
-            yield new Property('DTSTART', DateValue::fromDate($occurrence->getDate()));
+            yield new Property('DTSTART', new DateValue($occurrence->getDate()));
         }
 
         if ($occurrence instanceof MultiDay) {
-            yield new Property('DTSTART', DateValue::fromDate($occurrence->getFirstDay()));
-            yield new Property('DTEND', DateValue::fromDate($occurrence->getLastDay()->add(new DateInterval('P1D'))));
+            yield new Property('DTSTART', new DateValue($occurrence->getFirstDay()));
+            yield new Property('DTEND', new DateValue($occurrence->getLastDay()->add(new DateInterval('P1D'))));
         }
 
         if ($occurrence instanceof TimeSpan) {
-            yield new Property('DTSTART', DateTimeValue::fromDateTime($occurrence->getBegin()));
-            yield new Property('DTEND', DateTimeValue::fromDateTime($occurrence->getEnd()));
+            yield new Property('DTSTART', new DateTimeValue($occurrence->getBegin()));
+            yield new Property('DTEND', new DateTimeValue($occurrence->getEnd()));
         }
     }
 

@@ -17,7 +17,7 @@ final class ContentLine
     private const LINE_LENGTH = 75;
     private string $line;
 
-    private function __construct(string $line)
+    public function __construct(string $line)
     {
         $this->line = $line;
     }

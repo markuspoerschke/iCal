@@ -18,7 +18,7 @@ final class GeographicPosition
     private float $latitude;
     private float $longitude;
 
-    private function __construct(float $latitude, float $longitude)
+    public function __construct(float $latitude, float $longitude)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;

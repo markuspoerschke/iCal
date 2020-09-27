@@ -15,7 +15,7 @@ final class SingleDay extends Occurrence
 {
     private Date $date;
 
-    private function __construct(Date $date)
+    public function __construct(Date $date)
     {
         $this->date = $date;
     }

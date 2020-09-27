@@ -19,7 +19,7 @@ class ContentLineTest extends TestCase
     public function testShortLinesAreNotFolded()
     {
         $lineAsString = 'BEGIN:EVENT';
-        $contentLine = ContentLine::fromString($lineAsString);
+        $contentLine = new ContentLine($lineAsString);
 
         self::assertSame($lineAsString . ContentLine::LINE_SEPARATOR, (string) $contentLine);
     }
@@ -33,7 +33,7 @@ class ContentLineTest extends TestCase
             '',
         ]);
 
-        $contentLine = ContentLine::fromString($lineAsString);
+        $contentLine = new ContentLine($lineAsString);
         self::assertSame($expected, (string) $contentLine);
     }
 }

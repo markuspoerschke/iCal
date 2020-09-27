@@ -13,6 +13,8 @@ namespace Eluceo\iCal\Domain\ValueObject;
 
 use DateInterval;
 use DateTimeImmutable as PhpDateTimeImmutable;
+use DateTimeInterface as PhpDateTimeInterface;
+use Eluceo\iCal\Util\DateTimeImmutableFactory;
 
 /**
  * @internal
@@ -21,9 +23,13 @@ abstract class PointInTime
 {
     private PhpDateTimeImmutable $dateTime;
 
-    final protected function __construct(PhpDateTimeImmutable $dateTime)
+    public function __construct(PhpDateTimeInterface $dateTime = null)
     {
-        $this->dateTime = $dateTime;
+        if ($dateTime === null) {
+            $dateTime = new PhpDateTimeImmutable();
+        }
+
+        $this->dateTime = DateTimeImmutableFactory::createFromInterface($dateTime);
     }
 
     public function getDateTime(): PhpDateTimeImmutable

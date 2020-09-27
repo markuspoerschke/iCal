@@ -27,10 +27,8 @@ $event = new Event();
 $event
     ->setSummary('Christmas Eve')
     ->setOccurrence(
-        SingleDay::fromDate(
-            Date::fromDateTimeInterface(
-                DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24')
-            )
+        new SingleDay(
+            new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))
         )
     );
 

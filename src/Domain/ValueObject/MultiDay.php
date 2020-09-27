@@ -22,11 +22,6 @@ final class MultiDay extends Occurrence
         $this->lastDay = $lastDay;
     }
 
-    public static function fromDates(Date $firstDay, Date $lastDay): self
-    {
-        return new static($firstDay, $lastDay);
-    }
-
     public function getFirstDay(): Date
     {
         return $this->firstDay;
