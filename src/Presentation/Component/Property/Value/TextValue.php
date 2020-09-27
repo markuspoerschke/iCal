@@ -18,7 +18,20 @@ use Eluceo\iCal\Presentation\Component\Property\Value;
  */
 final class TextValue extends Value
 {
-    private const CONTROL_CHARACTERS = [
+    /**
+     * ESCAPED-CHAR as defined in section 3.3.11.
+     */
+    private const ESCAPED_CHARACTERS = [
+        '\\' => '\\\\',
+        ';' => '\\;',
+        ',' => '\\,',
+        "\n" => '\\n',
+    ];
+
+    /**
+     * Non TSAFE-CHAR as described in section 3.3.11.
+     */
+    private const FORBIDDEN_CHARACTERS = [
         "\x00",
         "\x01",
         "\x02",
@@ -52,6 +65,7 @@ final class TextValue extends Value
         "\x1f",
         "\x7f",
     ];
+
     private string $value;
 
     public function __construct(string $value)
@@ -62,20 +76,9 @@ final class TextValue extends Value
     public function __toString(): string
     {
         $value = $this->value;
-        $value = str_replace('\\', '\\\\', $value);
-        $value = str_replace(',', '\\,', $value);
-        $value = str_replace(';', '\\;', $value);
-        $value = str_replace("\n", '\\n', $value);
 
-        // escape double quotes
-        //  even if it is not mentioned in the RFC,
-        //  most calendar software will interpret \" as a double quote
-        //  this is an undefined behavior, since double quotes can be
-        //  used to escape the characters mentioned above
-        $value = str_replace('"', '\\"', $value);
-
-        // remove forbidden characters
-        $value = str_replace(static::CONTROL_CHARACTERS, '', $value);
+        $value = str_replace(array_keys(self::ESCAPED_CHARACTERS), array_values(self::ESCAPED_CHARACTERS), $value);
+        $value = str_replace(static::FORBIDDEN_CHARACTERS, '', $value);
 
         return $value;
     }
