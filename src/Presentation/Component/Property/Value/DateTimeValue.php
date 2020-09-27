@@ -11,6 +11,8 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
+use BadMethodCallException;
+use DateTimeZone;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Presentation\Component\Property\Value;
@@ -28,7 +30,7 @@ final class DateTimeValue extends Value
 
     public static function fromTimestamp(Timestamp $timestamp): self
     {
-        $dateTime = $timestamp->getDateTime()->setTimezone(new \DateTimeZone('UTC'));
+        $dateTime = $timestamp->getDateTime()->setTimezone(new DateTimeZone('UTC'));
 
         return new self($dateTime->format(self::FORMAT_UTC_DATE_TIME));
     }
@@ -38,7 +40,7 @@ final class DateTimeValue extends Value
         $format = self::FORMAT_NO_TIMEZONE;
 
         if ($dateTime->hasDateTimeZone()) {
-            throw new \BadMethodCallException('not implemented yet');
+            throw new BadMethodCallException('not implemented yet');
         }
 
         return new static($dateTime->getDateTime()->format($format));

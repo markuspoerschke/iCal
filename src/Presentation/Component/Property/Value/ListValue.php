@@ -25,7 +25,9 @@ final class ListValue extends Value
      */
     public function __construct(array $values)
     {
-        array_walk($values, [$this, 'addValue']);
+        foreach ($values as $value) {
+            $this->addValue($value);
+        }
     }
 
     public function __toString(): string

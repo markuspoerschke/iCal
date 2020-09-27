@@ -26,6 +26,9 @@ use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Generator;
 
+/**
+ * @SuppressWarnings("CouplingBetweenObjects")
+ */
 class EventFactory
 {
     /**

@@ -29,7 +29,9 @@ class Component implements IteratorAggregate
     public function __construct(string $componentName, array $properties = [])
     {
         $this->componentName = strtoupper($componentName);
-        array_walk($properties, [$this, 'addProperty']);
+        foreach ($properties as $property) {
+            $this->addProperty($property);
+        }
     }
 
     public function withProperty(Property $property): self
