@@ -18,6 +18,7 @@ use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 use Eluceo\iCal\Presentation\Factory\EventFactory;
+use Generator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -36,20 +37,15 @@ class CustomEvent extends Event
 //    that can add the additional property to the presentation component.
 class CustomEventFactory extends EventFactory
 {
-    public function createComponent(Event $event): Component
+    protected function getProperties(Event $event): Generator
     {
-        $component = parent::createComponent($event);
-
+        yield from parent::getProperties($event);
         if ($event instanceof CustomEvent) {
-            $component = $component->withProperty(
-                new Property(
-                    'X-CUSTOM',
-                    new TextValue($event->getMyCustomProperty())
-                )
+            yield new Property(
+                'X-CUSTOM',
+                new TextValue($event->getMyCustomProperty())
             );
         }
-
-        return $component;
     }
 }
 

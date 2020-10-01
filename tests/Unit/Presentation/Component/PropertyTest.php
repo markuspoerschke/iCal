@@ -40,7 +40,7 @@ class PropertyTest extends TestCase
             'LOREM',
             new TextValue('Ipsum'),
             [
-                Parameter::create('TEST', new TextValue('value')),
+                new Parameter('TEST', new TextValue('value')),
             ],
             'LOREM:TEST=value:Ipsum',
         ];
@@ -49,8 +49,8 @@ class PropertyTest extends TestCase
             'LOREM',
             new TextValue('Ipsum'),
             [
-                Parameter::create('TEST', new TextValue('value')),
-                Parameter::create('TEST2', new TextValue('value2')),
+                new Parameter('TEST', new TextValue('value')),
+                new Parameter('TEST2', new TextValue('value2')),
             ],
             'LOREM:TEST=value;TEST2=value2:Ipsum',
         ];

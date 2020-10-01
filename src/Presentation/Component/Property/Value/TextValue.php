@@ -16,7 +16,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value;
 /**
  * @see https://tools.ietf.org/html/rfc5545#section-3.3.11
  */
-final class TextValue extends Value
+class TextValue extends Value
 {
     /**
      * ESCAPED-CHAR as defined in section 3.3.11.
@@ -78,7 +78,7 @@ final class TextValue extends Value
         $value = $this->value;
 
         $value = str_replace(array_keys(self::ESCAPED_CHARACTERS), array_values(self::ESCAPED_CHARACTERS), $value);
-        $value = str_replace(static::FORBIDDEN_CHARACTERS, '', $value);
+        $value = str_replace(self::FORBIDDEN_CHARACTERS, '', $value);
 
         return $value;
     }

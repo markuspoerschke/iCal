@@ -17,27 +17,33 @@ use IteratorAggregate;
 
 class Component implements IteratorAggregate
 {
-    /**
-     * @var array<int, Property>
-     */
-    private array $properties = [];
     private string $componentName;
 
     /**
-     * @param Property[] $properties
+     * @var Property[]
      */
-    public function __construct(string $componentName, array $properties = [])
+    private array $properties = [];
+
+    /**
+     * @var iterable<Component>
+     */
+    private iterable $components = [];
+
+    /**
+     * @param Property[]          $properties
+     * @param iterable<Component> $components
+     */
+    public function __construct(string $componentName, array $properties = [], iterable $components = [])
     {
-        $this->componentName = strtoupper($componentName);
-        foreach ($properties as $property) {
-            $this->addProperty($property);
-        }
+        $this->componentName = $componentName;
+        $this->properties = $properties;
+        $this->components = $components;
     }
 
     public function withProperty(Property $property): self
     {
         $new = clone $this;
-        $new->addProperty($property);
+        $new->properties[] = $property;
 
         return $new;
     }
@@ -64,16 +70,12 @@ class Component implements IteratorAggregate
 
     protected function getContentLinesGenerator(): Generator
     {
-        yield from array_map(
-            fn (string $string) => new ContentLine($string),
-            array_map('strval', $this->properties)
-        );
-    }
+        foreach ($this->properties as $property) {
+            yield new ContentLine((string) $property);
+        }
 
-    private function addProperty(Property $property): self
-    {
-        $this->properties[] = $property;
-
-        return $this;
+        foreach ($this->components as $component) {
+            yield from $component->getContentLines();
+        }
     }
 }
