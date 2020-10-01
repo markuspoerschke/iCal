@@ -19,7 +19,7 @@ class ParameterTest extends TestCase
 {
     public function testParameterToString()
     {
-        $parameter = Parameter::create('TEST', new TextValue('lorem ipsum'));
+        $parameter = new Parameter('TEST', new TextValue('lorem ipsum'));
         self::assertSame('TEST=lorem ipsum', (string) $parameter);
     }
 }

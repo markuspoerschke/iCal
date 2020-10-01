@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -24,6 +25,11 @@ class Event
     private ?string $description = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
+
+    /**
+     * @var array<Alarm>
+     */
+    private array $alarms = [];
 
     public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
@@ -48,12 +54,10 @@ class Event
         return $this;
     }
 
-    /**
-     * @psalm-suppress InvalidNullableReturnType
-     * @psalm-suppress NullableReturnStatement
-     */
     public function getSummary(): string
     {
+        assert($this->summary !== null);
+
         return $this->summary;
     }
 
@@ -76,12 +80,10 @@ class Event
         return $this;
     }
 
-    /**
-     * @psalm-suppress InvalidNullableReturnType
-     * @psalm-suppress NullableReturnStatement
-     */
     public function getDescription(): string
     {
+        assert($this->description !== null);
+
         return $this->description;
     }
 
@@ -144,5 +146,17 @@ class Event
     public function hasLocation(): bool
     {
         return $this->location !== null;
+    }
+
+    public function getAlarms(): array
+    {
+        return $this->alarms;
+    }
+
+    public function addAlarm(Alarm $alarm): self
+    {
+        $this->alarms[] = $alarm;
+
+        return $this;
     }
 }

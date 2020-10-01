@@ -11,8 +11,8 @@
 
 namespace Eluceo\iCal\Presentation\Factory;
 
-use Eluceo\iCal\Domain\Entity\Calendar as CalendarEntity;
-use Eluceo\iCal\Presentation\Calendar;
+use Eluceo\iCal\Domain\Entity\Calendar;
+use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Generator;
@@ -26,18 +26,18 @@ class CalendarFactory
         $this->eventFactory = $eventFactory ?? new EventFactory();
     }
 
-    public function createCalendar(CalendarEntity $calendar): Calendar
+    public function createCalendar(Calendar $calendar): Component
     {
         $components = $this->eventFactory->createComponents($calendar->getEvents());
         $properties = iterator_to_array($this->getProperties($calendar), false);
 
-        return Calendar::createCalendar($components, $properties);
+        return new Component('VCALENDAR', $properties, $components);
     }
 
     /**
      * @return Generator<Property>
      */
-    private function getProperties(CalendarEntity $calendar): Generator
+    private function getProperties(Calendar $calendar): Generator
     {
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.3 */
         yield new Property('PRODID', new TextValue($calendar->getProductIdentifier()));

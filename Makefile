@@ -1,6 +1,8 @@
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 PATH := $(PATH):$(CURDIR)/vendor/bin
+PSALM_FLAGS :=
+PHPUNIT_FLAGS :=
 
 .PHONY: test
 test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd

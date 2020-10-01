@@ -29,7 +29,7 @@ See [RFC 5545 section 3.6](https://tools.ietf.org/html/rfc5545#section-3.6).
 | VJOURNAL  |     ✖     |
 | VFREEBUSY |     ✖     |
 | VTIMEZONE |     ✖     |
-| VALARM    |     ✖     |
+| VALARM    |     ✔     |
 
 ## Event Component
 
@@ -69,3 +69,35 @@ See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 | rdate       |     ✖     |
 | x-prop      |    (✔)    |
 | iana-prop   |    (✔)    |
+
+## Alarm Component
+
+See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.6).
+
+### Audio
+
+| Property  | Supported |
+| --------- | :-------: |
+| action    |     ✔     |
+| trigger   |     ✔     |
+| duration  |     ✔     |
+| repeat    |     ✔     |
+| attach    |     ✖     |
+| x-prop    |    (✔)    |
+| iana-prop |    (✔)    |
+
+### Display
+
+| Property    | Supported |
+| ----------- | :-------: |
+| action      |     ✔     |
+| trigger     |     ✔     |
+| description |     ✔     |
+| duration    |     ✔     |
+| repeat      |     ✔     |
+| x-prop      |    (✔)    |
+| iana-prop   |    (✔)    |
+
+## Email
+
+Not yet supported.

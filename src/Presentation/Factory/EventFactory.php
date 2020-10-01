@@ -14,6 +14,7 @@ namespace Eluceo\iCal\Presentation\Factory;
 use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
@@ -31,6 +32,13 @@ use Generator;
  */
 class EventFactory
 {
+    private AlarmFactory $alarmFactory;
+
+    public function __construct(?AlarmFactory $alarmFactory = null)
+    {
+        $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
+    }
+
     /**
      * @return Generator<Component>
      */
@@ -43,13 +51,17 @@ class EventFactory
 
     public function createComponent(Event $event): Component
     {
-        return new Component('VEVENT', iterator_to_array($this->getProperties($event), false));
+        return new Component(
+            'VEVENT',
+            iterator_to_array($this->getProperties($event), false),
+            iterator_to_array($this->getComponents($event), false)
+        );
     }
 
     /**
      * @return Generator<Property>
      */
-    private function getProperties(Event $event): Generator
+    protected function getProperties(Event $event): Generator
     {
         yield new Property('UID', new TextValue((string) $event->getUniqueIdentifier()));
         yield new Property('DTSTAMP', new DateTimeValue($event->getTouchedAt()));
@@ -69,6 +81,17 @@ class EventFactory
         if ($event->hasLocation()) {
             yield from $this->getLocationProperties($event);
         }
+    }
+
+    /**
+     * @return Generator<Component>
+     */
+    protected function getComponents(Event $event): Generator
+    {
+        yield from array_map(
+            fn (Alarm $alarm) => $this->alarmFactory->createComponent($alarm),
+            $event->getAlarms()
+        );
     }
 
     /**
