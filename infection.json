@@ -1,8 +1,6 @@
 {
     "source": {
-        "directories": [
-            "src"
-        ]
+        "directories": ["src"]
     },
     "logs": {
         "text": "report/infection.log",
