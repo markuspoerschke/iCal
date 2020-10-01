@@ -7,6 +7,7 @@
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
 [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable)](https://packagist.org/packages/eluceo/ical)
 [![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical)
+[![Infection MSI](https://badge.stryker-mutator.io/github.com/markuspoerschke/ical/2.x)](https://infection.github.io)
 
 This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.

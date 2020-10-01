@@ -5,7 +5,7 @@ PSALM_FLAGS :=
 PHPUNIT_FLAGS :=
 
 .PHONY: test
-test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd
+test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd test-infection
 
 .PHONY: test-code-style
 test-code-style: dependencies
@@ -22,6 +22,11 @@ test-phpunit: dependencies
 .PHONY: test-examples
 EXAMPLE_FILES := $(wildcard examples/*.php)
 test-examples: $(EXAMPLE_FILES)
+
+.PHONY: test-infection
+test-infection: dependencies test-phpunit
+test-infection:
+	infection --min-msi=60
 
 examples/example*.php: dependencies
 	php $@ > /dev/null
@@ -61,6 +66,7 @@ fix-code-style:
 fix-composer: dependencies
 fix-composer:
 	composer normalize --no-update-lock
+	composer update nothing
 
 .PHONY: fix-prettier
 fix-prettier:

@@ -6,5 +6,6 @@
 /couscous.phar
 /node_modules
 /phpunit.xml
+/report
 /vendor
 .idea

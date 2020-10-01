@@ -1,0 +1,14 @@
+{
+    "source": {
+        "directories": ["src"]
+    },
+    "logs": {
+        "text": "report/infection.log",
+        "badge": {
+            "branch": "2.x"
+        }
+    },
+    "mutators": {
+        "@default": true
+    }
+}
