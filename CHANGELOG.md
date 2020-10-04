@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- Support PHP 8.0
+
 ## [0.16.0]
 ### Added
 - Allow to add `ATTACH` property to an event [#128](https://github.com/markuspoerschke/iCal/pull/128)
@@ -114,6 +118,7 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.16.0...0.x
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
