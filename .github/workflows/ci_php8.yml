@@ -28,7 +28,8 @@ jobs:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-composer-cache"
 
+      - name: "Composer install"
+        run: "composer install --ignore-platform-reqs"
+
       - name: "Run tests"
-        run:
-          - "composer install --ignore-platform-reqs"
-          - "php vendor/bin/phpunit"
+        run: "php vendor/bin/phpunit"
