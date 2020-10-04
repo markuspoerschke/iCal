@@ -40,7 +40,7 @@ jobs:
 
     - <<: *test-unit
       name: PHP 8.0
-      php: 8.0
+      php: master
       env: COMPOSER_FLAGS="--ignore-platform-reqs"
 
     # Code Style
