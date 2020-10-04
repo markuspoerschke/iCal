@@ -17,6 +17,7 @@ test-psalm: dependencies
 
 .PHONY: test-phpunit
 test-phpunit: dependencies
+	which phpunit
 	phpunit ${PHPUNIT_FLAGS}
 
 .PHONY: test-examples
