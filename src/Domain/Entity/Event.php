@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\ValueObject\Alarm;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -30,6 +31,11 @@ class Event
      * @var array<Alarm>
      */
     private array $alarms = [];
+
+    /**
+     * @var array<Attachment>
+     */
+    private array $attachments = [];
 
     public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
@@ -158,5 +164,17 @@ class Event
         $this->alarms[] = $alarm;
 
         return $this;
+    }
+
+    public function addAttachment(Attachment $attachment): self
+    {
+        $this->attachments[] = $attachment;
+
+        return $this;
+    }
+
+    public function getAttachments(): array
+    {
+        return $this->attachments;
     }
 }

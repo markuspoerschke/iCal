@@ -114,6 +114,10 @@ class CalendarFactoryTest extends TestCase
         ]);
     }
 
+    public function testAttachments()
+    {
+    }
+
     private static function assertEventRendersCorrect(Event $event, array $expected)
     {
         $resultAsString = (string) (new EventFactory())->createComponent($event);

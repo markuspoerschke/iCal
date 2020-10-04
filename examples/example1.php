@@ -16,8 +16,11 @@ use DateTimeImmutable;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
+use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
+use Eluceo\iCal\Domain\ValueObject\Uri;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -38,6 +41,9 @@ $event
             new Alarm\DisplayAction('Reminder: the meeting starts in 15 minutes!'),
             (new Alarm\RelativeTrigger(DateInterval::createFromDateString('-15 minutes')))->withRelationToEnd()
         )
+    )
+    ->addAttachment(
+        new Attachment(new Uri('https://markus.poerschke.nrw/images/markus_poerschke.jpg'), null)
     )
 ;
 

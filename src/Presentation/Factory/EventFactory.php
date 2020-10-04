@@ -15,16 +15,20 @@ use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
+use Eluceo\iCal\Presentation\Component\Property\Parameter;
+use Eluceo\iCal\Presentation\Component\Property\Value\BinaryValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
 
 /**
@@ -81,6 +85,13 @@ class EventFactory
         if ($event->hasLocation()) {
             yield from $this->getLocationProperties($event);
         }
+
+        foreach ($event->getAttachments() as $attachment) {
+            $property = $this->getAttachmentProperty($attachment);
+            if ($property !== null) {
+                yield $property;
+            }
+        }
     }
 
     /**
@@ -124,5 +135,35 @@ class EventFactory
         if ($event->getLocation()->hasGeographicalPosition()) {
             yield new Property('GEO', new GeoValue($event->getLocation()->getGeographicPosition()));
         }
+    }
+
+    private function getAttachmentProperty(Attachment $attachment): ?Property
+    {
+        $mimeTypeParameter = null;
+        if ($attachment->hasMimeType()) {
+            $mimeTypeParameter = new Parameter('FMTTYPE', new TextValue($attachment->getMimeType()));
+        }
+
+        if ($attachment->hasUri()) {
+            return new Property(
+                'ATTACH',
+                new UriValue($attachment->getUri()),
+                array_filter([$mimeTypeParameter])
+            );
+        }
+
+        if ($attachment->hasBinaryContent()) {
+            return new Property(
+                'ATTACH',
+                new BinaryValue($attachment->getBinaryContent()),
+                array_filter([
+                    $mimeTypeParameter,
+                    new Parameter('ENCODING', new TextValue('BASE64')),
+                    new Parameter('VALUE', new TextValue('BINARY')),
+                ])
+            );
+        }
+
+        return null;
     }
 }
