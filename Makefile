@@ -1,6 +1,6 @@
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
-PATH := $(PATH):$(CURDIR)/vendor/bin
+PATH := $(CURDIR)/vendor/bin:$(PATH)
 PSALM_FLAGS ?=
 PHPUNIT_FLAGS ?=
 
