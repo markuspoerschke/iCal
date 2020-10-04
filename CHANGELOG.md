@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This version is complete rewrite.
 Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*` to `2.0.0`.
 
+### Added
+
+- Support for PHP 8.0
+
 ### Changed
 
 -   Separate domain and presentation logic
