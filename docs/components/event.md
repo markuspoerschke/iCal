@@ -42,6 +42,7 @@ The following sections explain the properties of the domain object:
 -   [Description](#description)
 -   [Occurrence](#occurrence)
 -   [Location](#location)
+-   [Attachments](#attachments)
 
 ### Unique Identifier
 
@@ -205,4 +206,32 @@ $location = new Location('North Pole');
 $location = $location->withGeographicPosition(new GeographicPosition(64.751111, 147.349444));
 
 $event = new Event();
+$event->setLocation($location);
+```
+
+### Attachments
+
+A document can be associated with an event.
+It can be either be added as a URI or directly embedded as binary content.
+It is strongly recommended to use the URI attachment, since binary content is not supported by all calendar applications.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
+use Eluceo\iCal\Domain\ValueObject\BinaryContent;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+
+$urlAttachment = new Attachment(
+    new Uri('https://example.com/test.txt'),
+    'text/plain'
+);
+
+$binaryContentAttachment = new Attachment(
+    new BinaryContent(file_get_contents('test.txt')),
+    'text/plain'
+);
+
+$event = new Event();
+$event->addAttachment($urlAttachment);
+$event->addAttachment($binaryContentAttachment);
 ```
