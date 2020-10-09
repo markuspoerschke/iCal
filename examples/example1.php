@@ -42,7 +42,10 @@ $event
         )
     )
     ->addAttachment(
-        new Attachment(new Uri('https://markus.poerschke.nrw/images/markus_poerschke.jpg'), null)
+        new Attachment(
+            new Uri('https://ical.poerschke.nrw/favicon.ico'),
+            'image/x-icon'
+        )
     )
 ;
 
