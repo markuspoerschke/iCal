@@ -87,10 +87,7 @@ class EventFactory
         }
 
         foreach ($event->getAttachments() as $attachment) {
-            $property = $this->getAttachmentProperty($attachment);
-            if ($property !== null) {
-                yield $property;
-            }
+            yield from $this->getAttachmentProperties($attachment);
         }
     }
 
@@ -137,33 +134,34 @@ class EventFactory
         }
     }
 
-    private function getAttachmentProperty(Attachment $attachment): ?Property
+    /**
+     * @return Generator<Property>
+     */
+    private function getAttachmentProperties(Attachment $attachment): Generator
     {
-        $mimeTypeParameter = null;
+        $parameters = [];
+
         if ($attachment->hasMimeType()) {
-            $mimeTypeParameter = new Parameter('FMTTYPE', new TextValue($attachment->getMimeType()));
+            $parameters[] = new Parameter('FMTTYPE', new TextValue($attachment->getMimeType()));
         }
 
         if ($attachment->hasUri()) {
-            return new Property(
+            yield new Property(
                 'ATTACH',
                 new UriValue($attachment->getUri()),
-                array_filter([$mimeTypeParameter])
+                $parameters
             );
         }
 
         if ($attachment->hasBinaryContent()) {
-            return new Property(
+            $parameters[] = new Parameter('ENCODING', new TextValue('BASE64'));
+            $parameters[] = new Parameter('VALUE', new TextValue('BINARY'));
+
+            yield new Property(
                 'ATTACH',
                 new BinaryValue($attachment->getBinaryContent()),
-                array_filter([
-                    $mimeTypeParameter,
-                    new Parameter('ENCODING', new TextValue('BASE64')),
-                    new Parameter('VALUE', new TextValue('BINARY')),
-                ])
+                $parameters
             );
         }
-
-        return null;
     }
 }

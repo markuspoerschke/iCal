@@ -28,10 +28,14 @@ class Attachment
 
         if ($content instanceof BinaryContent) {
             $this->binaryContent = $content;
-        } elseif ($content instanceof Uri) {
+        }
+
+        if ($content instanceof Uri) {
             $this->uri = $content;
-        } else {
-            throw new InvalidArgumentException('$content must be an instance of Url or BinaryContent.');
+        }
+
+        if ($this->uri === null && $this->binaryContent === null) {
+            throw new InvalidArgumentException(sprintf('$content is invalid. An instance of %s or %s was expected, but an instance of %s was given.', BinaryContent::class, Uri::class, get_class($content)));
         }
     }
 

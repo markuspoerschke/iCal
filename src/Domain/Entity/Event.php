@@ -117,12 +117,10 @@ class Event
         return $this->occurrence !== null;
     }
 
-    /**
-     * @psalm-suppress InvalidNullableReturnType
-     * @psalm-suppress NullableReturnStatement
-     */
     public function getOccurrence(): Occurrence
     {
+        assert($this->occurrence !== null);
+
         return $this->occurrence;
     }
 
@@ -133,12 +131,10 @@ class Event
         return $this;
     }
 
-    /**
-     * @psalm-suppress InvalidNullableReturnType
-     * @psalm-suppress NullableReturnStatement
-     */
     public function getLocation(): Location
     {
+        assert($this->location !== null);
+
         return $this->location;
     }
 
@@ -154,6 +150,9 @@ class Event
         return $this->location !== null;
     }
 
+    /**
+     * @return Alarm[]
+     */
     public function getAlarms(): array
     {
         return $this->alarms;
@@ -173,6 +172,9 @@ class Event
         return $this;
     }
 
+    /**
+     * @return Attachment[]
+     */
     public function getAttachments(): array
     {
         return $this->attachments;
