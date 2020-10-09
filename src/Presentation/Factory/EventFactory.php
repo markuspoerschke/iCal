@@ -15,16 +15,20 @@ use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
+use Eluceo\iCal\Presentation\Component\Property\Parameter;
+use Eluceo\iCal\Presentation\Component\Property\Value\BinaryValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
 
 /**
@@ -81,6 +85,10 @@ class EventFactory
         if ($event->hasLocation()) {
             yield from $this->getLocationProperties($event);
         }
+
+        foreach ($event->getAttachments() as $attachment) {
+            yield from $this->getAttachmentProperties($attachment);
+        }
     }
 
     /**
@@ -123,6 +131,37 @@ class EventFactory
 
         if ($event->getLocation()->hasGeographicalPosition()) {
             yield new Property('GEO', new GeoValue($event->getLocation()->getGeographicPosition()));
+        }
+    }
+
+    /**
+     * @return Generator<Property>
+     */
+    private function getAttachmentProperties(Attachment $attachment): Generator
+    {
+        $parameters = [];
+
+        if ($attachment->hasMimeType()) {
+            $parameters[] = new Parameter('FMTTYPE', new TextValue($attachment->getMimeType()));
+        }
+
+        if ($attachment->hasUri()) {
+            yield new Property(
+                'ATTACH',
+                new UriValue($attachment->getUri()),
+                $parameters
+            );
+        }
+
+        if ($attachment->hasBinaryContent()) {
+            $parameters[] = new Parameter('ENCODING', new TextValue('BASE64'));
+            $parameters[] = new Parameter('VALUE', new TextValue('BINARY'));
+
+            yield new Property(
+                'ATTACH',
+                new BinaryValue($attachment->getBinaryContent()),
+                $parameters
+            );
         }
     }
 }

@@ -14,6 +14,8 @@ namespace Unit\Presentation\Factory;
 use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
+use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
@@ -23,6 +25,7 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
+use Eluceo\iCal\Domain\ValueObject\Uri;
 use Eluceo\iCal\Presentation\ContentLine;
 use Eluceo\iCal\Presentation\Factory\EventFactory;
 use PHPUnit\Framework\TestCase;
@@ -111,6 +114,35 @@ class CalendarFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'DTSTART:20301224T121500',
             'DTEND:20301224T134500',
+        ]);
+    }
+
+    public function testUrlAttachments()
+    {
+        $event = (new Event())
+            ->addAttachment(
+                new Attachment(
+                    new Uri('http://example.com/document.txt'),
+                    'text/plain')
+            );
+
+        self::assertEventRendersCorrect($event, [
+            'ATTACH:FMTTYPE=text/plain:http://example.com/document.txt',
+        ]);
+    }
+
+    public function testFileAttachments()
+    {
+        $event = (new Event())
+            ->addAttachment(
+                new Attachment(
+                    new BinaryContent('Hello World!'),
+                    'text/plain'
+                )
+            );
+
+        self::assertEventRendersCorrect($event, [
+            'ATTACH:FMTTYPE=text/plain;ENCODING=BASE64;VALUE=BINARY:SGVsbG8gV29ybGQh',
         ]);
     }
 

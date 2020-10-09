@@ -12,7 +12,7 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 
 ### Added
 
--   Support for PHP 8.0
+-   Support for PHP 8.0.
 
 ### Changed
 

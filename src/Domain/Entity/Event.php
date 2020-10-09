@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\ValueObject\Alarm;
+use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -30,6 +31,11 @@ class Event
      * @var array<Alarm>
      */
     private array $alarms = [];
+
+    /**
+     * @var array<Attachment>
+     */
+    private array $attachments = [];
 
     public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
@@ -111,12 +117,10 @@ class Event
         return $this->occurrence !== null;
     }
 
-    /**
-     * @psalm-suppress InvalidNullableReturnType
-     * @psalm-suppress NullableReturnStatement
-     */
     public function getOccurrence(): Occurrence
     {
+        assert($this->occurrence !== null);
+
         return $this->occurrence;
     }
 
@@ -127,12 +131,10 @@ class Event
         return $this;
     }
 
-    /**
-     * @psalm-suppress InvalidNullableReturnType
-     * @psalm-suppress NullableReturnStatement
-     */
     public function getLocation(): Location
     {
+        assert($this->location !== null);
+
         return $this->location;
     }
 
@@ -148,6 +150,9 @@ class Event
         return $this->location !== null;
     }
 
+    /**
+     * @return Alarm[]
+     */
     public function getAlarms(): array
     {
         return $this->alarms;
@@ -158,5 +163,20 @@ class Event
         $this->alarms[] = $alarm;
 
         return $this;
+    }
+
+    public function addAttachment(Attachment $attachment): self
+    {
+        $this->attachments[] = $attachment;
+
+        return $this;
+    }
+
+    /**
+     * @return Attachment[]
+     */
+    public function getAttachments(): array
+    {
+        return $this->attachments;
     }
 }
