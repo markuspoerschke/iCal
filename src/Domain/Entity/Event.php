@@ -138,8 +138,16 @@ class Event
         return $this->location;
     }
 
-    public function setLocation(?Location $location): self
+    /**
+     * @param string|Location $location
+     * @return $this
+     */
+    public function setLocation($location): self
     {
+        if (is_string($location)) {
+            $location = new Location($location);
+        }
+
         $this->location = $location;
 
         return $this;
