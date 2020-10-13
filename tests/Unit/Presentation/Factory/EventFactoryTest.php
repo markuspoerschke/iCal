@@ -82,6 +82,18 @@ class CalendarFactoryTest extends TestCase
         );
     }
 
+    public function testEventWithLocationAsString()
+    {
+        $event = (new Event())->setLocation('Location Name');
+
+        self::assertEventRendersCorrect(
+            $event,
+            [
+                'LOCATION:Location Name',
+            ]
+        );
+    }
+
     public function testSingleDayEvent()
     {
         $event = (new Event())->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
