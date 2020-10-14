@@ -33,6 +33,7 @@ class Calendar
 
     /**
      * @param Event[]|Iterator<Event>|Events $events
+     * @return Events
      */
     private function ensureEventsObject($events = []): Events
     {

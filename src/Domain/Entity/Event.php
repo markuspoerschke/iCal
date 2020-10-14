@@ -26,6 +26,7 @@ class Event
     private ?string $description = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
+    private ?string $status = null;
 
     /**
      * @var array<Alarm>
@@ -178,5 +179,26 @@ class Event
     public function getAttachments(): array
     {
         return $this->attachments;
+    }
+
+    /**
+     * @param string $status Should be TENTATIVE, CONFIRMED, or CANCELLED
+     * @return $this
+     */
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function hasStatus(): bool
+    {
+        return $this->status !== null;
     }
 }

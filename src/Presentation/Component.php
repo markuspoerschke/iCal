@@ -22,15 +22,16 @@ class Component implements IteratorAggregate
     /**
      * @var Property[]
      */
-    private array $properties = [];
+    private array $properties;
 
     /**
      * @var iterable<Component>
      */
-    private iterable $components = [];
+    private iterable $components;
 
     /**
-     * @param Property[]          $properties
+     * @param string $componentName
+     * @param Property[] $properties
      * @param iterable<Component> $components
      */
     public function __construct(string $componentName, array $properties = [], iterable $components = [])

@@ -35,6 +35,7 @@ class CalendarFactory
     }
 
     /**
+     * @param Calendar $calendar
      * @return Generator<Property>
      */
     private function getProperties(Calendar $calendar): Generator
