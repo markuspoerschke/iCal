@@ -89,7 +89,7 @@ class EventFactory
         }
 
         if ($event->hasStatus()) {
-            yield from new Property('STATUS', new TextValue($event->getStatus()));
+            yield new Property('STATUS', new TextValue($event->getStatus()));
         }
 
         foreach ($event->getAttachments() as $attachment) {

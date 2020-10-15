@@ -209,6 +209,33 @@ $event = new Event();
 $event->setLocation($location);
 ```
 
+### Status
+
+The status defines the status of the event. The value must be one of the following: TENTATIVE, CONFIRMED, OR CANCELLED. You can read more about it in the [spec](https://tools.ietf.org/html/rfc5545#section-3.8.1.11).
+
+There are constants on the `Eluceo\iCal\Domain\Entity\Event` class to help set the status, as well as functions to set the values for you: `setConfirmed`, `setTentative`, and `setCancelled`.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+
+$event = new Event();
+
+// This will set the status to be CANCELLED
+// Event::TENTATIVE, Event::CONFIRMED
+$event->setStatus(Event::CANCELLED);
+
+// Alternatively
+$event->setCancelled();
+$event->setConfirmed();
+$event->setTentative();
+
+// To remove the status
+$event->clearStatus();
+
+// Or pass null to the setter
+$event->setStatus(null);
+```
+
 ### Attachments
 
 A document can be associated with an event.

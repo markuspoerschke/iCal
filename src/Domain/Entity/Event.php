@@ -28,6 +28,10 @@ class Event
     private ?Location $location = null;
     private ?string $status = null;
 
+    const TENTATIVE = 'TENTATIVE';
+    const CONFIRMED = 'CONFIRMED';
+    const CANCELLED = 'CANCELLED';
+
     /**
      * @var array<Alarm>
      */
@@ -182,17 +186,29 @@ class Event
     }
 
     /**
-     * @param string $status Should be TENTATIVE, CONFIRMED, or CANCELLED
+     * @param string|null $status Should be TENTATIVE, CONFIRMED, or CANCELLED
+     *
      * @return $this
      */
-    public function setStatus(string $status): self
+    public function setStatus(?string $status): self
     {
+        $allowedValues = [
+            self::TENTATIVE,
+            self::CONFIRMED,
+            self::CANCELLED,
+            null,
+        ];
+
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException('Status value must be one of the following: TENTATIVE, CONFIRMED, or CANCELLED');
+        }
+
         $this->status = $status;
 
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -200,5 +216,25 @@ class Event
     public function hasStatus(): bool
     {
         return $this->status !== null;
+    }
+
+    public function setCancelled(): self
+    {
+        return $this->setStatus(static::CANCELLED);
+    }
+
+    public function setConfirmed(): self
+    {
+        return $this->setStatus(static::CONFIRMED);
+    }
+
+    public function setTentative(): self
+    {
+        return $this->setStatus(static::TENTATIVE);
+    }
+
+    public function clearStatus(): self
+    {
+        return $this->setStatus(null);
     }
 }
