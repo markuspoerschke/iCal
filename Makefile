@@ -1,3 +1,5 @@
+export XDEBUG_MODE=coverage
+
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 PATH := $(CURDIR)/vendor/bin:$(PATH)
