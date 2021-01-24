@@ -1,0 +1,2 @@
+PHPUNIT_FLAGS = --coverage-html build/report
+INFECTION_FLAGS = --threads=4 --log-verbosity=all

@@ -24,6 +24,11 @@ class Calendar
     private Events $events;
 
     /**
+     * @var array<TimeZone>
+     */
+    private array $timeZones = [];
+
+    /**
      * @param Event[]|Iterator<Event>|Events $events
      */
     public function __construct($events = [])
@@ -71,6 +76,21 @@ class Calendar
     public function addEvent(Event $event): self
     {
         $this->events->addEvent($event);
+
+        return $this;
+    }
+
+    /**
+     * @return array<TimeZone>
+     */
+    public function getTimeZones(): array
+    {
+        return $this->timeZones;
+    }
+
+    public function addTimeZone(TimeZone $timeZone): self
+    {
+        $this->timeZones[] = $timeZone;
 
         return $this;
     }

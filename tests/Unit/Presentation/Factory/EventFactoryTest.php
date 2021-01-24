@@ -106,8 +106,8 @@ class CalendarFactoryTest extends TestCase
 
     public function testTimespanEvent()
     {
-        $begin = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'));
-        $end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'));
+        $begin = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'), false);
+        $end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'), false);
         $occurrence = new TimeSpan($begin, $end);
         $event = (new Event())->setOccurrence($occurrence);
 

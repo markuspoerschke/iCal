@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Eluceo\iCal\Integration;
+namespace Eluceo\iCal\Test\Integration;
 
 use DateInterval;
 use DateTimeImmutable;
@@ -48,6 +48,7 @@ class EventsGeneratorTest extends TestCase
             'BEGIN:VCALENDAR',
             'PRODID:-//eluceo/ical//2.0/EN',
             'VERSION:2.0',
+            'CALSCALE:GREGORIAN',
             'BEGIN:VEVENT',
             'UID:event-0',
             'DTSTAMP:20200101T150000Z',

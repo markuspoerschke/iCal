@@ -2,3 +2,6 @@
 /vendor
 /node_modules
 /report
+/build
+/.couscous
+/.github

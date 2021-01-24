@@ -38,9 +38,12 @@ class EventFactory
 {
     private AlarmFactory $alarmFactory;
 
-    public function __construct(?AlarmFactory $alarmFactory = null)
+    private DateTimeFactory $dateTimeFactory;
+
+    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null)
     {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
+        $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
     }
 
     /**
@@ -117,8 +120,8 @@ class EventFactory
         }
 
         if ($occurrence instanceof TimeSpan) {
-            yield new Property('DTSTART', new DateTimeValue($occurrence->getBegin()));
-            yield new Property('DTEND', new DateTimeValue($occurrence->getEnd()));
+            yield $this->dateTimeFactory->createProperty('DTSTART', $occurrence->getBegin());
+            yield $this->dateTimeFactory->createProperty('DTEND', $occurrence->getEnd());
         }
     }
 

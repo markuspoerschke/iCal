@@ -30,6 +30,7 @@ class CalendarFactoryTest extends TestCase
             'BEGIN:VCALENDAR',
             'PRODID:' . $calendar->getProductIdentifier(),
             'VERSION:2.0',
+            'CALSCALE:GREGORIAN',
             'END:VCALENDAR',
             '',
         ]);
@@ -58,6 +59,7 @@ class CalendarFactoryTest extends TestCase
             'BEGIN:VCALENDAR',
             'PRODID:-//test/ical//2.0/EN',
             'VERSION:2.0',
+            'CALSCALE:GREGORIAN',
             'BEGIN:VEVENT',
             'UID:event1',
             'DTSTAMP:20191110T112233Z',

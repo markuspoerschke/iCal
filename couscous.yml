@@ -20,6 +20,9 @@ menu:
       components/calendar:
         text: Calendar
         url: /components/calendar.html
+      components/timezone:
+        text: Time Zone
+        url: /components/timezone.html
   - section: Advanced
     items:
       advanced/custom-properties:
