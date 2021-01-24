@@ -11,7 +11,7 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
-class IntegerValue extends TextValue
+final class IntegerValue extends TextValue
 {
     public function __construct(int $value)
     {

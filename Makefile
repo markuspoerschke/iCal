@@ -1,3 +1,5 @@
+-include Makefile.local
+
 export XDEBUG_MODE=coverage
 
 MAKEFLAGS += --warn-undefined-variables
@@ -5,6 +7,7 @@ SHELL := bash
 PATH := $(CURDIR)/vendor/bin:$(PATH)
 PSALM_FLAGS ?=
 PHPUNIT_FLAGS ?=
+INFECTION_FLAGS ?=
 
 .PHONY: test
 test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd test-infection
@@ -19,7 +22,7 @@ test-psalm: dependencies
 
 .PHONY: test-phpunit
 test-phpunit: dependencies
-	phpunit ${PHPUNIT_FLAGS}
+	phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml ${PHPUNIT_FLAGS}
 
 .PHONY: test-examples
 EXAMPLE_FILES := $(wildcard examples/*.php)
@@ -28,7 +31,7 @@ test-examples: $(EXAMPLE_FILES)
 .PHONY: test-infection
 test-infection: dependencies test-phpunit
 test-infection:
-	infection --min-msi=60
+	infection --min-msi=60 --coverage=build/coverage ${INFECTION_FLAGS}
 
 examples/example*.php: dependencies
 	php $@ > /dev/null

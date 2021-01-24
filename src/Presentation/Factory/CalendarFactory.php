@@ -20,18 +20,26 @@ use Generator;
 class CalendarFactory
 {
     private EventFactory $eventFactory;
+    private TimeZoneFactory $timeZoneFactory;
 
-    public function __construct(?EventFactory $eventFactory = null)
+    public function __construct(?EventFactory $eventFactory = null, ?TimeZoneFactory $timeZoneFactory = null)
     {
         $this->eventFactory = $eventFactory ?? new EventFactory();
+        $this->timeZoneFactory = $timeZoneFactory ?? new TimeZoneFactory();
     }
 
     public function createCalendar(Calendar $calendar): Component
     {
-        $components = $this->eventFactory->createComponents($calendar->getEvents());
+        $components = $this->createCalendarComponents($calendar);
         $properties = iterator_to_array($this->getProperties($calendar), false);
 
         return new Component('VCALENDAR', $properties, $components);
+    }
+
+    protected function createCalendarComponents(Calendar $calendar): Generator
+    {
+        yield from $this->eventFactory->createComponents($calendar->getEvents());
+        yield from $this->timeZoneFactory->createComponents($calendar->getTimeZones());
     }
 
     /**
@@ -43,5 +51,7 @@ class CalendarFactory
         yield new Property('PRODID', new TextValue($calendar->getProductIdentifier()));
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.4 */
         yield new Property('VERSION', new TextValue('2.0'));
+        /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.1 */
+        yield new Property('CALSCALE', new TextValue('GREGORIAN'));
     }
 }

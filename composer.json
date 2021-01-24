@@ -28,9 +28,9 @@
         "ergebnis/composer-normalize": "^2.8",
         "friendsofphp/php-cs-fixer": "^2.16",
         "infection/infection": "^0.17.5",
-        "phpmd/phpmd": "^2.9",
+        "phpmd/phpmd": "~2.8.0",
         "phpunit/phpunit": "^9",
-        "vimeo/psalm": "^3.16"
+        "vimeo/psalm": "^4.4.1"
     },
     "autoload": {
         "psr-4": {

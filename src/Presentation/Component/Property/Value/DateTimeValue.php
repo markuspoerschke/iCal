@@ -11,7 +11,6 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
-use BadMethodCallException;
 use DateTimeZone;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\PointInTime;
@@ -21,8 +20,8 @@ use InvalidArgumentException;
 
 final class DateTimeValue extends Value
 {
-    private const FORMAT_UTC_DATE_TIME = 'Ymd\\THis\\Z';
-    private const FORMAT_NO_TIMEZONE = 'Ymd\\THis';
+    private const FORMAT_UTC = 'Ymd\\THis\\Z';
+    private const FORMAT = 'Ymd\\THis';
     private string $valueAsString;
 
     /**
@@ -37,18 +36,12 @@ final class DateTimeValue extends Value
     {
         $dateTime = $timestamp->getDateTime()->setTimezone(new DateTimeZone('UTC'));
 
-        return $dateTime->format(self::FORMAT_UTC_DATE_TIME);
+        return $dateTime->format(self::FORMAT_UTC);
     }
 
     private function convertDateTimeToString(DateTime $dateTime): string
     {
-        $format = self::FORMAT_NO_TIMEZONE;
-
-        if ($dateTime->hasDateTimeZone()) {
-            throw new BadMethodCallException('not implemented yet');
-        }
-
-        return $dateTime->getDateTime()->format($format);
+        return $dateTime->getDateTime()->format(self::FORMAT);
     }
 
     public function __toString(): string

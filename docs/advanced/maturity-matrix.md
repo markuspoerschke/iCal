@@ -5,12 +5,13 @@ title: Maturity Matrix
 
 # Maturity Matrix
 
-The generation of the `.ics` file follows the “Internet Calendaring and Scheduling Core Object Specification” ([RFC 5545](https://tools.ietf.org/html/rfc5545)).
-The domain objects in this package do not fully support all possibilities, that the specification provides.
-The following tables give an overview about the supported features.
+The generation of the `.ics` file follows the “Internet Calendaring and Scheduling Core Object
+Specification” ([RFC 5545](https://tools.ietf.org/html/rfc5545)). The domain objects in this package do not fully
+support all possibilities, that the specification provides. The following tables give an overview about the supported
+features.
 
-In the compatibility matrix, the icons from the following table are used.
-Each icon marks the level of support for the corresponding property or component.
+In the compatibility matrix, the icons from the following table are used. Each icon marks the level of support for the
+corresponding property or component.
 
 | Icon | Meaning             |
 | :--: | ------------------- |
@@ -28,7 +29,7 @@ See [RFC 5545 section 3.6](https://tools.ietf.org/html/rfc5545#section-3.6).
 | VTODO     |     ✖     |
 | VJOURNAL  |     ✖     |
 | VFREEBUSY |     ✖     |
-| VTIMEZONE |     ✖     |
+| VTIMEZONE |    (✔)    |
 | VALARM    |     ✔     |
 
 ## Event Component
@@ -72,7 +73,7 @@ See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 
 ## Alarm Component
 
-See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.6).
+See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 
 ### Audio
 
@@ -98,6 +99,32 @@ See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.6).
 | x-prop      |    (✔)    |
 | iana-prop   |    (✔)    |
 
-## Email
+### Email
 
 Not yet supported.
+
+## Time Zone Component
+
+See [RFC 5545 section 3.6.5](https://tools.ietf.org/html/rfc5545#section-3.6.5).
+
+| Property  | Supported |
+| --------- | :-------: |
+| tzid      |     ✔     |
+| last-mod  |     ✖     |
+| tzurl     |     ✖     |
+| x-prop    |    (✔)    |
+| iana-prop |    (✔)    |
+
+### Standard / Daylight sub-component
+
+| Property     | Supported |
+| ------------ | :-------: |
+| dtstart      |     ✔     |
+| tzoffsetto   |     ✔     |
+| tzoffsetfrom |     ✔     |
+| rrule        |     ✖     |
+| comment      |     ✖     |
+| rdate        |     ✖     |
+| tzname       |     ✔     |
+| x-prop       |    (✔)    |
+| iana-prop    |    (✔)    |
