@@ -1,11 +1,12 @@
 /.couscous
+/.idea
 /.php_cs.cache
 /.phpunit.result.cache
 /build
 /composer.lock
 /couscous.phar
+/Makefile.local
 /node_modules
 /phpunit.xml
 /report
 /vendor
-.idea
