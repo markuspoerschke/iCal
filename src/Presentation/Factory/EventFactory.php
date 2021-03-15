@@ -47,6 +47,7 @@ class EventFactory
     }
 
     /**
+     * @param Events $events
      * @return Generator<Component>
      */
     final public function createComponents(Events $events): Generator
@@ -66,6 +67,7 @@ class EventFactory
     }
 
     /**
+     * @param Event $event
      * @return Generator<Property>
      */
     protected function getProperties(Event $event): Generator
@@ -89,12 +91,17 @@ class EventFactory
             yield from $this->getLocationProperties($event);
         }
 
+        if ($event->hasStatus()) {
+            yield new Property('STATUS', new TextValue($event->getStatus()));
+        }
+
         foreach ($event->getAttachments() as $attachment) {
             yield from $this->getAttachmentProperties($attachment);
         }
     }
 
     /**
+     * @param Event $event
      * @return Generator<Component>
      */
     protected function getComponents(Event $event): Generator
@@ -106,6 +113,7 @@ class EventFactory
     }
 
     /**
+     * @param Occurrence $occurrence
      * @return Generator<Property>
      */
     private function getOccurrenceProperties(Occurrence $occurrence): Generator
@@ -126,6 +134,7 @@ class EventFactory
     }
 
     /**
+     * @param Event $event
      * @return Generator<Property>
      */
     private function getLocationProperties(Event $event): Generator
@@ -138,6 +147,7 @@ class EventFactory
     }
 
     /**
+     * @param Attachment $attachment
      * @return Generator<Property>
      */
     private function getAttachmentProperties(Attachment $attachment): Generator

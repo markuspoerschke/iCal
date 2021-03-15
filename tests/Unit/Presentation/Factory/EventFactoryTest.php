@@ -146,6 +146,52 @@ class CalendarFactoryTest extends TestCase
         ]);
     }
 
+    public function testEventStatus()
+    {
+        $event = (new Event())
+            ->setStatus(Event::CONFIRMED);
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:CONFIRMED',
+        ]);
+    }
+
+    public function testSettingEventStatusIncorrectly()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        (new Event())->setStatus('INVALID');
+    }
+
+    public function testStatusHelperFunctions()
+    {
+        $event = (new Event())->setConfirmed();
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:CONFIRMED',
+        ]);
+
+        $event = (new Event())->setTentative();
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:TENTATIVE',
+        ]);
+
+        $event = (new Event())->setCancelled();
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:CANCELLED',
+        ]);
+    }
+
+    public function testStatusCanBeCleared()
+    {
+        $event = (new Event())->setCancelled();
+        $this->assertEquals(Event::CANCELLED, $event->getStatus());
+
+        $event->clearStatus();
+        $this->assertEquals(null, $event->getStatus());
+    }
+
     private static function assertEventRendersCorrect(Event $event, array $expected)
     {
         $resultAsString = (string) (new EventFactory())->createComponent($event);
