@@ -42,7 +42,7 @@ class Property
         $string = $this->name;
 
         if (count($this->parameters) > 0) {
-            $string .= ':' . implode(';', array_map('strval', $this->parameters));
+            $string .= ';' . implode(';', array_map('strval', $this->parameters));
         }
 
         return $string . ':' . $this->value;

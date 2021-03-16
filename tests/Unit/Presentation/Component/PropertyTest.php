@@ -42,7 +42,7 @@ class PropertyTest extends TestCase
             [
                 new Parameter('TEST', new TextValue('value')),
             ],
-            'LOREM:TEST=value:Ipsum',
+            'LOREM;TEST=value:Ipsum',
         ];
 
         yield 'property with multiple parameters' => [
@@ -52,7 +52,7 @@ class PropertyTest extends TestCase
                 new Parameter('TEST', new TextValue('value')),
                 new Parameter('TEST2', new TextValue('value2')),
             ],
-            'LOREM:TEST=value;TEST2=value2:Ipsum',
+            'LOREM;TEST=value;TEST2=value2:Ipsum',
         ];
     }
 }
