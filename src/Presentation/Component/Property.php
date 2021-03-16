@@ -25,6 +25,8 @@ class Property
 
     private Value $value;
 
+    private string $delimiter = ':';
+
     /**
      * @param Parameter[] $parameters
      */
@@ -37,12 +39,17 @@ class Property
         }
     }
 
+    public function setDelimiter(string $delimiter): void
+    {
+        $this->delimiter = $delimiter;
+    }
+
     public function __toString(): string
     {
         $string = $this->name;
 
         if (count($this->parameters) > 0) {
-            $string .= ':' . implode(';', array_map('strval', $this->parameters));
+            $string .= $this->delimiter . implode(';', array_map('strval', $this->parameters));
         }
 
         return $string . ':' . $this->value;
