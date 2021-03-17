@@ -36,7 +36,10 @@ class CalendarFactory
         return new Component('VCALENDAR', $properties, $components);
     }
 
-    protected function createCalendarComponents(Calendar $calendar): Generator
+    /**
+     * @return iterable<Component>
+     */
+    protected function createCalendarComponents(Calendar $calendar): iterable
     {
         yield from $this->eventFactory->createComponents($calendar->getEvents());
         yield from $this->timeZoneFactory->createComponents($calendar->getTimeZones());
