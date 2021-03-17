@@ -34,7 +34,7 @@ class AlarmFactoryTest extends TestCase
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VALARM',
             'ACTION:AUDIO',
-            'TRIGGER:VALUE=DATE-TIME:20200930T000000',
+            'TRIGGER;VALUE=DATE-TIME:20200930T000000',
             'END:VALARM',
         ]);
 
@@ -58,7 +58,7 @@ class AlarmFactoryTest extends TestCase
             'ACTION:EMAIL',
             'SUMMARY:Summary Text',
             'DESCRIPTION:Description Text',
-            'TRIGGER:VALUE=DATE-TIME:20200930T000000',
+            'TRIGGER;VALUE=DATE-TIME:20200930T000000',
             'END:VALARM',
         ]);
 
@@ -81,7 +81,7 @@ class AlarmFactoryTest extends TestCase
             'BEGIN:VALARM',
             'ACTION:DISPLAY',
             'DESCRIPTION:Description Text',
-            'TRIGGER:VALUE=DATE-TIME:20200930T000000',
+            'TRIGGER;VALUE=DATE-TIME:20200930T000000',
             'END:VALARM',
         ]);
 
@@ -125,7 +125,7 @@ class AlarmFactoryTest extends TestCase
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VALARM',
             'ACTION:AUDIO',
-            'TRIGGER:VALUE=DATE-TIME:20200930T000000',
+            'TRIGGER;VALUE=DATE-TIME:20200930T000000',
             'REPEAT:3',
             'DURATION:P1D',
             'END:VALARM',

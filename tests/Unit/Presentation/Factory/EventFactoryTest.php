@@ -127,7 +127,7 @@ class CalendarFactoryTest extends TestCase
             );
 
         self::assertEventRendersCorrect($event, [
-            'ATTACH:FMTTYPE=text/plain:http://example.com/document.txt',
+            'ATTACH;FMTTYPE=text/plain:http://example.com/document.txt',
         ]);
     }
 
@@ -142,7 +142,7 @@ class CalendarFactoryTest extends TestCase
             );
 
         self::assertEventRendersCorrect($event, [
-            'ATTACH:FMTTYPE=text/plain;ENCODING=BASE64;VALUE=BINARY:SGVsbG8gV29ybGQh',
+            'ATTACH;FMTTYPE=text/plain;ENCODING=BASE64;VALUE=BINARY:SGVsbG8gV29ybGQh',
         ]);
     }
 
