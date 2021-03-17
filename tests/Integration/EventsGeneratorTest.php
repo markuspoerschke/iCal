@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Test\Integration;
 
 use DateInterval;
 use DateTimeImmutable;
+use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Date;
@@ -28,7 +29,7 @@ class EventsGeneratorTest extends TestCase
     public function testEventsGeneratorCreatesIcsContent(): void
     {
         $generator = function (): Generator {
-            $day = new DateTimeImmutable('2020-01-01 15:00:00');
+            $day = new DateTimeImmutable('2020-01-01 15:00:00', new DateTimeZone('UTC'));
             $timestamp = new Timestamp($day);
             $dayInterval = new DateInterval('P1D');
             for ($i = 0; $i < 3; ++$i) {
