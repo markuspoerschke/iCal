@@ -25,6 +25,6 @@ class DateTimeFactoryTest extends TestCase
 
         $property = (new DateTimeFactory())->createProperty('DTSTART', $dateTime);
 
-        self::assertSame('DTSTART:TZID=Europe/Berlin:20210122T111213', $property->__toString());
+        self::assertSame('DTSTART;TZID=Europe/Berlin:20210122T111213', $property->__toString());
     }
 }

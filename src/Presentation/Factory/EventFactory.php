@@ -135,7 +135,7 @@ class EventFactory
 
         if ($event->getLocation()->hasGeographicalPosition()) {
             yield new Property('GEO', new GeoValue($event->getLocation()->getGeographicPosition()));
-            $appleLocationProperty = new Property(
+            yield new Property(
                 'X-APPLE-STRUCTURED-LOCATION',
                 new TextValue(sprintf('geo:%1.6F,%1.6F',
                     number_format($event->getLocation()->getGeographicPosition()->getLatitude(), 6),
@@ -148,8 +148,6 @@ class EventFactory
                     new Parameter('X-TITLE', new TextValue('')),
                 ]
             );
-            $appleLocationProperty->setDelimiter(';');
-            yield $appleLocationProperty;
         }
     }
 
