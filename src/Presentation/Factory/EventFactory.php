@@ -23,6 +23,7 @@ use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Parameter;
+use Eluceo\iCal\Presentation\Component\Property\Value\AppleLocationGeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\BinaryValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
@@ -137,15 +138,12 @@ class EventFactory
             yield new Property('GEO', new GeoValue($event->getLocation()->getGeographicPosition()));
             yield new Property(
                 'X-APPLE-STRUCTURED-LOCATION',
-                new TextValue(sprintf('geo:%1.6F,%1.6F',
-                    number_format($event->getLocation()->getGeographicPosition()->getLatitude(), 6),
-                    number_format($event->getLocation()->getGeographicPosition()->getLongitude(), 6),
-                )),
+                new AppleLocationGeoValue($event->getLocation()->getGeographicPosition()),
                 [
                     new Parameter('VALUE', new TextValue('URI')),
                     new Parameter('X-ADDRESS', new TextValue((string) $event->getLocation())),
                     new Parameter('X-APPLE-RADIUS', new IntegerValue(49)),
-                    new Parameter('X-TITLE', new TextValue('')),
+                    new Parameter('X-TITLE', new TextValue($event->getLocation()->getTitle())),
                 ]
             );
         }
