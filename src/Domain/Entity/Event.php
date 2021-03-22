@@ -24,6 +24,7 @@ class Event
     private Timestamp $touchedAt;
     private ?string $summary = null;
     private ?string $description = null;
+    private ?string $status = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
 
@@ -108,6 +109,32 @@ class Event
     public function unsetDescription(): self
     {
         $this->description = null;
+
+        return $this;
+    }
+
+    public function getStatus(): string
+    {
+        assert($this->status !== null);
+
+        return $this->status;
+    }
+
+    public function hasStatus(): bool
+    {
+        return $this->status !== null;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function unsetStatus(): self
+    {
+        $this->status = null;
 
         return $this;
     }

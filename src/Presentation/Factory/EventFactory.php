@@ -81,6 +81,10 @@ class EventFactory
             yield new Property('DESCRIPTION', new TextValue($event->getDescription()));
         }
 
+        if ($event->hasStatus()) {
+            yield new Property('STATUS', new TextValue($event->getStatus()));
+        }
+
         if ($event->hasOccurrence()) {
             yield from $this->getOccurrenceProperties($event->getOccurrence());
         }
