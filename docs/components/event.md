@@ -179,8 +179,8 @@ use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$start = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'));
-$end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'));
+$start = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'), false);
+$end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'), false);
 $occurrence = new TimeSpan($start, $end);
 
 $event = new Event();
@@ -201,6 +201,9 @@ use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 
 $location = new Location('North Pole');
+
+// optionally you can create a location with a title for X-APPLE-STRUCTURED-LOCATION attribute
+$location = new Location('North Pole', 'Middle of nowhere');
 
 // optionally a location with a geographical position can be created
 $location = $location->withGeographicPosition(new GeographicPosition(64.751111, 147.349444));
