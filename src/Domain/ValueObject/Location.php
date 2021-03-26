@@ -47,7 +47,7 @@ final class Location
 
     public function getTitle(): string
     {
-        return (string)$this->title;
+        return (string) $this->title;
     }
 
     public function __toString(): string
