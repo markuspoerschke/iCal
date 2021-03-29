@@ -42,7 +42,7 @@ class TimeZone
             $endDateTime ? $endDateTime->getTimestamp() : PHP_INT_MAX
         );
         $timeZone = new self($phpDateTimeZone->getName());
-        /** @var array{ts: int, time: string, offset: int, isdst: bool, abbr: string} $transitionArray */
+
         foreach ($transitions as $transitionArray) {
             $fromDateTime = DateTimeImmutable::createFromFormat(
                 DateTimeImmutable::ISO8601,

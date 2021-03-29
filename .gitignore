@@ -3,7 +3,6 @@
 /.php_cs.cache
 /.phpunit.result.cache
 /build
-/composer.lock
 /couscous.phar
 /Makefile.local
 /node_modules
