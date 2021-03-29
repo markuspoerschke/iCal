@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2021-03-29
+
 This version is complete rewrite.
 Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*` to `2.0.0`.
 
@@ -110,7 +112,7 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 
 ### Fixed
 
--   Fix the GEO property (compatibility to PHP < 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
+-   Fix the GEO property (compatibility to PHP &lt; 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
 
 ## [0.11.2] - 2017-04-21
 
@@ -189,3 +191,5 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 [0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/markuspoerschke/iCal/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/markuspoerschke/iCal/compare/0.8.0...0.9.0
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.0...2.0.0
