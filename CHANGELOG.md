@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2.0.0
+## [Unreleased]
+
+## [2.0.0] - 2021-09-03
 
 This version is complete rewrite.
 Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*` to `2.0.0`.
@@ -22,7 +24,7 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 
 -   Support for PHP `<=7.3`
 
-## [0.16.0]
+## [0.16.0] - 2019-12-29
 
 ### Added
 
@@ -172,6 +174,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.0.0...2.x
+[2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.1...2.0.0
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
