@@ -1,7 +1,6 @@
 # 📅 eluceo — iCal 2
 
-[![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=2.x)](https://travis-ci.org/markuspoerschke/iCal)
-![reviewdog](https://github.com/markuspoerschke/iCal/workflows/reviewdog/badge.svg?branch=2.x)
+[![Continuous Integration](https://github.com/markuspoerschke/iCal/actions/workflows/ci.yml/badge.svg)](https://github.com/markuspoerschke/iCal/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/markuspoerschke/iCal/branch/2.x/graph/badge.svg)](https://codecov.io/gh/markuspoerschke/iCal)
 [![Psalm coverage](https://shepherd.dev/github/markuspoerschke/ical/coverage.svg?)](https://shepherd.dev/github/markuspoerschke/ical)
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
