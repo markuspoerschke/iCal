@@ -35,3 +35,6 @@ jobs:
 
       - name: "Run tests"
         run: "make -j -O test"
+
+      - name: "Send code coverage"
+        uses: codecov/codecov-action@v1
