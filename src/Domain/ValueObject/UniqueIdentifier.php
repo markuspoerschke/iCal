@@ -25,8 +25,8 @@ final class UniqueIdentifier
 
     public static function createRandom(): self
     {
-        if (function_exists('uuid_create') && defined('UUID_TYPE_RANDOM')) {
-            return new self((string) uuid_create(UUID_TYPE_RANDOM));
+        if (function_exists('random_bytes')) {
+            return new self((string) bin2hex(random_bytes(16)));
         }
 
         return new self(uniqid());
