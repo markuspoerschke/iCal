@@ -70,7 +70,7 @@ class CalendarFactoryTest extends TestCase
     public function testEventWithLocation()
     {
         $geographicalPosition = new GeographicPosition(51.333333333333, 7.05);
-        $location = (new Location('Location Name'))->withGeographicPosition($geographicalPosition);
+        $location = (new Location('Location Name', 'Somewhere'))->withGeographicPosition($geographicalPosition);
         $event = (new Event())->setLocation($location);
 
         self::assertEventRendersCorrect(
@@ -78,6 +78,8 @@ class CalendarFactoryTest extends TestCase
             [
                 'LOCATION:Location Name',
                 'GEO:51.333333;7.050000',
+                'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Location Name;X-APPLE-RADIU',
+                ' S=49;X-TITLE=Somewhere:geo:51.333333,7.050000',
             ]
         );
     }

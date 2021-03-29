@@ -11,21 +11,11 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
-use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
-use Eluceo\iCal\Presentation\Component\Property\Value;
-
-class GeoValue extends Value
+final class AppleLocationGeoValue extends GeoValue
 {
-    protected GeographicPosition $geographicPosition;
-
-    public function __construct(GeographicPosition $geographicPosition)
-    {
-        $this->geographicPosition = $geographicPosition;
-    }
-
     public function __toString(): string
     {
-        return sprintf('%1.6F;%1.6F',
+        return sprintf('geo:%1.6F,%1.6F',
             number_format($this->geographicPosition->getLatitude(), 6),
             number_format($this->geographicPosition->getLongitude(), 6),
         );
