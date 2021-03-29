@@ -1,6 +1,6 @@
 name: reviewdog
 
-on: [pull_request]
+on: [pull_request_target]
 
 jobs:
   spellchecker:
@@ -10,4 +10,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: reviewdog/action-languagetool@v1
         with:
+          github_token: ${{ secrets.PAT }}
           level: info
+          reporter: github-pr-review
