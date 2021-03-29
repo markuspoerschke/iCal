@@ -26,7 +26,7 @@ final class UniqueIdentifier
     public static function createRandom(): self
     {
         if (function_exists('random_bytes')) {
-            return new self((string) bin2hex(random_bytes(16)));
+            return new self(bin2hex(random_bytes(16)));
         }
 
         return new self(uniqid());
