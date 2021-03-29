@@ -8,7 +8,7 @@ on:
         required: true
       target_branch:
         description: "The target branch for the new version"
-        default: "1.x"
+        default: "2.x"
         required: true
 
 jobs:

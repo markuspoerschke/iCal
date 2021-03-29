@@ -3,7 +3,7 @@ name: "Publish new release"
 on:
   pull_request:
     branches:
-      - 1.x
+      - 2.x
     types:
       - closed
 
