@@ -1,5 +1,5 @@
 import "./styles.scss";
-const hljs = require("highlight.js/lib/highlight");
+const hljs = require("highlight.js/lib/core");
 hljs.registerLanguage("php", require("highlight.js/lib/languages/php"));
 hljs.registerLanguage(
     "plaintext",
