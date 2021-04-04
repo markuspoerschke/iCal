@@ -200,13 +200,13 @@ use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 
-$location = new Location('North Pole');
+$location = new Location('Neuschwansteinstraße 20, 87645 Schwangau');
 
 // optionally you can create a location with a title for X-APPLE-STRUCTURED-LOCATION attribute
-$location = new Location('North Pole', 'Middle of nowhere');
+$location = new Location('Neuschwansteinstraße 20, 87645 Schwangau', 'Schloss Neuschwanstein');
 
 // optionally a location with a geographical position can be created
-$location = $location->withGeographicPosition(new GeographicPosition(64.751111, 147.349444));
+$location = $location->withGeographicPosition(new GeographicPosition(47.557579, 10.749704));
 
 $event = new Event();
 $event->setLocation($location);
