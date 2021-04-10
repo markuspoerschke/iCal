@@ -1,9 +1,6 @@
 ---
-currentMenu: advanced/maturity-matrix
 title: Maturity Matrix
 ---
-
-# Maturity Matrix
 
 The generation of the `.ics` file follows the “Internet Calendaring and Scheduling Core Object
 Specification” ([RFC 5545](https://tools.ietf.org/html/rfc5545)). The domain objects in this package do not fully

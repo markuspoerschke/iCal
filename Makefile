@@ -89,25 +89,17 @@ fix-prettier:
 	npx prettier --write .
 
 .PHONY: docs
-docs: docs-dependencies docs-frontend-build
-	php couscous.phar generate
+docs: docs-dependencies
+	cd  website && yarn build
 
 .PHONY: docs-dependencies
 docs-dependencies:
-	if [ ! -f couscous.phar ]; then php -r "copy('https://github.com/CouscousPHP/Couscous/releases/download/1.8.0/couscous.phar', 'couscous.phar');"; fi
-
-.PHONY: docs-preview
-docs-preview: docs-dependencies docs-frontend-build
-	php couscous.phar preview
-
-.PHONY: docs-frontend-dependencies
-docs-frontend-dependencies:
 	cd website && yarn
 
-.PHONY: docs-frontend-build
-docs-frontend-build: docs-frontend-dependencies
-	cd  website && yarn build
+.PHONY: docs-preview
+docs-preview: docs-dependencies
+	cd website && yarn start
 
 .PHONY: clean
 clean:
-	rm -rf vendor .couscous website/node_modules website/template/static couscous.phar node_modules .phpunit.result.cache .php_cs.cache report
+	rm -rf vendor website/node_modules website/build website/.docusaurus couscous.phar node_modules .phpunit.result.cache .php_cs.cache report

@@ -1,9 +1,7 @@
-/.couscous
 /.idea
 /.php_cs.cache
 /.phpunit.result.cache
 /build
-/couscous.phar
 /Makefile.local
 /node_modules
 /phpunit.xml

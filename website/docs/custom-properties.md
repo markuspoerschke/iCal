@@ -1,9 +1,6 @@
 ---
-currentMenu: advanced/custom-properties
 title: Custom Properties
 ---
-
-# Custom Properties
 
 The domain entities in these packages are equipped with the commonly needed properties.
 In some cases these properties do not fully cover every use case.

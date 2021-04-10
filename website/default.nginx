@@ -1,0 +1,23 @@
+server {
+    listen       80;
+    server_name  localhost;
+    absolute_redirect off;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+
+        rewrite ^/$ /docs redirect;
+        rewrite ^/getting-started/installation.html$ /docs/installation permanent;
+        rewrite ^/components/event.html$ /docs/component-event permanent;
+        rewrite ^/components/calendar.html$ /docs/component-calendar permanent;
+        rewrite ^/components/timezone.html$ /docs/component-timezone permanent;
+        rewrite ^/advanced/custom-properties.html$ /docs/custom-properties permanent;
+        rewrite ^/advanced/maturity-matrix.html$ /docs/maturity-matrix permanent;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
