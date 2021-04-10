@@ -1,16 +1,13 @@
 ---
-currentMenu: components/event
-title: Event Component
+title: Event
 ---
-
-# Event
 
 The event domain object `\Eluceo\iCal\Domain\Entity\Event` represents a scheduled amount of time on a calendar.
 For example, it can be an one-hour lunch meeting from 12:00 to 13:00 on 24th of december.
 
 ## Create new instance
 
-When creating a new instance with the static method `Event::create`, the optional parameter `$uniqueIdentifier` can be set.
+When creating a new instance with the default construct method `new Event()`, the optional parameter `$uniqueIdentifier` can be set.
 If it is not set, then a random, but unique identifier is created.
 
 ```php

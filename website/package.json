@@ -1,23 +1,37 @@
 {
+    "name": "website",
+    "version": "0.0.0",
     "private": true,
-    "devDependencies": {
-        "css-loader": "^3.2.1",
-        "file-loader": "^5.0.2",
-        "mini-css-extract-plugin": "^0.8.0",
-        "node-sass": "^4.13.0",
-        "sass-loader": "^8.0.0",
-        "style-loader": "^1.0.1",
-        "webpack": "^4.41.2",
-        "webpack-cli": "^3.3.10"
+    "scripts": {
+        "docusaurus": "docusaurus",
+        "start": "docusaurus start",
+        "build": "docusaurus build",
+        "swizzle": "docusaurus swizzle",
+        "deploy": "docusaurus deploy",
+        "clear": "docusaurus clear",
+        "serve": "docusaurus serve",
+        "write-translations": "docusaurus write-translations",
+        "write-heading-ids": "docusaurus write-heading-ids"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.11.2",
-        "@openfonts/raleway_latin": "^1.44.0",
-        "ackee-tracker": "^3.2.2",
-        "highlight.js": "^10.4.1"
+        "@docusaurus/core": "2.0.0-alpha.72",
+        "@docusaurus/preset-classic": "2.0.0-alpha.72",
+        "@mdx-js/react": "^1.6.21",
+        "clsx": "^1.1.1",
+        "docusaurus-plugin-ackee": "^0.0.0",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
     },
-    "scripts": {
-        "build": "webpack-cli -p",
-        "watch": "webpack-cli -w -d"
+    "browserslist": {
+        "production": [
+            ">0.5%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }

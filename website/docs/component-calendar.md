@@ -1,9 +1,6 @@
 ---
-currentMenu: components/calendar
-title: Calendar Component
+title: Calendar
 ---
-
-# Calendar
 
 The calendar is basically a collection of events.
 A calendar can be represented as a `.ical` file.

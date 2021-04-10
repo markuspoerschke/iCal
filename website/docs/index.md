@@ -1,8 +1,7 @@
 ---
-currentMenu: home
+title: Introduction
+slug: /
 ---
-
-# iCalendar Generator for PHP
 
 The `eluceo/ical` package provides classes to generate `.ics` files.
 The iCalendar specification is defined in [RFC 5545](https://tools.ietf.org/html/rfc5545) and allows sharing calendar information among different systems.

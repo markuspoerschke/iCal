@@ -1,9 +1,6 @@
 ---
-currentMenu: getting-started/installation
-title: Install
+title: Installation
 ---
-
-# Installation
 
 The package can be installed using [Composer](http://getcomposer.org).
 
