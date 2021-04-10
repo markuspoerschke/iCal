@@ -9,6 +9,16 @@ PSALM_FLAGS ?=
 PHPUNIT_FLAGS ?=
 INFECTION_FLAGS ?=
 
+.PHONY: help
+help:
+	@echo 'Available targets'
+	@echo '  clean               Removes temporary build artifacts like'
+	@echo '  dependencies        Installs composer dependencies'
+	@echo '  docs                Builds the documentation website'
+	@echo '  fix                 Fixes composer.json and code style'
+	@echo '  fix-prettier        Fix code style of non PHP files (not included in "fix" target)'
+	@echo '  test                Execute all tests'
+
 .PHONY: test
 test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd test-infection
 
