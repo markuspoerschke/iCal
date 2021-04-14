@@ -94,6 +94,14 @@ class EventFactory
         foreach ($event->getAttachments() as $attachment) {
             yield from $this->getAttachmentProperties($attachment);
         }
+
+        foreach ($event->getAttributes() as $key => $value) {
+            if (!is_object($value)) {
+                $value = new TextValue($value);
+            }
+
+            yield new Property(strtoupper($key), $value);
+        }
     }
 
     /**
