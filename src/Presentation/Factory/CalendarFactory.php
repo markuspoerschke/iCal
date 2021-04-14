@@ -57,8 +57,12 @@ class CalendarFactory
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.1 */
         yield new Property('CALSCALE', new TextValue('GREGORIAN'));
 
+        /**
+         * @var string $key
+         * @var Property\Value|string $value
+         */
         foreach ($calendar->getAttributes() as $key => $value) {
-            if (!is_object($value)) {
+            if (is_string($value)) {
                 $value = new TextValue($value);
             }
 

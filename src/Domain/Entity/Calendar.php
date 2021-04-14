@@ -98,22 +98,30 @@ class Calendar
     }
 
 
+    /**
+     * @param string $name
+     * @return mixed|null
+     */
     public function __get(string $name)
     {
         return $this->attributes[$name] ?? null;
     }
 
-    public function __set(string $name, mixed $value)
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set(string $name, $value): void
     {
         $this->setAttribute($name, $value);
     }
 
-    public function __isset($name): bool
+    public function __isset(string $name): bool
     {
         return isset($this->attributes[$name]);
     }
 
-    public function __unset($name)
+    public function __unset(string $name): void
     {
         unset($this->attributes[$name]);
     }
@@ -124,7 +132,11 @@ class Calendar
         return $this->attributes;
     }
 
-    public function setAttribute(string $name, mixed $value)
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setAttribute(string $name, $value): void
     {
         $this->attributes[$name] = $value;
     }

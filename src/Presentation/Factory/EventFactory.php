@@ -95,8 +95,12 @@ class EventFactory
             yield from $this->getAttachmentProperties($attachment);
         }
 
+        /**
+         * @var string $key
+         * @var Property\Value|string $value
+         */
         foreach ($event->getAttributes() as $key => $value) {
-            if (!is_object($value)) {
+            if (is_string($value)) {
                 $value = new TextValue($value);
             }
 
