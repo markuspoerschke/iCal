@@ -4,9 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/website.yml"
-      - "docs/**"
       - "website/**"
-      - "couscous.yml"
       - "Dockerfile"
     branches:
       - 2.x

@@ -35,7 +35,7 @@ make fix
 ## Documentation
 
 The documentation will be published on the website `https://ical.poerschke.nrw`.
-The sources are available within the `docs/` folder.
+The sources are available within the `website/docs/` folder.
 To preview the result, you can run:
 
 ```
