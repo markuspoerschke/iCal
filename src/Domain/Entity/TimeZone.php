@@ -49,7 +49,7 @@ class TimeZone
 
         foreach ($transitions as $transitionArray) {
             $fromDateTime = DateTimeImmutable::createFromFormat(
-                DateTimeImmutable::ATOM,
+                DateTimeImmutable::ISO8601,
                 $transitionArray['time']
             );
             assert($fromDateTime instanceof DateTimeImmutable, $transitionArray['time']);
