@@ -10,12 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   TZOFFSETTO and TZOFFSETFROM should never be -0000 [#246](https://github.com/markuspoerschke/iCal/pull/246)
--   Calling TimeZone::createFromPhpDateTimeZone with default values fails with assertion
+-   Calling TimeZone::createFromPhpDateTimeZone with default values fails with assertion [#250](https://github.com/markuspoerschke/iCal/pull/250)
 
 ### Deprecated
 
 -   Method `Eluceo\iCal\Domain\Entity\TimeZone::createFromPhpDateTimeZone` will not have default values
-    for `$beginDateTime` and `$endDateTime` in the next major version.
+    for `$beginDateTime` and `$endDateTime` in the next major version. [#250](https://github.com/markuspoerschke/iCal/pull/250)
 
 ## [2.0.0] - 2021-03-29
 
