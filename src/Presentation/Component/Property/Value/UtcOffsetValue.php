@@ -28,7 +28,7 @@ final class UtcOffsetValue extends Value
 
     public static function fromSeconds(int $seconds): self
     {
-        $prefix = ($seconds > 0) ? '+' : '-';
+        $prefix = ($seconds >= 0) ? '+' : '-';
         $seconds = abs($seconds);
 
         $hours = intval($seconds / (60 * 60));
