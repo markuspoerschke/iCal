@@ -37,18 +37,22 @@ class TimeZone
         ?DateTimeInterface $beginDateTime = null,
         ?DateTimeInterface $endDateTime = null
     ): self {
+        if ($beginDateTime === null || $endDateTime === null) {
+            trigger_deprecation('eluceo/ical', '2.1.0', 'Relying on the default values for begin and end date when calling TimeZone::createFromPhpDateTimeZone() is deprecated. Please provide a begin and an end date.');
+        }
+
         $transitions = $phpDateTimeZone->getTransitions(
-            $beginDateTime ? $beginDateTime->getTimestamp() : PHP_INT_MIN,
+            $beginDateTime ? $beginDateTime->getTimestamp() : (new DateTimeImmutable('0000-01-01 12:00:00'))->getTimestamp(),
             $endDateTime ? $endDateTime->getTimestamp() : PHP_INT_MAX
         );
         $timeZone = new self($phpDateTimeZone->getName());
 
         foreach ($transitions as $transitionArray) {
             $fromDateTime = DateTimeImmutable::createFromFormat(
-                DateTimeImmutable::ISO8601,
+                DateTimeImmutable::ATOM,
                 $transitionArray['time']
             );
-            assert($fromDateTime instanceof DateTimeImmutable);
+            assert($fromDateTime instanceof DateTimeImmutable, $transitionArray['time']);
             $localFromDateTime = $fromDateTime->setTimezone($phpDateTimeZone);
 
             $timeZone->addTransition(new TimeZoneTransition(
