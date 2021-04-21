@@ -102,4 +102,4 @@ docs-preview: docs-dependencies
 
 .PHONY: clean
 clean:
-	rm -rf vendor website/node_modules website/build website/.docusaurus couscous.phar node_modules .phpunit.result.cache .php_cs.cache report
+	rm -rf vendor website/node_modules website/build website/.docusaurus node_modules .phpunit.result.cache .php_cs.cache build

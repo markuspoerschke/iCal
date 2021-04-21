@@ -1,4 +1,4 @@
-/.couscous
+/build
 /vendor
-/website/template/static
+/website/.docusaurus
 /website/node_modules
