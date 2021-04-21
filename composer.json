@@ -19,7 +19,8 @@
     ],
     "require": {
         "php": ">=7.4 || ~8.0.0",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "symfony/deprecation-contracts": "^2.1"
     },
     "conflict": {
         "php": "7.4.6"
