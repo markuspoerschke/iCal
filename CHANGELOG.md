@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- TZOFFSETTO and TZOFFSETFROM should never be -0000 [#246](https://github.com/markuspoerschke/iCal/pull/246)
+-   TZOFFSETTO and TZOFFSETFROM should never be -0000 [#246](https://github.com/markuspoerschke/iCal/pull/246)
 
 ## [2.0.0] - 2021-03-29
 
