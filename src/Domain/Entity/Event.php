@@ -26,6 +26,8 @@ class Event
     private ?string $description = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
+    private ?Timestamp $lastModified = null;
+    protected array $attributes = [];
 
     /**
      * @var array<Alarm>
@@ -58,6 +60,18 @@ class Event
         $this->touchedAt = $dateTime ?? new Timestamp();
 
         return $this;
+    }
+
+
+    public function setLastModified(Timestamp $dateTime): self
+    {
+        $this->lastModified = $dateTime;
+        return $this;
+    }
+
+    public function getLastModified(): ?Timestamp
+    {
+        return $this->lastModified;
     }
 
     public function getSummary(): string
@@ -178,5 +192,50 @@ class Event
     public function getAttachments(): array
     {
         return $this->attachments;
+    }
+
+
+    /**
+     * @param string $name
+     * @return mixed|null
+     */
+    public function __get(string $name)
+    {
+        return $this->attributes[$name] ?? null;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set(string $name, $value): void
+    {
+        $this->setAttribute($name, $value);
+    }
+
+    public function __isset(string $name): bool
+    {
+        return isset($this->attributes[$name]);
+    }
+
+
+    public function __unset(string $name): void
+    {
+        unset($this->attributes[$name]);
+    }
+
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setAttribute(string $name, $value): void
+    {
+        $this->attributes[$name] = $value;
     }
 }

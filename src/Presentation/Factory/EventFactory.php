@@ -16,6 +16,7 @@ use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
+use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
@@ -93,6 +94,24 @@ class EventFactory
 
         foreach ($event->getAttachments() as $attachment) {
             yield from $this->getAttachmentProperties($attachment);
+        }
+
+        /**
+         * @var string $key
+         * @var Property\Value|string $value
+         */
+        foreach ($event->getAttributes() as $key => $value) {
+            if (is_string($value)) {
+                $value = new TextValue($value);
+            }
+
+            yield new Property(strtoupper($key), $value);
+        }
+
+        if ($event->getLastModified() != null) {
+            /** @var DateTime $value */
+            $value = $event->getLastModified();
+            yield new Property('LAST-MODIFIED', new DateTimeValue($value));
         }
     }
 

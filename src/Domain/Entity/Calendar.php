@@ -23,6 +23,8 @@ class Calendar
 
     private Events $events;
 
+    protected array $attributes = [];
+
     /**
      * @var array<TimeZone>
      */
@@ -93,5 +95,49 @@ class Calendar
         $this->timeZones[] = $timeZone;
 
         return $this;
+    }
+
+
+    /**
+     * @param string $name
+     * @return mixed|null
+     */
+    public function __get(string $name)
+    {
+        return $this->attributes[$name] ?? null;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set(string $name, $value): void
+    {
+        $this->setAttribute($name, $value);
+    }
+
+    public function __isset(string $name): bool
+    {
+        return isset($this->attributes[$name]);
+    }
+
+    public function __unset(string $name): void
+    {
+        unset($this->attributes[$name]);
+    }
+
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setAttribute(string $name, $value): void
+    {
+        $this->attributes[$name] = $value;
     }
 }
