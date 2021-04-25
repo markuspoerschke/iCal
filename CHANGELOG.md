@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Event organizer
+
 ## [2.1.0] - 2021-04-21
 
 ### Fixed
