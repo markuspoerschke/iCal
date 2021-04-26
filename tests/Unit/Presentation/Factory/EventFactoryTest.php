@@ -18,9 +18,11 @@ use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
+use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -145,6 +147,22 @@ class CalendarFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'ATTACH;FMTTYPE=text/plain;ENCODING=BASE64;VALUE=BINARY:SGVsbG8gV29ybGQh',
+        ]);
+    }
+
+    public function testOrganizer()
+    {
+        $event = (new Event())
+            ->setOrganizer(new Organizer(
+                new EmailAddress('test@example.com'),
+                'Test Display Name',
+                new Uri('example://directory-entry'),
+                new EmailAddress('sendby@example.com')
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ORGANIZER;CN=Test Display Name;DIR=example://directory-entry;SENT-BY=mailto',
+            ' :sendby%40example.com:mailto:test%40example.com',
         ]);
     }
 

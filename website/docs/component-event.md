@@ -39,6 +39,7 @@ The following sections explain the properties of the domain object:
 -   [Description](#description)
 -   [Occurrence](#occurrence)
 -   [Location](#location)
+-   [Organizer](#organizer)
 -   [Attachments](#attachments)
 
 ### Unique Identifier
@@ -207,6 +208,30 @@ $location = $location->withGeographicPosition(new GeographicPosition(47.557579, 
 
 $event = new Event();
 $event->setLocation($location);
+```
+
+### Organizer
+
+The Organizer defines the person who organises the event.
+The property consists of at least an email address.
+Optional a display name, or a directory entry (as used in LDAP for example) can be added.
+In case the event was sent in behalf of another person, then the `sendBy` attribute will contain the email address.
+
+```php
+use Eluceo\iCal\Domain\ValueObject\Organizer;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
+use Eluceo\iCal\Domain\Entity\Event;
+
+$organizer = new Organizer(
+    new EmailAddress('test@example.org'),
+    'John Doe',
+    new Uri('ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)'),
+    new EmailAddress('sender@example.com')
+);
+
+$event = new Event();
+$event->setOrganizer($organizer);
 ```
 
 ### Attachments

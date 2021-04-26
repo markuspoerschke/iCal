@@ -18,6 +18,7 @@ use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
+use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
@@ -89,6 +90,10 @@ class EventFactory
 
         if ($event->hasLocation()) {
             yield from $this->getLocationProperties($event);
+        }
+
+        if ($event->hasOrganizer()) {
+            yield $this->getOrganizerProperty($event->getOrganizer());
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -178,5 +183,24 @@ class EventFactory
                 $parameters
             );
         }
+    }
+
+    private function getOrganizerProperty(Organizer $organizer): Property
+    {
+        $parameters = [];
+
+        if ($organizer->hasDisplayName()) {
+            $parameters[] = new Parameter('CN', new TextValue($organizer->getDisplayName()));
+        }
+
+        if ($organizer->hasDirectoryEntry()) {
+            $parameters[] = new Parameter('DIR', new UriValue($organizer->getDirectoryEntry()));
+        }
+
+        if ($organizer->isSentInBehalfOf()) {
+            $parameters[] = new Parameter('SENT-BY', new UriValue($organizer->getSentBy()->toUri()));
+        }
+
+        return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
     }
 }
