@@ -212,10 +212,10 @@ $event->setLocation($location);
 
 ### Organizer
 
-The Organizer defines the person who is organizing the event.
-The property consists of an email address.
-Optional a display name, or a directory entry (like used in LDAP) can be added.
-When the event was sent in behalf of another person, then the `sendBy` attribute will contain the e-mail address.
+The Organizer defines the person who organises the event.
+The property consists of at least an email address.
+Optional a display name, or a directory entry (as used in LDAP for example) can be added.
+In case the event was sent in behalf of another person, then the `sendBy` attribute will contain the email address.
 
 ```php
 use Eluceo\iCal\Domain\ValueObject\Organizer;
