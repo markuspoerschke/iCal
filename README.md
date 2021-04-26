@@ -12,6 +12,13 @@ This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
 The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) as good as possible.
 
+## Navigate through the project
+
+-   📖 [read the documentation](https://ical.poerschke.nrw)
+-   🐛 [report a bug or suggest a feature](https://github.com/markuspoerschke/iCal/issues)
+-   🙋 [raise a question](https://github.com/markuspoerschke/iCal/discussions/categories/q-a)
+-   💬 [start a discussion](https://github.com/markuspoerschke/iCal/discussions)
+
 ## Installation
 
 You can install this package by using [Composer](http://getcomposer.org), running the following command:

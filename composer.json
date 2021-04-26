@@ -45,6 +45,8 @@
     },
     "support": {
         "issues": "https://github.com/markuspoerschke/iCal/issues",
-        "source": "https://github.com/markuspoerschke/iCal"
+        "forum": "https://github.com/markuspoerschke/iCal/discussions",
+        "source": "https://github.com/markuspoerschke/iCal",
+        "docs": "https://ical.poerschke.nrw"
     }
 }
