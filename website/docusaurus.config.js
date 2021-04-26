@@ -39,6 +39,21 @@ module.exports = {
                     ],
                 },
                 {
+                    title: "Support and Community",
+                    items: [
+                        {
+                            label: "Raise a question",
+                            to:
+                                "https://github.com/markuspoerschke/iCal/discussions/categories/q-a",
+                        },
+                        {
+                            label: "Report a bug",
+                            to:
+                                "https://github.com/markuspoerschke/iCal/issues",
+                        },
+                    ],
+                },
+                {
                     title: "More",
                     items: [
                         {
