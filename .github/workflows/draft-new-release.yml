@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Update changelog
-        uses: thomaseizinger/keep-a-changelog-new-release@1.2.0
+        uses: thomaseizinger/keep-a-changelog-new-release@1.2.1
         with:
           version: ${{ github.event.inputs.version }}
 
