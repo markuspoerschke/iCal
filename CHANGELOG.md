@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2021-05-03
+
 ### Added
 
 -   Event organizer [#260](https://github.com/markuspoerschke/iCal/pull/260)
@@ -206,7 +208,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.0.0...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/markuspoerschke/iCal/compare/2.1.0...2.2.0
 [2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.0...2.0.0
 [unreleased]: https://github.com/markuspoerschke/iCal/compare/2.1.0...HEAD
 [2.1.0]: https://github.com/markuspoerschke/iCal/compare/2.0.0...2.1.0
