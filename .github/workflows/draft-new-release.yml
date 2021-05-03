@@ -26,7 +26,7 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.9.0
+      - uses: stefanzweifel/git-auto-commit-action@v4.10.0
         with:
           branch: release/${{ github.event.inputs.version }}
           commit_user_name: Markus Poerschke (Bot)
