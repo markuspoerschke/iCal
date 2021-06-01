@@ -717,16 +717,16 @@
         },
         {
             "name": "ergebnis/composer-normalize",
-            "version": "2.13.3",
+            "version": "2.13.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/composer-normalize.git",
-                "reference": "eff003890c655ee0e4b6ac5d4c5b40ce61247f7c"
+                "reference": "1d5fd0a87ea2baa91b643815dbec8d722c7532db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/eff003890c655ee0e4b6ac5d4c5b40ce61247f7c",
-                "reference": "eff003890c655ee0e4b6ac5d4c5b40ce61247f7c",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/1d5fd0a87ea2baa91b643815dbec8d722c7532db",
+                "reference": "1d5fd0a87ea2baa91b643815dbec8d722c7532db",
                 "shasum": ""
             },
             "require": {
@@ -740,18 +740,18 @@
             "require-dev": {
                 "composer/composer": "^1.10.19 || ^2.0.8",
                 "ergebnis/license": "^1.1.0",
-                "ergebnis/php-cs-fixer-config": "^2.13.0",
+                "ergebnis/php-cs-fixer-config": "^2.14.0",
                 "ergebnis/phpstan-rules": "~0.15.3",
-                "ergebnis/test-util": "^1.4.0",
+                "ergebnis/test-util": "^1.5.0",
                 "phpstan/extension-installer": "^1.1.0",
-                "phpstan/phpstan": "~0.12.80",
+                "phpstan/phpstan": "~0.12.84",
                 "phpstan/phpstan-deprecation-rules": "~0.12.6",
-                "phpstan/phpstan-phpunit": "~0.12.18",
+                "phpstan/phpstan-phpunit": "~0.12.19",
                 "phpstan/phpstan-strict-rules": "~0.12.9",
-                "phpunit/phpunit": "^8.5.14",
+                "phpunit/phpunit": "^8.5.15",
                 "psalm/plugin-phpunit": "~0.15.0",
-                "symfony/filesystem": "^5.2.4",
-                "vimeo/psalm": "^4.6.2"
+                "symfony/filesystem": "^5.2.7",
+                "vimeo/psalm": "^4.7.2"
             },
             "type": "composer-plugin",
             "extra": {
@@ -794,7 +794,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-06T14:00:23+00:00"
+            "time": "2021-05-19T12:26:29+00:00"
         },
         {
             "name": "ergebnis/json-normalizer",
