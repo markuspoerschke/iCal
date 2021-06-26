@@ -1,6 +1,5 @@
 /.idea
-/.php_cs.cache
-/.phpunit.result.cache
+/*.cache
 /build
 /Makefile.local
 /node_modules
