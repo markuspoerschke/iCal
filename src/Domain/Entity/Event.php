@@ -28,6 +28,7 @@ class Event
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
     private ?Organizer $organizer = null;
+    private ?Timestamp $lastModified = null;
 
     /**
      * @var array<Alarm>
@@ -199,5 +200,24 @@ class Event
     public function getAttachments(): array
     {
         return $this->attachments;
+    }
+
+    public function getLastModified(): Timestamp
+    {
+        assert($this->lastModified !== null);
+
+        return $this->lastModified;
+    }
+
+    public function hasLastModified(): bool
+    {
+        return $this->lastModified !== null;
+    }
+
+    public function setLastModified(?Timestamp $lastModified): self
+    {
+        $this->lastModified = $lastModified;
+
+        return $this;
     }
 }
