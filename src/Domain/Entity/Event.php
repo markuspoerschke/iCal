@@ -204,6 +204,8 @@ class Event
 
     public function getLastModified(): Timestamp
     {
+        assert($this->lastModified !== null);
+
         return $this->lastModified;
     }
 
