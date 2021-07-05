@@ -44,12 +44,24 @@ class CalendarFactoryTest extends TestCase
             )
         );
 
-        $event = (new Event(new UniqueIdentifier('event1')))->touch($currentTime);
+        $lastModified = new Timestamp(
+            DateTimeImmutable::createFromFormat(
+                'Y-m-d H:i:s',
+                '2019-10-09 10:11:22',
+                new DateTimeZone('UTC')
+            )
+        );
+
+        $event = (new Event(new UniqueIdentifier('event1')))
+            ->touch($currentTime)
+            ->setLastModified($lastModified)
+        ;
 
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VEVENT',
             'UID:event1',
             'DTSTAMP:20191110T112233Z',
+            'LAST-MODIFIED:20191009T101122Z',
             'END:VEVENT',
             '',
         ]);
