@@ -76,6 +76,14 @@ class EventFactory
         yield new Property('UID', new TextValue((string) $event->getUniqueIdentifier()));
         yield new Property('DTSTAMP', new DateTimeValue($event->getTouchedAt()));
 
+        if ($event->hasStatus()) {
+            yield new Property('STATUS', new TextValue((string) $event->getStatus()));
+        }
+
+        if ($event->hasMethod()) {
+            yield new Property('METHOD', new TextValue((string) $event->getMethod()));
+        }
+
         if ($event->hasLastModified()) {
             yield new Property('LAST-MODIFIED', new DateTimeValue($event->getLastModified()));
         }
