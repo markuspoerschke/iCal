@@ -11,6 +11,8 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use Eluceo\iCal\Domain\Enum\MethodType;
+use Eluceo\iCal\Domain\Enum\StatusType;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Location;
@@ -29,7 +31,8 @@ class Event
     private ?Location $location = null;
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
-
+    private ?StatusType $status = null;
+    private ?MethodType $method = null;
     /**
      * @var array<Alarm>
      */
@@ -59,6 +62,40 @@ class Event
     public function touch(?Timestamp $dateTime = null): self
     {
         $this->touchedAt = $dateTime ?? new Timestamp();
+
+        return $this;
+    }
+
+    public function getStatus(): ?StatusType
+    {
+        return $this->status;
+    }
+
+    public function hasStatus(): bool
+    {
+        return $this->status !== null;
+    }
+
+    public function setStatus(?StatusType $status): Event
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getMethod(): ?MethodType
+    {
+        return $this->method;
+    }
+
+    public function hasMethod(): bool
+    {
+        return $this->method !== null;
+    }
+
+    public function setMethod(?MethodType $method): Event
+    {
+        $this->method = $method;
 
         return $this;
     }
