@@ -11,7 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Enum;
 
-final class StatusType
+final class Status
 {
     private static ?self $confirmed = null;
     private static ?self $cancelled = null;
@@ -28,17 +28,17 @@ final class StatusType
 
     public static function CONFIRMED(): self
     {
-        return self::$confirmed = self::$confirmed ?? new StatusType('CONFIRMED');
+        return self::$confirmed = self::$confirmed ?? new Status('CONFIRMED');
     }
 
     public static function CANCELLED(): self
     {
-        return self::$cancelled = self::$cancelled ?? new StatusType('CANCELLED');
+        return self::$cancelled = self::$cancelled ?? new Status('CANCELLED');
     }
 
     public static function TENTATIVE(): self
     {
-        return self::$tentative = self::$tentative ?? new StatusType('TENTATIVE');
+        return self::$tentative = self::$tentative ?? new Status('TENTATIVE');
     }
 
     public function __toString()

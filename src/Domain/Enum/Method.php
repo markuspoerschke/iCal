@@ -11,7 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Enum;
 
-final class MethodType
+final class Method
 {
     private static ?self $publish = null;
     private static ?self $cancel = null;
@@ -27,12 +27,12 @@ final class MethodType
 
     public static function PUBLISH(): self
     {
-        return self::$publish = self::$publish ?? new MethodType('PUBLISH');
+        return self::$publish = self::$publish ?? new Method('PUBLISH');
     }
 
     public static function CANCELLED(): self
     {
-        return self::$cancel = self::$cancel ?? new MethodType('CANCEL');
+        return self::$cancel = self::$cancel ?? new Method('CANCEL');
     }
 
     public function __toString()

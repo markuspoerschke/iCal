@@ -11,8 +11,8 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
-use Eluceo\iCal\Domain\Enum\MethodType;
-use Eluceo\iCal\Domain\Enum\StatusType;
+use Eluceo\iCal\Domain\Enum\Method;
+use Eluceo\iCal\Domain\Enum\Status;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Location;
@@ -31,8 +31,8 @@ class Event
     private ?Location $location = null;
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
-    private ?StatusType $status = null;
-    private ?MethodType $method = null;
+    private ?Status $status = null;
+    private ?Method $method = null;
     /**
      * @var array<Alarm>
      */
@@ -66,7 +66,7 @@ class Event
         return $this;
     }
 
-    public function getStatus(): ?StatusType
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
@@ -76,14 +76,14 @@ class Event
         return $this->status !== null;
     }
 
-    public function setStatus(?StatusType $status): Event
+    public function setStatus(?Status $status): Event
     {
         $this->status = $status;
 
         return $this;
     }
 
-    public function getMethod(): ?MethodType
+    public function getMethod(): ?Method
     {
         return $this->method;
     }
@@ -93,7 +93,7 @@ class Event
         return $this->method !== null;
     }
 
-    public function setMethod(?MethodType $method): Event
+    public function setMethod(?Method $method): Event
     {
         $this->method = $method;
 
