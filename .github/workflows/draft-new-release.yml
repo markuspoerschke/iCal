@@ -35,7 +35,7 @@ jobs:
           file_pattern: CHANGELOG.md
 
       - name: Create pull request
-        uses: thomaseizinger/create-pull-request@1.1.0
+        uses: thomaseizinger/create-pull-request@1.2.1
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
