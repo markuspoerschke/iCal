@@ -14,6 +14,8 @@ namespace Unit\Presentation\Factory;
 use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\Method;
+use Eluceo\iCal\Domain\Enum\Status;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Date;
@@ -175,6 +177,26 @@ class CalendarFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'ORGANIZER;CN=Test Display Name;DIR=example://directory-entry;SENT-BY=mailto',
             ' :sendby%40example.com:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testStatus()
+    {
+        $event = (new Event())
+            ->setStatus(Status::CONFIRMED());
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:CONFIRMED',
+        ]);
+    }
+
+    public function testMethod()
+    {
+        $event = (new Event())
+            ->setMethod(Method::PUBLISH());
+
+        self::assertEventRendersCorrect($event, [
+            'METHOD:PUBLISH',
         ]);
     }
 
