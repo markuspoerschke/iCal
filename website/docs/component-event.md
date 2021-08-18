@@ -110,6 +110,19 @@ $event = new Event();
 $event->setDescription('Lorem Ipsum Dolor...');
 ```
 
+### URL
+
+The URL can be used to link to an arbitrary resource.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+
+$event = new Event();
+$uri = new Uri("https://example.org/calendarevent");
+$event->setUrl($uri);
+```
+
 ### Occurrence
 
 The occurrence property of an event defines, when the event takes place.
