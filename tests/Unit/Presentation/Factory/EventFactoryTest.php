@@ -178,6 +178,16 @@ class CalendarFactoryTest extends TestCase
         ]);
     }
 
+    public function testEventUrl()
+    {
+        $event = (new Event())
+            ->setUrl(new Uri('https://example.org/calendarevent'));
+
+        self::assertEventRendersCorrect($event, [
+            'URL:https://example.org/calendarevent',
+        ]);
+    }
+
     private static function assertEventRendersCorrect(Event $event, array $expected)
     {
         $resultAsString = (string) (new EventFactory())->createComponent($event);

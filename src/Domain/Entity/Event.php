@@ -18,6 +18,7 @@ use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
+use Eluceo\iCal\Domain\ValueObject\Uri;
 
 class Event
 {
@@ -25,6 +26,7 @@ class Event
     private Timestamp $touchedAt;
     private ?string $summary = null;
     private ?string $description = null;
+    private ?Uri $url = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
     private ?Organizer $organizer = null;
@@ -111,6 +113,32 @@ class Event
     public function unsetDescription(): self
     {
         $this->description = null;
+
+        return $this;
+    }
+
+    public function getUrl(): Uri
+    {
+        assert($this->url !== null);
+
+        return $this->url;
+    }
+
+    public function hasUrl(): bool
+    {
+        return $this->url !== null;
+    }
+
+    public function setUrl(Uri $uri): self
+    {
+        $this->url = $uri;
+
+        return $this;
+    }
+
+    public function unsetUrl(): self
+    {
+        $this->url = null;
 
         return $this;
     }
