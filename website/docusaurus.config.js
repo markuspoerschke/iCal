@@ -43,13 +43,11 @@ module.exports = {
                     items: [
                         {
                             label: "Raise a question",
-                            to:
-                                "https://github.com/markuspoerschke/iCal/discussions/categories/q-a",
+                            to: "https://github.com/markuspoerschke/iCal/discussions/categories/q-a",
                         },
                         {
                             label: "Report a bug",
-                            to:
-                                "https://github.com/markuspoerschke/iCal/issues",
+                            to: "https://github.com/markuspoerschke/iCal/issues",
                         },
                     ],
                 },
