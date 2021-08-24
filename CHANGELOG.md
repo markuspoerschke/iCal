@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2021-08-24
+
 ### Added
 
-- Event URL property [#314](https://github.com/markuspoerschke/iCal/pull/314)
-- Event LAST-MODIFIED property [#298](https://github.com/markuspoerschke/iCal/pull/298)
+-   Event URL property [#314](https://github.com/markuspoerschke/iCal/pull/314)
+-   Event LAST-MODIFIED property [#298](https://github.com/markuspoerschke/iCal/pull/298)
 
 ## [2.2.0] - 2021-05-03
 
@@ -198,23 +200,45 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
 [0.9.0]: https://github.com/markuspoerschke/iCal/compare/0.8.0...0.9.0
+
 [0.10.0]: https://github.com/markuspoerschke/iCal/compare/0.9.0...0.10.0
+
 [0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
+
 [0.11.0]: https://github.com/markuspoerschke/iCal/compare/0.10.1...0.11.0
+
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
+
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
+
 [0.11.3]: https://github.com/markuspoerschke/iCal/compare/0.11.2...0.11.3
+
 [0.11.4]: https://github.com/markuspoerschke/iCal/compare/0.11.3...0.11.4
+
 [0.11.5]: https://github.com/markuspoerschke/iCal/compare/0.11.4...0.11.5
+
 [0.12.0]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.12.0
+
 [0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
+
 [0.13.0]: https://github.com/markuspoerschke/iCal/compare/0.12.1...0.13.0
+
 [0.14.0]: https://github.com/markuspoerschke/iCal/compare/0.13.0...0.14.0
+
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
+
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
+
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.2.0...HEAD
+
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.3.0...HEAD
+
+[2.3.0]: https://github.com/markuspoerschke/iCal/compare/2.2.0...2.3.0
+
 [2.2.0]: https://github.com/markuspoerschke/iCal/compare/2.1.0...2.2.0
+
 [2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.0...2.0.0
+
 [unreleased]: https://github.com/markuspoerschke/iCal/compare/2.1.0...HEAD
+
 [2.1.0]: https://github.com/markuspoerschke/iCal/compare/2.0.0...2.1.0
