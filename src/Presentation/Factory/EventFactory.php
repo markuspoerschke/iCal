@@ -70,6 +70,7 @@ class EventFactory
 
     /**
      * @return Generator<Property>
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     protected function getProperties(Event $event): Generator
     {
@@ -86,6 +87,10 @@ class EventFactory
 
         if ($event->hasDescription()) {
             yield new Property('DESCRIPTION', new TextValue($event->getDescription()));
+        }
+
+        if ($event->hasUrl()) {
+            yield new Property('URL', new TextValue($event->getUrl()->getUri()));
         }
 
         if ($event->hasOccurrence()) {
