@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2021-08-24
+
 ### Added
 
-- Event URL property [#314](https://github.com/markuspoerschke/iCal/pull/314)
-- Event LAST-MODIFIED property [#298](https://github.com/markuspoerschke/iCal/pull/298)
+-   Event URL property [#314](https://github.com/markuspoerschke/iCal/pull/314)
+-   Event LAST-MODIFIED property [#298](https://github.com/markuspoerschke/iCal/pull/298)
 
 ## [2.2.0] - 2021-05-03
 
@@ -213,7 +215,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.2.0...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.3.0...HEAD
+[2.3.0]: https://github.com/markuspoerschke/iCal/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/markuspoerschke/iCal/compare/2.1.0...2.2.0
 [2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.0...2.0.0
 [unreleased]: https://github.com/markuspoerschke/iCal/compare/2.1.0...HEAD
