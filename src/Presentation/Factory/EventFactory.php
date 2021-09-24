@@ -220,7 +220,10 @@ class EventFactory
         return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
     }
 
-    private function getAttendeeProperties(Attendee $attendee): Property
+    /**
+     *  @return Generator<Property>
+     */
+    private function getAttendeeProperties(Attendee $attendee): Generator
     {
         $parameters = [];
 
@@ -228,6 +231,6 @@ class EventFactory
             $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
         }
 
-        return new Property('ATTENDEE', new UriValue($attendee->getEmailAddress()->toUri()), $parameters);
+        yield new Property('ATTENDEE', new UriValue($attendee->getEmailAddress()->toUri()), $parameters);
     }
 }
