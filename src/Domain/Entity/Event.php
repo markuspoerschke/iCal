@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
+use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
@@ -31,6 +32,11 @@ class Event
     private ?Location $location = null;
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
+
+    /**
+     * @var array<Attendee>
+     */
+    private array $attendee = [];
 
     /**
      * @var array<Alarm>
@@ -247,5 +253,28 @@ class Event
         $this->lastModified = $lastModified;
 
         return $this;
+    }
+
+    /**
+     * @return Attendee[]
+     */
+    public function hasAttendee(): bool
+    {
+        return !empty($this->attendee);
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        $this->attendee[] = $attendee;
+
+        return $this;
+    }
+
+    /**
+     * @return Attendee[]
+     */
+    public function getAttendee(): array
+    {
+        return $this->attendee;
     }
 }
