@@ -13,16 +13,17 @@ namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
-final class BooleanValue extends Value {
-
+final class BooleanValue extends Value
+{
     private string $valueAsString;
 
-    public function __construct(bool $value) {
+    public function __construct(bool $value)
+    {
         $this->valueAsString = $value ? 'TRUE' : 'FALSE';
-
     }
 
-    public function __toString(): string {
+    public function __toString(): string
+    {
         return $this->valueAsString;
     }
 }

@@ -46,7 +46,8 @@ final class Attendee
         return $this->displayName;
     }
 
-    public function isRSVPenabled(): string {
+    public function isRSVPenabled(): string
+    {
         return $this->rsvp;
     }
 }
