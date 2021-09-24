@@ -27,6 +27,7 @@ use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Parameter;
 use Eluceo\iCal\Presentation\Component\Property\Value\AppleLocationGeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\BinaryValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\BooleanValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
@@ -230,6 +231,10 @@ class EventFactory
 
         if ($attendee->hasDisplayName()) {
             $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
+        }
+
+        if ($attendee->isRSVPenabled()) {
+            $parameters[] = new Parameter('RSVP', new BooleanValue(true));
         }
 
         yield new Property('ATTENDEE', new UriValue($attendee->getEmailAddress()->toUri()), $parameters);

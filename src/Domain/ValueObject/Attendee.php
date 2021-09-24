@@ -15,17 +15,22 @@ final class Attendee
 {
     private EmailAddress $emailAddress;
     private ?string $displayName;
+    private ?bool $rsvp;
 
     public function __construct(
         EmailAddress $emailAddress,
-        ?string $displayName = null
+        ?string $displayName = null,
+        ?bool $rsvp = false
     ) {
         $this->emailAddress = $emailAddress;
         $this->displayName = $displayName;
+        $this->rsvp = $rsvp;
     }
 
     public function getEmailAddress(): EmailAddress
     {
+        assert($this->emailAddress !== null);
+
         return $this->emailAddress;
     }
 
@@ -39,5 +44,9 @@ final class Attendee
         assert($this->displayName !== null);
 
         return $this->displayName;
+    }
+
+    public function isRSVPenabled(): string {
+        return $this->rsvp;
     }
 }
