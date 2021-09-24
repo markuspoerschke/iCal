@@ -255,9 +255,6 @@ class Event
         return $this;
     }
 
-    /**
-     * @return Attendee[]
-     */
     public function hasAttendee(): bool
     {
         return !empty($this->attendee);
