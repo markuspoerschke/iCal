@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1476d26d71307e0e2a9a346a14dfc23e",
+    "content-hash": "a1b69dce579c90a9707ac616d154eb71",
     "packages": [
         {
             "name": "symfony/deprecation-contracts",
@@ -1056,25 +1056,25 @@
         },
         {
             "name": "infection/abstract-testframework-adapter",
-            "version": "0.3.1",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/abstract-testframework-adapter.git",
-                "reference": "c52539339f28d6b67625ff24496289b3e6d66025"
+                "reference": "18925e20d15d1a5995bb85c9dc09e8751e1e069b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/c52539339f28d6b67625ff24496289b3e6d66025",
-                "reference": "c52539339f28d6b67625ff24496289b3e6d66025",
+                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/18925e20d15d1a5995bb85c9dc09e8751e1e069b",
+                "reference": "18925e20d15d1a5995bb85c9dc09e8751e1e069b",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.8",
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "phpunit/phpunit": "^9.0"
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
             "autoload": {
@@ -1095,9 +1095,19 @@
             "description": "Abstract Test Framework Adapter for Infection",
             "support": {
                 "issues": "https://github.com/infection/abstract-testframework-adapter/issues",
-                "source": "https://github.com/infection/abstract-testframework-adapter/tree/0.3"
+                "source": "https://github.com/infection/abstract-testframework-adapter/tree/0.5.0"
             },
-            "time": "2020-08-30T13:50:12+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/infection",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/infection",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2021-08-17T18:49:12+00:00"
         },
         {
             "name": "infection/extension-installer",
@@ -1213,29 +1223,29 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.23.0",
+            "version": "0.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "ac87ae49e9f192f610276565e54469231dca7837"
+                "reference": "353ebc69eb745982cd384e78acd4a25fe6389a1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/ac87ae49e9f192f610276565e54469231dca7837",
-                "reference": "ac87ae49e9f192f610276565e54469231dca7837",
+                "url": "https://api.github.com/repos/infection/infection/zipball/353ebc69eb745982cd384e78acd4a25fe6389a1f",
+                "reference": "353ebc69eb745982cd384e78acd4a25fe6389a1f",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "^2.0",
                 "composer/xdebug-handler": "^2.0",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
-                "infection/abstract-testframework-adapter": "^0.3.1",
+                "infection/abstract-testframework-adapter": "^0.5.0",
                 "infection/extension-installer": "^0.1.0",
-                "infection/include-interceptor": "^0.2.4",
-                "justinrainbow/json-schema": "^5.2",
+                "infection/include-interceptor": "^0.2.5",
+                "justinrainbow/json-schema": "^5.2.10",
                 "nikic/php-parser": "^4.10.3",
-                "ocramius/package-versions": "^1.9.0 || ^2.0",
                 "ondram/ci-detector": "^3.3.0",
                 "php": "^7.4.7 || ^8.0",
                 "sanmai/later": "^0.1.1",
@@ -1246,7 +1256,7 @@
                 "symfony/filesystem": "^3.4.29 || ^4.1.19 || ^5.0",
                 "symfony/finder": "^3.4.29 || ^4.1.19 || ^5.0",
                 "symfony/process": "^3.4.29 || ^4.1.19 || ^5.0",
-                "thecodingmachine/safe": "^1.0",
+                "thecodingmachine/safe": "^1.1.3",
                 "webmozart/assert": "^1.3",
                 "webmozart/path-util": "^2.3"
             },
@@ -1255,6 +1265,7 @@
                 "symfony/console": "=4.1.5"
             },
             "require-dev": {
+                "brianium/paratest": "^6.3",
                 "ext-simplexml": "*",
                 "helmich/phpunit-json-assert": "^3.0",
                 "phpspec/prophecy-phpunit": "^2.0",
@@ -1322,7 +1333,7 @@
             ],
             "support": {
                 "issues": "https://github.com/infection/infection/issues",
-                "source": "https://github.com/infection/infection/tree/0.23.0"
+                "source": "https://github.com/infection/infection/tree/0.25.2"
             },
             "funding": [
                 {
@@ -1334,7 +1345,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-05-13T16:12:33+00:00"
+            "time": "2021-09-19T11:00:28+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -2770,20 +2781,20 @@
         },
         {
             "name": "psr/cache",
-            "version": "1.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
-                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
@@ -2803,7 +2814,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for caching libraries",
@@ -2813,9 +2824,9 @@
                 "psr-6"
             ],
             "support": {
-                "source": "https://github.com/php-fig/cache/tree/master"
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
             },
-            "time": "2016-08-06T20:24:11+00:00"
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/container",
@@ -2917,30 +2928,30 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
+                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
-                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/ef29f6d262798707a9edd554e2b82517ef3a9376",
+                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
+                    "Psr\\Log\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2961,9 +2972,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.4"
+                "source": "https://github.com/php-fig/log/tree/2.0.0"
             },
-            "time": "2021-05-03T11:20:27+00:00"
+            "time": "2021-07-14T16:41:46+00:00"
         },
         {
             "name": "sanmai/later",
