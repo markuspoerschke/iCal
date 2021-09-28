@@ -61,6 +61,9 @@ class Component implements IteratorAggregate
         return $this->getContentLines();
     }
 
+    /**
+     * @return Generator<ContentLine>
+     */
     protected function getContentLines(): Generator
     {
         yield new ContentLine('BEGIN:' . $this->componentName);
