@@ -17,12 +17,12 @@ use Eluceo\iCal\Domain\Entity\Event;
 final class EventsArray extends Events
 {
     /**
-     * @var Event[]
+     * @var array<int, Event>
      */
     private array $events = [];
 
     /**
-     * @param Event[] $events
+     * @param array<array-key, Event> $events
      */
     public function __construct(array $events)
     {

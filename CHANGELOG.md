@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   PHPStan complains about wrongly typed hinted constructor argument of `Calendar` class. [#281](https://github.com/markuspoerschke/iCal/issues/281)
+
 ## [2.3.0] - 2021-08-24
 
 ### Added
