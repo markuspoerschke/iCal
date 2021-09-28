@@ -15,6 +15,7 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
+use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
@@ -175,6 +176,31 @@ class CalendarFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'ORGANIZER;CN=Test Display Name;DIR=example://directory-entry;SENT-BY=mailto',
             ' :sendby%40example.com:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendee()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com')
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithCN()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com'),
+                'Test Display Name',
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CN=Test Display Name:mailto:test%40example.com',
         ]);
     }
 
