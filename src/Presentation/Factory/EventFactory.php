@@ -14,6 +14,7 @@ namespace Eluceo\iCal\Presentation\Factory;
 use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Attendee;
@@ -231,6 +232,28 @@ class EventFactory
 
         if ($attendee->hasDisplayName()) {
             $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
+        }
+
+        if ($attendee->hasCalendarUserType()) {
+            $textValue = "";
+            switch ($attendee->getCalendarUserType()) { 
+                case CalendarUserType::GROUP():
+                    $textValue = "GROUP";
+                    break;
+                case CalendarUserType::RESOURCE():
+                    $textValue = "RESOURCE";
+                    break;
+                case CalendarUserType::ROOM():
+                    $textValue = "ROOM";
+                    break;
+                case CalendarUserType::UNKNOWN():
+                    $textValue = "UNKNOWN";
+                    break;
+                default:
+                    $textValue = "INDIVIDUAL";
+                    break;
+            }
+            $parameters[] = new Parameter('CUTYPE', new TextValue($textValue));
         }
 
         if ($attendee->isRSVPenabled()) {
