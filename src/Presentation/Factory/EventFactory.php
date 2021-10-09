@@ -289,6 +289,10 @@ class EventFactory
             $parameters[] = new Parameter('DIR', new QuotedUriValue($attendee->getDirectoryEntryReference()));
         }
 
+        if ($attendee->hasLanguage()) {
+            $parameters[] = new Parameter('LANGUAGE', new TextValue($attendee->getLanguage()));
+        }
+
         yield new Property('ATTENDEE', new UriValue($attendee->getEmailAddress()->toUri()), $parameters);
     }
 }

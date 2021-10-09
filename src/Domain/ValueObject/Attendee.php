@@ -243,4 +243,23 @@ final class Attendee
 
         return $this;
     }
+
+    public function hasLanguage(): bool
+    {
+        return $this->language !== null;
+    }
+
+    public function getLanguage(): string
+    {
+        assert($this->language !== null);
+
+        return $this->language;
+    }
+
+    public function setLanguage(string $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
 }

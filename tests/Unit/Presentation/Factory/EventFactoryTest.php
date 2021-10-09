@@ -471,6 +471,22 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
+    public function testAttendeeWithLanguage()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->setLanguage('en-US');
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;LANGUAGE=en-US:mailto:jdoe%40example.com',
+        ]);
+    }
+
     public function testEventUrl()
     {
         $event = (new Event())
