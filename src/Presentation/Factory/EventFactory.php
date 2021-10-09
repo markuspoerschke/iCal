@@ -230,30 +230,29 @@ class EventFactory
     {
         $parameters = [];
 
-        if ($attendee->hasDisplayName()) {
-            $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
-        }
-
         if ($attendee->hasCalendarUserType()) {
-            $textValue = "";
-            switch ($attendee->getCalendarUserType()) { 
-                case CalendarUserType::GROUP():
-                    $textValue = "GROUP";
+            switch ($attendee->getCalendarUserType()) {
+                case CalendarUserType::GROUP:
+                    $textValue = 'GROUP';
                     break;
-                case CalendarUserType::RESOURCE():
-                    $textValue = "RESOURCE";
+                case CalendarUserType::RESOURCE:
+                    $textValue = 'RESOURCE';
                     break;
-                case CalendarUserType::ROOM():
-                    $textValue = "ROOM";
+                case CalendarUserType::ROOM:
+                    $textValue = 'ROOM';
                     break;
-                case CalendarUserType::UNKNOWN():
-                    $textValue = "UNKNOWN";
+                case CalendarUserType::UNKNOWN:
+                    $textValue = 'UNKNOWN';
                     break;
                 default:
-                    $textValue = "INDIVIDUAL";
+                    $textValue = 'INDIVIDUAL';
                     break;
             }
             $parameters[] = new Parameter('CUTYPE', new TextValue($textValue));
+        }
+
+        if ($attendee->hasDisplayName()) {
+            $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
         }
 
         if ($attendee->isRSVPenabled()) {

@@ -197,11 +197,82 @@ class EventFactoryTest extends TestCase
         $event = (new Event())
             ->addAttendee(new Attendee(
                 new EmailAddress('test@example.com'),
+                null,
                 'Test Display Name',
             ));
 
         self::assertEventRendersCorrect($event, [
             'ATTENDEE;CN=Test Display Name:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithIndividualCUtype()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com'),
+                CalendarUserType::INDIVIDUAL,
+                'Test Display Name',
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL;CN=Test Display Name:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithGroupCUtype()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com'),
+                CalendarUserType::GROUP,
+                'Test Display Name',
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=GROUP;CN=Test Display Name:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithResourceCUtype()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com'),
+                CalendarUserType::RESOURCE,
+                'Test Display Name',
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=RESOURCE;CN=Test Display Name:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithRoomCUtype()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com'),
+                CalendarUserType::ROOM,
+                'Test Display Name',
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=ROOM;CN=Test Display Name:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithUnknownCUtype()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com'),
+                CalendarUserType::UNKNOWN,
+                'Test Display Name',
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=UNKNOWN;CN=Test Display Name:mailto:test%40example.com',
         ]);
     }
 

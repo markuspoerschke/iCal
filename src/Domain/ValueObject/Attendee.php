@@ -11,34 +11,32 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-use Eluceo\iCal\Domain\Enum\CalendarUserType;
-
 final class Attendee
 {
     private EmailAddress $emailAddress;
-    private ?CalendarUserType $calendarUserType = null;
+    private ?string $calendarUserType = null;
     private ?bool $rsvp = null;
     private ?string $displayName;
-    /*  private ?string $member;
-     private ?string $role;
-     private ?string $partStat;
-     private ?string $delTo;
-     private ?string $delFrom;
-     private ?string $sentBy;
-     private ?string $dir;
-     private ?string $language; */
-    // TODO: Implement
+    /*
+    private ?string $member;
+    private ?string $role;
+    private ?string $partStat;
+    private ?string $delTo;
+    private ?string $delFrom;
+    private ?string $sentBy;
+    private ?string $dir;
+    private ?string $language; */
 
     public function __construct(
         EmailAddress $emailAddress,
+        ?string $calendarUserType = null,
         ?string $displayName = null,
-        bool $rsvp = null,
-        ?CalendarUserType $calendarUserType = null
+        bool $rsvp = null
     ) {
         $this->emailAddress = $emailAddress;
         $this->displayName = $displayName;
-        $this->rsvp = $rsvp;
         $this->calendarUserType = $calendarUserType;
+        $this->rsvp = $rsvp;
     }
 
     public function getEmailAddress(): EmailAddress
@@ -68,7 +66,7 @@ final class Attendee
         return $this->calendarUserType !== null;
     }
 
-    public function getCalendarUserType(): CalendarUserType
+    public function getCalendarUserType(): string
     {
         assert($this->calendarUserType !== null);
 
