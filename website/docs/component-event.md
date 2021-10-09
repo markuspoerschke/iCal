@@ -41,6 +41,7 @@ The following sections explain the properties of the domain object:
 -   [Location](#location)
 -   [Organizer](#organizer)
 -   [Attachments](#attachments)
+-   [Attendee](#attendee)
 
 ### Unique Identifier
 
@@ -268,6 +269,49 @@ $binaryContentAttachment = new Attachment(
     new BinaryContent(file_get_contents('test.txt')),
     'text/plain'
 );
+
+$event = new Event();
+$event->addAttachment($urlAttachment);
+$event->addAttachment($binaryContentAttachment);
+```
+
+### Attendee
+
+This property defines one or more attendee/s related to the event.
+Calendar user type, group or list membership, participation role, participation status, RSVP expectation, delegatee, delegator, sent by, common name, or directory entry reference property parameters can be specified on this property.
+Therefore are listed all the possible methods that you can call on the attendee
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Attendee;
+use Eluceo\iCal\Domain\ValueObject\BinaryContent;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+
+$attendee = new Attendee(
+        new EmailAddress('jdoe@example.com'),
+    );
+$attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL)
+    ->addMember(new Member(new EmailAddress('test@example.com')))
+    ->setRole(RoleType::CHAIR)
+    ->setParticipationStatus(
+        ParticipationStatusType::NEEDS_ACTION
+    )->setResponseNeededFromAttendee(true)
+    ->addDelegatedTo(
+        new EmailAddress('jdoe@example.com')
+    )->addDelegatedTo(
+        new EmailAddress('jqpublic@example.com')
+    )->addDelegatedFrom(
+        new EmailAddress('jsmith@example.com')
+    )->addSentBy(
+        new EmailAddress('sray@example.com')
+    )
+    ->setDisplayName('Test Example')
+    ->setDirectoryEntryReference(
+        new Uri('ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)')
+    )->setLanguage('en-US');
+
+$event = (new Event())
+    ->addAttendee($attendee);
 
 $event = new Event();
 $event->addAttachment($urlAttachment);
