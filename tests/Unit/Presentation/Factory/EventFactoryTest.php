@@ -14,6 +14,7 @@ namespace Unit\Presentation\Factory;
 use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
@@ -33,7 +34,7 @@ use Eluceo\iCal\Presentation\ContentLine;
 use Eluceo\iCal\Presentation\Factory\EventFactory;
 use PHPUnit\Framework\TestCase;
 
-class CalendarFactoryTest extends TestCase
+class EventFactoryTest extends TestCase
 {
     public function testMinimalEvent()
     {
