@@ -23,9 +23,8 @@ final class Attendee
     private ?bool $rsvp = null;
 
     private ?string $displayName = null;
-    /*
-    private ?string $dir;
-    private ?string $language; */
+    private ?Uri $dir = null;
+    private ?string $language = null;
 
     /**
      * @var array<Member>
@@ -224,5 +223,24 @@ final class Attendee
     public function getSentBy(): array
     {
         return $this->sentBy;
+    }
+
+    public function hasDirectoryEntryReference(): bool
+    {
+        return $this->dir !== null;
+    }
+
+    public function getDirectoryEntryReference(): Uri
+    {
+        assert($this->dir !== null);
+
+        return $this->dir;
+    }
+
+    public function setDirectoryEntryReference(Uri $dir): self
+    {
+        $this->dir = $dir;
+
+        return $this;
     }
 }

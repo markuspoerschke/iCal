@@ -253,6 +253,10 @@ class EventFactory
             $parameters[] = new Parameter('PARTSTAT', new TextValue($attendee->getParticipationStatus()));
         }
 
+        if ($attendee->isRSVPenabled()) {
+            $parameters[] = new Parameter('RSVP', new BooleanValue(true));
+        }
+
         if ($attendee->hasDelegatedTo()) {
             $listAddressesEmail = [];
             foreach ($attendee->getDelegatedTo() as $delegatedToAddress) {
@@ -281,8 +285,8 @@ class EventFactory
             $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
         }
 
-        if ($attendee->isRSVPenabled()) {
-            $parameters[] = new Parameter('RSVP', new BooleanValue(true));
+        if ($attendee->hasDirectoryEntryReference()) {
+            $parameters[] = new Parameter('DIR', new QuotedUriValue($attendee->getDirectoryEntryReference()));
         }
 
         yield new Property('ATTENDEE', new UriValue($attendee->getEmailAddress()->toUri()), $parameters);

@@ -454,6 +454,23 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
+    public function testAttendeeWithDirectoryEntryRef()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->setDirectoryEntryReference(new Uri('ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)'));
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;DIR="ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20D',
+            ' olittle)":mailto:jdoe%40example.com',
+        ]);
+    }
+
     public function testEventUrl()
     {
         $event = (new Event())
