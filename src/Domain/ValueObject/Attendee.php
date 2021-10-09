@@ -39,6 +39,11 @@ final class Attendee
      */
     private array $delTo = [];
 
+    /**
+     * @var array<EmailAddress>
+     */
+    private array $delFrom = [];
+
     public function __construct(
         EmailAddress $emailAddress
     ) {
@@ -176,5 +181,25 @@ final class Attendee
     public function getDelegatedTo(): array
     {
         return $this->delTo;
+    }
+
+    public function addDelegatedFrom(EmailAddress $delegatedFrom): self
+    {
+        $this->delFrom[] = $delegatedFrom;
+
+        return $this;
+    }
+
+    public function hasDelegatedFrom(): bool
+    {
+        return !empty($this->delFrom);
+    }
+
+    /**
+     * @return array<EmailAddress>
+     */
+    public function getDelegatedFrom(): array
+    {
+        return $this->delFrom;
     }
 }

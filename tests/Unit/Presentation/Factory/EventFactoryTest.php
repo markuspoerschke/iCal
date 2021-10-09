@@ -401,6 +401,25 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
+    public function testAttendeeWithDelegatedFrom()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->addDelegatedFrom(
+            new EmailAddress('jsmith@example.com')
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;DELEGATED-FROM="mailto:jsmith%40example.com":mailto:jdoe%40example',
+            ' .com',
+        ]);
+    }
+
     public function testEventUrl()
     {
         $event = (new Event())

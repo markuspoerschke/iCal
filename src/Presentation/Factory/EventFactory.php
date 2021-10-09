@@ -226,6 +226,8 @@ class EventFactory
 
     /**
      *  @return Generator<Property>
+     *  @SuppressWarnings(PHPMD.NPathComplexity)
+     *  @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function getAttendeeProperties(Attendee $attendee): Generator
     {
@@ -257,6 +259,14 @@ class EventFactory
                 $listAddressesEmail[] = new QuotedUriValue($delegatedToAddress->toUri());
             }
             $parameters[] = new Parameter('DELEGATED-TO', new ListValue($listAddressesEmail));
+        }
+
+        if ($attendee->hasDelegatedFrom()) {
+            $listAddressesEmail = [];
+            foreach ($attendee->getDelegatedFrom() as $delegatedFromAddress) {
+                $listAddressesEmail[] = new QuotedUriValue($delegatedFromAddress->toUri());
+            }
+            $parameters[] = new Parameter('DELEGATED-FROM', new ListValue($listAddressesEmail));
         }
 
         if ($attendee->hasDisplayName()) {
