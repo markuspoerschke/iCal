@@ -24,8 +24,6 @@ final class Attendee
 
     private ?string $displayName = null;
     /*
-    private ?string $delFrom;
-    private ?string $sentBy;
     private ?string $dir;
     private ?string $language; */
 

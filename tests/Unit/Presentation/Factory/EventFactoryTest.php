@@ -438,6 +438,22 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
+    public function testAttendeeWithCommonName()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->setDisplayName('Test Example');
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CN=Test Example:mailto:jdoe%40example.com',
+        ]);
+    }
+
     public function testEventUrl()
     {
         $event = (new Event())
