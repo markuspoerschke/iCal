@@ -420,6 +420,24 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
+    public function testAttendeeWithSentBy()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->addSentBy(
+            new EmailAddress('sray@example.com')
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;SENT-BY="mailto:sray%40example.com":mailto:jdoe%40example.com',
+        ]);
+    }
+
     public function testEventUrl()
     {
         $event = (new Event())

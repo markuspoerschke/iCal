@@ -269,6 +269,14 @@ class EventFactory
             $parameters[] = new Parameter('DELEGATED-FROM', new ListValue($listAddressesEmail));
         }
 
+        if ($attendee->hasSentBy()) {
+            $listAddressesEmail = [];
+            foreach ($attendee->getSentBy() as $sentByAddress) {
+                $listAddressesEmail[] = new QuotedUriValue($sentByAddress->toUri());
+            }
+            $parameters[] = new Parameter('SENT-BY', new ListValue($listAddressesEmail));
+        }
+
         if ($attendee->hasDisplayName()) {
             $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
         }
