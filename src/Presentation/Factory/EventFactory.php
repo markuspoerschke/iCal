@@ -247,6 +247,18 @@ class EventFactory
             $parameters[] = new Parameter('ROLE', new TextValue($attendee->getRole()));
         }
 
+        if ($attendee->hasParticipationStatus()) {
+            $parameters[] = new Parameter('PARTSTAT', new TextValue($attendee->getParticipationStatus()));
+        }
+
+        if ($attendee->hasDelegatedTo()) {
+            $listAddressesEmail = [];
+            foreach ($attendee->getDelegatedTo() as $delegatedToAddress) {
+                $listAddressesEmail[] = new QuotedUriValue($delegatedToAddress->toUri());
+            }
+            $parameters[] = new Parameter('DELEGATED-TO', new ListValue($listAddressesEmail));
+        }
+
         if ($attendee->hasDisplayName()) {
             $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
         }

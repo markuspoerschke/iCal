@@ -19,12 +19,11 @@ final class Attendee
     private EmailAddress $emailAddress;
     private ?string $calendarUserType = null;
     private ?string $role = null;
+    private ?string $partStat = null;
     private ?bool $rsvp = null;
-    private ?string $displayName;
+
+    private ?string $displayName = null;
     /*
-    private ?string $role;
-    private ?string $partStat;
-    private ?string $delTo;
     private ?string $delFrom;
     private ?string $sentBy;
     private ?string $dir;
@@ -35,18 +34,15 @@ final class Attendee
      */
     private array $members = [];
 
+    /**
+     * @var array<EmailAddress>
+     */
+    private array $delTo = [];
+
     public function __construct(
-        EmailAddress $emailAddress,
-        ?string $calendarUserType = null,
-        ?string $role = null,
-        ?string $displayName = null,
-        ?bool $rsvp = null
+        EmailAddress $emailAddress
     ) {
         $this->emailAddress = $emailAddress;
-        $this->calendarUserType = $calendarUserType;
-        $this->role = $role;
-        $this->displayName = $displayName;
-        $this->rsvp = $rsvp;
     }
 
     public function getEmailAddress(): EmailAddress
@@ -54,21 +50,11 @@ final class Attendee
         return $this->emailAddress;
     }
 
-    public function hasDisplayName(): bool
+    public function setCalendarUserType(string $calendarUserType): self
     {
-        return $this->displayName !== null;
-    }
+        $this->calendarUserType = $calendarUserType;
 
-    public function getDisplayName(): string
-    {
-        assert($this->displayName !== null);
-
-        return $this->displayName;
-    }
-
-    public function isRSVPenabled(): bool
-    {
-        return $this->rsvp !== null;
+        return $this;
     }
 
     public function hasCalendarUserType(): bool
@@ -103,6 +89,13 @@ final class Attendee
         return $this->members;
     }
 
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
     public function hasRole(): bool
     {
         return $this->role !== null;
@@ -113,5 +106,75 @@ final class Attendee
         assert($this->role !== null);
 
         return $this->role;
+    }
+
+    public function setParticipationStatus(string $partStat): self
+    {
+        $this->partStat = $partStat;
+
+        return $this;
+    }
+
+    public function hasParticipationStatus(): bool
+    {
+        return $this->partStat !== null;
+    }
+
+    public function getParticipationStatus(): string
+    {
+        assert($this->partStat !== null);
+
+        return $this->partStat;
+    }
+
+    public function setResponseNeededFromAttendee(bool $res): self
+    {
+        $this->rsvp = $res;
+
+        return $this;
+    }
+
+    public function isRSVPenabled(): bool
+    {
+        return $this->rsvp !== null;
+    }
+
+    public function setDisplayName(string $displayName): self
+    {
+        $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    public function hasDisplayName(): bool
+    {
+        return $this->displayName !== null;
+    }
+
+    public function getDisplayName(): string
+    {
+        assert($this->displayName !== null);
+
+        return $this->displayName;
+    }
+
+    public function addDelegatedTo(EmailAddress $delegatedTo): self
+    {
+        $this->delTo[] = $delegatedTo;
+
+        return $this;
+    }
+
+    public function hasDelegatedTo(): bool
+    {
+        return !empty($this->delTo);
+    }
+
+    /**
+     * @return array<EmailAddress>
+     */
+    public function getDelegatedTo(): array
+    {
+        return $this->delTo;
     }
 }
