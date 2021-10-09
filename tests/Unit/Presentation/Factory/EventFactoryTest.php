@@ -23,6 +23,7 @@ use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\EmailAddress;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 use Eluceo\iCal\Domain\ValueObject\Location;
+use Eluceo\iCal\Domain\ValueObject\Member;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
@@ -180,7 +181,7 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
-    public function testAttendee()
+    public function testOneAttendee()
     {
         $event = (new Event())
             ->addAttendee(new Attendee(
@@ -192,19 +193,35 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
-    public function testAttendeeWithCN()
+    public function testMultipleAttendees()
     {
         $event = (new Event())
             ->addAttendee(new Attendee(
-                new EmailAddress('test@example.com'),
-                null,
-                'Test Display Name',
+                new EmailAddress('test@example.com')
+            ))
+            ->addAttendee(new Attendee(
+                new EmailAddress('test2@example.net')
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CN=Test Display Name:mailto:test%40example.com',
+            'ATTENDEE:mailto:test%40example.com',
+            'ATTENDEE:mailto:test2%40example.net',
         ]);
     }
+
+    /*  public function testAttendeeWithCN()
+     {
+         $event = (new Event())
+             ->addAttendee(new Attendee(
+                 new EmailAddress('test@example.com'),
+                 null,
+                 'Test Display Name',
+             ));
+
+         self::assertEventRendersCorrect($event, [
+             'ATTENDEE;CN=Test Display Name:mailto:test%40example.com',
+         ]);
+     } */
 
     public function testAttendeeWithIndividualCUtype()
     {
@@ -212,11 +229,10 @@ class EventFactoryTest extends TestCase
             ->addAttendee(new Attendee(
                 new EmailAddress('test@example.com'),
                 CalendarUserType::INDIVIDUAL,
-                'Test Display Name',
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=INDIVIDUAL;CN=Test Display Name:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test%40example.com',
         ]);
     }
 
@@ -226,11 +242,10 @@ class EventFactoryTest extends TestCase
             ->addAttendee(new Attendee(
                 new EmailAddress('test@example.com'),
                 CalendarUserType::GROUP,
-                'Test Display Name',
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=GROUP;CN=Test Display Name:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=GROUP:mailto:test%40example.com',
         ]);
     }
 
@@ -240,11 +255,10 @@ class EventFactoryTest extends TestCase
             ->addAttendee(new Attendee(
                 new EmailAddress('test@example.com'),
                 CalendarUserType::RESOURCE,
-                'Test Display Name',
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=RESOURCE;CN=Test Display Name:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=RESOURCE:mailto:test%40example.com',
         ]);
     }
 
@@ -254,11 +268,10 @@ class EventFactoryTest extends TestCase
             ->addAttendee(new Attendee(
                 new EmailAddress('test@example.com'),
                 CalendarUserType::ROOM,
-                'Test Display Name',
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=ROOM;CN=Test Display Name:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=ROOM:mailto:test%40example.com',
         ]);
     }
 
@@ -268,11 +281,44 @@ class EventFactoryTest extends TestCase
             ->addAttendee(new Attendee(
                 new EmailAddress('test@example.com'),
                 CalendarUserType::UNKNOWN,
-                'Test Display Name',
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=UNKNOWN;CN=Test Display Name:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=UNKNOWN:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithOneMember()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+            CalendarUserType::INDIVIDUAL,
+        );
+        $attendee->addMember(new Member(new EmailAddress('test@example.com')));
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL;MEMBER="mailto:test%40example.com":mailto:test%4',
+            ' 0example.com',
+        ]);
+    }
+
+    public function testAttendeeWithMultipleMembers()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+            CalendarUserType::INDIVIDUAL,
+        );
+        $attendee->addMember(new Member(new EmailAddress('test@example.com')));
+        $attendee->addMember(new Member(new EmailAddress('test@example.net')));
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL;MEMBER="mailto:test%40example.com","mailto:test%',
+            ' 40example.net":mailto:test%40example.com',
         ]);
     }
 

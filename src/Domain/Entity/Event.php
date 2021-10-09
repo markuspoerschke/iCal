@@ -270,7 +270,7 @@ class Event
     /**
      * @return Attendee[]
      */
-    public function getAttendee(): array
+    public function getAttendees(): array
     {
         return $this->attendee;
     }

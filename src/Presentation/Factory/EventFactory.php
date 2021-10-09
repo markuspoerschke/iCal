@@ -33,6 +33,8 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\QuotedUriValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -110,7 +112,7 @@ class EventFactory
         }
 
         if ($event->hasAttendee()) {
-            foreach ($event->getAttendee() as $attendee) {
+            foreach ($event->getAttendees() as $attendee) {
                 yield from $this->getAttendeeProperties($attendee);
             }
         }
@@ -249,6 +251,14 @@ class EventFactory
                     break;
             }
             $parameters[] = new Parameter('CUTYPE', new TextValue($textValue));
+        }
+
+        if ($attendee->hasMembers()) {
+            $listAddressesEmail = [];
+            foreach ($attendee->getMembers() as $member) {
+                $listAddressesEmail[] = new QuotedUriValue($member->getEmailAddress()->toUri());
+            }
+            $parameters[] = new Parameter('MEMBER', new ListValue($listAddressesEmail));
         }
 
         if ($attendee->hasDisplayName()) {

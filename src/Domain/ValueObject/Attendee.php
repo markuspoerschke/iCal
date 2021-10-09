@@ -11,6 +11,9 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+/**
+ * @see https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.1
+ */
 final class Attendee
 {
     private EmailAddress $emailAddress;
@@ -18,7 +21,6 @@ final class Attendee
     private ?bool $rsvp = null;
     private ?string $displayName;
     /*
-    private ?string $member;
     private ?string $role;
     private ?string $partStat;
     private ?string $delTo;
@@ -27,6 +29,11 @@ final class Attendee
     private ?string $dir;
     private ?string $language; */
 
+    /**
+     * @var array<Member>
+     */
+    private array $members = [];
+
     public function __construct(
         EmailAddress $emailAddress,
         ?string $calendarUserType = null,
@@ -34,8 +41,8 @@ final class Attendee
         bool $rsvp = null
     ) {
         $this->emailAddress = $emailAddress;
-        $this->displayName = $displayName;
         $this->calendarUserType = $calendarUserType;
+        $this->displayName = $displayName;
         $this->rsvp = $rsvp;
     }
 
@@ -71,5 +78,25 @@ final class Attendee
         assert($this->calendarUserType !== null);
 
         return $this->calendarUserType;
+    }
+
+    public function hasMembers(): bool
+    {
+        return !empty($this->members);
+    }
+
+    public function addMember(Member $member): self
+    {
+        $this->members[] = $member;
+
+        return $this;
+    }
+
+    /**
+     * @return array<Member>
+     */
+    public function getMembers(): array
+    {
+        return $this->members;
     }
 }
