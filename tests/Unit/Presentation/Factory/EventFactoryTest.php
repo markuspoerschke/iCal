@@ -15,6 +15,7 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\CalendarUserType;
+use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
@@ -319,6 +320,38 @@ class EventFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'ATTENDEE;CUTYPE=INDIVIDUAL;MEMBER="mailto:test%40example.com","mailto:test%',
             ' 40example.net":mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithChairRole()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+            CalendarUserType::INDIVIDUAL,
+            RoleType::CHAIR
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=CHAIR:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithReqParticipantRole()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+            CalendarUserType::INDIVIDUAL,
+            RoleType::REQ_PARTICIPANT
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT:mailto:test%40example.com',
         ]);
     }
 

@@ -18,6 +18,7 @@ final class Attendee
 {
     private EmailAddress $emailAddress;
     private ?string $calendarUserType = null;
+    private ?string $role = null;
     private ?bool $rsvp = null;
     private ?string $displayName;
     /*
@@ -37,11 +38,13 @@ final class Attendee
     public function __construct(
         EmailAddress $emailAddress,
         ?string $calendarUserType = null,
+        ?string $role = null,
         ?string $displayName = null,
-        bool $rsvp = null
+        ?bool $rsvp = null
     ) {
         $this->emailAddress = $emailAddress;
         $this->calendarUserType = $calendarUserType;
+        $this->role = $role;
         $this->displayName = $displayName;
         $this->rsvp = $rsvp;
     }
@@ -98,5 +101,17 @@ final class Attendee
     public function getMembers(): array
     {
         return $this->members;
+    }
+
+    public function hasRole(): bool
+    {
+        return $this->role !== null;
+    }
+
+    public function getRole(): string
+    {
+        assert($this->role !== null);
+
+        return $this->role;
     }
 }

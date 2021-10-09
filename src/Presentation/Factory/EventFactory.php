@@ -14,7 +14,6 @@ namespace Eluceo\iCal\Presentation\Factory;
 use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
-use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Attendee;
@@ -233,24 +232,7 @@ class EventFactory
         $parameters = [];
 
         if ($attendee->hasCalendarUserType()) {
-            switch ($attendee->getCalendarUserType()) {
-                case CalendarUserType::GROUP:
-                    $textValue = 'GROUP';
-                    break;
-                case CalendarUserType::RESOURCE:
-                    $textValue = 'RESOURCE';
-                    break;
-                case CalendarUserType::ROOM:
-                    $textValue = 'ROOM';
-                    break;
-                case CalendarUserType::UNKNOWN:
-                    $textValue = 'UNKNOWN';
-                    break;
-                default:
-                    $textValue = 'INDIVIDUAL';
-                    break;
-            }
-            $parameters[] = new Parameter('CUTYPE', new TextValue($textValue));
+            $parameters[] = new Parameter('CUTYPE', new TextValue($attendee->getCalendarUserType()));
         }
 
         if ($attendee->hasMembers()) {
@@ -259,6 +241,10 @@ class EventFactory
                 $listAddressesEmail[] = new QuotedUriValue($member->getEmailAddress()->toUri());
             }
             $parameters[] = new Parameter('MEMBER', new ListValue($listAddressesEmail));
+        }
+
+        if ($attendee->hasRole()) {
+            $parameters[] = new Parameter('ROLE', new TextValue($attendee->getRole()));
         }
 
         if ($attendee->hasDisplayName()) {
