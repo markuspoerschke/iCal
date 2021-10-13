@@ -16,7 +16,6 @@ use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
-use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
@@ -27,13 +26,10 @@ use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Parameter;
 use Eluceo\iCal\Presentation\Component\Property\Value\AppleLocationGeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\BinaryValue;
-use Eluceo\iCal\Presentation\Component\Property\Value\BooleanValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
-use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
-use Eluceo\iCal\Presentation\Component\Property\Value\QuotedUriValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -46,11 +42,13 @@ class EventFactory
     private AlarmFactory $alarmFactory;
 
     private DateTimeFactory $dateTimeFactory;
+    private AttendeeFactory $attendeeFactory;
 
-    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null)
+    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null, ?AttendeeFactory $attendeeFactory = null)
     {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
+        $this->attendeeFactory = $attendeeFactory ?? new AttendeeFactory();
     }
 
     /**
@@ -112,7 +110,7 @@ class EventFactory
 
         if ($event->hasAttendee()) {
             foreach ($event->getAttendees() as $attendee) {
-                yield from $this->getAttendeeProperties($attendee);
+                yield $this->attendeeFactory->createProperty($attendee);
             }
         }
 
@@ -222,77 +220,5 @@ class EventFactory
         }
 
         return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
-    }
-
-    /**
-     *  @return Generator<Property>
-     *  @SuppressWarnings(PHPMD.NPathComplexity)
-     *  @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     */
-    private function getAttendeeProperties(Attendee $attendee): Generator
-    {
-        $parameters = [];
-
-        if ($attendee->hasCalendarUserType()) {
-            $parameters[] = new Parameter('CUTYPE', new TextValue($attendee->getCalendarUserType()));
-        }
-
-        if ($attendee->hasMembers()) {
-            $listAddressesEmail = [];
-            foreach ($attendee->getMembers() as $member) {
-                $listAddressesEmail[] = new QuotedUriValue($member->getEmailAddress()->toUri());
-            }
-            $parameters[] = new Parameter('MEMBER', new ListValue($listAddressesEmail));
-        }
-
-        if ($attendee->hasRole()) {
-            $parameters[] = new Parameter('ROLE', new TextValue($attendee->getRole()));
-        }
-
-        if ($attendee->hasParticipationStatus()) {
-            $parameters[] = new Parameter('PARTSTAT', new TextValue($attendee->getParticipationStatus()));
-        }
-
-        if ($attendee->isRSVPenabled()) {
-            $parameters[] = new Parameter('RSVP', new BooleanValue(true));
-        }
-
-        if ($attendee->hasDelegatedTo()) {
-            $listAddressesEmail = [];
-            foreach ($attendee->getDelegatedTo() as $delegatedToAddress) {
-                $listAddressesEmail[] = new QuotedUriValue($delegatedToAddress->toUri());
-            }
-            $parameters[] = new Parameter('DELEGATED-TO', new ListValue($listAddressesEmail));
-        }
-
-        if ($attendee->hasDelegatedFrom()) {
-            $listAddressesEmail = [];
-            foreach ($attendee->getDelegatedFrom() as $delegatedFromAddress) {
-                $listAddressesEmail[] = new QuotedUriValue($delegatedFromAddress->toUri());
-            }
-            $parameters[] = new Parameter('DELEGATED-FROM', new ListValue($listAddressesEmail));
-        }
-
-        if ($attendee->hasSentBy()) {
-            $listAddressesEmail = [];
-            foreach ($attendee->getSentBy() as $sentByAddress) {
-                $listAddressesEmail[] = new QuotedUriValue($sentByAddress->toUri());
-            }
-            $parameters[] = new Parameter('SENT-BY', new ListValue($listAddressesEmail));
-        }
-
-        if ($attendee->hasDisplayName()) {
-            $parameters[] = new Parameter('CN', new TextValue($attendee->getDisplayName()));
-        }
-
-        if ($attendee->hasDirectoryEntryReference()) {
-            $parameters[] = new Parameter('DIR', new QuotedUriValue($attendee->getDirectoryEntryReference()));
-        }
-
-        if ($attendee->hasLanguage()) {
-            $parameters[] = new Parameter('LANGUAGE', new TextValue($attendee->getLanguage()));
-        }
-
-        yield new Property('ATTENDEE', new UriValue($attendee->getEmailAddress()->toUri()), $parameters);
     }
 }
