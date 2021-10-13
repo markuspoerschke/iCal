@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PAT }}
 
       - name: Run php-cs-fixer
