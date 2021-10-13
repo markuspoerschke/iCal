@@ -36,7 +36,7 @@ class Event
     /**
      * @var array<Attendee>
      */
-    private array $attendee = [];
+    private array $attendees = [];
 
     /**
      * @var array<Alarm>
@@ -257,12 +257,22 @@ class Event
 
     public function hasAttendee(): bool
     {
-        return !empty($this->attendee);
+        return !empty($this->attendees);
     }
 
     public function addAttendee(Attendee $attendee): self
     {
-        $this->attendee[] = $attendee;
+        $this->attendees[] = $attendee;
+
+        return $this;
+    }
+
+    /**
+     * @param Attendee[] $attendees
+     */
+    public function setAttendees(array $attendees): self
+    {
+        $this->attendees = $attendees;
 
         return $this;
     }
@@ -272,6 +282,6 @@ class Event
      */
     public function getAttendees(): array
     {
-        return $this->attendee;
+        return $this->attendees;
     }
 }

@@ -19,11 +19,11 @@ final class Attendee
     private EmailAddress $emailAddress;
     private ?string $calendarUserType = null;
     private ?string $role = null;
-    private ?string $partStat = null;
+    private ?string $participationStatus = null;
     private ?bool $rsvp = null;
 
     private ?string $displayName = null;
-    private ?Uri $dir = null;
+    private ?Uri $directoryEntry = null;
     private ?string $language = null;
 
     /**
@@ -34,12 +34,12 @@ final class Attendee
     /**
      * @var array<EmailAddress>
      */
-    private array $delTo = [];
+    private array $delegatedTo = [];
 
     /**
      * @var array<EmailAddress>
      */
-    private array $delFrom = [];
+    private array $delegatedFrom = [];
 
     /**
      * @var array<EmailAddress>
@@ -115,23 +115,23 @@ final class Attendee
         return $this->role;
     }
 
-    public function setParticipationStatus(string $partStat): self
+    public function setParticipationStatus(string $participationStatus): self
     {
-        $this->partStat = $partStat;
+        $this->participationStatus = $participationStatus;
 
         return $this;
     }
 
     public function hasParticipationStatus(): bool
     {
-        return $this->partStat !== null;
+        return $this->participationStatus !== null;
     }
 
     public function getParticipationStatus(): string
     {
-        assert($this->partStat !== null);
+        assert($this->participationStatus !== null);
 
-        return $this->partStat;
+        return $this->participationStatus;
     }
 
     public function setResponseNeededFromAttendee(bool $res): self
@@ -167,14 +167,14 @@ final class Attendee
 
     public function addDelegatedTo(EmailAddress $delegatedTo): self
     {
-        $this->delTo[] = $delegatedTo;
+        $this->delegatedTo[] = $delegatedTo;
 
         return $this;
     }
 
     public function hasDelegatedTo(): bool
     {
-        return !empty($this->delTo);
+        return !empty($this->delegatedTo);
     }
 
     /**
@@ -182,19 +182,19 @@ final class Attendee
      */
     public function getDelegatedTo(): array
     {
-        return $this->delTo;
+        return $this->delegatedTo;
     }
 
     public function addDelegatedFrom(EmailAddress $delegatedFrom): self
     {
-        $this->delFrom[] = $delegatedFrom;
+        $this->delegatedFrom[] = $delegatedFrom;
 
         return $this;
     }
 
     public function hasDelegatedFrom(): bool
     {
-        return !empty($this->delFrom);
+        return !empty($this->delegatedFrom);
     }
 
     /**
@@ -202,7 +202,7 @@ final class Attendee
      */
     public function getDelegatedFrom(): array
     {
-        return $this->delFrom;
+        return $this->delegatedFrom;
     }
 
     public function addSentBy(EmailAddress $sentBy): self
@@ -227,19 +227,19 @@ final class Attendee
 
     public function hasDirectoryEntryReference(): bool
     {
-        return $this->dir !== null;
+        return $this->directoryEntry !== null;
     }
 
     public function getDirectoryEntryReference(): Uri
     {
-        assert($this->dir !== null);
+        assert($this->directoryEntry !== null);
 
-        return $this->dir;
+        return $this->directoryEntry;
     }
 
-    public function setDirectoryEntryReference(Uri $dir): self
+    public function setDirectoryEntryReference(Uri $directoryEntry): self
     {
-        $this->dir = $dir;
+        $this->directoryEntry = $directoryEntry;
 
         return $this;
     }

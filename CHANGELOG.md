@@ -13,7 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Event URL property [#314](https://github.com/markuspoerschke/iCal/pull/314)
 -   Event LAST-MODIFIED property [#298](https://github.com/markuspoerschke/iCal/pull/298)
--   Event STATUS and METHOD property [#300](https://github.com/markuspoerschke/iCal/pull/300)
 -   Calendar STATUS and METHOD property
 ## [2.2.0] - 2021-05-03
 

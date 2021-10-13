@@ -11,7 +11,7 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-class Member
+final class Member
 {
     private ?EmailAddress $emailAddress = null;
 
