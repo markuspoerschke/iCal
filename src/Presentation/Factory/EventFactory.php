@@ -105,6 +105,10 @@ class EventFactory
             yield $this->getOrganizerProperty($event->getOrganizer());
         }
 
+        if ($event->hasTimeTransparency()) {
+            yield new Property('TRANSP', new TextValue((string) $event->getTimeTransparency()));
+        }
+
         foreach ($event->getAttachments() as $attachment) {
             yield from $this->getAttachmentProperties($attachment);
         }

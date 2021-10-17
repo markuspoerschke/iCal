@@ -188,6 +188,16 @@ class CalendarFactoryTest extends TestCase
         ]);
     }
 
+    public function testEventWithTimeTransparency()
+    {
+        $event = (new Event())
+            ->setIsTimeOpaque();
+
+        self::assertEventRendersCorrect($event, [
+            'TRANSP:OPAQUE',
+        ]);
+    }
+
     private static function assertEventRendersCorrect(Event $event, array $expected)
     {
         $resultAsString = (string) (new EventFactory())->createComponent($event);

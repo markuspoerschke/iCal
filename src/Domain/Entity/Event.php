@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use Eluceo\iCal\Domain\Enum\TimeTransparency;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Location;
@@ -31,6 +32,7 @@ class Event
     private ?Location $location = null;
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
+    private ?TimeTransparency $timeTransparency = null;
 
     /**
      * @var array<Alarm>
@@ -247,5 +249,31 @@ class Event
         $this->lastModified = $lastModified;
 
         return $this;
+    }
+
+    public function setIsTimeTransparent(): self
+    {
+        $this->timeTransparency = TimeTransparency::TRANSPARENT();
+
+        return $this;
+    }
+
+    public function setIsTimeOpaque(): self
+    {
+        $this->timeTransparency = TimeTransparency::OPAQUE();
+
+        return $this;
+    }
+
+    public function hasTimeTransparency(): bool
+    {
+        return $this->timeTransparency !== null;
+    }
+
+    public function getTimeTransparency(): TimeTransparency
+    {
+        assert($this->timeTransparency !== null);
+
+        return $this->timeTransparency;
     }
 }

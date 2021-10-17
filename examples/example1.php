@@ -59,6 +59,7 @@ $event
             'image/x-icon'
         )
     )
+    ->setIsTimeTransparent()
 ;
 
 // 2. Create Calendar domain entity.
