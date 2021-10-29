@@ -40,13 +40,14 @@ use Generator;
 class EventFactory
 {
     private AlarmFactory $alarmFactory;
-
     private DateTimeFactory $dateTimeFactory;
+    private AttendeeFactory $attendeeFactory;
 
-    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null)
+    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null, ?AttendeeFactory $attendeeFactory = null)
     {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
+        $this->attendeeFactory = $attendeeFactory ?? new AttendeeFactory();
     }
 
     /**
@@ -71,6 +72,7 @@ class EventFactory
     /**
      * @return Generator<Property>
      * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function getProperties(Event $event): Generator
     {
@@ -103,6 +105,12 @@ class EventFactory
 
         if ($event->hasOrganizer()) {
             yield $this->getOrganizerProperty($event->getOrganizer());
+        }
+
+        if ($event->hasAttendee()) {
+            foreach ($event->getAttendees() as $attendee) {
+                yield $this->attendeeFactory->createProperty($attendee);
+            }
         }
 
         foreach ($event->getAttachments() as $attachment) {

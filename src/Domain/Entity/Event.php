@@ -33,6 +33,11 @@ class Event
     private ?Timestamp $lastModified = null;
 
     /**
+     * @var array<Attendee>
+     */
+    private array $attendees = [];
+
+    /**
      * @var array<Alarm>
      */
     private array $alarms = [];
@@ -247,5 +252,35 @@ class Event
         $this->lastModified = $lastModified;
 
         return $this;
+    }
+
+    public function hasAttendee(): bool
+    {
+        return !empty($this->attendees);
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        $this->attendees[] = $attendee;
+
+        return $this;
+    }
+
+    /**
+     * @param Attendee[] $attendees
+     */
+    public function setAttendees(array $attendees): self
+    {
+        $this->attendees = $attendees;
+
+        return $this;
+    }
+
+    /**
+     * @return Attendee[]
+     */
+    public function getAttendees(): array
+    {
+        return $this->attendees;
     }
 }
