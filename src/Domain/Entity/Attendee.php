@@ -9,7 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Eluceo\iCal\Domain\ValueObject;
+namespace Eluceo\iCal\Domain\Entity;
+
+use Eluceo\iCal\Domain\Enum\CalendarUserType;
+use Eluceo\iCal\Domain\Enum\ParticipationStatus;
+use Eluceo\iCal\Domain\Enum\RoleType;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
+use Eluceo\iCal\Domain\ValueObject\Member;
+use Eluceo\iCal\Domain\ValueObject\Uri;
 
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.4.1
@@ -17,11 +24,10 @@ namespace Eluceo\iCal\Domain\ValueObject;
 final class Attendee
 {
     private EmailAddress $emailAddress;
-    private ?string $calendarUserType = null;
-    private ?string $role = null;
-    private ?string $participationStatus = null;
+    private ?CalendarUserType $calendarUserType = null;
+    private ?RoleType $role = null;
+    private ?ParticipationStatus $participationStatus = null;
     private ?bool $rsvp = null;
-
     private ?string $displayName = null;
     private ?Uri $directoryEntry = null;
     private ?string $language = null;
@@ -57,7 +63,7 @@ final class Attendee
         return $this->emailAddress;
     }
 
-    public function setCalendarUserType(string $calendarUserType): self
+    public function setCalendarUserType(CalendarUserType $calendarUserType): self
     {
         $this->calendarUserType = $calendarUserType;
 
@@ -69,7 +75,7 @@ final class Attendee
         return $this->calendarUserType !== null;
     }
 
-    public function getCalendarUserType(): string
+    public function getCalendarUserType(): CalendarUserType
     {
         assert($this->calendarUserType !== null);
 
@@ -96,7 +102,7 @@ final class Attendee
         return $this->members;
     }
 
-    public function setRole(string $role): self
+    public function setRole(RoleType $role): self
     {
         $this->role = $role;
 
@@ -108,14 +114,14 @@ final class Attendee
         return $this->role !== null;
     }
 
-    public function getRole(): string
+    public function getRole(): RoleType
     {
         assert($this->role !== null);
 
         return $this->role;
     }
 
-    public function setParticipationStatus(string $participationStatus): self
+    public function setParticipationStatus(ParticipationStatus $participationStatus): self
     {
         $this->participationStatus = $participationStatus;
 
@@ -127,7 +133,7 @@ final class Attendee
         return $this->participationStatus !== null;
     }
 
-    public function getParticipationStatus(): string
+    public function getParticipationStatus(): ParticipationStatus
     {
         assert($this->participationStatus !== null);
 

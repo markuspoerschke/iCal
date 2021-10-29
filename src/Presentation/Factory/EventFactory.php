@@ -40,7 +40,6 @@ use Generator;
 class EventFactory
 {
     private AlarmFactory $alarmFactory;
-
     private DateTimeFactory $dateTimeFactory;
     private AttendeeFactory $attendeeFactory;
 

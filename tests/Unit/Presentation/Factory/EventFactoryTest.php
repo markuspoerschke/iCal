@@ -13,12 +13,12 @@ namespace Unit\Presentation\Factory;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Eluceo\iCal\Domain\Entity\Attendee;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\CalendarUserType;
-use Eluceo\iCal\Domain\Enum\ParticipationStatusType;
+use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
-use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
@@ -228,7 +228,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithIndividualCUtype()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL);
+        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -241,7 +241,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithGroupCUtype()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::GROUP);
+        $attendee->setCalendarUserType(CalendarUserType::GROUP());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -254,7 +254,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithResourceCUtype()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::RESOURCE);
+        $attendee->setCalendarUserType(CalendarUserType::RESOURCE());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -267,7 +267,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithRoomCUtype()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::ROOM);
+        $attendee->setCalendarUserType(CalendarUserType::ROOM());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -280,7 +280,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithUnknownCUtype()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::UNKNOWN);
+        $attendee->setCalendarUserType(CalendarUserType::UNKNOWN());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -292,7 +292,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithOneMember()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL);
+        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -305,7 +305,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithMultipleMembers()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL)
+        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL())
             ->addMember(new Member(new EmailAddress('test@example.com')))
             ->addMember(new Member(new EmailAddress('test@example.net')));
 
@@ -321,7 +321,7 @@ class EventFactoryTest extends TestCase
     public function testAttendeeWithChairRole()
     {
         $attendee = new Attendee(new EmailAddress('test@example.com'));
-        $attendee->setRole(RoleType::CHAIR);
+        $attendee->setRole(RoleType::CHAIR());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -336,7 +336,7 @@ class EventFactoryTest extends TestCase
         $attendee = new Attendee(
             new EmailAddress('test@example.com'),
         );
-        $attendee->setRole(RoleType::REQ_PARTICIPANT);
+        $attendee->setRole(RoleType::REQ_PARTICIPANT());
 
         $event = (new Event())
             ->addAttendee($attendee);
@@ -352,9 +352,7 @@ class EventFactoryTest extends TestCase
             new EmailAddress('test@example.com'),
         );
 
-        $attendee->setParticipationStatus(
-            ParticipationStatusType::NEEDS_ACTION
-        );
+        $attendee->setParticipationStatus(ParticipationStatus::NEEDS_ACTION());
 
         $event = (new Event())
             ->addAttendee($attendee);

@@ -13,7 +13,6 @@ namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
-use Eluceo\iCal\Domain\ValueObject\Attendee;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Organizer;

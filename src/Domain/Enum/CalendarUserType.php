@@ -13,9 +13,34 @@ namespace Eluceo\iCal\Domain\Enum;
 
 final class CalendarUserType
 {
-    public const INDIVIDUAL = 'INDIVIDUAL';
-    public const GROUP = 'GROUP';
-    public const RESOURCE = 'RESOURCE';
-    public const ROOM = 'ROOM';
-    public const UNKNOWN = 'UNKNOWN';
+    private static ?self $individual = null;
+    private static ?self $group = null;
+    private static ?self $resource = null;
+    private static ?self $room = null;
+    private static ?self $unknown = null;
+
+    public static function INDIVIDUAL(): self
+    {
+        return self::$individual ??= new self();
+    }
+
+    public static function GROUP(): self
+    {
+        return self::$group ??= new self();
+    }
+
+    public static function RESOURCE(): self
+    {
+        return self::$resource ??= new self();
+    }
+
+    public static function ROOM(): self
+    {
+        return self::$room ??= new self();
+    }
+
+    public static function UNKNOWN(): self
+    {
+        return self::$unknown ??= new self();
+    }
 }

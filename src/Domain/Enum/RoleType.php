@@ -13,8 +13,28 @@ namespace Eluceo\iCal\Domain\Enum;
 
 final class RoleType
 {
-    public const CHAIR = 'CHAIR';
-    public const REQ_PARTICIPANT = 'REQ-PARTICIPANT';
-    public const OPT_PARTICIPANT = 'OPT-PARTICIPANT';
-    public const NON_PARTICIPANT = 'NON-PARTICIPANT';
+    private static ?self $chair = null;
+    private static ?self $reqParticipant = null;
+    private static ?self $optParticipant = null;
+    private static ?self $nonParticipant = null;
+
+    public static function CHAIR(): self
+    {
+        return self::$chair ??= new RoleType();
+    }
+
+    public static function REQ_PARTICIPANT(): self
+    {
+        return self::$reqParticipant ??= new RoleType();
+    }
+
+    public static function OPT_PARTICIPANT(): self
+    {
+        return self::$optParticipant ??= new RoleType();
+    }
+
+    public static function NON_PARTICIPANT(): self
+    {
+        return self::$nonParticipant ??= new RoleType();
+    }
 }

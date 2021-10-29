@@ -11,7 +11,10 @@
 
 namespace Eluceo\iCal\Presentation\Factory;
 
-use Eluceo\iCal\Domain\ValueObject\Attendee;
+use Eluceo\iCal\Domain\Entity\Attendee;
+use Eluceo\iCal\Domain\Enum\CalendarUserType;
+use Eluceo\iCal\Domain\Enum\ParticipationStatus;
+use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Parameter;
 use Eluceo\iCal\Presentation\Component\Property\Value\BooleanValue;
@@ -19,6 +22,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\QuotedUriValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
+use UnexpectedValueException;
 
 class AttendeeFactory
 {
@@ -38,7 +42,7 @@ class AttendeeFactory
         $parameters = [];
 
         if ($attendee->hasCalendarUserType()) {
-            $parameters[] = new Parameter('CUTYPE', new TextValue($attendee->getCalendarUserType()));
+            $parameters[] = new Parameter('CUTYPE', $this->getCalendarUserTypeValue($attendee->getCalendarUserType()));
         }
 
         if ($attendee->hasMembers()) {
@@ -50,11 +54,11 @@ class AttendeeFactory
         }
 
         if ($attendee->hasRole()) {
-            $parameters[] = new Parameter('ROLE', new TextValue($attendee->getRole()));
+            $parameters[] = new Parameter('ROLE', $this->getRoleTypeValue($attendee->getRole()));
         }
 
         if ($attendee->hasParticipationStatus()) {
-            $parameters[] = new Parameter('PARTSTAT', new TextValue($attendee->getParticipationStatus()));
+            $parameters[] = new Parameter('PARTSTAT', $this->getParticipantStatusTextValue($attendee->getParticipationStatus()));
         }
 
         if ($attendee->isRSVPenabled()) {
@@ -98,5 +102,80 @@ class AttendeeFactory
         }
 
         return $parameters;
+    }
+
+    private function getCalendarUserTypeValue(CalendarUserType $calendarUserType): TextValue
+    {
+        if ($calendarUserType === CalendarUserType::GROUP()) {
+            return new TextValue('GROUP');
+        }
+
+        if ($calendarUserType === CalendarUserType::INDIVIDUAL()) {
+            return new TextValue('INDIVIDUAL');
+        }
+
+        if ($calendarUserType === CalendarUserType::RESOURCE()) {
+            return new TextValue('RESOURCE');
+        }
+
+        if ($calendarUserType === CalendarUserType::ROOM()) {
+            return new TextValue('ROOM');
+        }
+
+        return new TextValue('UNKNOWN');
+    }
+
+    private function getRoleTypeValue(RoleType $roleType): TextValue
+    {
+        if ($roleType === RoleType::CHAIR()) {
+            return new TextValue('CHAIR');
+        }
+
+        if ($roleType === RoleType::REQ_PARTICIPANT()) {
+            return new TextValue('REQ-PARTICIPANT');
+        }
+
+        if ($roleType === RoleType::OPT_PARTICIPANT()) {
+            return new TextValue('OPT-PARTICIPANT');
+        }
+
+        if ($roleType === RoleType::NON_PARTICIPANT()) {
+            return new TextValue('NON-PARTICIPANT');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown role type value that is not yet implemented.', RoleType::class));
+    }
+
+    public function getParticipantStatusTextValue(ParticipationStatus $participationStatus): TextValue
+    {
+        if (ParticipationStatus::NEEDS_ACTION() === $participationStatus) {
+            return new TextValue('NEEDS-ACTION');
+        }
+
+        if (ParticipationStatus::ACCEPTED() === $participationStatus) {
+            return new TextValue('ACCEPTED');
+        }
+
+        if (ParticipationStatus::DECLINED() === $participationStatus) {
+            return new TextValue('DECLINED');
+        }
+
+        if (ParticipationStatus::TENTATIVE() === $participationStatus) {
+            return new TextValue('TENTATIVE');
+        }
+
+        if (ParticipationStatus::DELEGATED() === $participationStatus) {
+            return new TextValue('DELEGATED');
+        }
+
+        if (ParticipationStatus::COMPLETED() === $participationStatus) {
+            return new TextValue('COMPLETED');
+        }
+
+        if (ParticipationStatus::IN_PROCESS() === $participationStatus) {
+            return new TextValue('IN-PROCESS');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown role type value that is not yet implemented.', ParticipationStatus::class));
     }
 }
