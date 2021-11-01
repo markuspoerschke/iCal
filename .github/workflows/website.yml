@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2.3.5
       - name: Turnstyle
         timeout-minutes: 18
         uses: softprops/turnstyle@v1
