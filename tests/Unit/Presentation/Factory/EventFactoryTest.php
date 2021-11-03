@@ -13,7 +13,11 @@ namespace Unit\Presentation\Factory;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Eluceo\iCal\Domain\Entity\Attendee;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\CalendarUserType;
+use Eluceo\iCal\Domain\Enum\ParticipationStatus;
+use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Date;
@@ -21,6 +25,7 @@ use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\EmailAddress;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 use Eluceo\iCal\Domain\ValueObject\Location;
+use Eluceo\iCal\Domain\ValueObject\Member;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
@@ -32,7 +37,7 @@ use Eluceo\iCal\Presentation\ContentLine;
 use Eluceo\iCal\Presentation\Factory\EventFactory;
 use PHPUnit\Framework\TestCase;
 
-class CalendarFactoryTest extends TestCase
+class EventFactoryTest extends TestCase
 {
     public function testMinimalEvent()
     {
@@ -175,6 +180,308 @@ class CalendarFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'ORGANIZER;CN=Test Display Name;DIR=example://directory-entry;SENT-BY=mailto',
             ' :sendby%40example.com:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testOneAttendee()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com')
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testMultipleAttendees()
+    {
+        $event = (new Event())
+            ->addAttendee(new Attendee(
+                new EmailAddress('test@example.com')
+            ))
+            ->addAttendee(new Attendee(
+                new EmailAddress('test2@example.net')
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE:mailto:test%40example.com',
+            'ATTENDEE:mailto:test2%40example.net',
+        ]);
+    }
+
+    /*  public function testAttendeeWithCN()
+     {
+         $event = (new Event())
+             ->addAttendee(new Attendee(
+                 new EmailAddress('test@example.com'),
+                 null,
+                 'Test Display Name',
+             ));
+
+         self::assertEventRendersCorrect($event, [
+             'ATTENDEE;CN=Test Display Name:mailto:test%40example.com',
+         ]);
+     } */
+
+    public function testAttendeeWithIndividualCUtype()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithGroupCUtype()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::GROUP());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=GROUP:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithResourceCUtype()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::RESOURCE());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=RESOURCE:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithRoomCUtype()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::ROOM());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=ROOM:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithUnknownCUtype()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::UNKNOWN());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=UNKNOWN:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithOneMember()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithMultipleMembers()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL())
+            ->addMember(new Member(new EmailAddress('test@example.com')))
+            ->addMember(new Member(new EmailAddress('test@example.net')));
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CUTYPE=INDIVIDUAL;MEMBER="mailto:test%40example.com","mailto:test%',
+            ' 40example.net":mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithChairRole()
+    {
+        $attendee = new Attendee(new EmailAddress('test@example.com'));
+        $attendee->setRole(RoleType::CHAIR());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;ROLE=CHAIR:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithReqParticipantRole()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+        );
+        $attendee->setRole(RoleType::REQ_PARTICIPANT());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;ROLE=REQ-PARTICIPANT:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithParticipationStatusNeedsAction()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+        );
+
+        $attendee->setParticipationStatus(ParticipationStatus::NEEDS_ACTION());
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;PARTSTAT=NEEDS-ACTION:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithRSVP()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('test@example.com'),
+        );
+
+        $attendee->setResponseNeededFromAttendee(true);
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;RSVP=TRUE:mailto:test%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithDelegatedTo()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jsmith@example.com'),
+        );
+
+        $attendee->addDelegatedTo(
+            new EmailAddress('jdoe@example.com')
+        )->addDelegatedTo(
+            new EmailAddress('jqpublic@example.com')
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;DELEGATED-TO="mailto:jdoe%40example.com","mailto:jqpublic%40exampl',
+            ' e.com":mailto:jsmith%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithDelegatedFrom()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->addDelegatedFrom(
+            new EmailAddress('jsmith@example.com')
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;DELEGATED-FROM="mailto:jsmith%40example.com":mailto:jdoe%40example',
+            ' .com',
+        ]);
+    }
+
+    public function testAttendeeWithSentBy()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->addSentBy(
+            new EmailAddress('sray@example.com')
+        );
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;SENT-BY="mailto:sray%40example.com":mailto:jdoe%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithCommonName()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->setDisplayName('Test Example');
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;CN=Test Example:mailto:jdoe%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithDirectoryEntryRef()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->setDirectoryEntryReference(new Uri('ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)'));
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;DIR="ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20D',
+            ' olittle)":mailto:jdoe%40example.com',
+        ]);
+    }
+
+    public function testAttendeeWithLanguage()
+    {
+        $attendee = new Attendee(
+            new EmailAddress('jdoe@example.com'),
+        );
+
+        $attendee->setLanguage('en-US');
+
+        $event = (new Event())
+            ->addAttendee($attendee);
+
+        self::assertEventRendersCorrect($event, [
+            'ATTENDEE;LANGUAGE=en-US:mailto:jdoe%40example.com',
         ]);
     }
 

@@ -35,6 +35,11 @@ class Event
     private ?TimeTransparency $timeTransparency = null;
 
     /**
+     * @var array<Attendee>
+     */
+    private array $attendees = [];
+
+    /**
      * @var array<Alarm>
      */
     private array $alarms = [];
@@ -265,6 +270,18 @@ class Event
         return $this;
     }
 
+    public function hasAttendee(): bool
+    {
+        return !empty($this->attendees);
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        $this->attendees[] = $attendee;
+
+        return $this;
+    }
+
     public function hasTimeTransparency(): bool
     {
         return $this->timeTransparency !== null;
@@ -275,5 +292,23 @@ class Event
         assert($this->timeTransparency !== null);
 
         return $this->timeTransparency;
+    }
+
+    /**
+     * @param Attendee[] $attendees
+     */
+    public function setAttendees(array $attendees): self
+    {
+        $this->attendees = $attendees;
+
+        return $this;
+    }
+
+    /**
+     * @return Attendee[]
+     */
+    public function getAttendees(): array
+    {
+        return $this->attendees;
     }
 }
