@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Event Attendee property [#333](https://github.com/markuspoerschke/iCal/pull/314)
-- Support PHP 8.1
+-   Event Attendee property [#333](https://github.com/markuspoerschke/iCal/pull/314)
+-   Support PHP 8.1
 
 ### Fixed
 
