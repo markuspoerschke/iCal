@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "5f38c8804a9e97d23e0c8d63341088cd8a22d627"
+                "reference": "6f981ee24cf69ee7ce9736146d1c57c2780598a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/5f38c8804a9e97d23e0c8d63341088cd8a22d627",
-                "reference": "5f38c8804a9e97d23e0c8d63341088cd8a22d627",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/6f981ee24cf69ee7ce9736146d1c57c2780598a8",
+                "reference": "6f981ee24cf69ee7ce9736146d1c57c2780598a8",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.4-dev"
+                    "dev-main": "2.5-dev"
                 },
                 "thanks": {
                     "name": "symfony/contracts",
@@ -55,7 +55,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.4.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.0"
             },
             "funding": [
                 {
@@ -71,7 +71,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-23T23:28:01+00:00"
+            "time": "2021-07-12T14:48:14+00:00"
         }
     ],
     "packages-dev": [
@@ -646,41 +646,35 @@
         },
         {
             "name": "ergebnis/composer-normalize",
-            "version": "2.15.0",
+            "version": "2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/composer-normalize.git",
-                "reference": "d469a15b916441959446d52a0f5d3fc9f7720317"
+                "reference": "21eb186aa37247544674ee75aa4139c1cade7a64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/d469a15b916441959446d52a0f5d3fc9f7720317",
-                "reference": "d469a15b916441959446d52a0f5d3fc9f7720317",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/21eb186aa37247544674ee75aa4139c1cade7a64",
+                "reference": "21eb186aa37247544674ee75aa4139c1cade7a64",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.1.0 || ^2.0.0",
+                "composer-plugin-api": "^2.0.0",
                 "ergebnis/json-normalizer": "^1.0.3",
                 "ergebnis/json-printer": "^3.1.1",
-                "justinrainbow/json-schema": "^5.2.10",
+                "justinrainbow/json-schema": "^5.2.11",
                 "localheinz/diff": "^1.1.1",
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "composer/composer": "^1.10.22 || ^2.0.13",
+                "composer/composer": "^2.1.12",
                 "ergebnis/license": "^1.1.0",
                 "ergebnis/php-cs-fixer-config": "^2.14.0",
-                "ergebnis/phpstan-rules": "~0.15.3",
                 "ergebnis/test-util": "^1.5.0",
-                "phpstan/extension-installer": "^1.1.0",
-                "phpstan/phpstan": "~0.12.89",
-                "phpstan/phpstan-deprecation-rules": "~0.12.6",
-                "phpstan/phpstan-phpunit": "~0.12.19",
-                "phpstan/phpstan-strict-rules": "~0.12.9",
-                "phpunit/phpunit": "^8.5.16",
-                "psalm/plugin-phpunit": "~0.16.0",
-                "symfony/filesystem": "^5.3.0",
-                "vimeo/psalm": "^4.7.3"
+                "phpunit/phpunit": "^8.5.21",
+                "psalm/plugin-phpunit": "~0.16.1",
+                "symfony/filesystem": "^5.3.4",
+                "vimeo/psalm": "^4.12.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -723,7 +717,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-15T08:06:45+00:00"
+            "time": "2021-11-22T10:23:09+00:00"
         },
         {
             "name": "ergebnis/json-normalizer",
