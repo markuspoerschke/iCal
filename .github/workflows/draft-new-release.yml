@@ -26,6 +26,8 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
+      - run: git checkout -b release/${{ github.event.inputs.version }}
+
       - uses: stefanzweifel/git-auto-commit-action@v4.12.0
         with:
           branch: release/${{ github.event.inputs.version }}
