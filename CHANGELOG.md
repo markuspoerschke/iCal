@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2021-12-13
+
 ### Added
 
 -   Support `symfony/deprecation-contracts` version 3 [#354](https://github.com/markuspoerschke/iCal/pull/354)
@@ -208,7 +210,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.3.0...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/markuspoerschke/iCal/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/markuspoerschke/iCal/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/markuspoerschke/iCal/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/markuspoerschke/iCal/compare/2.0.0...2.1.0
