@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1476d26d71307e0e2a9a346a14dfc23e",
+    "content-hash": "c66ebcc111a2febb8536b91b208f8ec8",
     "packages": [
         {
             "name": "symfony/deprecation-contracts",
@@ -6060,6 +6060,7 @@
                 "issues": "https://github.com/webmozart/path-util/issues",
                 "source": "https://github.com/webmozart/path-util/tree/2.3.0"
             },
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         }
     ],
