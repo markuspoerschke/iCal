@@ -2,22 +2,12 @@
 # Dockerfile for the project’s website
 #
 
-FROM node:13 AS build_frontend
+FROM node:14 AS build
 
 COPY website/ /app/website
 WORKDIR /app/website
 RUN yarn && yarn build
 
-FROM php:7.4-alpine AS build
-
-ADD https://github.com/CouscousPHP/Couscous/releases/download/1.8.0/couscous.phar /usr/local/bin/couscous
-RUN chmod +x /usr/local/bin/couscous
-
-COPY ./ /app
-COPY --from=build_frontend /app/website/template/static /app/website/template/static
-WORKDIR /app
-
-RUN /usr/local/bin/couscous generate
-
 FROM nginx
-COPY --from=build /app/.couscous/generated /usr/share/nginx/html
+COPY --from=build /app/website/build /usr/share/nginx/html
+COPY ./website/default.nginx /etc/nginx/conf.d/default.conf

@@ -1,7 +1,9 @@
+/.github
+/build
 /composer.lock
-/vendor
 /node_modules
 /report
-/build
-/.couscous
-/.github
+/vendor
+/website/.docusaurus
+/website/build
+/website/node_modules

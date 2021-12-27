@@ -1,9 +1,6 @@
 ---
-currentMenu: components/timezone
-title: Time Zone Component
+title: Time Zone
 ---
-
-# Time Zone
 
 The time zone event domain object `\Eluceo\iCal\Domain\Entity\TimeZone` represents a definition of a time zone.
 It contains the transitions of standard and daylight saving time and defines offsets to the UTC time.

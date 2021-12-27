@@ -18,6 +18,10 @@ use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
+use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
+use Eluceo\iCal\Domain\ValueObject\Location;
+use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\Uri;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
@@ -29,6 +33,14 @@ $event = new Event();
 $event
     ->setSummary('Christmas Eve')
     ->setDescription('Lorem Ipsum Dolor...')
+    ->setOrganizer(new Organizer(
+        new EmailAddress('john.doe@example.com'),
+        'John Doe'
+    ))
+    ->setLocation(
+        (new Location('Neuschwansteinstraße 20, 87645 Schwangau', 'Schloss Neuschwanstein'))
+            ->withGeographicPosition(new GeographicPosition(47.557579, 10.749704))
+    )
     ->setOccurrence(
         new TimeSpan(
             new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2030-12-24 13:30:00'), true),

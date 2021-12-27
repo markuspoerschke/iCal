@@ -1,9 +1,6 @@
 ---
-currentMenu: advanced/maturity-matrix
 title: Maturity Matrix
 ---
-
-# Maturity Matrix
 
 The generation of the `.ics` file follows the “Internet Calendaring and Scheduling Core Object
 Specification” ([RFC 5545](https://tools.ietf.org/html/rfc5545)). The domain objects in this package do not fully
@@ -36,40 +33,41 @@ See [RFC 5545 section 3.6](https://tools.ietf.org/html/rfc5545#section-3.6).
 
 See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 
-| Property    | Supported |
-| ----------- | :-------: |
-| dtstamp     |     ✔     |
-| uid         |     ✔     |
-| dtstart     |     ✔     |
-| class       |     ✖     |
-| created     |     ✖     |
-| description |     ✔     |
-| geo         |     ✔     |
-| last-mod    |     ✖     |
-| location    |     ✔     |
-| organizer   |     ✖     |
-| priority    |     ✖     |
-| seq         |     ✖     |
-| status      |     ✖     |
-| summary     |     ✔     |
-| transp      |     ✖     |
-| url         |     ✖     |
-| recurid     |     ✖     |
-| rrule       |     ✖     |
-| dtend       |     ✔     |
-| duration    |     ✖     |
-| attach      |     ✔     |
-| attendee    |     ✖     |
-| categories  |     ✖     |
-| comment     |     ✖     |
-| contact     |     ✖     |
-| exdate      |     ✖     |
-| rstatus     |     ✖     |
-| related     |     ✖     |
-| resources   |     ✖     |
-| rdate       |     ✖     |
-| x-prop      |    (✔)    |
-| iana-prop   |    (✔)    |
+| Property                    | Supported |
+| --------------------------- | :-------: |
+| dtstamp                     |     ✔     |
+| uid                         |     ✔     |
+| dtstart                     |     ✔     |
+| class                       |     ✖     |
+| created                     |     ✖     |
+| description                 |     ✔     |
+| geo                         |     ✔     |
+| last-mod                    |     ✔     |
+| location                    |     ✔     |
+| organizer                   |     ✔     |
+| priority                    |     ✖     |
+| seq                         |     ✖     |
+| status                      |     ✖     |
+| summary                     |     ✔     |
+| transp                      |     ✖     |
+| url                         |     ✔     |
+| recurid                     |     ✖     |
+| rrule                       |     ✖     |
+| dtend                       |     ✔     |
+| duration                    |     ✖     |
+| attach                      |     ✔     |
+| attendee                    |     ✔     |
+| categories                  |     ✖     |
+| comment                     |     ✖     |
+| contact                     |     ✖     |
+| exdate                      |     ✖     |
+| rstatus                     |     ✖     |
+| related                     |     ✖     |
+| resources                   |     ✖     |
+| rdate                       |     ✖     |
+| x-prop                      |    (✔)    |
+| iana-prop                   |    (✔)    |
+| x-apple-structured-location |     ✔     |
 
 ## Alarm Component
 

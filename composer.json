@@ -19,18 +19,19 @@
     ],
     "require": {
         "php": ">=7.4 || ~8.0.0",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "symfony/deprecation-contracts": "^2.1 || ^3.0"
     },
     "conflict": {
         "php": "7.4.6"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.8",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "infection/infection": "^0.20.1",
-        "phpmd/phpmd": "~2.8.0",
-        "phpunit/phpunit": "^9",
-        "vimeo/psalm": "^4.4.1"
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "infection/infection": "^0.23",
+        "phpmd/phpmd": "^2.10",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.8"
     },
     "autoload": {
         "psr-4": {
@@ -44,6 +45,8 @@
     },
     "support": {
         "issues": "https://github.com/markuspoerschke/iCal/issues",
-        "source": "https://github.com/markuspoerschke/iCal"
+        "forum": "https://github.com/markuspoerschke/iCal/discussions",
+        "source": "https://github.com/markuspoerschke/iCal",
+        "docs": "https://ical.poerschke.nrw"
     }
 }

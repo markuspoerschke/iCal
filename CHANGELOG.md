@@ -5,7 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2.0.0
+## [Unreleased]
+
+## [2.4.0] - 2021-12-13
+
+### Added
+
+-   Support `symfony/deprecation-contracts` version 3 [#354](https://github.com/markuspoerschke/iCal/pull/354)
+-   Event Attendee property [#333](https://github.com/markuspoerschke/iCal/pull/333)
+
+### Fixed
+
+-   PHPStan complains about wrongly typed hinted constructor argument of `Calendar` class. [#281](https://github.com/markuspoerschke/iCal/issues/281)
+
+## [2.3.0] - 2021-08-24
+
+### Added
+
+-   Event URL property [#314](https://github.com/markuspoerschke/iCal/pull/314)
+-   Event LAST-MODIFIED property [#298](https://github.com/markuspoerschke/iCal/pull/298)
+
+## [2.2.0] - 2021-05-03
+
+### Added
+
+-   Event organizer [#260](https://github.com/markuspoerschke/iCal/pull/260)
+
+## [2.1.0] - 2021-04-21
+
+### Fixed
+
+-   TZOFFSETTO and TZOFFSETFROM should never be -0000 [#246](https://github.com/markuspoerschke/iCal/pull/246)
+-   Calling TimeZone::createFromPhpDateTimeZone with default values fails with assertion [#250](https://github.com/markuspoerschke/iCal/pull/250)
+
+### Deprecated
+
+-   Method `Eluceo\iCal\Domain\Entity\TimeZone::createFromPhpDateTimeZone` will not have default values
+    for `$beginDateTime` and `$endDateTime` in the next major version. [#250](https://github.com/markuspoerschke/iCal/pull/250)
+
+## [2.0.0] - 2021-03-29
 
 This version is complete rewrite.
 Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*` to `2.0.0`.
@@ -22,7 +60,7 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 
 -   Support for PHP `<=7.3`
 
-## [0.16.0]
+## [0.16.0] - 2019-12-29
 
 ### Added
 
@@ -110,7 +148,7 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 
 ### Fixed
 
--   Fix the GEO property (compatibility to PHP < 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
+-   Fix the GEO property (compatibility to PHP &lt; 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
 
 ## [0.11.2] - 2017-04-21
 
@@ -172,6 +210,12 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/markuspoerschke/iCal/compare/2.3.0...2.4.0
+[2.3.0]: https://github.com/markuspoerschke/iCal/compare/2.2.0...2.3.0
+[2.2.0]: https://github.com/markuspoerschke/iCal/compare/2.1.0...2.2.0
+[2.1.0]: https://github.com/markuspoerschke/iCal/compare/2.0.0...2.1.0
+[2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.0...2.0.0
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
@@ -185,6 +229,6 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
 [0.11.0]: https://github.com/markuspoerschke/iCal/compare/0.10.1...0.11.0
-[0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/markuspoerschke/iCal/compare/0.9.0...0.10.0
+[0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
 [0.9.0]: https://github.com/markuspoerschke/iCal/compare/0.8.0...0.9.0

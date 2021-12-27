@@ -18,15 +18,18 @@ use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
+use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Parameter;
+use Eluceo\iCal\Presentation\Component\Property\Value\AppleLocationGeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\BinaryValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -37,13 +40,14 @@ use Generator;
 class EventFactory
 {
     private AlarmFactory $alarmFactory;
-
     private DateTimeFactory $dateTimeFactory;
+    private AttendeeFactory $attendeeFactory;
 
-    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null)
+    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null, ?AttendeeFactory $attendeeFactory = null)
     {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
+        $this->attendeeFactory = $attendeeFactory ?? new AttendeeFactory();
     }
 
     /**
@@ -67,11 +71,17 @@ class EventFactory
 
     /**
      * @return Generator<Property>
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function getProperties(Event $event): Generator
     {
         yield new Property('UID', new TextValue((string) $event->getUniqueIdentifier()));
         yield new Property('DTSTAMP', new DateTimeValue($event->getTouchedAt()));
+
+        if ($event->hasLastModified()) {
+            yield new Property('LAST-MODIFIED', new DateTimeValue($event->getLastModified()));
+        }
 
         if ($event->hasSummary()) {
             yield new Property('SUMMARY', new TextValue($event->getSummary()));
@@ -85,12 +95,26 @@ class EventFactory
             yield new Property('STATUS', new TextValue($event->getStatus()));
         }
 
+        if ($event->hasUrl()) {
+            yield new Property('URL', new TextValue($event->getUrl()->getUri()));
+        }
+
         if ($event->hasOccurrence()) {
             yield from $this->getOccurrenceProperties($event->getOccurrence());
         }
 
         if ($event->hasLocation()) {
             yield from $this->getLocationProperties($event);
+        }
+
+        if ($event->hasOrganizer()) {
+            yield $this->getOrganizerProperty($event->getOrganizer());
+        }
+
+        if ($event->hasAttendee()) {
+            foreach ($event->getAttendees() as $attendee) {
+                yield $this->attendeeFactory->createProperty($attendee);
+            }
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -138,6 +162,16 @@ class EventFactory
 
         if ($event->getLocation()->hasGeographicalPosition()) {
             yield new Property('GEO', new GeoValue($event->getLocation()->getGeographicPosition()));
+            yield new Property(
+                'X-APPLE-STRUCTURED-LOCATION',
+                new AppleLocationGeoValue($event->getLocation()->getGeographicPosition()),
+                [
+                    new Parameter('VALUE', new TextValue('URI')),
+                    new Parameter('X-ADDRESS', new TextValue((string) $event->getLocation())),
+                    new Parameter('X-APPLE-RADIUS', new IntegerValue(49)),
+                    new Parameter('X-TITLE', new TextValue($event->getLocation()->getTitle())),
+                ]
+            );
         }
     }
 
@@ -170,5 +204,24 @@ class EventFactory
                 $parameters
             );
         }
+    }
+
+    private function getOrganizerProperty(Organizer $organizer): Property
+    {
+        $parameters = [];
+
+        if ($organizer->hasDisplayName()) {
+            $parameters[] = new Parameter('CN', new TextValue($organizer->getDisplayName()));
+        }
+
+        if ($organizer->hasDirectoryEntry()) {
+            $parameters[] = new Parameter('DIR', new UriValue($organizer->getDirectoryEntry()));
+        }
+
+        if ($organizer->isSentInBehalfOf()) {
+            $parameters[] = new Parameter('SENT-BY', new UriValue($organizer->getSentBy()->toUri()));
+        }
+
+        return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
     }
 }

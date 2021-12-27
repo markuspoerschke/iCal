@@ -14,9 +14,9 @@ namespace Eluceo\iCal\Presentation\Component\Property\Value;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
-final class GeoValue extends Value
+class GeoValue extends Value
 {
-    private GeographicPosition $geographicPosition;
+    protected GeographicPosition $geographicPosition;
 
     public function __construct(GeographicPosition $geographicPosition)
     {

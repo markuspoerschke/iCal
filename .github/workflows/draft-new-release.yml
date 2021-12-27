@@ -1,0 +1,53 @@
+name: "Draft new release"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "The version you want to release"
+        required: true
+      target_branch:
+        description: "The target branch for the new version"
+        default: "2.x"
+        required: true
+
+jobs:
+  draft-new-release:
+    name: Draft a new release
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2.4.0
+        with:
+          ref: ${{ github.event.inputs.target_branch }}
+          token: ${{ secrets.PAT }}
+
+      - name: Update changelog
+        uses: thomaseizinger/keep-a-changelog-new-release@1.3.0
+        with:
+          version: ${{ github.event.inputs.version }}
+
+      - run: git checkout -b release/${{ github.event.inputs.version }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.12.0
+        with:
+          branch: release/${{ github.event.inputs.version }}
+          commit_user_name: Markus Poerschke (Bot)
+          commit_user_email: markus+githubbot@poerschke.nrw
+          commit_message: Release ${{ github.event.inputs.version }}
+          file_pattern: CHANGELOG.md
+
+      - name: Create pull request
+        uses: thomaseizinger/create-pull-request@1.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          head: release/${{ github.event.inputs.version }}
+          base: ${{ github.event.inputs.target_branch }}
+          title: Release version ${{ github.event.inputs.version }}
+          reviewers: ${{ github.actor }}
+          body: |
+            Hi @${{ github.actor }}!
+
+            This PR was created in response to a manual trigger of the release workflow here: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}.
+            I've updated the changelog: ${{ steps.make-commit.outputs.commit }}.
+            Merging this PR will create a GitHub release.

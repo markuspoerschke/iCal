@@ -4,9 +4,7 @@ on:
   push:
     paths:
       - ".github/workflows/website.yml"
-      - "docs/**"
       - "website/**"
-      - "couscous.yml"
       - "Dockerfile"
     branches:
       - 2.x
@@ -15,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2.4.0
       - name: Turnstyle
         timeout-minutes: 18
         uses: softprops/turnstyle@v1

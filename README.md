@@ -1,7 +1,6 @@
 # 📅 eluceo — iCal 2
 
-[![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=2.x)](https://travis-ci.org/markuspoerschke/iCal)
-![reviewdog](https://github.com/markuspoerschke/iCal/workflows/reviewdog/badge.svg?branch=2.x)
+[![Continuous Integration](https://github.com/markuspoerschke/iCal/actions/workflows/ci.yml/badge.svg)](https://github.com/markuspoerschke/iCal/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/markuspoerschke/iCal/branch/2.x/graph/badge.svg)](https://codecov.io/gh/markuspoerschke/iCal)
 [![Psalm coverage](https://shepherd.dev/github/markuspoerschke/ical/coverage.svg?)](https://shepherd.dev/github/markuspoerschke/ical)
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
@@ -12,6 +11,13 @@
 This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
 The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) as good as possible.
+
+## Navigate through the project
+
+-   📖 [read the documentation](https://ical.poerschke.nrw)
+-   🐛 [report a bug or suggest a feature](https://github.com/markuspoerschke/iCal/issues)
+-   🙋 [raise a question](https://github.com/markuspoerschke/iCal/discussions/categories/q-a)
+-   💬 [start a discussion](https://github.com/markuspoerschke/iCal/discussions)
 
 ## Installation
 
@@ -30,9 +36,9 @@ If you just start using this package, you should install version 2.
 
 | Version | PHP Version |
 | ------- | ----------- |
+| 2.\*    | 7.4 - 8.0   |
+| 0.16.\* | 7.0 - 8.0   |
 | 0.11.\* | 5.3.0 - 7.4 |
-| 0.15.\* | 7.0 - 7.4   |
-| 2.\*    | 7.4 only    |
 
 ## Documentation
 

@@ -29,6 +29,7 @@ class UtcOffsetValueTest extends TestCase
     public function provideTestData(): array
     {
         return [
+            [0, '+0000'],
             [3600, '+0100'],
             [4800, '+0120'],
             [43200, '+1200'],

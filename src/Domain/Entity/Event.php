@@ -15,8 +15,10 @@ use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
+use Eluceo\iCal\Domain\ValueObject\Organizer;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
+use Eluceo\iCal\Domain\ValueObject\Uri;
 
 class Event
 {
@@ -25,8 +27,16 @@ class Event
     private ?string $summary = null;
     private ?string $description = null;
     private ?string $status = null;
+    private ?Uri $url = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
+    private ?Organizer $organizer = null;
+    private ?Timestamp $lastModified = null;
+
+    /**
+     * @var array<Attendee>
+     */
+    private array $attendees = [];
 
     /**
      * @var array<Alarm>
@@ -139,6 +149,32 @@ class Event
         return $this;
     }
 
+    public function getUrl(): Uri
+    {
+        assert($this->url !== null);
+
+        return $this->url;
+    }
+
+    public function hasUrl(): bool
+    {
+        return $this->url !== null;
+    }
+
+    public function setUrl(Uri $uri): self
+    {
+        $this->url = $uri;
+
+        return $this;
+    }
+
+    public function unsetUrl(): self
+    {
+        $this->url = null;
+
+        return $this;
+    }
+
     public function hasOccurrence(): bool
     {
         return $this->occurrence !== null;
@@ -177,6 +213,25 @@ class Event
         return $this->location !== null;
     }
 
+    public function getOrganizer(): Organizer
+    {
+        assert($this->organizer !== null);
+
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?Organizer $organizer): self
+    {
+        $this->organizer = $organizer;
+
+        return $this;
+    }
+
+    public function hasOrganizer(): bool
+    {
+        return $this->organizer !== null;
+    }
+
     /**
      * @return Alarm[]
      */
@@ -205,5 +260,54 @@ class Event
     public function getAttachments(): array
     {
         return $this->attachments;
+    }
+
+    public function getLastModified(): Timestamp
+    {
+        assert($this->lastModified !== null);
+
+        return $this->lastModified;
+    }
+
+    public function hasLastModified(): bool
+    {
+        return $this->lastModified !== null;
+    }
+
+    public function setLastModified(?Timestamp $lastModified): self
+    {
+        $this->lastModified = $lastModified;
+
+        return $this;
+    }
+
+    public function hasAttendee(): bool
+    {
+        return ! empty($this->attendees);
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        $this->attendees[] = $attendee;
+
+        return $this;
+    }
+
+    /**
+     * @param Attendee[] $attendees
+     */
+    public function setAttendees(array $attendees): self
+    {
+        $this->attendees = $attendees;
+
+        return $this;
+    }
+
+    /**
+     * @return Attendee[]
+     */
+    public function getAttendees(): array
+    {
+        return $this->attendees;
     }
 }

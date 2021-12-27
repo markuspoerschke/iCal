@@ -1,16 +1,13 @@
 ---
-currentMenu: components/event
-title: Event Component
+title: Event
 ---
-
-# Event
 
 The event domain object `\Eluceo\iCal\Domain\Entity\Event` represents a scheduled amount of time on a calendar.
 For example, it can be an one-hour lunch meeting from 12:00 to 13:00 on 24th of december.
 
 ## Create new instance
 
-When creating a new instance with the static method `Event::create`, the optional parameter `$uniqueIdentifier` can be set.
+When creating a new instance with the default construct method `new Event()`, the optional parameter `$uniqueIdentifier` can be set.
 If it is not set, then a random, but unique identifier is created.
 
 ```php
@@ -42,7 +39,9 @@ The following sections explain the properties of the domain object:
 -   [Description](#description)
 -   [Occurrence](#occurrence)
 -   [Location](#location)
+-   [Organizer](#organizer)
 -   [Attachments](#attachments)
+-   [Attendee](#attendee)
 
 ### Unique Identifier
 
@@ -112,6 +111,19 @@ $event = new Event();
 $event->setDescription('Lorem Ipsum Dolor...');
 ```
 
+### URL
+
+The URL can be used to link to an arbitrary resource.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+
+$event = new Event();
+$uri = new Uri("https://example.org/calendarevent");
+$event->setUrl($uri);
+```
+
 ### Occurrence
 
 The occurrence property of an event defines, when the event takes place.
@@ -179,8 +191,8 @@ use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\Entity\Event;
 
-$start = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'));
-$end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'));
+$start = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 13:00:00'), false);
+$end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-03 14:00:00'), false);
 $occurrence = new TimeSpan($start, $end);
 
 $event = new Event();
@@ -200,13 +212,40 @@ use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 
-$location = new Location('North Pole');
+$location = new Location('Neuschwansteinstraße 20, 87645 Schwangau');
+
+// optionally you can create a location with a title for X-APPLE-STRUCTURED-LOCATION attribute
+$location = new Location('Neuschwansteinstraße 20, 87645 Schwangau', 'Schloss Neuschwanstein');
 
 // optionally a location with a geographical position can be created
-$location = $location->withGeographicPosition(new GeographicPosition(64.751111, 147.349444));
+$location = $location->withGeographicPosition(new GeographicPosition(47.557579, 10.749704));
 
 $event = new Event();
 $event->setLocation($location);
+```
+
+### Organizer
+
+The Organizer defines the person who organises the event.
+The property consists of at least an email address.
+Optional a display name, or a directory entry (as used in LDAP for example) can be added.
+In case the event was sent in behalf of another person, then the `sendBy` attribute will contain the email address.
+
+```php
+use Eluceo\iCal\Domain\ValueObject\Organizer;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
+use Eluceo\iCal\Domain\Entity\Event;
+
+$organizer = new Organizer(
+    new EmailAddress('test@example.org'),
+    'John Doe',
+    new Uri('ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)'),
+    new EmailAddress('sender@example.com')
+);
+
+$event = new Event();
+$event->setOrganizer($organizer);
 ```
 
 ### Attachments
@@ -230,6 +269,49 @@ $binaryContentAttachment = new Attachment(
     new BinaryContent(file_get_contents('test.txt')),
     'text/plain'
 );
+
+$event = new Event();
+$event->addAttachment($urlAttachment);
+$event->addAttachment($binaryContentAttachment);
+```
+
+### Attendee
+
+This property defines one or more attendee/s related to the event.
+Calendar user type, group or list membership, participation role, participation status, RSVP expectation, delegatee, delegator, sent by, common name, or directory entry reference property parameters can be specified on this property.
+Therefore are listed all the possible methods that you can call on the attendee
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\ParticipationStatus;
+use Eluceo\iCal\Domain\Enum\RoleType;
+use Eluceo\iCal\Domain\Entity\Attendee;
+use Eluceo\iCal\Domain\ValueObject\BinaryContent;
+use Eluceo\iCal\Domain\ValueObject\Uri;
+
+$attendee = new Attendee(new EmailAddress('jdoe@example.com'));
+$attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL)
+    ->addMember(new Member(new EmailAddress('test@example.com')))
+    ->setRole(RoleType::CHAIR())
+    ->setParticipationStatus(
+        ParticipationStatus::NEEDS_ACTION()
+    )->setResponseNeededFromAttendee(true)
+    ->addDelegatedTo(
+        new EmailAddress('jdoe@example.com')
+    )->addDelegatedTo(
+        new EmailAddress('jqpublic@example.com')
+    )->addDelegatedFrom(
+        new EmailAddress('jsmith@example.com')
+    )->addSentBy(
+        new EmailAddress('sray@example.com')
+    )
+    ->setDisplayName('Test Example')
+    ->setDirectoryEntryReference(
+        new Uri('ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)')
+    )->setLanguage('en-US');
+
+$event = (new Event())
+    ->addAttendee($attendee);
 
 $event = new Event();
 $event->addAttachment($urlAttachment);

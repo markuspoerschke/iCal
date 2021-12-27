@@ -7,26 +7,6 @@ on:
       - "2.x"
 
 jobs:
-  fix-code-style:
-    runs-on: ubuntu-20.04
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga
-
-      - name: Run prettier
-        uses: actionsx/prettier@v2
-        with:
-          args: --write .
-
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Fix code style!
-
   test:
     runs-on: ubuntu-20.04
     strategy:
@@ -36,7 +16,7 @@ jobs:
           - "8.0"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v2.4.0"
 
       - name: "Install PHP with extensions"
         uses: "shivammathur/setup-php@v2"
@@ -48,10 +28,13 @@ jobs:
         run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v1"
+        uses: "actions/cache@v2.1.7"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-composer-cache"
+          key: "php-${{ matrix.php-version }}-composer-cache"
 
       - name: "Run tests"
         run: "make -j -O test"
+
+      - name: "Send code coverage"
+        uses: codecov/codecov-action@v2.1.0

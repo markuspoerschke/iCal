@@ -29,7 +29,7 @@ class Calendar
     private array $timeZones = [];
 
     /**
-     * @param Event[]|Iterator<Event>|Events $events
+     * @param array<array-key, Event>|Iterator<Event>|Events $events
      */
     public function __construct($events = [])
     {
@@ -37,7 +37,7 @@ class Calendar
     }
 
     /**
-     * @param Event[]|Iterator<Event>|Events $events
+     * @param array<array-key, Event>|Iterator<Event>|Events $events
      */
     private function ensureEventsObject($events = []): Events
     {
