@@ -14,13 +14,14 @@ namespace Eluceo\iCal\Domain\Collection;
 use Eluceo\iCal\Domain\Entity\Event;
 use Iterator;
 use IteratorAggregate;
+use Traversable;
 
 abstract class Events implements IteratorAggregate
 {
     /**
-     * @return Iterator<Event>
+     * @return Traversable|Iterator<Event>
      */
-    abstract public function getIterator();
+    abstract public function getIterator(): Traversable;
 
     abstract public function addEvent(Event $event): void;
 }

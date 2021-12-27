@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Support `symfony/deprecation-contracts` version 3 [#354](https://github.com/markuspoerschke/iCal/pull/354)
 -   Event Attendee property [#333](https://github.com/markuspoerschke/iCal/pull/333)
+-   Event Attendee property [#333](https://github.com/markuspoerschke/iCal/pull/314)
+-   Support PHP 8.1
 
 ### Fixed
 

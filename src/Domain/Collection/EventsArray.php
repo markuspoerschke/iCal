@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Domain\Collection;
 
 use ArrayIterator;
 use Eluceo\iCal\Domain\Entity\Event;
+use Traversable;
 
 final class EventsArray extends Events
 {
@@ -29,7 +30,7 @@ final class EventsArray extends Events
         array_walk($events, [$this, 'addEvent']);
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->events);
     }
