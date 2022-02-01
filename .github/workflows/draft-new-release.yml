@@ -16,7 +16,7 @@ jobs:
     name: Draft a new release
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
         with:
           ref: ${{ github.event.inputs.target_branch }}
           token: ${{ secrets.PAT }}
@@ -26,7 +26,9 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.12.0
+      - run: git checkout -b release/${{ github.event.inputs.version }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.13.1
         with:
           branch: release/${{ github.event.inputs.version }}
           commit_user_name: Markus Poerschke (Bot)
@@ -35,7 +37,7 @@ jobs:
           file_pattern: CHANGELOG.md
 
       - name: Create pull request
-        uses: thomaseizinger/create-pull-request@1.2.1
+        uses: thomaseizinger/create-pull-request@1.2.2
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
