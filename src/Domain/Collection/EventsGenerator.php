@@ -14,6 +14,7 @@ namespace Eluceo\iCal\Domain\Collection;
 use BadMethodCallException;
 use Eluceo\iCal\Domain\Entity\Event;
 use Iterator;
+use ReturnTypeWillChange;
 
 final class EventsGenerator extends Events
 {
@@ -30,6 +31,7 @@ final class EventsGenerator extends Events
         $this->generator = $generator;
     }
 
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return $this->generator;
