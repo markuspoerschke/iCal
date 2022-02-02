@@ -34,10 +34,6 @@ jobs:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
 
-      - name: "Composer update"
-        if: ${{ matrix.php-version == '7.4' }}
-        run: "composer up --prefer-lowest"
-
       - name: "Run tests"
         run: "make -j -O test"
 
