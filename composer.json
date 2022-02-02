@@ -48,5 +48,11 @@
         "psr-4": {
             "Eluceo\\iCal\\": "tests/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true
+        }
     }
 }
