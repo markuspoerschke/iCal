@@ -36,6 +36,11 @@ jobs:
           commit_message: Release ${{ github.event.inputs.version }}
           file_pattern: CHANGELOG.md
 
+      - name: Fix code style
+        uses: actionsx/prettier@v2
+        with:
+          args: --write CHANGELOG.md
+
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.2.2
         env:
