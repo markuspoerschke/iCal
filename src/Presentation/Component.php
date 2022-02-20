@@ -15,6 +15,7 @@ use Eluceo\iCal\Presentation\Component\Property;
 use Generator;
 use IteratorAggregate;
 use ReturnTypeWillChange;
+use Traversable;
 
 class Component implements IteratorAggregate
 {
@@ -57,6 +58,9 @@ class Component implements IteratorAggregate
         );
     }
 
+    /**
+     * @return Traversable
+     */
     #[ReturnTypeWillChange]
     public function getIterator()
     {
