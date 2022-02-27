@@ -48,7 +48,7 @@ class CalendarFactory
     /**
      * @return Generator<Property>
      */
-    private function getProperties(Calendar $calendar): Generator
+    protected function getProperties(Calendar $calendar): Generator
     {
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.3 */
         yield new Property('PRODID', new TextValue($calendar->getProductIdentifier()));
