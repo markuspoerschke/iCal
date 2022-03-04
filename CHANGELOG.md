@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Declare CalendarFactory::getProperties protected i/o private to open it for extension
+
 ## [2.5.0] - 2022-02-13
 
 ### Added
