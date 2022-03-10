@@ -20,6 +20,8 @@ use Iterator;
 class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
+    private string $calendarName = '';
+    private string $calendarDescription = '';
 
     private Events $events;
 
@@ -64,6 +66,30 @@ class Calendar
     public function setProductIdentifier(string $productIdentifier): self
     {
         $this->productIdentifier = $productIdentifier;
+
+        return $this;
+    }
+
+    public function getCalendarName(): string
+    {
+        return $this->calendarName;
+    }
+
+    public function setCalendarName(string $calendarName): self
+    {
+        $this->calendarName = $calendarName;
+
+        return $this;
+    }
+
+    public function getCalendarDescription(): string
+    {
+        return $this->calendarDescription;
+    }
+
+    public function setCalendarDescription(string $calendarDescription): self
+    {
+        $this->calendarDescription = $calendarDescription;
 
         return $this;
     }
