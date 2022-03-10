@@ -16,6 +16,7 @@ use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Attendee;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\CalendarUserType;
+use Eluceo\iCal\Domain\Enum\EventStatus;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
@@ -492,6 +493,33 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'URL:https://example.org/calendarevent',
+        ]);
+    }
+
+    public function testEventWithCancelledStatus(): void
+    {
+        $event = (new Event())->setStatus(EventStatus::CANCELLED());
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:CANCELLED',
+        ]);
+    }
+
+    public function testEventWithConfirmedStatus(): void
+    {
+        $event = (new Event())->setStatus(EventStatus::CONFIRMED());
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:CONFIRMED',
+        ]);
+    }
+
+    public function testEventWithTentativeStatus(): void
+    {
+        $event = (new Event())->setStatus(EventStatus::TENTATIVE());
+
+        self::assertEventRendersCorrect($event, [
+            'STATUS:TENTATIVE',
         ]);
     }
 

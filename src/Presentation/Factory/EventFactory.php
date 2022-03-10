@@ -14,6 +14,7 @@ namespace Eluceo\iCal\Presentation\Factory;
 use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\EventStatus;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
@@ -33,6 +34,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
+use UnexpectedValueException;
 
 /**
  * @SuppressWarnings("CouplingBetweenObjects")
@@ -111,6 +113,10 @@ class EventFactory
             foreach ($event->getAttendees() as $attendee) {
                 yield $this->attendeeFactory->createProperty($attendee);
             }
+        }
+
+        if ($event->hasStatus()) {
+            yield new Property('STATUS', $this->getEventStatusTextValue($event->getStatus()));
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -219,5 +225,22 @@ class EventFactory
         }
 
         return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
+    }
+
+    private function getEventStatusTextValue(EventStatus $status): TextValue
+    {
+        if ($status === EventStatus::CANCELLED()) {
+            return new TextValue('CANCELLED');
+        }
+
+        if ($status === EventStatus::CONFIRMED()) {
+            return new TextValue('CONFIRMED');
+        }
+
+        if ($status === EventStatus::TENTATIVE()) {
+            return new TextValue('TENTATIVE');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', EventStatus::class));
     }
 }
