@@ -26,7 +26,7 @@ class ComponentTest extends TestCase
 
         $output = $vCalendar->render();
         $output = preg_replace('/\r\n /u', '', $output);
-        $this->assertContains($input, $output);
+        $this->assertStringContainsString($input, $output);
     }
 
     public function testDescriptionWithNewLines()
@@ -42,7 +42,7 @@ class ComponentTest extends TestCase
         $vCalendar->addComponent($vEvent);
 
         $output = $vCalendar->render();
-        $this->assertContains(str_replace("\n", "\\n", $input), $output);
+        $this->assertStringContainsString(str_replace("\n", "\\n", $input), $output);
     }
 
     public function testAddComponentOnKey()
@@ -58,7 +58,7 @@ class ComponentTest extends TestCase
         $vCalendar->addComponent($vEvent, 'eventKey');
 
         $output = $vCalendar->render();
-        $this->assertContains(str_replace("\n", "\\n", $input), $output);    
+        $this->assertStringContainsString(str_replace("\n", "\\n", $input), $output);
     }
 
     public function testSetComponents()
@@ -80,8 +80,8 @@ class ComponentTest extends TestCase
         $vCalendar->setComponents([$vEventTwo]);
 
         $output = $vCalendar->render();
-        $this->assertContains($shouldBeFound, $output);
-        $this->assertNotContains($shouldNotBeFound, $output);
+        $this->assertStringContainsString($shouldBeFound, $output);
+        $this->assertStringNotContainsString($shouldNotBeFound, $output);
     }
 
     public function testToString()

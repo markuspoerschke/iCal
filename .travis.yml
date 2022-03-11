@@ -20,19 +20,7 @@ cache:
 
 jobs:
   include:
-    # Matrix Builds (7.1 - 8.0)
-    - <<: *test-unit
-      name: PHP 7.1
-      php: 7.1
-
-    - <<: *test-unit
-      name: PHP 7.2
-      php: 7.2
-
-    - <<: *test-unit
-      name: PHP 7.3
-      php: 7.3
-
+    # Matrix Builds (7.4 - 8.1)
     - <<: *test-unit
       name: PHP 7.4
       php: 7.4
@@ -40,6 +28,11 @@ jobs:
 
     - <<: *test-unit
       name: PHP 8.0
+      php: master
+      env: COMPOSER_FLAGS="--ignore-platform-reqs"
+
+    - <<: *test-unit
+      name: PHP 8.1
       php: master
       env: COMPOSER_FLAGS="--ignore-platform-reqs"
 

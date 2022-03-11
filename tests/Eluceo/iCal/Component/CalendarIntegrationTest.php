@@ -61,7 +61,7 @@ class CalendarIntegrationTest extends TestCase
         {
             $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
 
-            $this->assertRegExp($lines[$key], $line);
+            $this->assertMatchesRegularExpression($lines[$key], $line);
         }
     }
 
@@ -116,7 +116,7 @@ class CalendarIntegrationTest extends TestCase
         {
             $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
 
-            $this->assertRegExp($lines[$key], $line);
+            $this->assertMatchesRegularExpression($lines[$key], $line);
         }
     }
 
@@ -191,7 +191,7 @@ class CalendarIntegrationTest extends TestCase
         {
             $this->assertTrue(isset($lines[$key]), 'Too many lines... ' . $line);
 
-            $this->assertRegExp($lines[$key], $line);
+            $this->assertMatchesRegularExpression($lines[$key], $line);
         }
     }
 }

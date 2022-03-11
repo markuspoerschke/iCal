@@ -66,7 +66,7 @@ class PropertyBag implements \IteratorAggregate
         return $this;
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayObject($this->elements);
     }
