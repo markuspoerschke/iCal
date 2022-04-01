@@ -788,16 +788,16 @@
         },
         {
             "name": "ergebnis/composer-normalize",
-            "version": "2.23.1",
+            "version": "2.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/composer-normalize.git",
-                "reference": "a54e28d1338903d9b6043d2187ed0f059d89938f"
+                "reference": "f8dcad3ab46b251864b89e1a33cb396d6e85984a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/a54e28d1338903d9b6043d2187ed0f059d89938f",
-                "reference": "a54e28d1338903d9b6043d2187ed0f059d89938f",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/f8dcad3ab46b251864b89e1a33cb396d6e85984a",
+                "reference": "f8dcad3ab46b251864b89e1a33cb396d6e85984a",
                 "shasum": ""
             },
             "require": {
@@ -809,14 +809,14 @@
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "composer/composer": "^2.2.5",
+                "composer/composer": "^2.3.1",
                 "ergebnis/license": "^1.2.0",
-                "ergebnis/php-cs-fixer-config": "^3.4.0",
-                "fakerphp/faker": "^1.18.0",
-                "phpunit/phpunit": "^9.5.13",
+                "ergebnis/php-cs-fixer-config": "^4.4.0",
+                "fakerphp/faker": "^1.19.0",
+                "phpunit/phpunit": "^9.5.19",
                 "psalm/plugin-phpunit": "~0.16.1",
-                "symfony/filesystem": "^5.4.3",
-                "vimeo/psalm": "^4.18.1"
+                "symfony/filesystem": "^5.4.6",
+                "vimeo/psalm": "^4.22.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -859,7 +859,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-31T06:49:30+00:00"
+            "time": "2022-03-30T13:53:56+00:00"
         },
         {
             "name": "ergebnis/json-normalizer",
