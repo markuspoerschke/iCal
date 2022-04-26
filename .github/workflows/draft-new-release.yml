@@ -16,7 +16,7 @@ jobs:
     name: Draft a new release
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.target_branch }}
           token: ${{ secrets.PAT }}
