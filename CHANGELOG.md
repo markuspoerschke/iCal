@@ -222,50 +222,27 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.5.1...HEAD
-
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.5.1...HEAD
 [2.5.1]: https://github.com/markuspoerschke/iCal/compare/2.5.0...2.5.1
-
 [2.5.0]: https://github.com/markuspoerschke/iCal/compare/2.4.0...2.5.0
-
 [2.4.0]: https://github.com/markuspoerschke/iCal/compare/2.3.0...2.4.0
-
 [2.3.0]: https://github.com/markuspoerschke/iCal/compare/2.2.0...2.3.0
-
 [2.2.0]: https://github.com/markuspoerschke/iCal/compare/2.1.0...2.2.0
-
 [2.1.0]: https://github.com/markuspoerschke/iCal/compare/2.0.0...2.1.0
-
 [2.0.0]: https://github.com/markuspoerschke/iCal/compare/0.16.0...2.0.0
-
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0
-
 [0.15.1]: https://github.com/markuspoerschke/iCal/compare/0.15.0...0.15.1
-
 [0.15.0]: https://github.com/markuspoerschke/iCal/compare/0.14.0...0.15.0
-
 [0.14.0]: https://github.com/markuspoerschke/iCal/compare/0.13.0...0.14.0
-
 [0.13.0]: https://github.com/markuspoerschke/iCal/compare/0.12.1...0.13.0
-
 [0.12.1]: https://github.com/markuspoerschke/iCal/compare/0.12.0...0.12.1
-
 [0.12.0]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.12.0
-
 [0.11.5]: https://github.com/markuspoerschke/iCal/compare/0.11.4...0.11.5
-
 [0.11.4]: https://github.com/markuspoerschke/iCal/compare/0.11.3...0.11.4
-
 [0.11.3]: https://github.com/markuspoerschke/iCal/compare/0.11.2...0.11.3
-
 [0.11.2]: https://github.com/markuspoerschke/iCal/compare/0.11.1...0.11.2
-
 [0.11.1]: https://github.com/markuspoerschke/iCal/compare/0.11.0...0.11.1
-
 [0.11.0]: https://github.com/markuspoerschke/iCal/compare/0.10.1...0.11.0
-
 [0.10.0]: https://github.com/markuspoerschke/iCal/compare/0.9.0...0.10.0
-
 [0.10.1]: https://github.com/markuspoerschke/iCal/compare/0.10.0...0.10.1
-
 [0.9.0]: https://github.com/markuspoerschke/iCal/compare/0.8.0...0.9.0
