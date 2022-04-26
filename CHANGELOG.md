@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Deprecation message occuring on an OOTB Symfony 5.4 on PHP 7.4 [#382](https://github.com/markuspoerschke/iCal/pull/382)
+
 ## [2.5.0] - 2022-02-13
 
 ### Added
