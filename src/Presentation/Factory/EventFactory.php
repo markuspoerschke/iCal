@@ -107,6 +107,10 @@ class EventFactory
             yield $this->getOrganizerProperty($event->getOrganizer());
         }
 
+        if ($event->hasTimeTransparency()) {
+            yield new Property('TRANSP', new TextValue((string) $event->getTimeTransparency()));
+        }
+
         if ($event->hasAttendee()) {
             foreach ($event->getAttendees() as $attendee) {
                 yield $this->attendeeFactory->createProperty($attendee);
