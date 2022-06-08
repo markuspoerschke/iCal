@@ -56,5 +56,13 @@ class CalendarFactory
         yield new Property('VERSION', new TextValue('2.0'));
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.1 */
         yield new Property('CALSCALE', new TextValue('GREGORIAN'));
+
+        if(!empty($calendar->getCalendarName())) {
+            yield new Property('X-WR-CALNAME', new TextValue($calendar->getCalendarName()));
+        }
+
+        if(!empty($calendar->getCalendarDescription())) {
+            yield new Property('X-WR-CALDESC', new TextValue($calendar->getCalendarDescription()));
+        }
     }
 }
