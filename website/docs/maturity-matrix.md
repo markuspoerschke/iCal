@@ -34,7 +34,7 @@ See [RFC 5545 section 3.6](https://tools.ietf.org/html/rfc5545#section-3.6).
 See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 
 | Property                    | Supported |
-| --------------------------- | :-------: |
+| --------------------------- |:---------:|
 | dtstamp                     |     ✔     |
 | uid                         |     ✔     |
 | dtstart                     |     ✔     |
@@ -57,7 +57,7 @@ See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 | duration                    |     ✖     |
 | attach                      |     ✔     |
 | attendee                    |     ✔     |
-| categories                  |     ✖     |
+| categories                  |    (✔)    |
 | comment                     |     ✖     |
 | contact                     |     ✖     |
 | exdate                      |     ✖     |

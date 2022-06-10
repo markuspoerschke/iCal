@@ -33,15 +33,16 @@ $event = (new Event())
 
 The following sections explain the properties of the domain object:
 
--   [Unique Identifier](#unique-identifier)
--   [Touched at](#touched-at)
--   [Summary](#summary)
--   [Description](#description)
--   [Occurrence](#occurrence)
--   [Location](#location)
--   [Organizer](#organizer)
--   [Attachments](#attachments)
--   [Attendee](#attendee)
+- [Unique Identifier](#unique-identifier)
+- [Touched at](#touched-at)
+- [Summary](#summary)
+- [Description](#description)
+- [Occurrence](#occurrence)
+- [Location](#location)
+- [Organizer](#organizer)
+- [Attachments](#attachments)
+- [Attendee](#attendee)
+- [Categories](#categories)
 
 ### Unique Identifier
 
@@ -316,4 +317,19 @@ $event = (new Event())
 $event = new Event();
 $event->addAttachment($urlAttachment);
 $event->addAttachment($binaryContentAttachment);
+```
+
+### Categories
+
+This property is used to specify categories or subtypes of the calendar component.
+The categories are useful in searching for a calendar component of a particular type and category.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Category;
+
+$event = new Event();
+$event
+    ->addCategory(new Category('APPOINTMENT'))
+    ->addCategory(new Category('EDUCATION'));
 ```
