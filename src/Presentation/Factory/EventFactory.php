@@ -30,6 +30,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -43,8 +44,7 @@ class EventFactory
     private DateTimeFactory $dateTimeFactory;
     private AttendeeFactory $attendeeFactory;
 
-    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null, ?AttendeeFactory $attendeeFactory = null)
-    {
+    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null, ?AttendeeFactory $attendeeFactory = null) {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
         $this->attendeeFactory = $attendeeFactory ?? new AttendeeFactory();
@@ -111,6 +111,10 @@ class EventFactory
             foreach ($event->getAttendees() as $attendee) {
                 yield $this->attendeeFactory->createProperty($attendee);
             }
+        }
+
+        if ($event->hasCategory()) {
+            yield $this->getCategoryProperties($event);
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -219,5 +223,15 @@ class EventFactory
         }
 
         return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
+    }
+
+    private function getCategoryProperties(Event $event): Property
+    {
+        $categories = [];
+        foreach ($event->getCategories() as $category) {
+            $categories[] = new TextValue((string) $category);
+        }
+
+        return new Property('CATEGORIES', new ListValue($categories));
     }
 }
