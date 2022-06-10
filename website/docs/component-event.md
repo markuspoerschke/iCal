@@ -33,16 +33,16 @@ $event = (new Event())
 
 The following sections explain the properties of the domain object:
 
-- [Unique Identifier](#unique-identifier)
-- [Touched at](#touched-at)
-- [Summary](#summary)
-- [Description](#description)
-- [Occurrence](#occurrence)
-- [Location](#location)
-- [Organizer](#organizer)
-- [Attachments](#attachments)
-- [Attendee](#attendee)
-- [Categories](#categories)
+-   [Unique Identifier](#unique-identifier)
+-   [Touched at](#touched-at)
+-   [Summary](#summary)
+-   [Description](#description)
+-   [Occurrence](#occurrence)
+-   [Location](#location)
+-   [Organizer](#organizer)
+-   [Attachments](#attachments)
+-   [Attendee](#attendee)
+-   [Categories](#categories)
 
 ### Unique Identifier
 
