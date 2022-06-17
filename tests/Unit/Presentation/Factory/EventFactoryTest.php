@@ -21,6 +21,7 @@ use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
+use Eluceo\iCal\Domain\ValueObject\Category;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\EmailAddress;
@@ -494,6 +495,33 @@ class EventFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'URL:https://example.org/calendarevent',
         ]);
+    }
+
+    public function testEventWithOneCategory()
+    {
+        $category = new Category('category');
+        $event = (new Event())->addCategory($category);
+
+        self::assertEventRendersCorrect(
+            $event,
+            [
+                'CATEGORIES:category',
+            ]
+        );
+    }
+
+    public function testEventWithMultipleCategories()
+    {
+        $event = (new Event())
+            ->addCategory(new Category('category 1'))
+            ->addCategory(new Category('category 2'));
+
+        self::assertEventRendersCorrect(
+            $event,
+            [
+                'CATEGORIES:category 1,category 2',
+            ]
+        );
     }
 
     public function testEventWithCancelledStatus(): void

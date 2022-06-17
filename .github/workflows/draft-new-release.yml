@@ -16,7 +16,7 @@ jobs:
     name: Draft a new release
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.target_branch }}
           token: ${{ secrets.PAT }}
@@ -28,7 +28,7 @@ jobs:
 
       - run: git checkout -b release/${{ github.event.inputs.version }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.13.1
+      - uses: stefanzweifel/git-auto-commit-action@v4.14.1
         with:
           branch: release/${{ github.event.inputs.version }}
           commit_user_name: Markus Poerschke (Bot)

@@ -17,7 +17,7 @@ jobs:
           - "8.1"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2.4.0"
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP with extensions"
         uses: "shivammathur/setup-php@v2"
@@ -29,7 +29,7 @@ jobs:
         run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.7"
+        uses: "actions/cache@v3.0.3"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
