@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Support categories property on events [#421](https://github.com/markuspoerschke/iCal/pull/421)
+
 ## [2.5.1] - 2022-04-26
 
 ### Fixed
