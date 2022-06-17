@@ -13,9 +13,9 @@ namespace Eluceo\iCal\Domain\Enum;
 
 final class EventStatus
 {
-    private static self $cancelled;
-    private static self $confirmed;
-    private static self $tentative;
+    private static ?self $cancelled = null;
+    private static ?self $confirmed = null;
+    private static ?self $tentative = null;
 
     public static function CANCELLED(): self
     {
