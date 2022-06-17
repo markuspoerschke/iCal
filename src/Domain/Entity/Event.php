@@ -290,7 +290,7 @@ class Event
         return $this->attendees;
     }
 
-    public function hasCategory(): bool
+    public function hasCategories(): bool
     {
         return !empty($this->categories);
     }

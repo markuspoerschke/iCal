@@ -114,7 +114,7 @@ class EventFactory
             }
         }
 
-        if ($event->hasCategory()) {
+        if ($event->hasCategories()) {
             yield $this->getCategoryProperties($event);
         }
 
