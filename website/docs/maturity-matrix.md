@@ -47,7 +47,7 @@ See [RFC 5545 section 3.6.1](https://tools.ietf.org/html/rfc5545#section-3.6.1).
 | organizer                   |     ✔     |
 | priority                    |     ✖     |
 | seq                         |     ✖     |
-| status                      |     ✖     |
+| status                      |     ✔     |
 | summary                     |     ✔     |
 | transp                      |     ✖     |
 | url                         |     ✔     |

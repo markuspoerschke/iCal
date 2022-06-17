@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use Eluceo\iCal\Domain\Enum\EventStatus;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Category;
@@ -32,6 +33,7 @@ class Event
     private ?Location $location = null;
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
+    private ?EventStatus $status = null;
 
     /**
      * @var array<Attendee>
@@ -318,5 +320,31 @@ class Event
     public function getCategories(): array
     {
         return $this->categories;
+    }
+
+    public function getStatus(): EventStatus
+    {
+        assert($this->status !== null);
+
+        return $this->status;
+    }
+
+    public function hasStatus(): bool
+    {
+        return $this->status !== null;
+    }
+
+    public function setStatus(EventStatus $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function unsetStatus(): self
+    {
+        $this->status = null;
+
+        return $this;
     }
 }

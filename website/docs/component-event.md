@@ -43,6 +43,7 @@ The following sections explain the properties of the domain object:
 -   [Attachments](#attachments)
 -   [Attendee](#attendee)
 -   [Categories](#categories)
+-   [Status](#status)
 
 ### Unique Identifier
 
@@ -332,4 +333,17 @@ $event = new Event();
 $event
     ->addCategory(new Category('APPOINTMENT'))
     ->addCategory(new Category('EDUCATION'));
+```
+
+### Status
+
+This property defines the status of the event, e.g. if it has been confirmed or perhaps cancelled. The possible values
+are `tentative`, `confirmed` and `canceled`.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\EventStatus;
+
+$event = new Event();
+$event->setStatus(EventStatus::CANCELLED());
 ```
