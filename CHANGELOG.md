@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.0] - 2022-06-17
+
 ### Added
 
--   Support status property on events [#422](https://github.com/markuspoerschke/iCal/pull/421)
+-   Support status property on events [#422](https://github.com/markuspoerschke/iCal/pull/422)
 -   Support categories property on events [#421](https://github.com/markuspoerschke/iCal/pull/421)
 
 ## [2.5.1] - 2022-04-26
@@ -227,7 +229,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.5.1...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.6.0...HEAD
+[2.6.0]: https://github.com/markuspoerschke/iCal/compare/2.5.1...2.6.0
 [2.5.1]: https://github.com/markuspoerschke/iCal/compare/2.5.0...2.5.1
 [2.5.0]: https://github.com/markuspoerschke/iCal/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/markuspoerschke/iCal/compare/2.3.0...2.4.0
