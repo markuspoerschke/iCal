@@ -6,12 +6,11 @@ use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
-    /**
-     * @expectedException \UnexpectedValueException
-     * @expectedExceptionMessage PRODID cannot be empty
-     */
     public function testConstructorThrowsUnexpectedValueException()
     {
+        $this->expectExceptionMessage("PRODID cannot be empty");
+        $this->expectException(\UnexpectedValueException::class);
+
         new Calendar(null);
     }
 
@@ -108,6 +107,6 @@ class CalendarTest extends TestCase
         $calendar = new Calendar('-//ABC Corporation//NONSGML My Product//EN');
         $calendar->addEvent(new Event('unique_id'));
 
-        $this->assertContains("unique_id", $calendar->render());
+        $this->assertStringContainsString("unique_id", $calendar->render());
     }
 }

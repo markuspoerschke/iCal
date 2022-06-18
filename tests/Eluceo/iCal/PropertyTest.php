@@ -57,12 +57,11 @@ class PropertyTest extends TestCase
         $this->assertSame('value1,value2', $property->getValue()->getEscapedValue());
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage The value must implement the ValueInterface.
-     */
     public function testSetValueOnInvalidValue()
     {
+        $this->expectExceptionMessage("The value must implement the ValueInterface.");
+        $this->expectException(\Exception::class);
+
         $property = new Property('DTSTAMP', '20131020T153112');
         $property->setValue(new \DateTimeZone('Asia/Taipei'));
     }

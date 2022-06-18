@@ -65,12 +65,11 @@ class EventTest extends TestCase
         $this->assertSame('LOCATION:Conference Room - F123\, Bldg. 002', $result['LOCATION']->toLine());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The parameter 'geo' must be a string or an instance of Eluceo\iCal\Property\Event\Geo but an instance of ArrayObject was given.
-     */
     public function testSetLocationOnInvalidGeo()
     {
+        $this->expectExceptionMessage("The parameter 'geo' must be a string or an instance of Eluceo\iCal\Property\Event\Geo but an instance of ArrayObject was given.");
+        $this->expectException(\InvalidArgumentException::class);
+
         $event = new Event('19960401T080045Z-4000F192713-0052@host1.com');
         $event->setLocation('Conference Room - F123, Bldg. 002', '', new \ArrayObject([25.632, 122.072]));
         $result = $event->buildPropertyBag()->getIterator()->getArrayCopy();

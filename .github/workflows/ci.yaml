@@ -12,13 +12,9 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "7.1"
-          - "7.2"
-          - "7.3"
           - "7.4"
-          # I am to lazy to fix the CI now, because we will update PHPUnit and drop some PHP versions later,
-          # then this version will be activate again and everything should work...
-          # - "8.0"
+          - "8.0"
+          - "8.1"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v3"

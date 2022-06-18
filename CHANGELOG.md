@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+### Added
+- Support PHP 8.1
+### Changed
+- Use PHPUnit v9.5
+### Removed
+- Support for EOL PHP versions (7.1, 7.2, 7.3)
+
 ## [0.16.1]
 ### Added
 - Support PHP 8.0 [#194](https://github.com/markuspoerschke/iCal/pull/194)

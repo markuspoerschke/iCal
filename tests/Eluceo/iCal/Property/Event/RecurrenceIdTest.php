@@ -8,7 +8,7 @@ class RecurrenceIdTest extends TestCase
 {
     public function testConstructorOnDateTime()
     {
-        $this->assertInstanceOf(RecurrenceId::class, new RecurrenceId(new \DateTime(null, new \DateTimeZone('Asia/Taipei'))));
+        $this->assertInstanceOf(RecurrenceId::class, new RecurrenceId(new \DateTime('now', new \DateTimeZone('Asia/Taipei'))));
     }
 
     public function testConstructorOnNullDateTime()
@@ -21,7 +21,7 @@ class RecurrenceIdTest extends TestCase
         $recurrenceId = new RecurrenceId();
         $recurrenceId->applyTimeSettings();
 
-        $this->assertContains(date('Ymd'), $recurrenceId->getValue()->getValue());
+        $this->assertStringContainsString(date('Ymd'), $recurrenceId->getValue()->getValue());
     }
 
     public function testApplyTimeSettingsOnRange()
@@ -30,7 +30,7 @@ class RecurrenceIdTest extends TestCase
         $recurrenceId->setRange('RANGE=THISANDPRIOR:19980401T133000Z');
         $recurrenceId->applyTimeSettings();
 
-        $this->assertContains(date('Ymd'), $recurrenceId->getValue()->getValue());
+        $this->assertStringContainsString(date('Ymd'), $recurrenceId->getValue()->getValue());
     }
 
     public function testApplyTimeSettingsOnDefaultParams()
@@ -38,13 +38,13 @@ class RecurrenceIdTest extends TestCase
         $recurrenceId = new RecurrenceId();
         $recurrenceId->applyTimeSettings(true, true, true, 'Europe/Berlin');
 
-        $this->assertContains(date('Ymd'), $recurrenceId->getValue()->getValue());
+        $this->assertStringContainsString(date('Ymd'), $recurrenceId->getValue()->getValue());
         $this->assertSame(date('Ymd'), $recurrenceId->getValue()->getValue());
     }
 
     public function testGetDatetime()
     {
-        $recurrenceId = new RecurrenceId(new \DateTime(null, new \DateTimeZone('Europe/Berlin')));
+        $recurrenceId = new RecurrenceId(new \DateTime('now', new \DateTimeZone('Europe/Berlin')));
 
         $this->assertInstanceOf(\DateTime::class, $recurrenceId->getDatetime());
         $this->assertSame('Europe/Berlin', $recurrenceId->getDatetime()->getTimeZone()->getName());
@@ -53,7 +53,7 @@ class RecurrenceIdTest extends TestCase
     public function testSetDatetime()
     {
         $recurrenceId = new RecurrenceId();
-        $recurrenceId->setDatetime(new \DateTime(null, new \DateTimeZone('Asia/Taipei')));
+        $recurrenceId->setDatetime(new \DateTime('now', new \DateTimeZone('Asia/Taipei')));
 
         $this->assertInstanceOf(\DateTime::class, $recurrenceId->getDatetime());
         $this->assertSame('Asia/Taipei', $recurrenceId->getDatetime()->getTimeZone()->getName());
@@ -82,12 +82,11 @@ class RecurrenceIdTest extends TestCase
         $this->assertSame(['RECURRENCE-ID:value1'], $recurrenceId->toLines());
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage The value must implement the ValueInterface.
-     */
     public function testToLinesThrowsException()
     {
+        $this->expectExceptionMessage("The value must implement the ValueInterface.");
+        $this->expectException(\Exception::class);
+
         $recurrenceId = new RecurrenceId();
 
         $recurrenceId->toLines();

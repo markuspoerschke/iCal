@@ -30,22 +30,20 @@ class AttendeesTest extends TestCase
         $this->assertCount(0, $attendees->getValue());
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Cannot call setParam on Attendees Property
-     */
     public function testSetParamThrowsBadMethodCallException()
     {
+        $this->expectExceptionMessage("Cannot call setParam on Attendees Property");
+        $this->expectException(\BadMethodCallException::class);
+
         $attendees = new Attendees();
         $attendees->setParam('MAILTO', 'DEV-GROUP@host2.com');
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage Cannot call getParam on Attendees Property
-     */
     public function testGetParamThrowsBadMethodCallException()
     {
+        $this->expectExceptionMessage("Cannot call getParam on Attendees Property");
+        $this->expectException(\BadMethodCallException::class);
+
         $attendees = new Attendees();
         $attendees->getParam('MAILTO');
     }

@@ -6,12 +6,11 @@ use PHPUnit\Framework\TestCase;
 
 class PropertyBagTest extends TestCase
 {
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Property with name 'propName' already exists
-     */
     public function testPropertyAlreadyExistsOnAddingProperty()
     {
+        $this->expectExceptionMessage("Property with name 'propName' already exists");
+        $this->expectException(\Exception::class);
+
         $propertyBag = new PropertyBag();
         $propertyBag->add(new Property('propName', ''));
         $propertyBag->add(new Property('propName', ''));

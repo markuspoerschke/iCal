@@ -13,21 +13,19 @@ class GeoTest extends TestCase
         $this->assertInstanceOf(Geo::class, $geo);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The geographical latitude must be a value between -90 and 90 degrees. '-100' was given.
-     */
     public function testConstructorOnInvalidLatitude()
     {
+        $this->expectExceptionMessage("The geographical latitude must be a value between -90 and 90 degrees. '-100' was given.");
+        $this->expectException(\InvalidArgumentException::class);
+
         new Geo(-100, 122.072);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The geographical longitude must be a value between -180 and 180 degrees. '-200' was given.
-     */
     public function testConstructorOnInvalidLongitude()
     {
+        $this->expectExceptionMessage("The geographical longitude must be a value between -180 and 180 degrees. '-200' was given.");
+        $this->expectException(\InvalidArgumentException::class);
+
         new Geo(25.632, -200);
     }
 
