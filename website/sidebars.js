@@ -17,7 +17,7 @@ module.exports = {
         {
             type: "category",
             label: "Advanced",
-            items: ["custom-properties", "maturity-matrix"],
+            items: ["custom-properties", "non-standard-properties", "maturity-matrix"],
         },
     ],
 };
