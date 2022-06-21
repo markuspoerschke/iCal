@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Collection\EventsArray;
 use Eluceo\iCal\Domain\Collection\EventsGenerator;
@@ -20,6 +21,8 @@ use Iterator;
 class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
+
+    private ?DateInterval $publishedTTL = null;
 
     private Events $events;
 
@@ -54,6 +57,16 @@ class Calendar
         }
 
         throw new InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
+    }
+
+    public function getPublishedTTL(): ?DateInterval
+    {
+        return $this->publishedTTL;
+    }
+
+    public function setPublishedTTL(?DateInterval $ttl): void
+    {
+        $this->publishedTTL = $ttl;
     }
 
     public function getProductIdentifier(): string
