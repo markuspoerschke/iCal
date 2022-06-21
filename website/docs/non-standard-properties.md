@@ -13,5 +13,5 @@ use Eluceo\iCal\Domain\Entity\Calendar;
 
 $calendar = new Calendar();
 // set the duration to 2 hours
-$calendar->setPublishedTTL('PT2H')
+$calendar->setPublishedTTL(new DateInterval('PT2H'))
 ```
