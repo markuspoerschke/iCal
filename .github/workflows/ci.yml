@@ -29,7 +29,7 @@ jobs:
         run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.0.8"
+        uses: "actions/cache@v3.0.9"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
