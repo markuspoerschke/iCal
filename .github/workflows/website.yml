@@ -5,8 +5,8 @@ on:
     paths:
       - ".github/workflows/website.yml"
       - "website/**"
-#    branches:
-#      - 2.x
+    branches:
+      - 2.x
 
 permissions:
   contents: read
