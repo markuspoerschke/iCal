@@ -5,24 +5,39 @@ on:
     paths:
       - ".github/workflows/website.yml"
       - "website/**"
-      - "Dockerfile"
     branches:
       - 2.x
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: website
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: Turnstyle
-        timeout-minutes: 18
-        uses: softprops/turnstyle@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Dokku Deployment
-        uses: vitalyliber/dokku-github-action@master
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
-          HOST: ical.poerschke.nrw
-          PROJECT: ical
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Build Website
+        run: "make docs"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'website/build'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
