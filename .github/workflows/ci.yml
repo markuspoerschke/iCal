@@ -36,7 +36,7 @@ jobs:
           key: "php-${{ matrix.php-version }}-composer-cache"
 
       - name: "Update ocramius/package-versions"
-        if: ${{ matrix.php-version != '8.2' }}
+        if: ${{ matrix.php-version != '7.4' }}
         run: "composer up ocramius/package-versions"
 
       - name: "Composer update"
