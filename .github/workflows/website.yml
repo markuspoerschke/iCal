@@ -8,6 +8,11 @@ on:
 #    branches:
 #      - 2.x
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
   group: website
   cancel-in-progress: true
