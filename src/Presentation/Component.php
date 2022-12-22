@@ -17,6 +17,9 @@ use IteratorAggregate;
 use ReturnTypeWillChange;
 use Traversable;
 
+/**
+ * @implements IteratorAggregate<ContentLine>
+ */
 class Component implements IteratorAggregate
 {
     private string $componentName;
@@ -58,6 +61,9 @@ class Component implements IteratorAggregate
         );
     }
 
+    /**
+     * @return Traversable<ContentLine>
+     */
     #[ReturnTypeWillChange]
     public function getIterator(): Traversable
     {
