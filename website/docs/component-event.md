@@ -287,12 +287,14 @@ Therefore are listed all the possible methods that you can call on the attendee
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
+USE Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\Entity\Attendee;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Uri;
 
 $attendee = new Attendee(new EmailAddress('jdoe@example.com'));
-$attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL)
+$attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL())
     ->addMember(new Member(new EmailAddress('test@example.com')))
     ->setRole(RoleType::CHAIR())
     ->setParticipationStatus(
