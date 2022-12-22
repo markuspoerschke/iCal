@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Support chaining of Calendar.setPublishedTTL() [#452](https://github.com/markuspoerschke/iCal/pull/452)
+
 ## [2.7.0] - 2022-06-21
 
 ### Added
