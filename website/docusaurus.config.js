@@ -21,9 +21,9 @@ module.exports = {
                     detailed: true,
                     ignoreLocalhost: true,
                     ignoreOwnVisits: true,
-                })
-            }
-        }
+                }),
+            },
+        },
     ],
     themeConfig: {
         navbar: {
