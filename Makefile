@@ -8,6 +8,7 @@ PATH := $(CURDIR)/vendor/bin:$(PATH)
 PSALM_FLAGS ?=
 PHPUNIT_FLAGS ?=
 INFECTION_FLAGS ?=
+PHP_CS_FIXER_IGNORE_ENV := 1
 
 .PHONY: help
 help:
