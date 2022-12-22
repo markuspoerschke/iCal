@@ -3406,11 +3406,6 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-plugin-ackee@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/docusaurus-plugin-ackee/-/docusaurus-plugin-ackee-0.0.0.tgz#0886c6934e02fbcab9d0ed9ec01d90480b6b8fdf"
-  integrity sha512-ORsNPBJ/5jm49kuL9PLR9JgHDnwhwhqOlF7iFr2GDxElSHDJM6Lc3Pz0FaZSqbG9MNy4d0CYzwCZlJjlBW15ZA==
-
 dom-converter@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/dom-converter/-/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"
