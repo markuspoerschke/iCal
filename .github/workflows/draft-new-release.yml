@@ -26,6 +26,11 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
+      - name: Fix code style
+        uses: actionsx/prettier@v2
+        with:
+          args: --write CHANGELOG.md
+
       - run: git checkout -b release/${{ github.event.inputs.version }}
 
       - uses: stefanzweifel/git-auto-commit-action@v4.15.4
@@ -35,11 +40,6 @@ jobs:
           commit_user_email: markus+githubbot@poerschke.nrw
           commit_message: Release ${{ github.event.inputs.version }}
           file_pattern: CHANGELOG.md
-
-      - name: Fix code style
-        uses: actionsx/prettier@v2
-        with:
-          args: --write CHANGELOG.md
 
       - name: Create pull request
         uses: thomaseizinger/create-pull-request@1.2.2
