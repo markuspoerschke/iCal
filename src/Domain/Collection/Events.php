@@ -16,6 +16,9 @@ use Iterator;
 use IteratorAggregate;
 use ReturnTypeWillChange;
 
+/**
+ * @implements IteratorAggregate<Event>
+ */
 abstract class Events implements IteratorAggregate
 {
     /**
