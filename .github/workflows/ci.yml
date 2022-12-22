@@ -35,11 +35,11 @@ jobs:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
 
-      - name: "Update ocramius/package-versions"
-        if: ${{ matrix.php-version != '7.4' }}
-        run: "composer up ocramius/package-versions"
+      - name: "Update Packages for PHP 8.0"
+        if: ${{ matrix.php-version == '8.0' }}
+        run: "composer up --prefer-lowest ocramius/package-versions symfony/*"
 
-      - name: "Composer update"
+      - name: "Update Packages for PHP 7.4"
         if: ${{ matrix.php-version == '7.4' }}
         run: "composer up --prefer-lowest"
 
