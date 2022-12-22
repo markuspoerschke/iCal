@@ -1,6 +1,7 @@
 -include Makefile.local
 
 export XDEBUG_MODE=coverage
+export PHP_CS_FIXER_IGNORE_ENV=1
 
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
@@ -8,7 +9,6 @@ PATH := $(CURDIR)/vendor/bin:$(PATH)
 PSALM_FLAGS ?=
 PHPUNIT_FLAGS ?=
 INFECTION_FLAGS ?=
-PHP_CS_FIXER_IGNORE_ENV := 1
 
 .PHONY: help
 help:
