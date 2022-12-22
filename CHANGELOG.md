@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Support chaining of Calendar.setPublishedTTL() [#452](https://github.com/markuspoerschke/iCal/pull/452)
--   Support PHP 8.2
+-   Support PHP 8.2 [#470](https://github.com/markuspoerschke/iCal/pull/470)
 
 ## [2.7.0] - 2022-06-21
 
