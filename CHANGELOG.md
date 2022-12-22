@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add missing return types and missing template annotations [#472](https://github.com/markuspoerschke/iCal/pull/472)
+  - Added `@implements IteratorAggregate<Event>` to `\Eluceo\iCal\Domain\Collection\Events`
+  - Added `@implements IteratorAggregate<ContentLine>` to `\Eluceo\iCal\Presentation\Component`
+  - Added `@return Traversable<ContentLine>` to `\Eluceo\iCal\Presentation\Component::getIterator`
+
 ## [2.8.0] - 2022-12-22
 
 ### Added
