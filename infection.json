@@ -3,10 +3,7 @@
         "directories": ["src"]
     },
     "logs": {
-        "text": "report/infection.log",
-        "badge": {
-            "branch": "2.x"
-        }
+        "text": "report/infection.log"
     },
     "mutators": {
         "@default": true
