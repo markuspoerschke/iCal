@@ -64,9 +64,11 @@ class Calendar
         return $this->publishedTTL;
     }
 
-    public function setPublishedTTL(?DateInterval $ttl): void
+    public function setPublishedTTL(?DateInterval $ttl): self
     {
         $this->publishedTTL = $ttl;
+
+        return $this;
     }
 
     public function getProductIdentifier(): string
