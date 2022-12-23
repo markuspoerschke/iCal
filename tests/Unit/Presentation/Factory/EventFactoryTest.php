@@ -181,7 +181,7 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'ORGANIZER;CN=Test Display Name;DIR=example://directory-entry;SENT-BY=mailto',
-            ' :sendby%40example.com:mailto:test%40example.com',
+            ' :sendby@example.com:mailto:test@example.com',
         ]);
     }
 
@@ -193,7 +193,7 @@ class EventFactoryTest extends TestCase
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE:mailto:test%40example.com',
+            'ATTENDEE:mailto:test@example.com',
         ]);
     }
 
@@ -208,8 +208,8 @@ class EventFactoryTest extends TestCase
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE:mailto:test%40example.com',
-            'ATTENDEE:mailto:test2%40example.net',
+            'ATTENDEE:mailto:test@example.com',
+            'ATTENDEE:mailto:test2@example.net',
         ]);
     }
 
@@ -223,7 +223,7 @@ class EventFactoryTest extends TestCase
              ));
 
          self::assertEventRendersCorrect($event, [
-             'ATTENDEE;CN=Test Display Name:mailto:test%40example.com',
+             'ATTENDEE;CN=Test Display Name:mailto:test@example.com',
          ]);
      } */
 
@@ -236,7 +236,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test@example.com',
         ]);
     }
 
@@ -249,7 +249,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=GROUP:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=GROUP:mailto:test@example.com',
         ]);
     }
 
@@ -262,7 +262,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=RESOURCE:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=RESOURCE:mailto:test@example.com',
         ]);
     }
 
@@ -275,7 +275,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=ROOM:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=ROOM:mailto:test@example.com',
         ]);
     }
 
@@ -287,7 +287,7 @@ class EventFactoryTest extends TestCase
         $event = (new Event())
             ->addAttendee($attendee);
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=UNKNOWN:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=UNKNOWN:mailto:test@example.com',
         ]);
     }
 
@@ -300,7 +300,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=INDIVIDUAL:mailto:test@example.com',
         ]);
     }
 
@@ -315,8 +315,8 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CUTYPE=INDIVIDUAL;MEMBER="mailto:test%40example.com","mailto:test%',
-            ' 40example.net":mailto:test%40example.com',
+            'ATTENDEE;CUTYPE=INDIVIDUAL;MEMBER="mailto:test@example.com","mailto:test@ex',
+            ' ample.net":mailto:test@example.com',
         ]);
     }
 
@@ -329,7 +329,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;ROLE=CHAIR:mailto:test%40example.com',
+            'ATTENDEE;ROLE=CHAIR:mailto:test@example.com',
         ]);
     }
 
@@ -344,7 +344,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;ROLE=REQ-PARTICIPANT:mailto:test%40example.com',
+            'ATTENDEE;ROLE=REQ-PARTICIPANT:mailto:test@example.com',
         ]);
     }
 
@@ -360,7 +360,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;PARTSTAT=NEEDS-ACTION:mailto:test%40example.com',
+            'ATTENDEE;PARTSTAT=NEEDS-ACTION:mailto:test@example.com',
         ]);
     }
 
@@ -376,7 +376,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;RSVP=TRUE:mailto:test%40example.com',
+            'ATTENDEE;RSVP=TRUE:mailto:test@example.com',
         ]);
     }
 
@@ -396,8 +396,8 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;DELEGATED-TO="mailto:jdoe%40example.com","mailto:jqpublic%40exampl',
-            ' e.com":mailto:jsmith%40example.com',
+            'ATTENDEE;DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.co',
+            ' m":mailto:jsmith@example.com',
         ]);
     }
 
@@ -415,8 +415,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;DELEGATED-FROM="mailto:jsmith%40example.com":mailto:jdoe%40example',
-            ' .com',
+            'ATTENDEE;DELEGATED-FROM="mailto:jsmith@example.com":mailto:jdoe@example.com',
         ]);
     }
 
@@ -434,7 +433,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;SENT-BY="mailto:sray%40example.com":mailto:jdoe%40example.com',
+            'ATTENDEE;SENT-BY="mailto:sray@example.com":mailto:jdoe@example.com',
         ]);
     }
 
@@ -450,7 +449,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;CN=Test Example:mailto:jdoe%40example.com',
+            'ATTENDEE;CN=Test Example:mailto:jdoe@example.com',
         ]);
     }
 
@@ -467,7 +466,7 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'ATTENDEE;DIR="ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20D',
-            ' olittle)":mailto:jdoe%40example.com',
+            ' olittle)":mailto:jdoe@example.com',
         ]);
     }
 
@@ -483,7 +482,7 @@ class EventFactoryTest extends TestCase
             ->addAttendee($attendee);
 
         self::assertEventRendersCorrect($event, [
-            'ATTENDEE;LANGUAGE=en-US:mailto:jdoe%40example.com',
+            'ATTENDEE;LANGUAGE=en-US:mailto:jdoe@example.com',
         ]);
     }
 
