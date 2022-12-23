@@ -31,7 +31,7 @@ jobs:
           node-version: 18
 
       - name: Build Website
-        run: "make docs"
+        run: "make website"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

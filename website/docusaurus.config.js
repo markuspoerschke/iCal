@@ -81,7 +81,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright (c) 2012-2021 Markus Poerschke, Published under MIT License`,
+            copyright: `Copyright (c) 2012-2022 Markus Poerschke, Published under MIT License`,
         },
         prism: {
             additionalLanguages: ["php"],
