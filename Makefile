@@ -91,7 +91,7 @@ node_modules: yarn.lock package.json
 	yarn
 
 .PHONY: website
-docs: website
+website:
 	cd website && $(MAKE) build
 
 .PHONY: clean
