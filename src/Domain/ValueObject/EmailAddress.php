@@ -33,6 +33,6 @@ final class EmailAddress
 
     public function toUri(): Uri
     {
-        return new Uri('mailto:' . urlencode($this->emailAddress));
+        return new Uri('mailto:' . $this->emailAddress);
     }
 }
