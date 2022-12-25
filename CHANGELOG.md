@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   Fix formatting date time property with UTC time zone
+-   Fix formatting date time property with UTC time zone [#482](https://github.com/markuspoerschke/iCal/pull/482)
 
 ## [2.9.0] - 2022-12-23
 
