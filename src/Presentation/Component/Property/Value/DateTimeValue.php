@@ -41,6 +41,10 @@ final class DateTimeValue extends Value
 
     private function convertDateTimeToString(DateTime $dateTime): string
     {
+        if ($dateTime->hasDateTimeZone() && $dateTime->getDateTimeZone()->getName() === 'UTC') {
+            return $dateTime->getDateTime()->format(self::FORMAT_UTC);
+        }
+
         return $dateTime->getDateTime()->format(self::FORMAT);
     }
 
