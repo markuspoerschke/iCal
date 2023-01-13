@@ -9,6 +9,22 @@ module.exports = {
     favicon: "img/favicon.ico",
     organizationName: "markuspoerschke", // Usually your GitHub org/user name.
     projectName: "ical", // Usually your repo name.
+    headTags: [
+        {
+            tagName: "script",
+            attributes: {
+                async: "true",
+                src: "https://ackee.poerschke.nrw/tracker.js",
+                "data-ackee-server": "https://ackee.poerschke.nrw",
+                "data-ackee-domain-id": "23cbb93b-ce0b-4f58-bca4-6caa0bc939ee",
+                "data-ackee-opts": JSON.stringify({
+                    detailed: true,
+                    ignoreLocalhost: true,
+                    ignoreOwnVisits: true,
+                }),
+            },
+        },
+    ],
     themeConfig: {
         navbar: {
             title: "eluceo/ical",
@@ -65,7 +81,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright (c) 2012-2021 Markus Poerschke, Published under MIT License`,
+            copyright: `Copyright (c) 2012-2022 Markus Poerschke, Published under MIT License`,
         },
         prism: {
             additionalLanguages: ["php"],
@@ -86,15 +102,6 @@ module.exports = {
                 theme: {
                     customCss: require.resolve("./src/css/custom.css"),
                 },
-            },
-        ],
-    ],
-    plugins: [
-        [
-            "docusaurus-plugin-ackee",
-            {
-                domainId: "23cbb93b-ce0b-4f58-bca4-6caa0bc939ee",
-                server: "https://ackee.poerschke.nrw",
             },
         ],
     ],

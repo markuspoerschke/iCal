@@ -1,6 +1,7 @@
 -include Makefile.local
 
 export XDEBUG_MODE=coverage
+export PHP_CS_FIXER_IGNORE_ENV=1
 
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
@@ -13,7 +14,7 @@ INFECTION_FLAGS ?=
 help:
 	@echo 'Available targets'
 	@echo '  clean               Removes temporary build artifacts like'
-	@echo '  docs                Builds the documentation website'
+	@echo '  website             Builds the documentation website'
 	@echo '  fix                 Fixes composer.json and code style'
 	@echo '  fix-prettier        Fix code style of non PHP files (not included in "fix" target)'
 	@echo '  test                Execute all tests'
@@ -89,18 +90,11 @@ fix-prettier: node_modules
 node_modules: yarn.lock package.json
 	yarn
 
-.PHONY: docs
-docs: docs-vendor
-	cd  website && yarn build
-
-.PHONY: docs-vendor
-docs-vendor:
-	cd website && yarn
-
-.PHONY: docs-preview
-docs-preview: docs-vendor
-	cd website && yarn start
+.PHONY: website
+website:
+	cd website && $(MAKE) build
 
 .PHONY: clean
 clean:
-	rm -rf vendor website/node_modules website/build website/.docusaurus node_modules .phpunit.result.cache .php-cs-fixer.cache build
+	rm -rf vendor node_modules .phpunit.result.cache .php-cs-fixer.cache build
+	cd website && $(MAKE) clean

@@ -11,20 +11,17 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-final class BinaryContent
+final class Category
 {
-    /**
-     * Binary content.
-     */
-    private string $content;
+    private string $category;
 
-    public function __construct(string $content)
+    public function __construct(string $category)
     {
-        $this->content = $content;
+        $this->category = $category;
     }
 
-    public function getContent(): string
+    public function __toString(): string
     {
-        return $this->content;
+        return $this->category;
     }
 }

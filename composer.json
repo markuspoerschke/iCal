@@ -24,17 +24,17 @@
         "docs": "https://ical.poerschke.nrw"
     },
     "require": {
-        "php": ">=7.4 || ~8.0.0 || ~8.1.0",
+        "php": ">=7.4 || ~8.0.0 || ~8.1.0 || ~8.2.0",
         "ext-mbstring": "*",
         "symfony/deprecation-contracts": "^2.1 || ^3.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.23.1",
         "friendsofphp/php-cs-fixer": "^3.4",
-        "infection/infection": "^0.23",
-        "phpmd/phpmd": "^2.11.1",
+        "infection/infection": "^0.23 || ^0.26",
+        "phpmd/phpmd": "^2.13",
         "phpunit/phpunit": "^9.5",
-        "vimeo/psalm": "^4.8"
+        "vimeo/psalm": "^4.8 || ^5.0"
     },
     "conflict": {
         "php": "7.4.6"

@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2023 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Test\Unit\Presentation\Factory;
 
+use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Calendar;
@@ -68,6 +69,26 @@ class CalendarFactoryTest extends TestCase
             'UID:event2',
             'DTSTAMP:20191110T112233Z',
             'END:VEVENT',
+            'END:VCALENDAR',
+            '',
+        ]);
+
+        self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));
+    }
+
+    /**
+     * @covers \Eluceo\iCal\Presentation\Factory\CalendarFactory::createCalendar
+     */
+    public function testRenderWithPublishedTTL(): void
+    {
+        $calendar = new Calendar();
+        $calendar->setPublishedTTL(new DateInterval('P1D'));
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
+            'BEGIN:VCALENDAR',
+            'PRODID:' . $calendar->getProductIdentifier(),
+            'VERSION:2.0',
+            'CALSCALE:GREGORIAN',
+            'X-PUBLISHED-TTL:P1D',
             'END:VCALENDAR',
             '',
         ]);

@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2023 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -15,7 +15,11 @@ use Eluceo\iCal\Presentation\Component\Property;
 use Generator;
 use IteratorAggregate;
 use ReturnTypeWillChange;
+use Traversable;
 
+/**
+ * @implements IteratorAggregate<ContentLine>
+ */
 class Component implements IteratorAggregate
 {
     private string $componentName;
@@ -57,8 +61,11 @@ class Component implements IteratorAggregate
         );
     }
 
+    /**
+     * @return Traversable<ContentLine>
+     */
     #[ReturnTypeWillChange]
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return $this->getContentLines();
     }

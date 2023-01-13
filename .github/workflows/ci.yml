@@ -15,9 +15,10 @@ jobs:
           - "7.4"
           - "8.0"
           - "8.1"
+          - "8.2"
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2.4.0"
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP with extensions"
         uses: "shivammathur/setup-php@v2"
@@ -29,12 +30,16 @@ jobs:
         run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.7"
+        uses: "actions/cache@v3.2.2"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
 
-      - name: "Composer update"
+      - name: "Update Packages for PHP 8.0"
+        if: ${{ matrix.php-version == '8.0' }}
+        run: "composer up --prefer-lowest ocramius/package-versions symfony/*"
+
+      - name: "Update Packages for PHP 7.4"
         if: ${{ matrix.php-version == '7.4' }}
         run: "composer up --prefer-lowest"
 
@@ -42,4 +47,4 @@ jobs:
         run: "make -j -O test"
 
       - name: "Send code coverage"
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3.1.1
