@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Declare CalendarFactory::getProperties protected i/o private to open it for extension [#386](https://github.com/markuspoerschke/iCal/pull/386)
+
 ## [2.10.0] - 2023-01-17
 
 ### Fixed
