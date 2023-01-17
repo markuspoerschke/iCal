@@ -37,7 +37,11 @@ class DateTimeFactory
      */
     private function getParameters(PointInTime $pointInTime): array
     {
-        if ($pointInTime instanceof DateTime && $pointInTime->hasDateTimeZone()) {
+        if (
+            $pointInTime instanceof DateTime
+            && $pointInTime->hasDateTimeZone()
+            && $pointInTime->getDateTimeZone()->getName() !== 'UTC'
+        ) {
             return [
                 new Property\Parameter('TZID', new TextValue($pointInTime->getDateTimeZone()->getName())),
             ];
