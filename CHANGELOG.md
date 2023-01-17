@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.0] - 2023-01-17
+
 ### Changed
 
 -   Declare CalendarFactory::getProperties protected i/o private to open it for extension [#386](https://github.com/markuspoerschke/iCal/pull/386)
@@ -262,7 +264,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.10.0...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.11.0...HEAD
+[2.11.0]: https://github.com/markuspoerschke/iCal/compare/2.10.0...2.11.0
 [2.10.0]: https://github.com/markuspoerschke/iCal/compare/2.9.0...2.10.0
 [2.9.0]: https://github.com/markuspoerschke/iCal/compare/2.8.0...2.9.0
 [2.8.0]: https://github.com/markuspoerschke/iCal/compare/2.7.0...2.8.0
