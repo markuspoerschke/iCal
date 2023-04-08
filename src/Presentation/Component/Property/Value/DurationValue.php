@@ -18,7 +18,7 @@ final class DurationValue extends Value
 {
     private \DateInterval $duration;
 
-    public function __construct(\DateInterval $duration)
+    public function __construct(DateInterval $duration)
     {
         $this->duration = $duration;
     }
@@ -66,7 +66,7 @@ final class DurationValue extends Value
      *
      * @see https://www.php.net/manual/de/class.dateinterval.php
      */
-    private function getNormalizedDateInterval(): \DateInterval
+    private function getNormalizedDateInterval(): DateInterval
     {
         $baseDate = (new \DateTimeImmutable())->setTimestamp(0);
         $nextDate = $baseDate->sub($this->duration);

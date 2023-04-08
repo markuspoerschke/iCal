@@ -13,7 +13,6 @@ namespace Eluceo\iCal\Presentation;
 
 use Eluceo\iCal\Presentation\Component\Property;
 use IteratorAggregate;
-use ReturnTypeWillChange;
 
 /**
  * @implements IteratorAggregate<ContentLine>

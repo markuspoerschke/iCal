@@ -26,7 +26,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
  */
 
 // 1. Create event generator
-$generator = function (): \Generator {
+$generator = function (): Generator {
     $day = new \DateTimeImmutable();
     $dayInterval = new \DateInterval('P1D');
     for ($i = 0; $i < 10; ++$i) {

@@ -13,7 +13,6 @@ namespace Eluceo\iCal\Domain\Collection;
 
 use Eluceo\iCal\Domain\Entity\Event;
 use IteratorAggregate;
-use ReturnTypeWillChange;
 
 /**
  * @implements IteratorAggregate<Event>

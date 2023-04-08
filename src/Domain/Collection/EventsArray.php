@@ -12,7 +12,6 @@
 namespace Eluceo\iCal\Domain\Collection;
 
 use Eluceo\iCal\Domain\Entity\Event;
-use ReturnTypeWillChange;
 
 final class EventsArray extends Events
 {
