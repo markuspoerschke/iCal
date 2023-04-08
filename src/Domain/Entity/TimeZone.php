@@ -11,9 +11,6 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
-use DateInterval;
-use DateTimeImmutable;
-use DateTimeInterface;
 use DateTimeZone as PhpDateTimeZone;
 use Eluceo\iCal\Domain\Enum\TimeZoneTransitionType;
 use Eluceo\iCal\Domain\ValueObject\TimeZoneTransition;
@@ -34,31 +31,31 @@ class TimeZone
 
     public static function createFromPhpDateTimeZone(
         PhpDateTimeZone $phpDateTimeZone,
-        ?DateTimeInterface $beginDateTime = null,
-        ?DateTimeInterface $endDateTime = null
+        ?\DateTimeInterface $beginDateTime = null,
+        ?\DateTimeInterface $endDateTime = null
     ): self {
         if ($beginDateTime === null || $endDateTime === null) {
             trigger_deprecation('eluceo/ical', '2.1.0', 'Relying on the default values for begin and end date when calling TimeZone::createFromPhpDateTimeZone() is deprecated. Please provide a begin and an end date.');
         }
 
         $transitions = $phpDateTimeZone->getTransitions(
-            $beginDateTime ? $beginDateTime->getTimestamp() : (new DateTimeImmutable('0000-01-01 12:00:00'))->getTimestamp(),
+            $beginDateTime ? $beginDateTime->getTimestamp() : (new \DateTimeImmutable('0000-01-01 12:00:00'))->getTimestamp(),
             $endDateTime ? $endDateTime->getTimestamp() : PHP_INT_MAX
         );
         $timeZone = new self($phpDateTimeZone->getName());
 
         foreach ($transitions as $transitionArray) {
-            $fromDateTime = DateTimeImmutable::createFromFormat(
-                DateTimeImmutable::ISO8601,
+            $fromDateTime = \DateTimeImmutable::createFromFormat(
+                \DateTimeImmutable::ISO8601,
                 $transitionArray['time']
             );
-            assert($fromDateTime instanceof DateTimeImmutable, $transitionArray['time']);
+            assert($fromDateTime instanceof \DateTimeImmutable, $transitionArray['time']);
             $localFromDateTime = $fromDateTime->setTimezone($phpDateTimeZone);
 
             $timeZone->addTransition(new TimeZoneTransition(
                 $transitionArray['isdst'] ? TimeZoneTransitionType::DAYLIGHT() : TimeZoneTransitionType::STANDARD(),
                 $localFromDateTime,
-                $phpDateTimeZone->getOffset($fromDateTime->sub(new DateInterval('PT1S'))),
+                $phpDateTimeZone->getOffset($fromDateTime->sub(new \DateInterval('PT1S'))),
                 $transitionArray['offset'],
                 $transitionArray['abbr']
             ));

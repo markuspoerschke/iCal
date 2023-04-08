@@ -12,15 +12,13 @@
 namespace Eluceo\iCal\Presentation;
 
 use Eluceo\iCal\Presentation\Component\Property;
-use Generator;
 use IteratorAggregate;
 use ReturnTypeWillChange;
-use Traversable;
 
 /**
  * @implements IteratorAggregate<ContentLine>
  */
-class Component implements IteratorAggregate
+class Component implements \IteratorAggregate
 {
     private string $componentName;
 
@@ -62,25 +60,25 @@ class Component implements IteratorAggregate
     }
 
     /**
-     * @return Traversable<ContentLine>
+     * @return \Traversable<ContentLine>
      */
-    #[ReturnTypeWillChange]
-    public function getIterator(): Traversable
+    #[\ReturnTypeWillChange]
+    public function getIterator(): \Traversable
     {
         return $this->getContentLines();
     }
 
     /**
-     * @return Generator<ContentLine>
+     * @return \Generator<ContentLine>
      */
-    protected function getContentLines(): Generator
+    protected function getContentLines(): \Generator
     {
         yield new ContentLine('BEGIN:' . $this->componentName);
         yield from $this->getContentLinesGenerator();
         yield new ContentLine('END:' . $this->componentName);
     }
 
-    protected function getContentLinesGenerator(): Generator
+    protected function getContentLinesGenerator(): \Generator
     {
         foreach ($this->properties as $property) {
             yield new ContentLine((string) $property);

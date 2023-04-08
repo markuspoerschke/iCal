@@ -11,12 +11,10 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
-use DateTimeZone;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\PointInTime;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Presentation\Component\Property\Value;
-use InvalidArgumentException;
 
 final class DateTimeValue extends Value
 {
@@ -34,7 +32,7 @@ final class DateTimeValue extends Value
 
     private function convertTimestampToString(Timestamp $timestamp): string
     {
-        $dateTime = $timestamp->getDateTime()->setTimezone(new DateTimeZone('UTC'));
+        $dateTime = $timestamp->getDateTime()->setTimezone(new \DateTimeZone('UTC'));
 
         return $dateTime->format(self::FORMAT_UTC);
     }
@@ -63,6 +61,6 @@ final class DateTimeValue extends Value
             return $this->convertTimestampToString($pointInTime);
         }
 
-        throw new InvalidArgumentException('Cannot convert object of type ' . get_class($pointInTime) . ' to string');
+        throw new \InvalidArgumentException('Cannot convert object of type ' . get_class($pointInTime) . ' to string');
     }
 }
