@@ -12,6 +12,7 @@
 namespace Presentation\Factory;
 
 use DateTimeImmutable as PhpDateTimeImmutable;
+use DateTimeZone;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Presentation\Factory\DateTimeFactory;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +21,7 @@ class DateTimeFactoryTest extends TestCase
 {
     public function testCreateProperty(): void
     {
-        $dateTime = new DateTime(new PhpDateTimeImmutable('2021-01-22 11:12:13', new \DateTimeZone('Europe/Berlin')), true);
+        $dateTime = new DateTime(new PhpDateTimeImmutable('2021-01-22 11:12:13', new DateTimeZone('Europe/Berlin')), true);
 
         $property = (new DateTimeFactory())->createProperty('DTSTART', $dateTime);
 
@@ -29,7 +30,7 @@ class DateTimeFactoryTest extends TestCase
 
     public function testUtcTimeZone(): void
     {
-        $dateTime = new DateTime(new PhpDateTimeImmutable('2022-12-25 23:29:00', new \DateTimeZone('UTC')), true);
+        $dateTime = new DateTime(new PhpDateTimeImmutable('2022-12-25 23:29:00', new DateTimeZone('UTC')), true);
 
         $property = (new DateTimeFactory())->createProperty('DTSTART', $dateTime);
 

@@ -11,6 +11,7 @@
 
 namespace Presentation\Factory;
 
+use DateTimeImmutable;
 use Eluceo\iCal\Domain\Entity\TimeZone;
 use Eluceo\iCal\Domain\Enum\TimeZoneTransitionType;
 use Eluceo\iCal\Domain\ValueObject\TimeZoneTransition;
@@ -26,14 +27,14 @@ class TimeZoneFactoryTest extends TestCase
         $timeZone->setTransitions([
             new TimeZoneTransition(
                 TimeZoneTransitionType::STANDARD(),
-                new \DateTimeImmutable('2021-01-01 00:00:00'),
+                new DateTimeImmutable('2021-01-01 00:00:00'),
                 7200,
                 3600,
                 'TimeZone1'
             ),
             new TimeZoneTransition(
                 TimeZoneTransitionType::DAYLIGHT(),
-                new \DateTimeImmutable('2021-03-01 00:00:00'),
+                new DateTimeImmutable('2021-03-01 00:00:00'),
                 3600,
                 7200,
                 'TimeZone2'

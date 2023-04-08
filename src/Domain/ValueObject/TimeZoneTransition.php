@@ -11,12 +11,14 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Eluceo\iCal\Domain\Enum\TimeZoneTransitionType;
 use Eluceo\iCal\Util\DateTimeImmutableFactory;
 
 class TimeZoneTransition
 {
-    private \DateTimeImmutable $fromDateTime;
+    private DateTimeImmutable $fromDateTime;
 
     /**
      * Offset in seconds.
@@ -34,7 +36,7 @@ class TimeZoneTransition
 
     public function __construct(
         TimeZoneTransitionType $type,
-        \DateTimeInterface $fromDateTime,
+        DateTimeInterface $fromDateTime,
         int $offsetFrom,
         int $offsetTo,
         string $timeZoneName)
@@ -46,7 +48,7 @@ class TimeZoneTransition
         $this->timeZoneName = $timeZoneName;
     }
 
-    public function getFromDateTime(): \DateTimeImmutable
+    public function getFromDateTime(): DateTimeImmutable
     {
         return $this->fromDateTime;
     }

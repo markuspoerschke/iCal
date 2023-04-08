@@ -11,6 +11,8 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+use InvalidArgumentException;
+
 class Attachment
 {
     private ?BinaryContent $binaryContent = null;
@@ -33,7 +35,7 @@ class Attachment
         }
 
         if ($this->uri === null && $this->binaryContent === null) {
-            throw new \InvalidArgumentException(sprintf('$content is invalid. An instance of %s or %s was expected, but an instance of %s was given.', BinaryContent::class, Uri::class, get_class($content)));
+            throw new InvalidArgumentException(sprintf('$content is invalid. An instance of %s or %s was expected, but an instance of %s was given.', BinaryContent::class, Uri::class, get_class($content)));
         }
     }
 

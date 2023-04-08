@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Unit\Domain\Entity;
 
+use DateInterval;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,7 @@ class CalendarTest extends TestCase
     public function provideGetSetPublishedTTLTestData(): array
     {
         return [
-            [new \DateInterval('P1W')],
+            [new DateInterval('P1W')],
             [null],
         ];
     }
@@ -30,7 +31,7 @@ class CalendarTest extends TestCase
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::getPublishedTTL
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::setPublishedTTL
      *
-     * @param ?\DateInterval $ttl
+     * @param ?DateInterval $ttl
      */
     public function testGetSetPublishedTTL($ttl): void
     {

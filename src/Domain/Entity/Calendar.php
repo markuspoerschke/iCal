@@ -11,15 +11,18 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Collection\EventsArray;
 use Eluceo\iCal\Domain\Collection\EventsGenerator;
+use InvalidArgumentException;
+use Iterator;
 
 class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
 
-    private ?\DateInterval $publishedTTL = null;
+    private ?DateInterval $publishedTTL = null;
 
     private Events $events;
 
@@ -29,7 +32,7 @@ class Calendar
     private array $timeZones = [];
 
     /**
-     * @param array<array-key, Event>|\Iterator<Event>|Events $events
+     * @param array<array-key, Event>|Iterator<Event>|Events $events
      */
     public function __construct($events = [])
     {
@@ -37,7 +40,7 @@ class Calendar
     }
 
     /**
-     * @param array<array-key, Event>|\Iterator<Event>|Events $events
+     * @param array<array-key, Event>|Iterator<Event>|Events $events
      */
     private function ensureEventsObject($events = []): Events
     {
@@ -49,19 +52,19 @@ class Calendar
             return new EventsArray($events);
         }
 
-        if ($events instanceof \Iterator) {
+        if ($events instanceof Iterator) {
             return new EventsGenerator($events);
         }
 
-        throw new \InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
+        throw new InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
     }
 
-    public function getPublishedTTL(): ?\DateInterval
+    public function getPublishedTTL(): ?DateInterval
     {
         return $this->publishedTTL;
     }
 
-    public function setPublishedTTL(?\DateInterval $ttl): self
+    public function setPublishedTTL(?DateInterval $ttl): self
     {
         $this->publishedTTL = $ttl;
 

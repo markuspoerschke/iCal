@@ -19,15 +19,16 @@ use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UtcOffsetValue;
+use Generator;
 
 class TimeZoneFactory
 {
     /**
      * @param iterable<TimeZone> $timeZones
      *
-     * @return \Generator<Component>
+     * @return Generator<Component>
      */
-    public function createComponents(iterable $timeZones): \Generator
+    public function createComponents(iterable $timeZones): Generator
     {
         foreach ($timeZones as $timeZone) {
             yield $this->createComponent($timeZone);

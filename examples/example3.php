@@ -11,6 +11,8 @@
 
 namespace Example;
 
+use DateInterval;
+use DateTimeImmutable;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Date;
@@ -27,8 +29,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 // 1. Create event generator
 $generator = function (): Generator {
-    $day = new \DateTimeImmutable();
-    $dayInterval = new \DateInterval('P1D');
+    $day = new DateTimeImmutable();
+    $dayInterval = new DateInterval('P1D');
     for ($i = 0; $i < 10; ++$i) {
         yield (new Event())
             ->setSummary('Event ' . $i)

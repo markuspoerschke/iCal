@@ -22,6 +22,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\QuotedUriValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
+use UnexpectedValueException;
 
 class AttendeeFactory
 {
@@ -142,7 +143,7 @@ class AttendeeFactory
             return new TextValue('NON-PARTICIPANT');
         }
 
-        throw new \UnexpectedValueException(sprintf('The enum %s resulted into an unknown role type value that is not yet implemented.', RoleType::class));
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown role type value that is not yet implemented.', RoleType::class));
     }
 
     public function getParticipantStatusTextValue(ParticipationStatus $participationStatus): TextValue
@@ -175,6 +176,6 @@ class AttendeeFactory
             return new TextValue('IN-PROCESS');
         }
 
-        throw new \UnexpectedValueException(sprintf('The enum %s resulted into an unknown role type value that is not yet implemented.', ParticipationStatus::class));
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown role type value that is not yet implemented.', ParticipationStatus::class));
     }
 }

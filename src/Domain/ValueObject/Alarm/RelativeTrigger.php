@@ -11,6 +11,8 @@
 
 namespace Eluceo\iCal\Domain\ValueObject\Alarm;
 
+use DateInterval;
+
 final class RelativeTrigger extends Trigger
 {
     /**
@@ -23,9 +25,9 @@ final class RelativeTrigger extends Trigger
      */
     private bool $relatedToStart = true;
 
-    private \DateInterval $duration;
+    private DateInterval $duration;
 
-    public function __construct(\DateInterval $duration)
+    public function __construct(DateInterval $duration)
     {
         $this->duration = $duration;
     }
@@ -40,7 +42,7 @@ final class RelativeTrigger extends Trigger
         return !$this->relatedToStart;
     }
 
-    public function getDuration(): \DateInterval
+    public function getDuration(): DateInterval
     {
         return $this->duration;
     }

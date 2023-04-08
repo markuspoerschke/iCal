@@ -11,18 +11,21 @@
 
 namespace Eluceo\iCal\Util;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+
 /**
  * @internal
  */
 final class DateTimeImmutableFactory
 {
-    public static function createFromInterface(\DateTimeInterface $dateTime): \DateTimeImmutable
+    public static function createFromInterface(DateTimeInterface $dateTime): DateTimeImmutable
     {
-        if ($dateTime instanceof \DateTimeImmutable) {
+        if ($dateTime instanceof DateTimeImmutable) {
             return $dateTime;
         }
 
-        return (new \DateTimeImmutable('now', $dateTime->getTimezone()))
+        return (new DateTimeImmutable('now', $dateTime->getTimezone()))
             ->setTimestamp($dateTime->getTimestamp());
     }
 }

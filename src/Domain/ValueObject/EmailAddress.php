@@ -11,6 +11,8 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+use InvalidArgumentException;
+
 final class EmailAddress
 {
     private string $emailAddress;
@@ -18,7 +20,7 @@ final class EmailAddress
     public function __construct(string $emailAddress)
     {
         if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
-            throw new \InvalidArgumentException("$emailAddress is no valid e-mail address");
+            throw new InvalidArgumentException("$emailAddress is no valid e-mail address");
         }
 
         $this->emailAddress = $emailAddress;

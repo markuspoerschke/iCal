@@ -26,6 +26,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DurationValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use Generator;
 
 /**
  * @SuppressWarnings("CouplingBetweenObjects")
@@ -38,9 +39,9 @@ class AlarmFactory
     }
 
     /**
-     * @return \Generator<Property>
+     * @return Generator<Property>
      */
-    private function getProperties(Alarm $alarm): \Generator
+    private function getProperties(Alarm $alarm): Generator
     {
         yield from $this->getActionProperties($alarm->getAction());
         yield from $this->getTriggerProperties($alarm->getTrigger());
@@ -48,9 +49,9 @@ class AlarmFactory
     }
 
     /**
-     * @return \Generator<Property>
+     * @return Generator<Property>
      */
-    private function getRepeatProperties(Alarm $alarm): \Generator
+    private function getRepeatProperties(Alarm $alarm): Generator
     {
         if (!$alarm->isRepeated()) {
             return;
@@ -61,9 +62,9 @@ class AlarmFactory
     }
 
     /**
-     * @return \Generator<Property>
+     * @return Generator<Property>
      */
-    private function getTriggerProperties(Trigger $trigger): \Generator
+    private function getTriggerProperties(Trigger $trigger): Generator
     {
         if ($trigger instanceof AbsoluteDateTimeTrigger) {
             yield new Property(
@@ -85,9 +86,9 @@ class AlarmFactory
     }
 
     /**
-     * @return \Generator<Property>
+     * @return Generator<Property>
      */
-    private function getActionProperties(Action $action): \Generator
+    private function getActionProperties(Action $action): Generator
     {
         if ($action instanceof AudioAction) {
             yield new Property('ACTION', new TextValue('AUDIO'));

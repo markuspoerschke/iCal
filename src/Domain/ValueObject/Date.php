@@ -11,9 +11,12 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+use DateInterval;
+use InvalidArgumentException;
+
 final class Date extends PointInTime
 {
-    public function add(\DateInterval $interval): self
+    public function add(DateInterval $interval): self
     {
         if (
             $interval->h > 0
@@ -21,7 +24,7 @@ final class Date extends PointInTime
             || $interval->s > 0
             || $interval->f > 0
         ) {
-            throw new \InvalidArgumentException('Cannot add time interval to a date.');
+            throw new InvalidArgumentException('Cannot add time interval to a date.');
         }
 
         $new = parent::add($interval);

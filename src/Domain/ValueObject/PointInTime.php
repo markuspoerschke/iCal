@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
+use DateInterval;
 use DateTimeImmutable as PhpDateTimeImmutable;
 use DateTimeInterface as PhpDateTimeInterface;
 use Eluceo\iCal\Util\DateTimeImmutableFactory;
@@ -39,7 +40,7 @@ abstract class PointInTime
     /**
      * @psalm-suppress MoreSpecificReturnType
      */
-    public function add(\DateInterval $interval): self
+    public function add(DateInterval $interval): self
     {
         $new = clone $this;
         $new->dateTime = $new->dateTime->add($interval);

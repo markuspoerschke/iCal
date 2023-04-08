@@ -11,24 +11,27 @@
 
 namespace Eluceo\iCal\Domain\Collection;
 
+use BadMethodCallException;
 use Eluceo\iCal\Domain\Entity\Event;
+use Iterator;
+use ReturnTypeWillChange;
 
 final class EventsGenerator extends Events
 {
     /**
-     * @var \Iterator<Event>
+     * @var Iterator<Event>
      */
-    private \Iterator $generator;
+    private Iterator $generator;
 
     /**
-     * @param \Iterator<Event> $generator
+     * @param Iterator<Event> $generator
      */
-    public function __construct(\Iterator $generator)
+    public function __construct(Iterator $generator)
     {
         $this->generator = $generator;
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return $this->generator;
@@ -36,6 +39,6 @@ final class EventsGenerator extends Events
 
     public function addEvent(Event $event): void
     {
-        throw new \BadMethodCallException('Events cannot be added to an EventsGenerator.');
+        throw new BadMethodCallException('Events cannot be added to an EventsGenerator.');
     }
 }
