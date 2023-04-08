@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+-   Update `.gitattributes` file to exclude unnecessary files when fetching package through Composer. [#510](https://github.com/markuspoerschke/iCal/pull/510)
+
 ## [2.11.0] - 2023-01-17
 
 ### Changed
 
--   Declare CalendarFactory::getProperties protected i/o private to open it for extension [#386](https://github.com/markuspoerschke/iCal/pull/386)
+-   Declare `CalendarFactory::getProperties` protected i/o private to open it for extension [#386](https://github.com/markuspoerschke/iCal/pull/386)
 
 ## [2.10.0] - 2023-01-17
 
