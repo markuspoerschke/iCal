@@ -110,7 +110,7 @@ class EventFactoryTest extends TestCase
         $event = (new Event())->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
 
         self::assertEventRendersCorrect($event, [
-            'DTSTART:20301224',
+            'DTSTART;VALUE=DATE:20301224',
         ]);
     }
 
@@ -122,8 +122,8 @@ class EventFactoryTest extends TestCase
         $event = (new Event())->setOccurrence($occurrence);
 
         self::assertEventRendersCorrect($event, [
-            'DTSTART:20301224',
-            'DTEND:20301227',
+            'DTSTART;VALUE=DATE:20301224',
+            'DTEND;VALUE=DATE:20301227',
         ]);
     }
 
