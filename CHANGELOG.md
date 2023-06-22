@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.12.0] - 2023-04-10
 
+### Fixed
+
+-   Add value type DATE to DTSTART and DTEND [#519](https://github.com/markuspoerschke/iCal/pull/519)
+
+### Changed
+
 -   Update `.gitattributes` file to exclude unnecessary files when fetching package through Composer. [#510](https://github.com/markuspoerschke/iCal/pull/510)
 
 ## [2.11.0] - 2023-01-17
