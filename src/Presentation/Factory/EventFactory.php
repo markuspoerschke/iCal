@@ -146,12 +146,31 @@ class EventFactory
     private function getOccurrenceProperties(Occurrence $occurrence): Generator
     {
         if ($occurrence instanceof SingleDay) {
-            yield new Property('DTSTART', new DateValue($occurrence->getDate()));
+            yield new Property(
+                'DTSTART',
+                new DateValue($occurrence->getDate()),
+                [
+                    new Parameter('VALUE', new TextValue('DATE')),
+                ]
+            );
         }
 
         if ($occurrence instanceof MultiDay) {
-            yield new Property('DTSTART', new DateValue($occurrence->getFirstDay()));
-            yield new Property('DTEND', new DateValue($occurrence->getLastDay()->add(new DateInterval('P1D'))));
+            yield new Property(
+                'DTSTART',
+                new DateValue($occurrence->getFirstDay()),
+                [
+                    new Parameter('VALUE', new TextValue('DATE')),
+                ]
+            );
+
+            yield new Property(
+                'DTEND',
+                new DateValue($occurrence->getLastDay()->add(new DateInterval('P1D'))),
+                [
+                    new Parameter('VALUE', new TextValue('DATE')),
+                ]
+            );
         }
 
         if ($occurrence instanceof TimeSpan) {
