@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Add value type DATE to DTSTART and DTEND [#519](https://github.com/markuspoerschke/iCal/pull/519)
+-   Add value type DATE to DTSTART and DTEND [#519](https://github.com/markuspoerschke/iCal/pull/519)
 
 ### Changed
 
