@@ -16,7 +16,7 @@ class ArrayValueTest extends TestCase
         $this->assertEquals($expectedOutput, $arrayValue->getEscapedValue());
     }
 
-    public function arrayValuesProvider()
+    public static function arrayValuesProvider()
     {
         return array(
             array(array(), ''),
