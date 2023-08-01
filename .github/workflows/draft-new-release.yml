@@ -27,7 +27,7 @@ jobs:
           version: ${{ github.event.inputs.version }}
 
       - name: Fix code style
-        uses: actionsx/prettier@v2
+        uses: actionsx/prettier@v3
         with:
           args: --write CHANGELOG.md
 
