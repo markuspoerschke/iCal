@@ -34,6 +34,7 @@ class Event
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
     private ?EventStatus $status = null;
+    private ?RecurrenceRule $rrule = null;
 
     /**
      * @var array<Attendee>
@@ -344,6 +345,32 @@ class Event
     public function unsetStatus(): self
     {
         $this->status = null;
+
+        return $this;
+    }
+
+    public function getRecurrenceRule(): RecurrenceRule
+    {
+        assert($this->rrule !== null);
+
+        return $this->rrule;
+    }
+
+    public function hasRecurrenceRule(): bool
+    {
+        return $this->rrule !== null;
+    }
+
+    public function setRecurrenceRule(RecurrenceRule $rrule): self
+    {
+        $this->rrule = $rrule;
+
+        return $this;
+    }
+
+    public function unsetRecurrenceRule(): self
+    {
+        $this->rrule = null;
 
         return $this;
     }
