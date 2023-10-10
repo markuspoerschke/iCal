@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Domain\ValueObject\Recurrence;
 
 use InvalidArgumentException;
+use TypeError;
 
 final class By
 {
@@ -24,22 +25,31 @@ final class By
         }
 
         foreach ($by as $checkBy) {
-            if (!in_array(get_class($checkBy), [
-                By\Second::class,
-                By\Minute::class,
-                By\Hour::class,
-                By\Day::class,
-                By\MonthDay::class,
-                By\Month::class,
-                By\YearDay::class,
-                By\SetPosition::class,
-                By\WeekNumber::class
-            ])) {
-                throw new InvalidArgumentException('Values must be one of: Day, Hour, Minute, Month, MonthDay, Second, SetPosition, WeekNumber, YearDay');
+            try {
+                if (!in_array(get_class($checkBy), [
+                    By\Second::class,
+                    By\Minute::class,
+                    By\Hour::class,
+                    By\Day::class,
+                    By\MonthDay::class,
+                    By\Month::class,
+                    By\YearDay::class,
+                    By\SetPosition::class,
+                    By\WeekNumber::class
+                ])) {
+                    $this->throwInvalid();
+                }
+            } catch (TypeError $e) {
+                $this->throwInvalid();
             }
         }
 
         $this->by = $by;
+    }
+
+    private function throwInvalid(): void
+    {
+        throw new InvalidArgumentException('Values must be one of: Day, Hour, Minute, Month, MonthDay, Second, SetPosition, WeekNumber, YearDay');
     }
 
     public function __toString(): string

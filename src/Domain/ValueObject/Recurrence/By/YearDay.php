@@ -24,9 +24,9 @@ final class YearDay
         }
         $value = array_map('intval', $value);
 
-        foreach ($value as $weekNumber) {
-            if ($weekNumber < -366 || $weekNumber > 366 || $weekNumber === 0) {
-                throw new InvalidArgumentException('Week number values must be between 1 and 366, or -1 and -366');
+        foreach ($value as $yearDay) {
+            if ($yearDay < -366 || $yearDay > 366 || $yearDay === 0) {
+                throw new InvalidArgumentException('Year day values must be between 1 and 366, or -1 and -366');
             }
         }
 

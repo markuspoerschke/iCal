@@ -11,20 +11,19 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
-
 use Eluceo\iCal\Domain\ValueObject\DateTime;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\By;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Count;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Exclusion;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Frequency;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Interval;
+use Eluceo\iCal\Domain\ValueObject\Recurrence\Until;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\WeekStart;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
-use InvalidArgumentException;
 
 class RecurrenceRule
 {
-    private ?DateTime $until = null;
+    private ?Until $until = null;
     private ?Frequency $frequency = null;
     private ?Count $count = null;
     private ?Interval $interval = null;
@@ -32,7 +31,7 @@ class RecurrenceRule
     private ?By $by = null;
     private ?Exclusion $exclusions = null;
 
-    public function getUntil(): ?DateTime
+    public function getUntil(): ?Until
     {
         return $this->until;
     }
@@ -42,7 +41,7 @@ class RecurrenceRule
         return $this->until !== null;
     }
 
-    public function setUntil(?DateTime $until): self
+    public function setUntil(?Until $until): self
     {
         $this->until = $until;
         return $this;
@@ -201,7 +200,7 @@ class RecurrenceRule
         }
 
         $parts = [
-            $this->hasUntil() ? new DateTimeValue($this->getUntil()) : null,
+            $this->getUntil(),
             $this->getFrequency(),
             $this->getCount(),
             $this->getInterval(),

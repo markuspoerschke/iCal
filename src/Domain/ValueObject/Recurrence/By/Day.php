@@ -18,11 +18,11 @@ class Day
     private array $days;
 
     /**
-     * Accepts one or more recurrence days.
+     * Accepts one or more recurrence days
      *
-     * If the day is an index, an offset is expected as the value, such as:
+     * For example:
      *
-     *   [RecurrenceWeekDay::monday(), RecurrenceWeekDay::sunday() => -3]
+     *   [RecurrenceWeekDay::monday(), RecurrenceWeekDay::sunday(-3)]
      *
      * If the offset is given, it must be between -53 and 53.
      *
@@ -34,17 +34,8 @@ class Day
             $days = [$days];
         }
 
-        foreach ($days as $key => $value) {
-            if (is_numeric($value)) {
-                $value = (int)$value;
-                if ($value < -53 || $value > 53) {
-                    throw new \InvalidArgumentException('Day offsets must be between -53 and 53');
-                }
-                if (!is_a($key, RecurrenceWeekDay::class)) {
-                    throw new \InvalidArgumentException('Day must be an instance of RecurrenceWeekDay');
-                }
-                $days[$key] = $value;
-            } elseif (!is_a($value, RecurrenceWeekDay::class)) {
+        foreach ($days as $day) {
+            if (!is_a($day, RecurrenceWeekDay::class)) {
                 throw new \InvalidArgumentException('Day must be an instance of RecurrenceWeekDay');
             }
         }
@@ -54,14 +45,6 @@ class Day
 
     public function __toString(): string
     {
-        $parts = [];
-        foreach ($this->days as $key => $value) {
-            if (is_numeric($value)) {
-                $parts[] = "{$key}{$value}";
-            } else {
-                $parts[] = (string)$value;
-            }
-        }
-        return 'BYDAY=' . implode(',', $parts);
+        return 'BYDAY=' . implode(',', $this->days);
     }
 }
