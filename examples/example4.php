@@ -24,6 +24,7 @@ use Eluceo\iCal\Domain\ValueObject\Recurrence\By\SetPosition;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Count;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Exclusion;
 use Eluceo\iCal\Domain\ValueObject\Recurrence\Frequency;
+use Eluceo\iCal\Domain\ValueObject\Recurrence\Until;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
 
@@ -45,7 +46,8 @@ $rrule
     ->setExclusions(new Exclusion([
         new DateTime(new DateTimeImmutable('now'),false),
         new DateTime(new DateTimeImmutable('2023-10-23T10:00:00'),true),
-    ]));
+    ]))
+    ->setUntil(new Until(new DateTime(new DateTimeImmutable('2023-12-31T10:00:00'),false)));
 
 // 2. Create Event domain entity.
 $event = new Event();
