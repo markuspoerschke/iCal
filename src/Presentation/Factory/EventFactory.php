@@ -175,7 +175,9 @@ class EventFactory
 
         if ($occurrence instanceof TimeSpan) {
             yield $this->dateTimeFactory->createProperty('DTSTART', $occurrence->getBegin());
-            yield $this->dateTimeFactory->createProperty('DTEND', $occurrence->getEnd());
+            if ($occurrence->getEnd() !== null) {
+                yield $this->dateTimeFactory->createProperty('DTEND', $occurrence->getEnd());
+            }
         }
     }
 
