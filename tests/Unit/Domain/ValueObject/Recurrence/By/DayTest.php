@@ -19,7 +19,7 @@ class DayTest extends TestCase
 {
     public function testConstructorWithSingleDay(): void
     {
-        $day = new Day(RecurrenceWeekDay::monday());
+        $day = new Day([RecurrenceWeekDay::monday()]);
 
         $this->assertInstanceOf(Day::class, $day);
         $this->assertSame('BYDAY=MO', $day->__toString());

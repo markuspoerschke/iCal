@@ -36,7 +36,7 @@ class RecurrenceRuleTest extends TestCase
             ->setCount(new Count(5))
             ->setInterval(new Interval(2))
             ->setWeekStart(new WeekStart(RecurrenceWeekDay::monday()))
-            ->setBy(new By(new Day(RecurrenceWeekDay::thursday(-1))))
+            ->setBy(new By([new Day([RecurrenceWeekDay::thursday(-1)])]))
             ->setExclusions(new Exclusion([new DateTime(new PhpDateTime('2023-12-31T12:00:00'), true)]));
 
         $expected = 'UNTIL=20231231T120000;FREQ=DAILY;COUNT=5;INTERVAL=2;WKST=MO;BYDAY=-1TH';

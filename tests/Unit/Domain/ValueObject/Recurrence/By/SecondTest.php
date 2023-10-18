@@ -19,7 +19,7 @@ class SecondTest extends TestCase
 {
     public function testConstructorWithSingleSecond(): void
     {
-        $second = new Second(30);
+        $second = new Second([30]);
 
         $this->assertInstanceOf(Second::class, $second);
         $this->assertSame('BYSECONDS=30', $second->__toString());
@@ -38,7 +38,7 @@ class SecondTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Second values must be between 0 and 60');
 
-        new Second(61);
+        new Second([61]);
     }
 
     public function testConstructorWithInvalidSecondArrayValue(): void

@@ -26,14 +26,10 @@ class Day
      *
      * If the offset is given, it must be between -53 and 53.
      *
-     * @param $days
+     * @param array<RecurrenceWeekDay> $days
      */
-    public function __construct($days)
+    public function __construct(array $days)
     {
-        if (!is_array($days)) {
-            $days = [$days];
-        }
-
         foreach ($days as $day) {
             if (!is_a($day, RecurrenceWeekDay::class)) {
                 throw new \InvalidArgumentException('Day must be an instance of RecurrenceWeekDay');

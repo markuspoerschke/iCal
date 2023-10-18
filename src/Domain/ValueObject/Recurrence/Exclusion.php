@@ -17,14 +17,11 @@ use InvalidArgumentException;
 
 class Exclusion
 {
+    /** @var array<DateTime> */
     private array $exclusions;
 
-    public function __construct($value)
+    public function __construct(array $value)
     {
-        if (!is_array($value)) {
-            $value = [$value];
-        }
-
         foreach ($value as $exclusion) {
             if (!$exclusion instanceof DateTime) {
                 throw new InvalidArgumentException('Values must be DateTime objects');

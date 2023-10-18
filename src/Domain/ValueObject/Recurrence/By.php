@@ -16,14 +16,11 @@ use TypeError;
 
 final class By
 {
+    /** @var array<By\Second|By\Minute|By\Hour|By\Day|By\MonthDay|By\Month|By\YearDay|By\SetPosition|By\WeekNumber> */
     private array $by;
 
-    public function __construct($by)
+    public function __construct(array $by)
     {
-        if (!is_array($by)) {
-            $by = [$by];
-        }
-
         foreach ($by as $checkBy) {
             try {
                 if (!in_array(get_class($checkBy), [

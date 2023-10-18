@@ -30,15 +30,15 @@ class ByTest extends TestCase
     public function testConstructorWithValidByValues(): void
     {
         $byArray = [
-            new Second(15),
-            new Minute(30),
-            new Hour(4),
-            new Day(RecurrenceWeekDay::monday()),
-            new MonthDay(15),
-            new Month(6),
-            new YearDay(200),
-            new SetPosition(3),
-            new WeekNumber(10),
+            new Second([15]),
+            new Minute([30]),
+            new Hour([4]),
+            new Day([RecurrenceWeekDay::monday()]),
+            new MonthDay([15]),
+            new Month([6]),
+            new YearDay([200]),
+            new SetPosition([3]),
+            new WeekNumber([10]),
         ];
 
         $by = new By($byArray);
@@ -56,7 +56,7 @@ class ByTest extends TestCase
         $this->expectExceptionMessage('Values must be one of: Day, Hour, Minute, Month, MonthDay, Second, SetPosition, WeekNumber, YearDay');
 
         $byArray = [
-            new Second(15),
+            new Second([15]),
             'InvalidValue',
         ];
 

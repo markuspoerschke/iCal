@@ -21,10 +21,10 @@ class ExclusionTest extends TestCase
 {
     public function testConstructorWithSingleExclusion(): void
     {
-        $exclusion = new Exclusion(new DateTime(
+        $exclusion = new Exclusion([new DateTime(
             new PhpDateTime('2023-12-31T12:00:00'),
             true
-        ));
+        )]);
 
         $this->assertInstanceOf(Exclusion::class, $exclusion);
         $this->assertSame('20231231T120000', $exclusion->__toString());

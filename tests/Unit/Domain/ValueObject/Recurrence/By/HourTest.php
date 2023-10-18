@@ -19,7 +19,7 @@ class HourTest extends TestCase
 {
     public function testConstructorWithSingleHour(): void
     {
-        $hour = new Hour(8);
+        $hour = new Hour([8]);
 
         $this->assertInstanceOf(Hour::class, $hour);
         $this->assertSame('BYHOUR=8', $hour->__toString());
@@ -27,10 +27,10 @@ class HourTest extends TestCase
 
     public function testConstructorWithMultipleHours(): void
     {
-        $hours = new Hour([8, 12, 16]);
+        $hours = new Hour([8, 16, 12]);
 
         $this->assertInstanceOf(Hour::class, $hours);
-        $this->assertSame('BYHOUR=8,12,16', $hours->__toString());
+        $this->assertSame('BYHOUR=8,16,12', $hours->__toString());
     }
 
     public function testConstructorWithInvalidHourValue(): void
@@ -38,7 +38,7 @@ class HourTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Hour values must be between 0 and 23');
 
-        new Hour(25);
+        new Hour([25]);
     }
 
     public function testConstructorWithInvalidHourArrayValue(): void

@@ -19,7 +19,7 @@ class MinuteTest extends TestCase
 {
     public function testConstructorWithSingleMinute(): void
     {
-        $minute = new Minute(15);
+        $minute = new Minute([15]);
 
         $this->assertInstanceOf(Minute::class, $minute);
         $this->assertSame('BYMINUTE=15', $minute->__toString());
@@ -38,7 +38,7 @@ class MinuteTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Minute values must be between 0 and 59');
 
-        new Minute(60);
+        new Minute([60]);
     }
 
     public function testConstructorWithInvalidMinuteArrayValue(): void

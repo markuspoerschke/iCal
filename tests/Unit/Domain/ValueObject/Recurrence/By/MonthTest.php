@@ -19,7 +19,7 @@ class MonthTest extends TestCase
 {
     public function testConstructorWithSingleMonth(): void
     {
-        $month = new Month(5);
+        $month = new Month([5]);
 
         $this->assertInstanceOf(Month::class, $month);
         $this->assertSame('BYMONTH=5', $month->__toString());
@@ -38,7 +38,7 @@ class MonthTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Month values must be between 1 and 12');
 
-        new Month(0);
+        new Month([0]);
     }
 
     public function testConstructorWithInvalidMonthArrayValue(): void

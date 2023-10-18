@@ -15,13 +15,11 @@ use InvalidArgumentException;
 
 final class Month
 {
+    /** @var array<int> */
     private array $months;
 
-    public function __construct($value)
+    public function __construct(array $value)
     {
-        if (!is_array($value)) {
-            $value = [$value];
-        }
         $value = array_map('intval', $value);
 
         foreach ($value as $month) {

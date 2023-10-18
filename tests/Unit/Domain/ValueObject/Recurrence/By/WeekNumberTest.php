@@ -19,7 +19,7 @@ class WeekNumberTest extends TestCase
 {
     public function testConstructorWithSingleWeekNumber(): void
     {
-        $weekNumber = new WeekNumber(15);
+        $weekNumber = new WeekNumber([15]);
 
         $this->assertInstanceOf(WeekNumber::class, $weekNumber);
         $this->assertSame('BYWEEKNO=15', $weekNumber->__toString());
@@ -38,7 +38,7 @@ class WeekNumberTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Week number values must be between 1 and 53, or -1 and -53');
 
-        new WeekNumber(0);
+        new WeekNumber([0]);
     }
 
     public function testConstructorWithInvalidWeekNumberArrayValue(): void

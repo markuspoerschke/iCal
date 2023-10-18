@@ -19,7 +19,7 @@ class YearDayTest extends TestCase
 {
     public function testConstructorWithSingleYearDay(): void
     {
-        $yearDay = new YearDay(100);
+        $yearDay = new YearDay([100]);
 
         $this->assertInstanceOf(YearDay::class, $yearDay);
         $this->assertSame('BYYEARDAY=100', $yearDay->__toString());
@@ -38,7 +38,7 @@ class YearDayTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Year day values must be between 1 and 366, or -1 and -366');
 
-        new YearDay(0);
+        new YearDay([0]);
     }
 
     public function testConstructorWithInvalidYearDayArrayValue(): void

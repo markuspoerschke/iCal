@@ -19,7 +19,7 @@ class SetPositionTest extends TestCase
 {
     public function testConstructorWithSinglePosition(): void
     {
-        $position = new SetPosition(15);
+        $position = new SetPosition([15]);
 
         $this->assertInstanceOf(SetPosition::class, $position);
         $this->assertSame('BYSETPOS=15', $position->__toString());
@@ -38,7 +38,7 @@ class SetPositionTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Position values must be between 1 and 366, or -1 and -366');
 
-        new SetPosition(0);
+        new SetPosition([0]);
     }
 
     public function testConstructorWithInvalidPositionArrayValue(): void

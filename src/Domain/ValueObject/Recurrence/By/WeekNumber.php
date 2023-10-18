@@ -15,13 +15,11 @@ use InvalidArgumentException;
 
 final class WeekNumber
 {
+    /** @var array<int> */
     private array $weekNumbers;
 
-    public function __construct($value)
+    public function __construct(array $value)
     {
-        if (!is_array($value)) {
-            $value = [$value];
-        }
         $value = array_map('intval', $value);
 
         foreach ($value as $weekNumber) {
