@@ -11,12 +11,11 @@
 
 namespace Unit\Presentation\Factory;
 
-use DateTimeImmutable;
-use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Attendee;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\MethodType;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
@@ -44,18 +43,18 @@ class EventFactoryTest extends TestCase
     public function testMinimalEvent()
     {
         $currentTime = new Timestamp(
-            DateTimeImmutable::createFromFormat(
+            \DateTimeImmutable::createFromFormat(
                 'Y-m-d H:i:s',
                 '2019-11-10 11:22:33',
-                new DateTimeZone('UTC')
+                new \DateTimeZone('UTC')
             )
         );
 
         $lastModified = new Timestamp(
-            DateTimeImmutable::createFromFormat(
+            \DateTimeImmutable::createFromFormat(
                 'Y-m-d H:i:s',
                 '2019-10-09 10:11:22',
-                new DateTimeZone('UTC')
+                new \DateTimeZone('UTC')
             )
         );
 
@@ -107,7 +106,7 @@ class EventFactoryTest extends TestCase
 
     public function testSingleDayEvent()
     {
-        $event = (new Event())->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
+        $event = (new Event())->setOccurrence(new SingleDay(new Date(\DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'))));
 
         self::assertEventRendersCorrect($event, [
             'DTSTART;VALUE=DATE:20301224',
@@ -116,8 +115,8 @@ class EventFactoryTest extends TestCase
 
     public function testMultiDayEvent()
     {
-        $firstDay = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'));
-        $lastDay = new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-26'));
+        $firstDay = new Date(\DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24'));
+        $lastDay = new Date(\DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-26'));
         $occurrence = new MultiDay($firstDay, $lastDay);
         $event = (new Event())->setOccurrence($occurrence);
 
@@ -129,8 +128,8 @@ class EventFactoryTest extends TestCase
 
     public function testTimespanEvent()
     {
-        $begin = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'), false);
-        $end = new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'), false);
+        $begin = new DateTime(\DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 12:15'), false);
+        $end = new DateTime(\DateTimeImmutable::createFromFormat('Y-m-d H:i', '2030-12-24 13:45'), false);
         $occurrence = new TimeSpan($begin, $end);
         $event = (new Event())->setOccurrence($occurrence);
 
@@ -547,6 +546,16 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'STATUS:TENTATIVE',
+        ]);
+    }
+
+    public function testMethod()
+    {
+        $event = (new Event())
+            ->setMethod(MethodType::PUBLISH());
+
+        self::assertEventRendersCorrect($event, [
+            'METHOD:PUBLISH',
         ]);
     }
 

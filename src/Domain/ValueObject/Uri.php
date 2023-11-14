@@ -11,8 +11,6 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-use InvalidArgumentException;
-
 final class Uri
 {
     private string $uri;
@@ -20,7 +18,7 @@ final class Uri
     public function __construct(string $uri)
     {
         if (!filter_var($uri, FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException("$uri is no valid URI");
+            throw new \InvalidArgumentException("$uri is no valid URI");
         }
 
         $this->uri = $uri;

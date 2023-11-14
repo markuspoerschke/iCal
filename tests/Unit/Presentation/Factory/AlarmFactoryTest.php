@@ -11,7 +11,6 @@
 
 namespace Eluceo\iCal\Test\Unit\Presentation\Factory;
 
-use DateInterval;
 use DateTimeImmutable as PhpDateTimeImmutable;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Alarm\AbsoluteDateTimeTrigger;
@@ -97,7 +96,7 @@ class AlarmFactoryTest extends TestCase
     {
         $alarm = new Alarm(
             new AudioAction(),
-            new Alarm\RelativeTrigger(new DateInterval('P1D'))
+            new Alarm\RelativeTrigger(new \DateInterval('P1D'))
         );
 
         $expected = implode(ContentLine::LINE_SEPARATOR, [
@@ -120,7 +119,7 @@ class AlarmFactoryTest extends TestCase
         $alarm = (new Alarm(
             new AudioAction(),
             new AbsoluteDateTimeTrigger(new DateTime(new PhpDateTimeImmutable('2020-09-30 00:00:00'), false))
-        ))->withRepeat(3, new DateInterval('P1D'));
+        ))->withRepeat(3, new \DateInterval('P1D'));
 
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VALARM',

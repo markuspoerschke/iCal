@@ -11,8 +11,6 @@
 
 namespace Example;
 
-use DateInterval;
-use DateTimeImmutable;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
@@ -43,14 +41,14 @@ $event
     )
     ->setOccurrence(
         new TimeSpan(
-            new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2030-12-24 13:30:00'), true),
-            new DateTime(DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2030-12-24 14:30:00'), true)
+            new DateTime(\DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2030-12-24 13:30:00'), true),
+            new DateTime(\DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2030-12-24 14:30:00'), true)
         )
     )
     ->addAlarm(
         new Alarm(
             new Alarm\DisplayAction('Reminder: the meeting starts in 15 minutes!'),
-            (new Alarm\RelativeTrigger(DateInterval::createFromDateString('-15 minutes')))->withRelationToEnd()
+            (new Alarm\RelativeTrigger(\DateInterval::createFromDateString('-15 minutes')))->withRelationToEnd()
         )
     )
     ->addAttachment(

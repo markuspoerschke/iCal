@@ -11,7 +11,6 @@
 
 namespace Eluceo\iCal\Domain\ValueObject;
 
-use DateInterval;
 use Eluceo\iCal\Domain\ValueObject\Alarm\Action;
 use Eluceo\iCal\Domain\ValueObject\Alarm\Trigger;
 
@@ -21,7 +20,7 @@ class Alarm
     private Trigger $trigger;
 
     private int $repeatCount = 0;
-    private ?DateInterval $repeatInterval = null;
+    private ?\DateInterval $repeatInterval = null;
 
     public function __construct(Action $action, Trigger $trigger)
     {
@@ -44,7 +43,7 @@ class Alarm
         return $this->repeatCount > 0;
     }
 
-    public function withRepeat(int $repeatCount, DateInterval $repeatInterval): self
+    public function withRepeat(int $repeatCount, \DateInterval $repeatInterval): self
     {
         $this->repeatCount = $repeatCount;
         $this->repeatInterval = $repeatInterval;
@@ -65,7 +64,7 @@ class Alarm
         return $this->repeatCount;
     }
 
-    public function getRepeatInterval(): DateInterval
+    public function getRepeatInterval(): \DateInterval
     {
         assert($this->repeatInterval !== null);
 

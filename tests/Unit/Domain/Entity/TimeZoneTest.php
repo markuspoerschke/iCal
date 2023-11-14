@@ -11,7 +11,6 @@
 
 namespace Domain\Entity;
 
-use DateTimeImmutable;
 use DateTimeZone as PhpDateTimeZone;
 use Eluceo\iCal\Domain\Entity\TimeZone;
 use Eluceo\iCal\Domain\Enum\TimeZoneTransitionType;
@@ -25,8 +24,8 @@ class TimeZoneTest extends TestCase
         $phpDateTimeZone = new PhpDateTimeZone('Europe/Berlin');
         $actual = TimeZone::createFromPhpDateTimeZone(
             $phpDateTimeZone,
-            new DateTimeImmutable('2020-01-01 00:00:00', $phpDateTimeZone),
-            new DateTimeImmutable('2021-01-01 00:00:00', $phpDateTimeZone)
+            new \DateTimeImmutable('2020-01-01 00:00:00', $phpDateTimeZone),
+            new \DateTimeImmutable('2021-01-01 00:00:00', $phpDateTimeZone)
         );
 
         $expected = new TimeZone('Europe/Berlin');
@@ -34,7 +33,7 @@ class TimeZoneTest extends TestCase
             ->addTransition(
                 new TimeZoneTransition(
                     TimeZoneTransitionType::STANDARD(),
-                    new DateTimeImmutable('2020-01-01 00:00:00', $phpDateTimeZone),
+                    new \DateTimeImmutable('2020-01-01 00:00:00', $phpDateTimeZone),
                     3600,
                     3600,
                     'CET'
@@ -43,7 +42,7 @@ class TimeZoneTest extends TestCase
             ->addTransition(
                 new TimeZoneTransition(
                     TimeZoneTransitionType::DAYLIGHT(),
-                    new DateTimeImmutable('2020-03-29 02:00:00', $phpDateTimeZone),
+                    new \DateTimeImmutable('2020-03-29 02:00:00', $phpDateTimeZone),
                     3600,
                     7200,
                     'CEST'
@@ -52,7 +51,7 @@ class TimeZoneTest extends TestCase
             ->addTransition(
                 new TimeZoneTransition(
                     TimeZoneTransitionType::STANDARD(),
-                    new DateTimeImmutable('2020-10-25 02:00:00', $phpDateTimeZone),
+                    new \DateTimeImmutable('2020-10-25 02:00:00', $phpDateTimeZone),
                     7200,
                     3600,
                     'CET'

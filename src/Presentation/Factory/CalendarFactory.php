@@ -16,14 +16,13 @@ use Eluceo\iCal\Presentation\Component;
 use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Value\DurationValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
-use Generator;
 
 class CalendarFactory
 {
     private EventFactory $eventFactory;
     private TimeZoneFactory $timeZoneFactory;
 
-    public function __construct(?EventFactory $eventFactory = null, ?TimeZoneFactory $timeZoneFactory = null)
+    public function __construct(EventFactory $eventFactory = null, TimeZoneFactory $timeZoneFactory = null)
     {
         $this->eventFactory = $eventFactory ?? new EventFactory();
         $this->timeZoneFactory = $timeZoneFactory ?? new TimeZoneFactory();
@@ -47,9 +46,9 @@ class CalendarFactory
     }
 
     /**
-     * @return Generator<Property>
+     * @return \Generator<Property>
      */
-    protected function getProperties(Calendar $calendar): Generator
+    protected function getProperties(Calendar $calendar): \Generator
     {
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.3 */
         yield new Property('PRODID', new TextValue($calendar->getProductIdentifier()));

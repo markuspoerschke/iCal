@@ -11,9 +11,6 @@
 
 namespace Eluceo\iCal\Test\Unit\Presentation\Factory;
 
-use DateInterval;
-use DateTimeImmutable;
-use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -42,10 +39,10 @@ class CalendarFactoryTest extends TestCase
     public function testRenderWithEvents()
     {
         $currentTime = new Timestamp(
-            DateTimeImmutable::createFromFormat(
+            \DateTimeImmutable::createFromFormat(
                 'Y-m-d H:i:s',
                 '2019-11-10 11:22:33',
-                new DateTimeZone('UTC')
+                new \DateTimeZone('UTC')
             )
         );
         $calendar = new Calendar(
@@ -82,7 +79,7 @@ class CalendarFactoryTest extends TestCase
     public function testRenderWithPublishedTTL(): void
     {
         $calendar = new Calendar();
-        $calendar->setPublishedTTL(new DateInterval('P1D'));
+        $calendar->setPublishedTTL(new \DateInterval('P1D'));
         $expected = implode(ContentLine::LINE_SEPARATOR, [
             'BEGIN:VCALENDAR',
             'PRODID:' . $calendar->getProductIdentifier(),
