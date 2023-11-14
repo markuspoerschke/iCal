@@ -5,10 +5,10 @@ services:
     ical:
       build:
         context: ./
-        dockerfile: docker/Dockerfile
+        dockerfile: Dockerfile
         args:
           IMAGE: php:8.2-apache
       volumes:
-        - ./:/var/www/html
+        - ../:/var/www/html
       ports:
         - '80:80'
