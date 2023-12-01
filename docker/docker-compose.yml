@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+
+    ical:
+      build:
+        context: ./
+        dockerfile: Dockerfile
+        args:
+          IMAGE: php:8.2-apache
+      volumes:
+        - ../:/var/www/html
+      ports:
+        - '80:80'

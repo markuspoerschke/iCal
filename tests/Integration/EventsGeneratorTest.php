@@ -11,9 +11,6 @@
 
 namespace Eluceo\iCal\Test\Integration;
 
-use DateInterval;
-use DateTimeImmutable;
-use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\ValueObject\Date;
@@ -21,17 +18,16 @@ use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
 use Eluceo\iCal\Presentation\Factory\CalendarFactory;
-use Generator;
 use PHPUnit\Framework\TestCase;
 
 class EventsGeneratorTest extends TestCase
 {
     public function testEventsGeneratorCreatesIcsContent(): void
     {
-        $generator = function (): Generator {
-            $day = new DateTimeImmutable('2020-01-01 15:00:00', new DateTimeZone('UTC'));
+        $generator = function (): \Generator {
+            $day = new \DateTimeImmutable('2020-01-01 15:00:00', new \DateTimeZone('UTC'));
             $timestamp = new Timestamp($day);
-            $dayInterval = new DateInterval('P1D');
+            $dayInterval = new \DateInterval('P1D');
             for ($i = 0; $i < 3; ++$i) {
                 yield (new Event(new UniqueIdentifier('event-' . $i)))
                     ->touch($timestamp)
