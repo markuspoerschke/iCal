@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Unit\Domain\ValueObject;
 
 use Eluceo\iCal\Domain\ValueObject\EmailAddress;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class EmailAddressTest extends TestCase
@@ -25,7 +26,7 @@ class EmailAddressTest extends TestCase
 
     public function testInvalidEmail(): void
     {
-        self::expectException(\InvalidArgumentException::class);
+        self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage('example@example@example.com is no valid e-mail address');
 
         new EmailAddress('example@example@example.com');
