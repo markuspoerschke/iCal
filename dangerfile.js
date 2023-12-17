@@ -3,7 +3,7 @@ import { message, danger, warn } from "danger";
 // Add a CHANGELOG entry for app changes
 const hasChangelog = danger.git.modified_files.includes("CHANGELOG.md");
 const isTrivial = (danger.github.pr.body + danger.github.pr.title).includes(
-    "#trivial"
+    "#trivial",
 );
 if (!hasChangelog && !isTrivial) {
     warn("Please add a changelog entry for your changes.");
@@ -28,6 +28,6 @@ const hasTestChanges =
         .length > 0;
 if (hasSrcChanges && !hasTestChanges) {
     warn(
-        "There are code changes, but no tests changed or added. That's okay as long as you're refactoring existing code"
+        "There are code changes, but no tests changed or added. That's okay as long as you're refactoring existing code",
     );
 }
