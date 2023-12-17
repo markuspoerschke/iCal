@@ -13,7 +13,7 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga:3.0.0
+        uses: docker://oskarstark/php-cs-fixer-ga:3.26.0
 
       - name: Run prettier
         uses: actionsx/prettier@v3

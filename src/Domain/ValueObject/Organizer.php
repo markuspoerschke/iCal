@@ -30,9 +30,9 @@ final class Organizer
 
     public function __construct(
         EmailAddress $emailAddress,
-        ?string $displayName = null,
-        ?Uri $directoryEntry = null,
-        ?EmailAddress $sentBy = null
+        string $displayName = null,
+        Uri $directoryEntry = null,
+        EmailAddress $sentBy = null
     ) {
         $this->emailAddress = $emailAddress;
         $this->displayName = $displayName;

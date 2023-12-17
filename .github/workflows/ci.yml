@@ -35,12 +35,8 @@ jobs:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
 
-      - name: "Update Packages for PHP 8.0"
-        if: ${{ matrix.php-version == '8.0' }}
-        run: "composer up --prefer-lowest ocramius/package-versions symfony/*"
-
-      - name: "Update Packages for PHP 7.4"
-        if: ${{ matrix.php-version == '7.4' }}
+      - name: "Install lowest available packages for PHP 7.4 and 8.0"
+        if: ${{ matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1' }}
         run: "composer up --prefer-lowest"
 
       - name: "Run tests"
