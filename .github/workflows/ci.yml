@@ -48,4 +48,5 @@ jobs:
         run: "make -j -O test"
 
       - name: "Send code coverage"
+        if: ${{ matrix.php-version == '8.2' }}
         uses: codecov/codecov-action@v3.1.4
