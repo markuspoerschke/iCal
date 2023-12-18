@@ -39,7 +39,12 @@ jobs:
         if: ${{ matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1' }}
         run: "composer up --prefer-lowest"
 
+      - name: "Run tests (old PHP versions)"
+        if: ${{ matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1' }}
+        run: "make test-phpunit test-psalm php-examples"
+
       - name: "Run tests"
+        if: ${{ matrix.php-version == '8.2' }}
         run: "make -j -O test"
 
       - name: "Send code coverage"

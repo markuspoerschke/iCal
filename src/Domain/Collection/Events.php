@@ -14,7 +14,6 @@ namespace Eluceo\iCal\Domain\Collection;
 use Eluceo\iCal\Domain\Entity\Event;
 use Iterator;
 use IteratorAggregate;
-use ReturnTypeWillChange;
 
 /**
  * @implements IteratorAggregate<Event>
@@ -24,8 +23,7 @@ abstract class Events implements IteratorAggregate
     /**
      * @return Iterator<Event>
      */
-    #[ReturnTypeWillChange]
-    abstract public function getIterator();
+    abstract public function getIterator(): Iterator;
 
     abstract public function addEvent(Event $event): void;
 }

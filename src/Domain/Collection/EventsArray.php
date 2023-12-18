@@ -13,7 +13,7 @@ namespace Eluceo\iCal\Domain\Collection;
 
 use ArrayIterator;
 use Eluceo\iCal\Domain\Entity\Event;
-use ReturnTypeWillChange;
+use Iterator;
 
 final class EventsArray extends Events
 {
@@ -30,8 +30,7 @@ final class EventsArray extends Events
         array_walk($events, [$this, 'addEvent']);
     }
 
-    #[ReturnTypeWillChange]
-    public function getIterator()
+    public function getIterator(): Iterator
     {
         return new ArrayIterator($this->events);
     }

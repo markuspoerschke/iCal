@@ -14,7 +14,6 @@ namespace Eluceo\iCal\Presentation;
 use Eluceo\iCal\Presentation\Component\Property;
 use Generator;
 use IteratorAggregate;
-use ReturnTypeWillChange;
 use Traversable;
 
 /**
@@ -64,7 +63,6 @@ class Component implements IteratorAggregate
     /**
      * @return Traversable<ContentLine>
      */
-    #[ReturnTypeWillChange]
     public function getIterator(): Traversable
     {
         return $this->getContentLines();
