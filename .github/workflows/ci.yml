@@ -41,7 +41,7 @@ jobs:
 
       - name: "Run tests (old PHP versions)"
         if: ${{ matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1' }}
-        run: "make test-phpunit test-psalm php-examples"
+        run: "PHPUNIT_FLAGS=--no-coverage make test-phpunit test-psalm test-examples"
 
       - name: "Run tests"
         if: ${{ matrix.php-version == '8.2' }}
