@@ -22,7 +22,7 @@ class Attachment
     /**
      * @param BinaryContent|Uri $content
      */
-    public function __construct(object $content, ?string $mimeType = null)
+    public function __construct(object $content, string $mimeType = null)
     {
         $this->mimeType = $mimeType;
 

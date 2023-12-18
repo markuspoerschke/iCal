@@ -23,7 +23,7 @@ class CalendarFactory
     private EventFactory $eventFactory;
     private TimeZoneFactory $timeZoneFactory;
 
-    public function __construct(?EventFactory $eventFactory = null, ?TimeZoneFactory $timeZoneFactory = null)
+    public function __construct(EventFactory $eventFactory = null, TimeZoneFactory $timeZoneFactory = null)
     {
         $this->eventFactory = $eventFactory ?? new EventFactory();
         $this->timeZoneFactory = $timeZoneFactory ?? new TimeZoneFactory();

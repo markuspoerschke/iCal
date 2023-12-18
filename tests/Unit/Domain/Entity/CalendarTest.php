@@ -27,6 +27,7 @@ class CalendarTest extends TestCase
 
     /**
      * @dataProvider provideGetSetPublishedTTLTestData
+     *
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::getPublishedTTL
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::setPublishedTTL
      *

@@ -34,8 +34,8 @@ class TimeZone
 
     public static function createFromPhpDateTimeZone(
         PhpDateTimeZone $phpDateTimeZone,
-        ?DateTimeInterface $beginDateTime = null,
-        ?DateTimeInterface $endDateTime = null
+        DateTimeInterface $beginDateTime = null,
+        DateTimeInterface $endDateTime = null
     ): self {
         if ($beginDateTime === null || $endDateTime === null) {
             trigger_deprecation('eluceo/ical', '2.1.0', 'Relying on the default values for begin and end date when calling TimeZone::createFromPhpDateTimeZone() is deprecated. Please provide a begin and an end date.');

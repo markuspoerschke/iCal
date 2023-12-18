@@ -33,7 +33,7 @@ test-psalm: vendor
 
 .PHONY: test-phpunit
 test-phpunit: vendor
-	phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml ${PHPUNIT_FLAGS}
+	phpunit ${PHPUNIT_FLAGS}
 
 .PHONY: test-examples
 EXAMPLE_FILES := $(wildcard examples/*.php)
