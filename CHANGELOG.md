@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.0] - 2023-12-19
+
 ### Added
 
 -   Support PHP 8.3 [#576](https://github.com/markuspoerschke/iCal/pull/576)
@@ -280,7 +282,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.12.1...HEAD
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.13.0...HEAD
+[2.13.0]: https://github.com/markuspoerschke/iCal/compare/2.12.1...2.13.0
 [2.12.1]: https://github.com/markuspoerschke/iCal/compare/2.12.0...2.12.1
 [2.12.0]: https://github.com/markuspoerschke/iCal/compare/2.11.0...2.12.0
 [2.11.0]: https://github.com/markuspoerschke/iCal/compare/2.10.0...2.11.0
