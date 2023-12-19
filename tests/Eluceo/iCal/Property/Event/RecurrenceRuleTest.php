@@ -101,7 +101,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYMONTH=1', $rule->getEscapedValue());
     }
 
-    public function invalidMonthProvider()
+    public static function invalidMonthProvider()
     {
         return [
             ['invalid_month'],
@@ -132,7 +132,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYWEEKNO=1', $rule->getEscapedValue());
     }
 
-    public function invalidByWeekNoProvider()
+    public static function invalidByWeekNoProvider()
     {
         return [
             [0],
@@ -162,7 +162,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYYEARDAY=1', $rule->getEscapedValue());
     }
 
-    public function invalidByYearDayProvider()
+    public static function invalidByYearDayProvider()
     {
         return [
             [0],
@@ -192,7 +192,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYMONTHDAY=1', $rule->getEscapedValue());
     }
 
-    public function invalidByMonthDayProvider()
+    public static function invalidByMonthDayProvider()
     {
         return [
             [0],
@@ -222,7 +222,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYHOUR=1', $rule->getEscapedValue());
     }
 
-    public function invalidByHourProvider()
+    public static function invalidByHourProvider()
     {
         return [
             [0.0001],
@@ -251,7 +251,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYMINUTE=1', $rule->getEscapedValue());
     }
 
-    public function invalidByMinuteProvider()
+    public static function invalidByMinuteProvider()
     {
         return [
             [0.0001],
@@ -280,7 +280,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYSECOND=1', $rule->getEscapedValue());
     }
 
-    public function invalidBySecondProvider()
+    public static function invalidBySecondProvider()
     {
         return [
             [0.0001],
