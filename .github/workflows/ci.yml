@@ -16,6 +16,7 @@ jobs:
           - "8.0"
           - "8.1"
           - "8.2"
+          - "8.3"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v4"
@@ -44,9 +45,9 @@ jobs:
         run: "PHPUNIT_FLAGS=--no-coverage make test-phpunit test-psalm test-examples"
 
       - name: "Run tests"
-        if: ${{ matrix.php-version == '8.2' }}
+        if: ${{ matrix.php-version == '8.2' || matrix.php-version == '8.3' }}
         run: "make -j -O test"
 
       - name: "Send code coverage"
-        if: ${{ matrix.php-version == '8.2' }}
+        if: ${{ matrix.php-version == '8.3' }}
         uses: codecov/codecov-action@v3.1.4
