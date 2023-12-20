@@ -448,8 +448,10 @@ class RecurrenceRule implements ValueInterface
      */
     public function setByMonthDay($day)
     {
-        if (!is_integer($day) || $day > 31 || $day < -31 || $day === 0) {
-            throw new InvalidArgumentException('Invalid value for BYMONTHDAY');
+        foreach (explode(',', $day) as $value) {
+            if (!filter_var($value, FILTER_VALIDATE_INT, ['options' => ['min_range' => -31, 'max_range' => 31]]) || (int) $value === 0) {
+                throw new InvalidArgumentException('Invalid value for BYMONTHDAY');
+            }
         }
 
         $this->byMonthDay = $day;
