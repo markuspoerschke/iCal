@@ -62,5 +62,16 @@ class CalendarFactory
             /* @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx */
             yield new Property('X-PUBLISHED-TTL', new DurationValue($publishedTTL));
         }
+        if ($calendar->getCalendarName() !== null) {
+            yield new Property('NAME', new TextValue($calendar->getCalendarName()));
+            yield new Property('X-WR-CALNAME', new TextValue($calendar->getCalendarName()));
+        }
+        if ($calendar->getCalendarDescription() !== null) {
+            yield new Property('DESCRIPTION', new TextValue($calendar->getCalendarDescription()));
+            yield new Property('X-WR-CALDESC', new TextValue($calendar->getCalendarDescription()));
+        }
+        if ($calendar->getRefreshInterval() !== null) {
+            yield new Property("REFRESH-INTERVAL", new DurationValue($calendar->getRefreshInterval()));
+        }
     }
 }

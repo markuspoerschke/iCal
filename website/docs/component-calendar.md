@@ -62,3 +62,25 @@ $calendar
     ->addTimeZone(TimeZone::createFromPhpDateTimeZone(new PhpDateTimeZone('Europe/London')))
 ;
 ```
+
+## Other Calendar properties
+
+There are other properties on the calendar that you can set:
+
+```php
+
+
+use Eluceo\iCal\Domain\Entity\Calendar;
+use Eluceo\iCal\Domain\Entity\TimeZone;
+use DateTimeZone as PhpDateTimeZone;
+
+$calendar = new Calendar();
+$calendar
+    ->setProductIdentifier('-//eluceo/ical//2.0/EN')
+    ->setName('Our test calendar')
+    ->setDescription('This is a test calendar you can import into your calendar app.')
+    ->setRefreshInterval(DateInterval::createFromDateString('1 day'));
+```
+
+Please note that since they have been introduced rather recently ([RFC7986](https://datatracker.ietf.org/doc/html/rfc7986#page-9)), 
+they might not be supported in your calendar app.

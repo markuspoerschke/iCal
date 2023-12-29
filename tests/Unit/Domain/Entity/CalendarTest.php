@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
-    public function provideGetSetPublishedTTLTestData(): array
+    public function provideDateIntervalTestData(): array
     {
         return [
             [new DateInterval('P1W')],
@@ -26,7 +26,7 @@ class CalendarTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetSetPublishedTTLTestData
+     * @dataProvider provideDateIntervalTestData
      *
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::getPublishedTTL
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::setPublishedTTL
@@ -38,5 +38,20 @@ class CalendarTest extends TestCase
         $calendar = new Calendar();
         $calendar->setPublishedTTL($ttl);
         self::assertSame($calendar->getPublishedTTL(), $ttl);
+    }
+
+    /**
+     * @dataProvider provideDateIntervalTestData
+     *
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::getRefreshInterval
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::setRefreshInterval
+     *
+     * @param ?DateInterval $ttl
+     */
+    public function testGetSetRefreshInterval($ttl): void
+    {
+        $calendar = new Calendar();
+        $calendar->setRefreshInterval($ttl);
+        self::assertSame($calendar->getRefreshInterval(), $ttl);
     }
 }
