@@ -82,5 +82,5 @@ $calendar
     ->setRefreshInterval(DateInterval::createFromDateString('1 day'));
 ```
 
-Please note that since they have been introduced rather recently ([RFC7986](https://datatracker.ietf.org/doc/html/rfc7986#page-9)), 
+Please note that since they have been introduced rather recently ([RFC7986](https://datatracker.ietf.org/doc/html/rfc7986#page-9)),
 they might not be supported in your calendar app.
