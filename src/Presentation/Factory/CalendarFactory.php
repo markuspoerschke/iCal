@@ -71,7 +71,7 @@ class CalendarFactory
             yield new Property('X-WR-CALDESC', new TextValue($calendar->getCalendarDescription()));
         }
         if ($calendar->getRefreshInterval() !== null) {
-            yield new Property("REFRESH-INTERVAL", new DurationValue($calendar->getRefreshInterval()));
+            yield new Property('REFRESH-INTERVAL', new DurationValue($calendar->getRefreshInterval()));
         }
     }
 }
