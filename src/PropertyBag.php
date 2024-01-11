@@ -27,6 +27,7 @@ class PropertyBag implements \IteratorAggregate
      *
      * @return $this
      */
+    #[\ReturnTypeWillChange]
     public function set($name, $value, $params = [])
     {
         $this->add(new Property($name, $value, $params));
@@ -37,6 +38,7 @@ class PropertyBag implements \IteratorAggregate
     /**
      * @return Property|null
      */
+    #[\ReturnTypeWillChange]
     public function get(string $name)
     {
         if (isset($this->elements[$name])) {
@@ -53,6 +55,7 @@ class PropertyBag implements \IteratorAggregate
      *
      * @throws \Exception
      */
+    #[\ReturnTypeWillChange]
     public function add(Property $property)
     {
         $name = $property->getName();
@@ -66,6 +69,7 @@ class PropertyBag implements \IteratorAggregate
         return $this;
     }
 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayObject($this->elements);
