@@ -46,6 +46,6 @@ class DateUtilTest extends TestCase
 
     public function testGetDefaultParamsOnUseTimezone()
     {
-        $this->assertSame(['TZID' => 'Asia/Taipei'], DateUtil::getDefaultParams(new \DateTime(null, new \DateTimeZone('Asia/Taipei')), false, true));
+        $this->assertSame(['TZID' => 'Asia/Taipei'], DateUtil::getDefaultParams(new \DateTime('now', new \DateTimeZone('Asia/Taipei')), false, true));
     }
 }

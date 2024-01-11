@@ -245,9 +245,13 @@ class RecurrenceRule implements ValueInterface
      */
     public function setFreq($freq)
     {
-        if (@constant('static::FREQ_' . $freq) !== null) {
-            $this->freq = $freq;
-        } else {
+        try {
+            if (@constant('static::FREQ_' . $freq) !== null) {
+                $this->freq = $freq;
+            } else {
+                throw new \InvalidArgumentException("The Frequency {$freq} is not supported.");
+            }
+        } catch (\Error $error) {
             throw new \InvalidArgumentException("The Frequency {$freq} is not supported.");
         }
 

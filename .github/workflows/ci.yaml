@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "0.x"
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        php-version:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+
+      - name: "Install PHP with extensions"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: "Determine composer cache directory"
+        id: "determine-composer-cache-directory"
+        run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v3.0.3"
+        with:
+          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
+          key: "php-${{ matrix.php-version }}-composer-cache"
+
+      - name: "Composer install"
+        run: "composer install --ignore-platform-reqs"
+
+      - name: "Run tests"
+        run: "./vendor/bin/phpunit"

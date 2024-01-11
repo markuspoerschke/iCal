@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit colors="true"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         bootstrap="./vendor/autoload.php">
-    <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
-    </logging>
+         bootstrap="./vendor/autoload.php"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <report>
+            <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+        </report>
+    </coverage>
+    <logging/>
     <testsuites>
         <testsuite name="eluceo iCal Test Suite">
             <directory suffix="Test.php">./tests/Eluceo/iCal/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
 </phpunit>

@@ -4,7 +4,7 @@ namespace Eluceo\iCal\Property;
 
 use PHPUnit\Framework\TestCase;
 
-class RawStringValuetTest extends TestCase
+class RawStringValueTest extends TestCase
 {
     public function testGetEscapedValue()
     {

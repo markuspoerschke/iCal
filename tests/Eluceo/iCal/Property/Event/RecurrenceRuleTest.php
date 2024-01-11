@@ -60,12 +60,11 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('1997-12-24', $result->format('Y-m-d'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The Frequency invalid_freq_string is not supported.
-     */
     public function testSetFreqOnInvalidFreq()
     {
+        $this->expectExceptionMessage("The Frequency invalid_freq_string is not supported.");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setFreq('invalid_freq_string');
     }
@@ -102,7 +101,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYMONTH=1', $rule->getEscapedValue());
     }
 
-    public function invalidMonthProvider()
+    public static function invalidMonthProvider()
     {
         return [
             ['invalid_month'],
@@ -115,11 +114,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidMonthProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYMONTH
      */
     public function testSetByMonthOnInvalidMonth($month)
     {
+        $this->expectExceptionMessage("Invalid value for BYMONTH");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setByMonth($month);
     }
@@ -132,7 +132,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYWEEKNO=1', $rule->getEscapedValue());
     }
 
-    public function invalidByWeekNoProvider()
+    public static function invalidByWeekNoProvider()
     {
         return [
             [0],
@@ -144,11 +144,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidByWeekNoProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYWEEKNO
      */
     public function testSetByWeekNoOnInvalidByWeekNo($byWeekNo)
     {
+        $this->expectExceptionMessage("Invalid value for BYWEEKNO");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setByWeekNo($byWeekNo);
     }
@@ -161,7 +162,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYYEARDAY=1', $rule->getEscapedValue());
     }
 
-    public function invalidByYearDayProvider()
+    public static function invalidByYearDayProvider()
     {
         return [
             [0],
@@ -173,11 +174,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidByYearDayProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYYEARDAY
      */
     public function testSetByYearDayOnInvalidByYeraDay($day)
     {
+        $this->expectExceptionMessage("Invalid value for BYYEARDAY");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setByYearDay($day);
     }
@@ -190,7 +192,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYMONTHDAY=1', $rule->getEscapedValue());
     }
 
-    public function invalidByMonthDayProvider()
+    public static function invalidByMonthDayProvider()
     {
         return [
             [0],
@@ -202,11 +204,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidByMonthDayProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYMONTHDAY
      */
     public function testSetByMonthDayOnInvalidByMonthDay($day)
     {
+        $this->expectExceptionMessage("Invalid value for BYMONTHDAY");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setByMonthDay($day);
     }
@@ -219,7 +222,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYHOUR=1', $rule->getEscapedValue());
     }
 
-    public function invalidByHourProvider()
+    public static function invalidByHourProvider()
     {
         return [
             [0.0001],
@@ -230,11 +233,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidByHourProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYHOUR
      */
     public function testSetByHourOnInvalidByHour($value)
     {
+        $this->expectExceptionMessage("Invalid value for BYHOUR");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setByHour($value);
     }
@@ -247,7 +251,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYMINUTE=1', $rule->getEscapedValue());
     }
 
-    public function invalidByMinuteProvider()
+    public static function invalidByMinuteProvider()
     {
         return [
             [0.0001],
@@ -258,11 +262,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidByMinuteProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYMINUTE
      */
     public function testSetByMinuteOnInvalidByMinute($value)
     {
+        $this->expectExceptionMessage("Invalid value for BYMINUTE");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setByMinute($value);
     }
@@ -275,7 +280,7 @@ class RecurrenceRuleTest extends TestCase
         $this->assertSame('FREQ=YEARLY;INTERVAL=1;BYSECOND=1', $rule->getEscapedValue());
     }
 
-    public function invalidBySecondProvider()
+    public static function invalidBySecondProvider()
     {
         return [
             [0.0001],
@@ -286,11 +291,12 @@ class RecurrenceRuleTest extends TestCase
 
     /**
      * @dataProvider invalidBySecondProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid value for BYSECOND
      */
     public function testSetBySecondOnInvalidBySecond($value)
     {
+        $this->expectExceptionMessage("Invalid value for BYSECOND");
+        $this->expectException(\InvalidArgumentException::class);
+
         $rule = new RecurrenceRule();
         $rule->setBySecond($value);
     }

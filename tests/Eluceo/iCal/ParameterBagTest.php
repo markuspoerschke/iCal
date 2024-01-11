@@ -20,7 +20,7 @@ class ParameterBagTest extends TestCase
         );
     }
 
-    public function escapedParamsDataProvider()
+    public static function escapedParamsDataProvider()
     {
         return [
             'No escaping necessary' => ['test string', 'TEST=test string'],
