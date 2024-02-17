@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\Transparency;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Category;
@@ -34,6 +35,7 @@ class Event
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
     private ?EventStatus $status = null;
+    private ?Transparency $transparency = null;
 
     /**
      * @var array<Attendee>
@@ -329,6 +331,13 @@ class Event
         return $this->status;
     }
 
+    public function getTransparency(): Transparency
+    {
+        assert($this->transparency !== null);
+
+        return $this->transparency;
+    }
+
     public function hasStatus(): bool
     {
         return $this->status !== null;
@@ -340,6 +349,19 @@ class Event
 
         return $this;
     }
+
+    public function hasTransparency(): bool
+    {
+        return $this->transparency !== null;
+    }
+
+    public function setTransparency(Transparency $transparency): self
+    {
+        $this->transparency = $transparency;
+
+        return $this;
+    }
+
 
     public function unsetStatus(): self
     {

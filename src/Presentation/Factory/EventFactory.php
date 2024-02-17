@@ -15,6 +15,7 @@ use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\Transparency;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
@@ -123,6 +124,10 @@ class EventFactory
 
         if ($event->hasStatus()) {
             yield new Property('STATUS', $this->getEventStatusTextValue($event->getStatus()));
+        }
+
+        if ($event->hasTransparency()) {
+            yield new Property('TRANSP', $this->getTransparencyTextValue($event->getTransparency()));
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -277,5 +282,18 @@ class EventFactory
         }
 
         throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', EventStatus::class));
+    }
+
+    public function getTransparencyTextValue(Transparency $transparency): TextValue
+    {
+        if ($transparency === Transparency::OPAQUE()) {
+            return new TextValue('OPAQUE');
+        }
+
+        if ($transparency === Transparency::TRANSPARENT()) {
+            return new TextValue('TRANSPARENT');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown transparency type value that is not yet implemented.', Transparency::class));
     }
 }
