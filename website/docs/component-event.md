@@ -203,6 +203,8 @@ $event->setOccurrence($occurrence);
 
 describes an event that takes place between 1pm and 2pm on 3rd of january 2020.
 
+For calendars which include [time zone data](./component-timezone), set the second argument of `DateTime` to `true` to include the time zone with the resulting timestamp.
+
 ### Location
 
 The location defines where an event takes place.
