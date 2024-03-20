@@ -32,6 +32,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\RawTextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -127,6 +128,13 @@ class EventFactory
 
         foreach ($event->getAttachments() as $attachment) {
             yield from $this->getAttachmentProperties($attachment);
+        }
+
+        if ($event->hasRecurrenceRule()) {
+            yield new Property('RRULE', new RawTextValue((string)$event->getRecurrenceRule()));
+            if ($event->getRecurrenceRule()->hasExclusions()) {
+                yield new Property('EXDATE', new RawTextValue((string)$event->getRecurrenceRule()->getExclusions()));
+            }
         }
     }
 
