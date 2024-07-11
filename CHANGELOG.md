@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.0] - 2024-07-11
+
 ### Fixed
 
--   Fix \n being escaped to \\n, leading to no newlines in actual text [#617](https://github.com/markuspoerschke/iCal/pull/617)
+-   Fix \\n being escaped to \\n, leading to no newlines in actual text [#617](https://github.com/markuspoerschke/iCal/pull/617)
 
 ## [2.13.0] - 2023-12-19
 
@@ -286,7 +288,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 -   **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 -   Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.13.0...HEAD
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.14.0...HEAD
+[2.14.0]: https://github.com/markuspoerschke/iCal/compare/2.13.0...2.14.0
 [2.13.0]: https://github.com/markuspoerschke/iCal/compare/2.12.1...2.13.0
 [2.12.1]: https://github.com/markuspoerschke/iCal/compare/2.12.0...2.12.1
 [2.12.0]: https://github.com/markuspoerschke/iCal/compare/2.11.0...2.12.0
