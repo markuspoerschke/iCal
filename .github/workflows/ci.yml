@@ -57,7 +57,7 @@ jobs:
 
       - name: "Run tests (PHP 8.4)"
         if: ${{ matrix.php-version == '8.4' }}
-        run: "make -j -O test-phpunit test-examples"
+        run: "make -j -O test"
 
       - name: "Send code coverage"
         if: ${{ matrix.php-version == '8.3' }}
