@@ -46,11 +46,11 @@ jobs:
         run: "composer install --ignore-platform-reqs"
 
       - name: "Run tests (old PHP versions)"
-        if: ${{ matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1' }}
+        if: ${{ matrix.php-version == '7.4' || matrix.php-version == '8.0' || matrix.php-version == '8.1' || matrix.php-version == '8.2' }}
         run: "PHPUNIT_FLAGS=--no-coverage make test-phpunit test-psalm test-examples"
 
       - name: "Run tests"
-        if: ${{ matrix.php-version == '8.2' || matrix.php-version == '8.3' }}
+        if: ${{ matrix.php-version == '8.3' }}
         run: "make -j -O test"
 
       - name: "Run tests (PHP 8.4)"

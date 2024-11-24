@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Support PHP 8.4 [#650](https://github.com/markuspoerschke/iCal/pull/650)
+
 ## [2.14.0] - 2024-07-11
 
 ### Fixed
 
--   Fix \\n being escaped to \\n, leading to no newlines in actual text [#617](https://github.com/markuspoerschke/iCal/pull/617)
+-   Fix `\n` being escaped to `\\n`, leading to no newlines in actual text [#617](https://github.com/markuspoerschke/iCal/pull/617)
 
 ## [2.13.0] - 2023-12-19
 
