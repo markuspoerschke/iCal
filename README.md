@@ -36,7 +36,8 @@ If you just start using this package, you should install version 2.
 
 | Version | PHP Version |
 | ------- | ----------- |
-| 2.\*    | 7.4 - 8.3   |
+| >= 2.15 | 8.3 - 8.4   |
+| \< 2.14 | 7.4 - 8.3   |
 | 0.16.\* | 7.0 - 8.2   |
 | 0.11.\* | 5.3.0 - 7.4 |
 
