@@ -17,13 +17,13 @@ use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
-    public function provideGetSetPublishedTTLTestData(): array
-    {
-        return [
-            [new DateInterval('P1W')],
-            [null],
-        ];
-    }
+  public static function provideGetSetPublishedTTLTestData(): array
+  {
+      return [
+          [new DateInterval('P1W')],
+          [null],
+      ];
+  }
 
     /**
      * @dataProvider provideGetSetPublishedTTLTestData
