@@ -53,7 +53,7 @@ final class Attendee
     private array $sentBy = [];
 
     public function __construct(
-        EmailAddress $emailAddress
+        EmailAddress $emailAddress,
     ) {
         $this->emailAddress = $emailAddress;
     }
