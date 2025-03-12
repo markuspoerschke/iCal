@@ -24,6 +24,10 @@ class Calendar
 
     private ?DateInterval $publishedTTL = null;
 
+    private ?string $calendarName = null;
+    private ?string $calendarDescription = null;
+    private ?DateInterval $refreshInterval = null;
+
     private Events $events;
 
     /**
@@ -106,6 +110,42 @@ class Calendar
     public function addTimeZone(TimeZone $timeZone): self
     {
         $this->timeZones[] = $timeZone;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->calendarName;
+    }
+
+    public function setName(?string $calendarName): self
+    {
+        $this->calendarName = $calendarName;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->calendarDescription;
+    }
+
+    public function setDescription(?string $calendarDescription): self
+    {
+        $this->calendarDescription = $calendarDescription;
+
+        return $this;
+    }
+
+    public function getRefreshInterval(): ?DateInterval
+    {
+        return $this->refreshInterval;
+    }
+
+    public function setRefreshInterval(?DateInterval $refreshInterval)
+    {
+        $this->refreshInterval = $refreshInterval;
 
         return $this;
     }
