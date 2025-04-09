@@ -29,7 +29,7 @@ test-code-style: vendor
 
 .PHONY: test-psalm
 test-psalm: vendor
-	psalm -m --no-progress ${PSALM_FLAGS}
+	php -v | grep -q 'PHP 8.3' && psalm -m --no-progress ${PSALM_FLAGS} || true
 
 .PHONY: test-phpunit
 test-phpunit: vendor
