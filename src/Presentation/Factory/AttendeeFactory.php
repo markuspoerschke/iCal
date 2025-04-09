@@ -35,7 +35,7 @@ class AttendeeFactory
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      *
-     * @return array<Property\Parameter>
+     * @return array<Parameter>
      */
     private function getParameters(Attendee $attendee): array
     {
