@@ -24,7 +24,7 @@ class BooleanValueTest extends TestCase
         self::assertSame($expected, (string) (new BooleanValue($inputValue)));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield 'Test bool true is same' => [
             true,

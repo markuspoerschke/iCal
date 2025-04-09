@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
-    public function provideGetSetPublishedTTLTestData(): array
+    public static function provideGetSetPublishedTTLTestData(): array
     {
         return [
             [new DateInterval('P1W')],

@@ -27,7 +27,7 @@ class PropertyTest extends TestCase
         self::assertSame($expected, (string) new Property($name, $value, $parameters));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield 'property with simple value' => [
             'LOREM',

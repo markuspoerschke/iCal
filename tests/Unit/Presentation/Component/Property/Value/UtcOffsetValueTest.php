@@ -26,7 +26,7 @@ class UtcOffsetValueTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function provideTestData(): array
+    public static function provideTestData(): array
     {
         return [
             [0, '+0000'],

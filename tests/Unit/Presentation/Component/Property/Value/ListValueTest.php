@@ -25,7 +25,7 @@ class ListValueTest extends TestCase
         self::assertSame($expected, (string) (new ListValue($values)));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield 'empty list value' => [
             [],

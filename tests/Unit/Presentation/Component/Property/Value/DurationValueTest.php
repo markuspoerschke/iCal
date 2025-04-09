@@ -26,7 +26,7 @@ class DurationValueTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield '30 days' => [
             new DateInterval('P30D'),

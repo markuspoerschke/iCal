@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" processIsolation="false"
          stopOnFailure="false" bootstrap="./vendor/autoload.php"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-    <coverage processUncoveredFiles="true">
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd">
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
+    </source>
+    <coverage>
         <report>
             <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
             <xml outputDirectory="build/coverage/coverage-xml"/>

@@ -24,7 +24,7 @@ class TextValueTest extends TestCase
         self::assertSame($expected, (string) (new TextValue($inputValue)));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield 'example from RFC 5545' => [
             "Project XYZ Final Review\nConference Room - 3B\nCome Prepared.",
