@@ -26,31 +26,31 @@ class DurationValueTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-  public static function provideTestData()
-  {
-      yield '30 days' => [
-          new DateInterval('P30D'),
-          'P30D',
-      ];
+    public static function provideTestData()
+    {
+        yield '30 days' => [
+            new DateInterval('P30D'),
+            'P30D',
+        ];
 
-      yield '-30 days' => [
-          DateInterval::createFromDateString('-30 days'),
-          '-P30D',
-      ];
+        yield '-30 days' => [
+            DateInterval::createFromDateString('-30 days'),
+            '-P30D',
+        ];
 
-      yield 'time based' => [
-          new DateInterval('PT10H20M30S'),
-          'PT10H20M30S',
-      ];
+        yield 'time based' => [
+            new DateInterval('PT10H20M30S'),
+            'PT10H20M30S',
+        ];
 
-      yield '-15 minutes' => [
-          DateInterval::createFromDateString('-15 minutes'),
-          '-PT15M',
-      ];
+        yield '-15 minutes' => [
+            DateInterval::createFromDateString('-15 minutes'),
+            '-PT15M',
+        ];
 
-      yield 'days and time' => [
-          new DateInterval('P1MT10H'),
-          'P31DT10H',
-      ];
-  }
+        yield 'days and time' => [
+            new DateInterval('P1MT10H'),
+            'P31DT10H',
+        ];
+    }
 }

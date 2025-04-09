@@ -27,11 +27,11 @@ class GeographicPositionTest extends TestCase
         new GeographicPosition($latitude, $longitude);
     }
 
-  public static function provideInvalidPositions(): Generator
-  {
-      yield [-91, 0];
-      yield [91, 0];
-      yield [0, -181];
-      yield [0, 181];
-  }
+    public static function provideInvalidPositions(): Generator
+    {
+        yield [-91, 0];
+        yield [91, 0];
+        yield [0, -181];
+        yield [0, 181];
+    }
 }

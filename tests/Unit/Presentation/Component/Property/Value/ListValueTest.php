@@ -25,31 +25,31 @@ class ListValueTest extends TestCase
         self::assertSame($expected, (string) (new ListValue($values)));
     }
 
-  public static function provideTestData()
-  {
-      yield 'empty list value' => [
-          [],
-          '',
-      ];
-      yield 'single value' => [
-          [new TextValue('Lorem')],
-          'Lorem',
-      ];
-      yield 'multiple values without escaping' => [
-          [
-              new TextValue('Lorem'),
-              new TextValue('Ipsum'),
-              new TextValue('Dolor'),
-          ],
-          'Lorem,Ipsum,Dolor',
-      ];
-      yield 'multiple values with escaping' => [
-          [
-              new TextValue('Lorem'),
-              new TextValue('Ips,um'),
-              new TextValue('semi;colon:'),
-          ],
-          'Lorem,Ips\\,um,semi\\;colon:',
-      ];
-  }
+    public static function provideTestData()
+    {
+        yield 'empty list value' => [
+            [],
+            '',
+        ];
+        yield 'single value' => [
+            [new TextValue('Lorem')],
+            'Lorem',
+        ];
+        yield 'multiple values without escaping' => [
+            [
+                new TextValue('Lorem'),
+                new TextValue('Ipsum'),
+                new TextValue('Dolor'),
+            ],
+            'Lorem,Ipsum,Dolor',
+        ];
+        yield 'multiple values with escaping' => [
+            [
+                new TextValue('Lorem'),
+                new TextValue('Ips,um'),
+                new TextValue('semi;colon:'),
+            ],
+            'Lorem,Ips\\,um,semi\\;colon:',
+        ];
+    }
 }

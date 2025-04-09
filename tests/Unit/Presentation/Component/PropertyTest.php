@@ -27,32 +27,32 @@ class PropertyTest extends TestCase
         self::assertSame($expected, (string) new Property($name, $value, $parameters));
     }
 
-  public static function provideTestData()
-  {
-      yield 'property with simple value' => [
-          'LOREM',
-          new TextValue('Ipsum'),
-          [],
-          'LOREM:Ipsum',
-      ];
+    public static function provideTestData()
+    {
+        yield 'property with simple value' => [
+            'LOREM',
+            new TextValue('Ipsum'),
+            [],
+            'LOREM:Ipsum',
+        ];
 
-      yield 'property with parameters' => [
-          'LOREM',
-          new TextValue('Ipsum'),
-          [
-              new Parameter('TEST', new TextValue('value')),
-          ],
-          'LOREM;TEST=value:Ipsum',
-      ];
+        yield 'property with parameters' => [
+            'LOREM',
+            new TextValue('Ipsum'),
+            [
+                new Parameter('TEST', new TextValue('value')),
+            ],
+            'LOREM;TEST=value:Ipsum',
+        ];
 
-      yield 'property with multiple parameters' => [
-          'LOREM',
-          new TextValue('Ipsum'),
-          [
-              new Parameter('TEST', new TextValue('value')),
-              new Parameter('TEST2', new TextValue('value2')),
-          ],
-          'LOREM;TEST=value;TEST2=value2:Ipsum',
-      ];
-  }
+        yield 'property with multiple parameters' => [
+            'LOREM',
+            new TextValue('Ipsum'),
+            [
+                new Parameter('TEST', new TextValue('value')),
+                new Parameter('TEST2', new TextValue('value2')),
+            ],
+            'LOREM;TEST=value;TEST2=value2:Ipsum',
+        ];
+    }
 }
