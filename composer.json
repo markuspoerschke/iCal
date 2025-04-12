@@ -33,7 +33,7 @@
         "friendsofphp/php-cs-fixer": "^3.75",
         "infection/infection": "^0.27 || ^0.29",
         "phpmd/phpmd": "^2.13",
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "^10.5 || ^11.0 || ^12.0",
         "vimeo/psalm": "^5.0 || ^6.0"
     },
     "conflict": {

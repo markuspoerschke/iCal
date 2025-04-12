@@ -13,13 +13,12 @@ namespace Eluceo\iCal\Test\Unit\Presentation\Component\Property\Value;
 
 use DateInterval;
 use Eluceo\iCal\Presentation\Component\Property\Value\DurationValue;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DurationValueTest extends TestCase
 {
-    /**
-     * @dataProvider provideTestData
-     */
+    #[DataProvider('provideTestData')]
     public function testDurationToString(DateInterval $duration, string $expected)
     {
         $actual = (new DurationValue($duration))->__toString();
@@ -28,29 +27,27 @@ class DurationValueTest extends TestCase
 
     public static function provideTestData()
     {
-        yield '30 days' => [
-            new DateInterval('P30D'),
-            'P30D',
-        ];
-
-        yield '-30 days' => [
-            DateInterval::createFromDateString('-30 days'),
-            '-P30D',
-        ];
-
-        yield 'time based' => [
-            new DateInterval('PT10H20M30S'),
-            'PT10H20M30S',
-        ];
-
-        yield '-15 minutes' => [
-            DateInterval::createFromDateString('-15 minutes'),
-            '-PT15M',
-        ];
-
-        yield 'days and time' => [
-            new DateInterval('P1MT10H'),
-            'P31DT10H',
+        return [
+            '30 days' => [
+                new DateInterval('P30D'),
+                'P30D',
+            ],
+            '-30 days' => [
+                DateInterval::createFromDateString('-30 days'),
+                '-P30D',
+            ],
+            'time based' => [
+                new DateInterval('PT10H20M30S'),
+                'PT10H20M30S',
+            ],
+            '-15 minutes' => [
+                DateInterval::createFromDateString('-15 minutes'),
+                '-PT15M',
+            ],
+            'days and time' => [
+                new DateInterval('P1MT10H'),
+                'P31DT10H',
+            ],
         ];
     }
 }

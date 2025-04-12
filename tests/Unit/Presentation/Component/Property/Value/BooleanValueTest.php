@@ -12,13 +12,12 @@
 namespace Eluceo\iCal\Test\Unit\Presentation\Component\Property\Value;
 
 use Eluceo\iCal\Presentation\Component\Property\Value\BooleanValue;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class BooleanValueTest extends TestCase
 {
-    /**
-     * @dataProvider provideTestData
-     */
+    #[DataProvider('provideTestData')]
     public function testStringValueEscaping(bool $inputValue, string $expected)
     {
         self::assertSame($expected, (string) (new BooleanValue($inputValue)));
@@ -26,14 +25,15 @@ class BooleanValueTest extends TestCase
 
     public static function provideTestData()
     {
-        yield 'Test bool true is same' => [
-            true,
-            'TRUE',
-        ];
-
-        yield 'Test bool false is same' => [
-            false,
-            'FALSE',
+        return [
+            'Test bool true is same' => [
+                true,
+                'TRUE',
+            ],
+            'Test bool false is same' => [
+                false,
+                'FALSE',
+            ],
         ];
     }
 }

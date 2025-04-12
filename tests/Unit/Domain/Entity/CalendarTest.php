@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Unit\Domain\Entity;
 
 use DateInterval;
 use Eluceo\iCal\Domain\Entity\Calendar;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
@@ -26,13 +27,12 @@ class CalendarTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGetSetPublishedTTLTestData
-     *
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::getPublishedTTL
      * @covers \Eluceo\iCal\Domain\Entity\Calendar::setPublishedTTL
      *
      * @param ?DateInterval $ttl
      */
+    #[DataProvider('provideGetSetPublishedTTLTestData')]
     public function testGetSetPublishedTTL($ttl): void
     {
         $calendar = new Calendar();

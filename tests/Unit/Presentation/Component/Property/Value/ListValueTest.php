@@ -13,13 +13,12 @@ namespace Eluceo\iCal\Test\Unit\Presentation\Component\Property\Value;
 
 use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ListValueTest extends TestCase
 {
-    /**
-     * @dataProvider provideTestData
-     */
+    #[DataProvider('provideTestData')]
     public function testStringValueEscaping(array $values, string $expected)
     {
         self::assertSame($expected, (string) (new ListValue($values)));
@@ -27,29 +26,31 @@ class ListValueTest extends TestCase
 
     public static function provideTestData()
     {
-        yield 'empty list value' => [
-            [],
-            '',
-        ];
-        yield 'single value' => [
-            [new TextValue('Lorem')],
-            'Lorem',
-        ];
-        yield 'multiple values without escaping' => [
-            [
-                new TextValue('Lorem'),
-                new TextValue('Ipsum'),
-                new TextValue('Dolor'),
+        return [
+            'empty list value' => [
+                [],
+                '',
             ],
-            'Lorem,Ipsum,Dolor',
-        ];
-        yield 'multiple values with escaping' => [
-            [
-                new TextValue('Lorem'),
-                new TextValue('Ips,um'),
-                new TextValue('semi;colon:'),
+            'single value' => [
+                [new TextValue('Lorem')],
+                'Lorem',
             ],
-            'Lorem,Ips\\,um,semi\\;colon:',
+            'multiple values without escaping' => [
+                [
+                    new TextValue('Lorem'),
+                    new TextValue('Ipsum'),
+                    new TextValue('Dolor'),
+                ],
+                'Lorem,Ipsum,Dolor',
+            ],
+            'multiple values with escaping' => [
+                [
+                    new TextValue('Lorem'),
+                    new TextValue('Ips,um'),
+                    new TextValue('semi;colon:'),
+                ],
+                'Lorem,Ips\\,um,semi\\;colon:',
+            ],
         ];
     }
 }

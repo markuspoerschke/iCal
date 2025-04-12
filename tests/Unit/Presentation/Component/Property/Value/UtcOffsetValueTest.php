@@ -12,13 +12,12 @@
 namespace Eluceo\iCal\Test\Unit\Presentation\Component\Property\Value;
 
 use Eluceo\iCal\Presentation\Component\Property\Value\UtcOffsetValue;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class UtcOffsetValueTest extends TestCase
 {
-    /**
-     * @dataProvider provideTestData
-     */
+    #[DataProvider('provideTestData')]
     public function testFromSeconds(int $seconds, string $expected): void
     {
         $actual = UtcOffsetValue::fromSeconds($seconds)->__toString();

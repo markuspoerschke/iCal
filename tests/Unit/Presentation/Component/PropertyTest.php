@@ -15,13 +15,12 @@ use Eluceo\iCal\Presentation\Component\Property;
 use Eluceo\iCal\Presentation\Component\Property\Parameter;
 use Eluceo\iCal\Presentation\Component\Property\Value;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class PropertyTest extends TestCase
 {
-    /**
-     * @dataProvider provideTestData
-     */
+    #[DataProvider('provideTestData')]
     public function testPropertyToString(string $name, Value $value, array $parameters, string $expected)
     {
         self::assertSame($expected, (string) new Property($name, $value, $parameters));
@@ -29,30 +28,30 @@ class PropertyTest extends TestCase
 
     public static function provideTestData()
     {
-        yield 'property with simple value' => [
-            'LOREM',
-            new TextValue('Ipsum'),
-            [],
-            'LOREM:Ipsum',
-        ];
-
-        yield 'property with parameters' => [
-            'LOREM',
-            new TextValue('Ipsum'),
-            [
-                new Parameter('TEST', new TextValue('value')),
+        return [
+            'property with simple value' => [
+                'LOREM',
+                new TextValue('Ipsum'),
+                [],
+                'LOREM:Ipsum',
             ],
-            'LOREM;TEST=value:Ipsum',
-        ];
-
-        yield 'property with multiple parameters' => [
-            'LOREM',
-            new TextValue('Ipsum'),
-            [
-                new Parameter('TEST', new TextValue('value')),
-                new Parameter('TEST2', new TextValue('value2')),
+            'property with parameters' => [
+                'LOREM',
+                new TextValue('Ipsum'),
+                [
+                    new Parameter('TEST', new TextValue('value')),
+                ],
+                'LOREM;TEST=value:Ipsum',
             ],
-            'LOREM;TEST=value;TEST2=value2:Ipsum',
+            'property with multiple parameters' => [
+                'LOREM',
+                new TextValue('Ipsum'),
+                [
+                    new Parameter('TEST', new TextValue('value')),
+                    new Parameter('TEST2', new TextValue('value2')),
+                ],
+                'LOREM;TEST=value;TEST2=value2:Ipsum',
+            ],
         ];
     }
 }
