@@ -24,7 +24,7 @@ use Eluceo\iCal\Domain\ValueObject\Uri;
 
 class Event
 {
-    private UniqueIdentifier $uniqueIdentifier;
+    private ?UniqueIdentifier $uniqueIdentifier = null;
     private Timestamp $touchedAt;
     private ?string $summary = null;
     private ?string $description = null;
