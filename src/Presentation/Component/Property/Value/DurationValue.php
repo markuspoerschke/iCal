@@ -27,16 +27,20 @@ final class DurationValue extends Value
     public function __toString(): string
     {
         $duration = $this->getNormalizedDateInterval();
+        $days = abs($duration->days);
+        $hours = abs($duration->h);
+        $minutes = abs($duration->i);
+        $seconds = abs($duration->s);
+        if ($days + $hours + $minutes + $seconds === 0) {
+            return 'PT0S';
+        }
+
         $durationAsString = $duration->invert === 1 ? '-P' : 'P';
 
-        $days = abs($duration->days);
         if ($days > 0) {
             $durationAsString .= $days . 'D';
         }
 
-        $hours = abs($duration->h);
-        $minutes = abs($duration->i);
-        $seconds = abs($duration->s);
         if ($hours > 0 || $minutes > 0 || $seconds > 0) {
             $durationAsString .= 'T';
 
