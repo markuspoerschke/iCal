@@ -17,7 +17,7 @@ final class Location
     private ?string $title;
     private ?GeographicPosition $geographicPosition = null;
 
-    public function __construct(string $location, string $title = null)
+    public function __construct(string $location, ?string $title = null)
     {
         $this->location = $location;
         $this->title = $title;

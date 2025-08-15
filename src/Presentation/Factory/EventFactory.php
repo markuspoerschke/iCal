@@ -47,9 +47,9 @@ class EventFactory
     private AttendeeFactory $attendeeFactory;
 
     public function __construct(
-        AlarmFactory $alarmFactory = null,
-        DateTimeFactory $dateTimeFactory = null,
-        AttendeeFactory $attendeeFactory = null,
+        ?AlarmFactory $alarmFactory = null,
+        ?DateTimeFactory $dateTimeFactory = null,
+        ?AttendeeFactory $attendeeFactory = null,
     ) {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
