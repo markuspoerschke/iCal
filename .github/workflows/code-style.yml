@@ -12,9 +12,6 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PAT }}
 
-      - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga:3.26.0
-
       - name: Run prettier
         uses: actionsx/prettier@v3
         with:
