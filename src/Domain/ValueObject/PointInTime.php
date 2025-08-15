@@ -23,7 +23,7 @@ abstract class PointInTime
 {
     private PhpDateTimeImmutable $dateTime;
 
-    public function __construct(?PhpDateTimeInterface $dateTime = null)
+    public function __construct(PhpDateTimeInterface $dateTime = null)
     {
         if ($dateTime === null) {
             $dateTime = new PhpDateTimeImmutable();

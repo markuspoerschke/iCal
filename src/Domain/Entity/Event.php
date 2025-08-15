@@ -55,7 +55,7 @@ class Event
      */
     private array $categories = [];
 
-    public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
+    public function __construct(UniqueIdentifier $uniqueIdentifier = null)
     {
         $this->uniqueIdentifier = $uniqueIdentifier ?? UniqueIdentifier::createRandom();
         $this->touchedAt = new Timestamp();
@@ -71,7 +71,7 @@ class Event
         return $this->touchedAt;
     }
 
-    public function touch(?Timestamp $dateTime = null): self
+    public function touch(Timestamp $dateTime = null): self
     {
         $this->touchedAt = $dateTime ?? new Timestamp();
 
