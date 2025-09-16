@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0] - 2024-11-24
+### Added
+- Support PHP 8.4
+
+## [0.18.0] - 2023-12-19
+### Added
+- Support PHP 8.3
+
 ## [0.17.0]
 ### Added
 - Support PHP 8.1
@@ -128,7 +136,9 @@ The former default value was set to one week. If you want the behavior from vers
 - **Breaking Change:** Changed signature of the ```Event::setOrganizer``` method. Now there is is only one parameter that must be an instance of ```Property\Organizer```.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.16.1...0.17.0
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.19.0...0.x
+[0.19.0]: https://github.com/markuspoerschke/iCal/compare/0.18.0...0.19.0
+[0.18.0]: https://github.com/markuspoerschke/iCal/compare/0.17.0...0.18.0
 [0.17.0]: https://github.com/markuspoerschke/iCal/compare/0.16.1...0.17.0
 [0.16.1]: https://github.com/markuspoerschke/iCal/compare/0.16.0...0.16.1
 [0.16.0]: https://github.com/markuspoerschke/iCal/compare/0.15.1...0.16.0

@@ -42,5 +42,11 @@
     },
     "scripts": {
         "test": "phpunit"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "ergebnis/composer-normalize": true
+        }
     }
 }
