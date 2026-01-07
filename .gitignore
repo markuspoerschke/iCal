@@ -2,3 +2,5 @@
 .phpunit.result.cache
 /composer.lock
 /vendor
+/php-cs-fixer.phar
+/.php-cs-fixer.cache
