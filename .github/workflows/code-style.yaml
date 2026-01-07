@@ -8,13 +8,13 @@ on:
 
 jobs:
   check-code-style:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: "actions/checkout@v6"
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PAT }}
 
       - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga:2.19.0
+        uses: docker://oskarstark/php-cs-fixer-ga:3.26.0
