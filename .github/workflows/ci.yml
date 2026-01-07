@@ -34,16 +34,7 @@ jobs:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
 
-      - name: "Install packages for PHP 8.4"
-        if: ${{ matrix.php-version == '8.4' }}
-        run: "composer install --ignore-platform-reqs"
-
-      - name: "Run tests (PHP 8.4)"
-        if: ${{ matrix.php-version == '8.4' }}
-        run: "make -j -O test-phpunit test-examples"
-
       - name: "Run tests"
-        if: ${{ matrix.php-version == '8.5' }}
         run: "make -j -O test"
 
       - name: "Send code coverage"
