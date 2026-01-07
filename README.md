@@ -3,8 +3,8 @@
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
 [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable)](https://packagist.org/packages/eluceo/ical)
 [![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master) 
-[![Code Coverage](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/markuspoerschke/iCal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/markuspoerschke/iCal/?branch=master)
 [![Build Status](https://travis-ci.org/markuspoerschke/iCal.svg?branch=master)](https://travis-ci.org/markuspoerschke/iCal)
 
 This package offers a abstraction layer for creating iCalendars. The output will
@@ -12,10 +12,10 @@ follow [RFC 5545](http://www.ietf.org/rfc/rfc5545.txt) as best as possible.
 
 The following components are supported at this time:
 
-* VCALENDAR
-* VEVENT
-* VALARM
-* VTIMEZONE
+- VCALENDAR
+- VEVENT
+- VALARM
+- VTIMEZONE
 
 ## Installation
 
@@ -24,6 +24,7 @@ You can install this package by using [Composer](http://getcomposer.org), runnin
 ```sh
 composer require eluceo/ical
 ```
+
 Link to Packagist: https://packagist.org/packages/eluceo/ical
 
 ## Usage
@@ -131,7 +132,7 @@ DTSTART:20121224T180000
 
 ## License
 
-This package is released under the __MIT license__.
+This package is released under the **MIT license**.
 
 Copyright (c) 2012-2019 Markus Poerschke
 
