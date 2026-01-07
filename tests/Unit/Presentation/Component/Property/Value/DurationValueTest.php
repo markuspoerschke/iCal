@@ -52,5 +52,10 @@ class DurationValueTest extends TestCase
             new DateInterval('P1MT10H'),
             'P31DT10H',
         ];
+
+        yield 'event start' => [
+            new DateInterval('PT0M'),
+            'PT0S',
+        ];
     }
 }
