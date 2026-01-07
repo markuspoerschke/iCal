@@ -11,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: "actions/checkout@v6"
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          token: ${{ secrets.PAT }}
+      - name: "Checkout"
+        uses: "actions/checkout@v6"
 
       - name: Run php-cs-fixer
         uses: docker://oskarstark/php-cs-fixer-ga:3.26.0
