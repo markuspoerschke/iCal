@@ -209,7 +209,7 @@ class RecurrenceRule implements ValueInterface
     /**
      * @return $this
      */
-    public function setUntil(\DateTimeInterface $until = null)
+    public function setUntil(?\DateTimeInterface $until = null)
     {
         $this->until = $until;
 
