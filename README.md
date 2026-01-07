@@ -35,8 +35,9 @@ Please see the upgrade guide if you want to migrate from version `0.*` to `2.*`.
 If you just start using this package, you should install version 2.
 
 | Version | PHP Version |
-| ------- | ----------- |
-| >= 2.15 | 8.3 - 8.4   |
+|---------|-------------|
+| >= 2.16 | 8.4 - 8.5   |
+| 2.15    | 8.3 - 8.4   |
 | \< 2.14 | 7.4 - 8.3   |
 | 0.16.\* | 7.0 - 8.2   |
 | 0.11.\* | 5.3.0 - 7.4 |

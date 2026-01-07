@@ -12,11 +12,12 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.3"
           - "8.4"
+          - "8.5"
+
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v6"
 
       - name: "Install PHP with extensions"
         uses: "shivammathur/setup-php@v2"
@@ -28,7 +29,7 @@ jobs:
         run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v4.2.0"
+        uses: "actions/cache@v5"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
@@ -37,14 +38,14 @@ jobs:
         if: ${{ matrix.php-version == '8.4' }}
         run: "composer install --ignore-platform-reqs"
 
-      - name: "Run tests"
-        if: ${{ matrix.php-version == '8.3' }}
-        run: "make -j -O test"
-
       - name: "Run tests (PHP 8.4)"
         if: ${{ matrix.php-version == '8.4' }}
         run: "make -j -O test-phpunit test-examples"
 
+      - name: "Run tests"
+        if: ${{ matrix.php-version == '8.5' }}
+        run: "make -j -O test"
+
       - name: "Send code coverage"
-        if: ${{ matrix.php-version == '8.3' }}
-        uses: codecov/codecov-action@v5.5.1
+        if: ${{ matrix.php-version == '8.5' }}
+        uses: codecov/codecov-action@v5
