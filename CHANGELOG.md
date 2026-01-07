@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-01-07
+
 ## [0.19.0] - 2024-11-24
 
 ### Added
@@ -127,7 +129,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix the GEO property (compatibility to PHP < 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
+- Fix the GEO property (compatibility to PHP &lt; 7) [#91](https://github.com/markuspoerschke/iCal/pull/91) [#91](https://github.com/markuspoerschke/iCal/pull/93)
 
 ## [0.11.2] - 2017-04-21
 
@@ -189,7 +191,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[unreleased]: https://github.com/markuspoerschke/iCal/compare/0.19.0...0.x
+[Unreleased]: https://github.com/markuspoerschke/iCal/compare/0.20.0...HEAD
+[0.20.0]: https://github.com/markuspoerschke/iCal/compare/0.19.0...0.20.0
 [0.19.0]: https://github.com/markuspoerschke/iCal/compare/0.18.0...0.19.0
 [0.18.0]: https://github.com/markuspoerschke/iCal/compare/0.17.0...0.18.0
 [0.17.0]: https://github.com/markuspoerschke/iCal/compare/0.16.1...0.17.0
