@@ -6,7 +6,7 @@ jobs:
     name: Danger JS
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Danger
         uses: docker://ghcr.io/danger/danger-js:10.6.6
         env:
