@@ -4,7 +4,7 @@ on: [pull_request_target]
 
 jobs:
   fix-code-style:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -12,15 +12,12 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PAT }}
 
-      - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga:3.26.0
-
       - name: Run prettier
         uses: actionsx/prettier@v3
         with:
           args: --write .
 
-      - uses: stefanzweifel/git-auto-commit-action@v5.0.1
+      - uses: stefanzweifel/git-auto-commit-action@v7.1.0
         with:
           commit_user_name: Markus Poerschke (Bot)
           commit_user_email: markus+githubbot@poerschke.nrw

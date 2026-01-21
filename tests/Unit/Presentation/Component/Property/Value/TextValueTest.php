@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -24,7 +24,7 @@ class TextValueTest extends TestCase
         self::assertSame($expected, (string) (new TextValue($inputValue)));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield 'example from RFC 5545' => [
             "Project XYZ Final Review\nConference Room - 3B\nCome Prepared.",
