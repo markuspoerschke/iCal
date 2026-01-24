@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\Method;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Category;
@@ -34,6 +35,7 @@ class Event
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
     private ?EventStatus $status = null;
+    private ?Method $method = null;
 
     /**
      * @var array<Attendee>
@@ -344,6 +346,25 @@ class Event
     public function unsetStatus(): self
     {
         $this->status = null;
+
+        return $this;
+    }
+
+    public function getMethod(): Method
+    {
+        assert($this->method !== null);
+
+        return $this->method;
+    }
+
+    public function hasMethod(): bool
+    {
+        return $this->method !== null;
+    }
+
+    public function setMethod(Method $method): self
+    {
+        $this->method = $method;
 
         return $this;
     }

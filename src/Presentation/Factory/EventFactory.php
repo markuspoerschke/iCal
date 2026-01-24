@@ -15,6 +15,7 @@ use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\Method;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
@@ -126,6 +127,10 @@ class EventFactory
 
         if ($event->hasStatus()) {
             yield new Property('STATUS', $this->getEventStatusTextValue($event->getStatus()));
+        }
+
+        if ($event->hasMethod()) {
+            yield new Property('METHOD', $this->getMethodTextValue($event->getMethod()));
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -280,5 +285,18 @@ class EventFactory
         }
 
         throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', EventStatus::class));
+    }
+
+    private function getMethodTextValue(Method $method): TextValue
+    {
+        if ($method === Method::PUBLISH()) {
+            return new TextValue('PUBLISH');
+        }
+
+        if ($method === Method::REQUEST()) {
+            return new TextValue('REQUEST');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown method type value that is not yet implemented.', Method::class));
     }
 }
