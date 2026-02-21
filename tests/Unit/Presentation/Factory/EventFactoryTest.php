@@ -19,6 +19,7 @@ use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\Enum\EventStatus;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
+use Eluceo\iCal\Domain\Enum\Transparency;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Category;
@@ -547,6 +548,24 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'STATUS:TENTATIVE',
+        ]);
+    }
+
+    public function testEventWithTransparentTransparency(): void
+    {
+        $event = (new Event())->setTransparency(Transparency::TRANSPARENT());
+
+        self::assertEventRendersCorrect($event, [
+            'TRANSP:TRANSPARENT',
+        ]);
+    }
+
+    public function testEventWithOpaqueTransparency(): void
+    {
+        $event = (new Event())->setTransparency(Transparency::OPAQUE());
+
+        self::assertEventRendersCorrect($event, [
+            'TRANSP:OPAQUE',
         ]);
     }
 

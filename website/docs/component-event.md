@@ -349,3 +349,17 @@ use Eluceo\iCal\Domain\Enum\EventStatus;
 $event = new Event();
 $event->setStatus(EventStatus::CANCELLED());
 ```
+
+
+### Transparency
+
+This property defines the transparency of the event, e.g. if it is transparent or opaque. The possible values
+are `transparent` and `opaque`.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\Transparency;
+
+$event = new Event();
+$event->setTransparency(Transparency::TRANSPARENT());
+```
