@@ -17,6 +17,7 @@ use Eluceo\iCal\Domain\Enum\RecurrenceFrequency;
 use Eluceo\iCal\Domain\Enum\RecurrenceWeekday;
 use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Presentation\Component\Property\Value\RecurrenceRuleValue;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class RecurrenceRuleValueTest extends TestCase
@@ -108,6 +109,73 @@ class RecurrenceRuleValueTest extends TestCase
         $value = new RecurrenceRuleValue($rule);
 
         self::assertSame('FREQ=MONTHLY;INTERVAL=1;COUNT=12;WKST=SU;BYDAY=1MO', (string) $value);
+    }
+
+    public function testUntilConvertsNonUtcToUtc(): void
+    {
+        $until = DateTimeImmutable::createFromFormat(
+            'Y-m-d H:i:s',
+            '2030-12-31 19:00:00',
+            new DateTimeZone('America/New_York')
+        );
+
+        $rule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+            ->setUntil($until);
+        $value = new RecurrenceRuleValue($rule);
+
+        self::assertSame('FREQ=DAILY;UNTIL=20310101T000000Z', (string) $value);
+    }
+
+    public function testSetCountClearsUntil(): void
+    {
+        $until = DateTimeImmutable::createFromFormat(
+            'Y-m-d H:i:s',
+            '2030-12-31 23:59:59',
+            new DateTimeZone('UTC')
+        );
+
+        $rule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+            ->setUntil($until)
+            ->setCount(5);
+
+        self::assertSame(5, $rule->getCount());
+        self::assertNull($rule->getUntil());
+
+        $value = new RecurrenceRuleValue($rule);
+        self::assertSame('FREQ=DAILY;COUNT=5', (string) $value);
+    }
+
+    public function testSetUntilClearsCount(): void
+    {
+        $until = DateTimeImmutable::createFromFormat(
+            'Y-m-d H:i:s',
+            '2030-12-31 23:59:59',
+            new DateTimeZone('UTC')
+        );
+
+        $rule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+            ->setCount(5)
+            ->setUntil($until);
+
+        self::assertNull($rule->getCount());
+        self::assertNotNull($rule->getUntil());
+
+        $value = new RecurrenceRuleValue($rule);
+        self::assertSame('FREQ=DAILY;UNTIL=20301231T235959Z', (string) $value);
+    }
+
+    public function testSetIntervalThrowsForZero(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new RecurrenceRule(RecurrenceFrequency::DAILY()))->setInterval(0);
+    }
+
+    public function testSetIntervalThrowsForNegative(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new RecurrenceRule(RecurrenceFrequency::DAILY()))->setInterval(-1);
     }
 
     public function testAllByParts(): void

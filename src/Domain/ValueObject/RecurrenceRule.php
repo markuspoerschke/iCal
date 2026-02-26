@@ -91,6 +91,7 @@ class RecurrenceRule
     public function setCount(int $count): self
     {
         $this->count = $count;
+        $this->until = null;
 
         return $this;
     }
@@ -103,6 +104,7 @@ class RecurrenceRule
     public function setUntil(DateTimeInterface $until): self
     {
         $this->until = $until;
+        $this->count = null;
 
         return $this;
     }

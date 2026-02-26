@@ -11,6 +11,8 @@
 
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Presentation\Component\Property\Value;
 
@@ -41,7 +43,9 @@ final class RecurrenceRuleValue extends Value
         }
 
         if ($this->recurrenceRule->getUntil() !== null) {
-            $parts[] = 'UNTIL=' . $this->recurrenceRule->getUntil()->format('Ymd\THis\Z');
+            $utcDateTime = DateTimeImmutable::createFromInterface($this->recurrenceRule->getUntil())
+                ->setTimezone(new DateTimeZone('UTC'));
+            $parts[] = 'UNTIL=' . $utcDateTime->format('Ymd\THis\Z');
         }
 
         if ($this->recurrenceRule->getWeekStartDay() !== null) {
