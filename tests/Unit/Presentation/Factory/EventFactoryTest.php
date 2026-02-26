@@ -24,12 +24,14 @@ use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Category;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\DateTime;
+use Eluceo\iCal\Domain\Enum\RecurrenceFrequency;
 use Eluceo\iCal\Domain\ValueObject\EmailAddress;
 use Eluceo\iCal\Domain\ValueObject\GeographicPosition;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Member;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
+use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -547,6 +549,52 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'STATUS:TENTATIVE',
+        ]);
+    }
+
+    public function testEventWithYearlyRecurrenceRule(): void
+    {
+        $recurrenceRule = new RecurrenceRule(RecurrenceFrequency::YEARLY());
+
+        $event = (new Event())
+            ->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-01'))))
+            ->addRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART;VALUE=DATE:20300101',
+            'RRULE:FREQ=YEARLY',
+        ]);
+    }
+
+    public function testEventWithMonthlyRecurrenceRuleAndInterval(): void
+    {
+        $recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::MONTHLY()))
+            ->setInterval(2)
+            ->setCount(6);
+
+        $event = (new Event())
+            ->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-01'))))
+            ->addRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART;VALUE=DATE:20300101',
+            'RRULE:FREQ=MONTHLY;INTERVAL=2;COUNT=6',
+        ]);
+    }
+
+    public function testEventWithMultipleRecurrenceRules(): void
+    {
+        $rule1 = new RecurrenceRule(RecurrenceFrequency::YEARLY());
+        $rule2 = (new RecurrenceRule(RecurrenceFrequency::MONTHLY()))
+            ->setCount(3);
+
+        $event = (new Event())
+            ->addRecurrenceRule($rule1)
+            ->addRecurrenceRule($rule2);
+
+        self::assertEventRendersCorrect($event, [
+            'RRULE:FREQ=YEARLY',
+            'RRULE:FREQ=MONTHLY;COUNT=3',
         ]);
     }
 

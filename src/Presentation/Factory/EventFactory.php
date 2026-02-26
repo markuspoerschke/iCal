@@ -20,6 +20,7 @@ use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
+use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Presentation\Component;
@@ -32,6 +33,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\RecurrenceRuleValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -104,6 +106,12 @@ class EventFactory
 
         if ($event->hasOccurrence()) {
             yield from $this->getOccurrenceProperties($event->getOccurrence());
+        }
+
+        if ($event->hasRecurrenceRules()) {
+            foreach ($event->getRecurrenceRules() as $recurrenceRule) {
+                yield new Property('RRULE', new RecurrenceRuleValue($recurrenceRule));
+            }
         }
 
         if ($event->hasLocation()) {
