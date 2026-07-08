@@ -1,0 +1,26 @@
+name: Dependabot Auto-Approve
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-approve:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve and enable auto-merge
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh pr review ${{ github.event.pull_request.number }} --approve -b "Auto approve for dependency updates"
+          gh pr merge ${{ github.event.pull_request.number }} --auto --squash
