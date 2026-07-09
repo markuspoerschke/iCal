@@ -33,6 +33,7 @@ jobs:
 
       - name: Enable Corepack
         run: corepack enable
+        shell: bash
 
       - name: Build Website
         run: "make website"
