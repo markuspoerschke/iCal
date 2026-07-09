@@ -1,5 +1,7 @@
+import { themes as prismThemes } from "prism-react-renderer";
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
-module.exports = {
+const config = {
     title: "eluceo/ical",
     tagline: "iCalendar Generator for PHP",
     url: "https://ical.poerschke.nrw",
@@ -85,8 +87,8 @@ module.exports = {
         },
         prism: {
             additionalLanguages: ["php"],
-            theme: require("prism-react-renderer/themes/nightOwlLight"),
-            darkTheme: require("prism-react-renderer/themes/oceanicNext"),
+            theme: prismThemes.nightOwlLight,
+            darkTheme: prismThemes.oceanicNext,
         },
     },
     presets: [
@@ -95,14 +97,16 @@ module.exports = {
             {
                 blog: false,
                 docs: {
-                    sidebarPath: require.resolve("./sidebars.js"),
+                    sidebarPath: "./sidebars.js",
                     editUrl:
                         "https://github.com/markuspoerschke/ical/edit/2.x/website/",
                 },
                 theme: {
-                    customCss: require.resolve("./src/css/custom.css"),
+                    customCss: "./src/css/custom.css",
                 },
             },
         ],
     ],
 };
+
+export default config;

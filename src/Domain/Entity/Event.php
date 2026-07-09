@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -56,7 +56,7 @@ class Event
      */
     private array $categories = [];
 
-    public function __construct(UniqueIdentifier $uniqueIdentifier = null)
+    public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
         $this->uniqueIdentifier = $uniqueIdentifier ?? UniqueIdentifier::createRandom();
         $this->touchedAt = new Timestamp();
@@ -72,7 +72,7 @@ class Event
         return $this->touchedAt;
     }
 
-    public function touch(Timestamp $dateTime = null): self
+    public function touch(?Timestamp $dateTime = null): self
     {
         $this->touchedAt = $dateTime ?? new Timestamp();
 
