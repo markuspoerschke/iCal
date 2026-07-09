@@ -33,17 +33,17 @@ $event = (new Event())
 
 The following sections explain the properties of the domain object:
 
-- [Unique Identifier](#unique-identifier)
-- [Touched at](#touched-at)
-- [Summary](#summary)
-- [Description](#description)
-- [Occurrence](#occurrence)
-- [Location](#location)
-- [Organizer](#organizer)
-- [Attachments](#attachments)
-- [Attendee](#attendee)
-- [Categories](#categories)
-- [Status](#status)
+-   [Unique Identifier](#unique-identifier)
+-   [Touched at](#touched-at)
+-   [Summary](#summary)
+-   [Description](#description)
+-   [Occurrence](#occurrence)
+-   [Location](#location)
+-   [Organizer](#organizer)
+-   [Attachments](#attachments)
+-   [Attendee](#attendee)
+-   [Categories](#categories)
+-   [Status](#status)
 
 ### Unique Identifier
 
@@ -131,9 +131,9 @@ $event->setUrl($uri);
 The occurrence property of an event defines, when the event takes place.
 There are currently three different types of occurrences possible:
 
-- [Single day](#single-day)
-- [Multi day](#multi-day)
-- [Timespan](#timespan)
+-   [Single day](#single-day)
+-   [Multi day](#multi-day)
+-   [Timespan](#timespan)
 
 #### Single day
 
@@ -160,8 +160,8 @@ The multi day occurrence defines a span of days.
 
 The constructor `MultiDay($firstDay, $lastDay)` accepts two dates:
 
-- The `$firstDay` attribute defines the first inclusive day, the event will take place.
-- The `$lastDay` attribute defines the last inclusive day, the event will take place.
+-   The `$firstDay` attribute defines the first inclusive day, the event will take place.
+-   The `$lastDay` attribute defines the last inclusive day, the event will take place.
 
 The given example
 
