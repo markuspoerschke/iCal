@@ -46,4 +46,4 @@ jobs:
 
       - name: "Send code coverage"
         if: ${{ matrix.php-version == '8.5' }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
