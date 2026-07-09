@@ -12,6 +12,13 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.PAT }}
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Run prettier
         uses: actionsx/prettier@v3
         with:
