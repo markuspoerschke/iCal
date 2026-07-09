@@ -22,6 +22,8 @@ class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
 
+    private ?string $calName = null;
+
     private ?DateInterval $publishedTTL = null;
 
     private Events $events;
@@ -81,6 +83,23 @@ class Calendar
         $this->productIdentifier = $productIdentifier;
 
         return $this;
+    }
+
+    public function getCalName(): string
+    {
+        return $this->calName;
+    }
+
+    public function setCalName(string $calName): self
+    {
+        $this->calName = $calName;
+
+        return $this;
+    }
+
+    public function hasCalName(): bool
+    {
+        return $this->calName !== null;
     }
 
     public function getEvents(): Events

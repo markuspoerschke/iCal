@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Event's HTML alternative description [#657](https://github.com/markuspoerschke/iCal/pull/657)
+- Calendar's name (X-WR-CALNAME) [#663](https://github.com/markuspoerschke/iCal/pull/663)
 
 ### Fixed
 
