@@ -575,9 +575,6 @@ class EventFactoryTest extends TestCase
         self::assertSame($expected, $resultAsArray);
     }
 
-    /**
-     * @return array
-     */
     public static function msBusyStatusProvider(): array
     {
         return [
