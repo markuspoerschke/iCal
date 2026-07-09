@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -86,6 +86,18 @@ class EventFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'SUMMARY:Lorem Summary',
             'DESCRIPTION:Lorem Description',
+        ]);
+    }
+
+    public function testWithDescriptionAndHtmlDescription()
+    {
+        $event = (new Event())
+            ->setDescription('Lorem Description')
+            ->setHtmlDescription('<p>Lorem Description</p>');
+
+        self::assertEventRendersCorrect($event, [
+            'DESCRIPTION:Lorem Description',
+            'X-ALT-DESC;FMTTYPE=text/html:<p>Lorem Description</p>',
         ]);
     }
 

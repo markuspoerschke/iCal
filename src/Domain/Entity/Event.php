@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -29,6 +29,7 @@ class Event
     private Timestamp $touchedAt;
     private ?string $summary = null;
     private ?string $description = null;
+    private ?string $htmlDescription = null;
     private ?Uri $url = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
@@ -57,7 +58,7 @@ class Event
      */
     private array $categories = [];
 
-    public function __construct(UniqueIdentifier $uniqueIdentifier = null)
+    public function __construct(?UniqueIdentifier $uniqueIdentifier = null)
     {
         $this->uniqueIdentifier = $uniqueIdentifier ?? UniqueIdentifier::createRandom();
         $this->touchedAt = new Timestamp();
@@ -73,7 +74,7 @@ class Event
         return $this->touchedAt;
     }
 
-    public function touch(Timestamp $dateTime = null): self
+    public function touch(?Timestamp $dateTime = null): self
     {
         $this->touchedAt = $dateTime ?? new Timestamp();
 
@@ -128,6 +129,32 @@ class Event
     public function unsetDescription(): self
     {
         $this->description = null;
+
+        return $this;
+    }
+
+    public function getHtmlDescription(): string
+    {
+        assert($this->htmlDescription !== null);
+
+        return $this->htmlDescription;
+    }
+
+    public function hasHtmlDescription(): bool
+    {
+        return $this->htmlDescription !== null;
+    }
+
+    public function setHtmlDescription(string $htmlDescription): self
+    {
+        $this->htmlDescription = $htmlDescription;
+
+        return $this;
+    }
+
+    public function unsetHtmlDescription(): self
+    {
+        $this->htmlDescription = null;
 
         return $this;
     }

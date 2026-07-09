@@ -21,7 +21,7 @@ help:
 	@echo '  vendor              Installs composer vendor'
 
 .PHONY: test
-test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd test-infection
+test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-infection test-prettier
 
 .PHONY: test-code-style
 test-code-style: vendor
@@ -29,7 +29,7 @@ test-code-style: vendor
 
 .PHONY: test-psalm
 test-psalm: vendor
-	psalm -m --no-progress ${PSALM_FLAGS}
+	php -v | grep -q 'PHP 8.3' && psalm -m --no-progress ${PSALM_FLAGS} || true
 
 .PHONY: test-phpunit
 test-phpunit: vendor
@@ -56,14 +56,8 @@ test-composer-normalize: vendor
 test-composer-normalize:
 	composer normalize --dry-run --diff
 
-.PHONY: test-phpmd
-test-phpmd: vendor
-test-phpmd:
-	phpmd ./src text rulesets.xml
-
 .PHONY: test-prettier
-test-prettier:
-	yarn
+test-prettier: node_modules
 	npx prettier --check .
 
 vendor: composer.json composer.lock

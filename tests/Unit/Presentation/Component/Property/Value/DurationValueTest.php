@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -26,7 +26,7 @@ class DurationValueTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield '30 days' => [
             new DateInterval('P30D'),
@@ -51,6 +51,11 @@ class DurationValueTest extends TestCase
         yield 'days and time' => [
             new DateInterval('P1MT10H'),
             'P31DT10H',
+        ];
+
+        yield 'event start' => [
+            new DateInterval('PT0M'),
+            'PT0S',
         ];
     }
 }

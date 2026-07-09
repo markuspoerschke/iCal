@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -21,6 +21,8 @@ use Iterator;
 class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
+
+    private ?string $calName = null;
 
     private ?DateInterval $publishedTTL = null;
 
@@ -81,6 +83,23 @@ class Calendar
         $this->productIdentifier = $productIdentifier;
 
         return $this;
+    }
+
+    public function getCalName(): string
+    {
+        return $this->calName;
+    }
+
+    public function setCalName(string $calName): self
+    {
+        $this->calName = $calName;
+
+        return $this;
+    }
+
+    public function hasCalName(): bool
+    {
+        return $this->calName !== null;
     }
 
     public function getEvents(): Events

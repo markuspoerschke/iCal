@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2024 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -47,8 +47,11 @@ class EventFactory
     private DateTimeFactory $dateTimeFactory;
     private AttendeeFactory $attendeeFactory;
 
-    public function __construct(AlarmFactory $alarmFactory = null, DateTimeFactory $dateTimeFactory = null, AttendeeFactory $attendeeFactory = null)
-    {
+    public function __construct(
+        ?AlarmFactory $alarmFactory = null,
+        ?DateTimeFactory $dateTimeFactory = null,
+        ?AttendeeFactory $attendeeFactory = null,
+    ) {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
         $this->attendeeFactory = $attendeeFactory ?? new AttendeeFactory();
@@ -94,6 +97,12 @@ class EventFactory
 
         if ($event->hasDescription()) {
             yield new Property('DESCRIPTION', new TextValue($event->getDescription()));
+        }
+
+        if ($event->hasHtmlDescription()) {
+            yield new Property('X-ALT-DESC', new TextValue($event->getHtmlDescription()), [
+                new Parameter('FMTTYPE', new TextValue('text/html')),
+            ]);
         }
 
         if ($event->hasUrl()) {
