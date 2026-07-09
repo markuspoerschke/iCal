@@ -98,6 +98,12 @@ class EventFactory
             yield new Property('DESCRIPTION', new TextValue($event->getDescription()));
         }
 
+        if ($event->hasHtmlDescription()) {
+            yield new Property('X-ALT-DESC', new TextValue($event->getHtmlDescription()), [
+                new Parameter('FMTTYPE', new TextValue('text/html')),
+            ]);
+        }
+
         if ($event->hasUrl()) {
             yield new Property('URL', new TextValue($event->getUrl()->getUri()));
         }

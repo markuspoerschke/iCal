@@ -37,6 +37,7 @@ The following sections explain the properties of the domain object:
 - [Touched at](#touched-at)
 - [Summary](#summary)
 - [Description](#description)
+- [HTML Description](#html-description)
 - [Occurrence](#occurrence)
 - [Location](#location)
 - [Organizer](#organizer)
@@ -111,6 +112,17 @@ use Eluceo\iCal\Domain\Entity\Event;
 
 $event = new Event();
 $event->setDescription('Lorem Ipsum Dolor...');
+```
+
+### HTML Description
+
+In addition to the description, it is possible to add an alternative HTML description for clients that support it (ie. Outlook).
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+
+$event = new Event();
+$event->setHtmlDescription('<p>Lorem Ipsum Dolor...</p>');
 ```
 
 ### URL

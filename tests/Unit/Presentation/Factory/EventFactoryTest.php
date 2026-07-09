@@ -88,6 +88,18 @@ class EventFactoryTest extends TestCase
         ]);
     }
 
+    public function testWithDescriptionAndHtmlDescription()
+    {
+        $event = (new Event())
+            ->setDescription('Lorem Description')
+            ->setHtmlDescription('<p>Lorem Description</p>');
+
+        self::assertEventRendersCorrect($event, [
+            'DESCRIPTION:Lorem Description',
+            'X-ALT-DESC;FMTTYPE=text/html:<p>Lorem Description</p>',
+        ]);
+    }
+
     public function testEventWithLocation()
     {
         $geographicalPosition = new GeographicPosition(51.333333333333, 7.05);

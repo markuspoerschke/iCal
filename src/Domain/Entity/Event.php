@@ -28,6 +28,7 @@ class Event
     private Timestamp $touchedAt;
     private ?string $summary = null;
     private ?string $description = null;
+    private ?string $htmlDescription = null;
     private ?Uri $url = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
@@ -126,6 +127,32 @@ class Event
     public function unsetDescription(): self
     {
         $this->description = null;
+
+        return $this;
+    }
+
+    public function getHtmlDescription(): string
+    {
+        assert($this->htmlDescription !== null);
+
+        return $this->htmlDescription;
+    }
+
+    public function hasHtmlDescription(): bool
+    {
+        return $this->htmlDescription !== null;
+    }
+
+    public function setHtmlDescription(string $htmlDescription): self
+    {
+        $this->htmlDescription = $htmlDescription;
+
+        return $this;
+    }
+
+    public function unsetHtmlDescription(): self
+    {
+        $this->htmlDescription = null;
 
         return $this;
     }
