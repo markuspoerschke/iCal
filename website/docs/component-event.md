@@ -361,3 +361,15 @@ use Eluceo\iCal\Domain\Enum\EventStatus;
 $event = new Event();
 $event->setStatus(EventStatus::CANCELLED());
 ```
+
+### MsBusyStatus
+
+This property represents the status in Microsoft Outlook for freebusy-view. The possible values are `free`, `tentative`, `busy`, `oof`.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
+
+$event = new Event();
+$event->setMsBusyStatus(MsBusyStatus::FREE());
+```

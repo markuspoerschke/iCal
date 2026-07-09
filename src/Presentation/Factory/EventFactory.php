@@ -15,6 +15,7 @@ use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
@@ -132,6 +133,11 @@ class EventFactory
 
         if ($event->hasStatus()) {
             yield new Property('STATUS', $this->getEventStatusTextValue($event->getStatus()));
+        }
+
+        if ($event->hasMsBusyStatus()) {
+            yield new Property('X-MICROSOFT-CDO-BUSYSTATUS', $this->getEventMsBusyStatusTextValue($event->getMsBusyStatus()));
+            yield new Property('X-MICROSOFT-CDO-INTENDEDSTATUS', $this->getEventMsBusyStatusTextValue($event->getMsBusyStatus()));
         }
 
         foreach ($event->getAttachments() as $attachment) {
@@ -286,5 +292,26 @@ class EventFactory
         }
 
         throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', EventStatus::class));
+    }
+
+    private function getEventMsBusyStatusTextValue(MsBusyStatus $msBusyStatus): TextValue
+    {
+        if ($msBusyStatus === MsBusyStatus::FREE()) {
+            return new TextValue('FREE');
+        }
+
+        if ($msBusyStatus === MsBusyStatus::BUSY()) {
+            return new TextValue('BUSY');
+        }
+
+        if ($msBusyStatus === MsBusyStatus::TENTATIVE()) {
+            return new TextValue('TENTATIVE');
+        }
+
+        if ($msBusyStatus === MsBusyStatus::OOF()) {
+            return new TextValue('OOF');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', MsBusyStatus::class));
     }
 }
