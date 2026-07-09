@@ -22,8 +22,16 @@ use InvalidArgumentException;
  * @see https://tools.ietf.org/html/rfc5545#section-3.3.10
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.5.3
  */
-class RecurrenceRule
+final class RecurrenceRule
 {
+    /**
+     * Grammar of a single BYDAY value as defined in RFC 5545, section 3.3.10.
+     *
+     * An optional signed ordinal (1 to 53 or -53 to -1) followed by a weekday
+     * abbreviation.
+     */
+    private const BY_DAY_PATTERN = '/\A[+-]?([1-9]|[1-4][0-9]|5[0-3])?(SU|MO|TU|WE|TH|FR|SA)\z/';
+
     private RecurrenceFrequency $frequency;
     private ?int $interval = null;
     private ?int $count = null;
@@ -88,8 +96,18 @@ class RecurrenceRule
         return $this->count;
     }
 
+    /**
+     * Set the COUNT rule part. Valid values are 1 or greater.
+     *
+     * COUNT and UNTIL must not occur in the same recurrence rule, therefore a
+     * previously set UNTIL value is discarded.
+     */
     public function setCount(int $count): self
     {
+        if ($count < 1) {
+            throw new InvalidArgumentException('Count must be a positive integer.');
+        }
+
         $this->count = $count;
         $this->until = null;
 
@@ -101,6 +119,12 @@ class RecurrenceRule
         return $this->until;
     }
 
+    /**
+     * Set the UNTIL rule part.
+     *
+     * COUNT and UNTIL must not occur in the same recurrence rule, therefore a
+     * previously set COUNT value is discarded.
+     */
     public function setUntil(DateTimeInterface $until): self
     {
         $this->until = $until;
@@ -132,14 +156,22 @@ class RecurrenceRule
     /**
      * Set BYDAY rule part.
      *
-     * Each value can be a weekday abbreviation (e.g., "MO", "TU") optionally
-     * preceded by a positive or negative integer (e.g., "1MO", "-1FR").
+     * Each value is a weekday abbreviation (e.g., "MO", "TU") optionally
+     * preceded by an ordinal from 1 to 53 or -53 to -1 (e.g., "1MO", "-1FR").
      *
      * @param string[] $days
      */
     public function setByDay(array $days): self
     {
-        $this->byDay = $days;
+        $this->assertNotEmpty($days, 'BYDAY');
+
+        foreach ($days as $day) {
+            if (preg_match(self::BY_DAY_PATTERN, $day) !== 1) {
+                throw new InvalidArgumentException(sprintf('The value "%s" is not a valid BYDAY value.', $day));
+            }
+        }
+
+        $this->byDay = array_values($days);
 
         return $this;
     }
@@ -159,7 +191,7 @@ class RecurrenceRule
      */
     public function setByMonthDay(array $days): self
     {
-        $this->byMonthDay = $days;
+        $this->byMonthDay = $this->assertValidRange($days, 'BYMONTHDAY', 1, 31, true);
 
         return $this;
     }
@@ -179,7 +211,7 @@ class RecurrenceRule
      */
     public function setByYearDay(array $days): self
     {
-        $this->byYearDay = $days;
+        $this->byYearDay = $this->assertValidRange($days, 'BYYEARDAY', 1, 366, true);
 
         return $this;
     }
@@ -199,7 +231,7 @@ class RecurrenceRule
      */
     public function setByWeekNo(array $weeks): self
     {
-        $this->byWeekNo = $weeks;
+        $this->byWeekNo = $this->assertValidRange($weeks, 'BYWEEKNO', 1, 53, true);
 
         return $this;
     }
@@ -219,7 +251,7 @@ class RecurrenceRule
      */
     public function setByMonth(array $months): self
     {
-        $this->byMonth = $months;
+        $this->byMonth = $this->assertValidRange($months, 'BYMONTH', 1, 12, false);
 
         return $this;
     }
@@ -239,7 +271,7 @@ class RecurrenceRule
      */
     public function setBySetPos(array $positions): self
     {
-        $this->bySetPos = $positions;
+        $this->bySetPos = $this->assertValidRange($positions, 'BYSETPOS', 1, 366, true);
 
         return $this;
     }
@@ -259,7 +291,7 @@ class RecurrenceRule
      */
     public function setByHour(array $hours): self
     {
-        $this->byHour = $hours;
+        $this->byHour = $this->assertValidRange($hours, 'BYHOUR', 0, 23, false);
 
         return $this;
     }
@@ -279,7 +311,7 @@ class RecurrenceRule
      */
     public function setByMinute(array $minutes): self
     {
-        $this->byMinute = $minutes;
+        $this->byMinute = $this->assertValidRange($minutes, 'BYMINUTE', 0, 59, false);
 
         return $this;
     }
@@ -299,8 +331,38 @@ class RecurrenceRule
      */
     public function setBySecond(array $seconds): self
     {
-        $this->bySecond = $seconds;
+        $this->bySecond = $this->assertValidRange($seconds, 'BYSECOND', 0, 60, false);
 
         return $this;
+    }
+
+    /**
+     * @param int[] $values
+     *
+     * @return int[]
+     */
+    private function assertValidRange(array $values, string $rulePart, int $min, int $max, bool $allowNegative): array
+    {
+        $this->assertNotEmpty($values, $rulePart);
+
+        foreach ($values as $value) {
+            $magnitude = $allowNegative ? abs($value) : $value;
+
+            if ($magnitude < $min || $magnitude > $max) {
+                throw new InvalidArgumentException(sprintf('The value %d is not a valid %s value. Valid values are %d to %d%s.', $value, $rulePart, $min, $max, $allowNegative ? sprintf(' or -%d to -%d', $max, $min) : ''));
+            }
+        }
+
+        return array_values($values);
+    }
+
+    /**
+     * @param array<mixed> $values
+     */
+    private function assertNotEmpty(array $values, string $rulePart): void
+    {
+        if ($values === []) {
+            throw new InvalidArgumentException(sprintf('The %s rule part must contain at least one value.', $rulePart));
+        }
     }
 }

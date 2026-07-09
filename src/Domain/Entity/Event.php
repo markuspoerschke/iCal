@@ -54,10 +54,7 @@ class Event
      */
     private array $attachments = [];
 
-    /**
-     * @var array<RecurrenceRule>
-     */
-    private array $recurrenceRules = [];
+    private ?RecurrenceRule $recurrenceRule = null;
 
     /**
      * @var array<Category>
@@ -263,24 +260,29 @@ class Event
         return $this;
     }
 
-    public function hasRecurrenceRules(): bool
+    public function hasRecurrenceRule(): bool
     {
-        return !empty($this->recurrenceRules);
+        return $this->recurrenceRule !== null;
     }
 
-    public function addRecurrenceRule(RecurrenceRule $recurrenceRule): self
+    /**
+     * Set the recurrence rule of the event.
+     *
+     * RFC 5545, section 3.8.5.3 recommends against more than one RRULE per event,
+     * therefore an event holds at most a single recurrence rule.
+     */
+    public function setRecurrenceRule(RecurrenceRule $recurrenceRule): self
     {
-        $this->recurrenceRules[] = $recurrenceRule;
+        $this->recurrenceRule = $recurrenceRule;
 
         return $this;
     }
 
-    /**
-     * @return RecurrenceRule[]
-     */
-    public function getRecurrenceRules(): array
+    public function getRecurrenceRule(): RecurrenceRule
     {
-        return $this->recurrenceRules;
+        assert($this->recurrenceRule !== null);
+
+        return $this->recurrenceRule;
     }
 
     public function addAttachment(Attachment $attachment): self

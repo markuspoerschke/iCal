@@ -114,10 +114,8 @@ class EventFactory
             yield from $this->getOccurrenceProperties($event->getOccurrence());
         }
 
-        if ($event->hasRecurrenceRules()) {
-            foreach ($event->getRecurrenceRules() as $recurrenceRule) {
-                yield new Property('RRULE', new RecurrenceRuleValue($recurrenceRule));
-            }
+        if ($event->hasRecurrenceRule()) {
+            yield new Property('RRULE', new RecurrenceRuleValue($event->getRecurrenceRule(), $this->hasDateValueTypeOccurrence($event)));
         }
 
         if ($event->hasLocation()) {
@@ -200,6 +198,23 @@ class EventFactory
             yield $this->dateTimeFactory->createProperty('DTSTART', $occurrence->getBegin());
             yield $this->dateTimeFactory->createProperty('DTEND', $occurrence->getEnd());
         }
+    }
+
+    /**
+     * The UNTIL rule part must have the same value type as the DTSTART property,
+     * which is a DATE value for events that occur on whole days.
+     *
+     * @see https://tools.ietf.org/html/rfc5545#section-3.3.10
+     */
+    private function hasDateValueTypeOccurrence(Event $event): bool
+    {
+        if (!$event->hasOccurrence()) {
+            return false;
+        }
+
+        $occurrence = $event->getOccurrence();
+
+        return $occurrence instanceof SingleDay || $occurrence instanceof MultiDay;
     }
 
     /**

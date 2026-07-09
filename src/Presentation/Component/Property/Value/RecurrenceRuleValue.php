@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Presentation\Component\Property\Value;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 use DateTimeZone;
 use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Presentation\Component\Property\Value;
@@ -22,10 +23,16 @@ use Eluceo\iCal\Presentation\Component\Property\Value;
 final class RecurrenceRuleValue extends Value
 {
     private RecurrenceRule $recurrenceRule;
+    private bool $untilAsDate;
 
-    public function __construct(RecurrenceRule $recurrenceRule)
+    /**
+     * @param bool $untilAsDate whether the UNTIL rule part must be rendered as a DATE value, which is
+     *                          required when the DTSTART of the event is a DATE value as well
+     */
+    public function __construct(RecurrenceRule $recurrenceRule, bool $untilAsDate = false)
     {
         $this->recurrenceRule = $recurrenceRule;
+        $this->untilAsDate = $untilAsDate;
     }
 
     public function __toString(): string
@@ -43,9 +50,7 @@ final class RecurrenceRuleValue extends Value
         }
 
         if ($this->recurrenceRule->getUntil() !== null) {
-            $utcDateTime = DateTimeImmutable::createFromInterface($this->recurrenceRule->getUntil())
-                ->setTimezone(new DateTimeZone('UTC'));
-            $parts[] = 'UNTIL=' . $utcDateTime->format('Ymd\THis\Z');
+            $parts[] = 'UNTIL=' . $this->formatUntil($this->recurrenceRule->getUntil());
         }
 
         if ($this->recurrenceRule->getWeekStartDay() !== null) {
@@ -89,5 +94,16 @@ final class RecurrenceRuleValue extends Value
         }
 
         return implode(';', $parts);
+    }
+
+    private function formatUntil(DateTimeInterface $until): string
+    {
+        if ($this->untilAsDate) {
+            return $until->format('Ymd');
+        }
+
+        return DateTimeImmutable::createFromInterface($until)
+            ->setTimezone(new DateTimeZone('UTC'))
+            ->format('Ymd\THis\Z');
     }
 }
