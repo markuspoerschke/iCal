@@ -13,10 +13,10 @@ The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) 
 
 ## Navigate through the project
 
--   📖 [read the documentation](https://ical.poerschke.nrw)
--   🐛 [report a bug or suggest a feature](https://github.com/markuspoerschke/iCal/issues)
--   🙋 [raise a question](https://github.com/markuspoerschke/iCal/discussions/categories/q-a)
--   💬 [start a discussion](https://github.com/markuspoerschke/iCal/discussions)
+- 📖 [read the documentation](https://ical.poerschke.nrw)
+- 🐛 [report a bug or suggest a feature](https://github.com/markuspoerschke/iCal/issues)
+- 🙋 [raise a question](https://github.com/markuspoerschke/iCal/discussions/categories/q-a)
+- 💬 [start a discussion](https://github.com/markuspoerschke/iCal/discussions)
 
 ## Installation
 
@@ -49,8 +49,8 @@ Visit [ical.poerschke.nrw](https://ical.poerschke.nrw/) for complete documentati
 
 The classes within this package are grouped into two namespaces:
 
--   The `Domain` contains the information about the events.
--   The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
+- The `Domain` contains the information about the events.
+- The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
 
 To create a calendar, the first step will be to create the corresponding domain objects.
 Then these objects can be transformed into a iCalendar PHP representation, which can be cast to string.
