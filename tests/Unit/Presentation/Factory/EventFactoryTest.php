@@ -17,6 +17,7 @@ use Eluceo\iCal\Domain\Entity\Attendee;
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RecurrenceFrequency;
 use Eluceo\iCal\Domain\Enum\RoleType;
@@ -87,6 +88,18 @@ class EventFactoryTest extends TestCase
         self::assertEventRendersCorrect($event, [
             'SUMMARY:Lorem Summary',
             'DESCRIPTION:Lorem Description',
+        ]);
+    }
+
+    public function testWithDescriptionAndHtmlDescription()
+    {
+        $event = (new Event())
+            ->setDescription('Lorem Description')
+            ->setHtmlDescription('<p>Lorem Description</p>');
+
+        self::assertEventRendersCorrect($event, [
+            'DESCRIPTION:Lorem Description',
+            'X-ALT-DESC;FMTTYPE=text/html:<p>Lorem Description</p>',
         ]);
     }
 
@@ -608,5 +621,25 @@ class EventFactoryTest extends TestCase
 
         $resultAsArray = array_slice($resultAsArray, 3, -2);
         self::assertSame($expected, $resultAsArray);
+    }
+
+    public static function msBusyStatusProvider(): array
+    {
+        return [
+            [MsBusyStatus::FREE(), ['X-MICROSOFT-CDO-BUSYSTATUS:FREE', 'X-MICROSOFT-CDO-INTENDEDSTATUS:FREE']],
+            [MsBusyStatus::BUSY(), ['X-MICROSOFT-CDO-BUSYSTATUS:BUSY', 'X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY']],
+            [MsBusyStatus::TENTATIVE(), ['X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE', 'X-MICROSOFT-CDO-INTENDEDSTATUS:TENTATIVE']],
+            [MsBusyStatus::OOF(), ['X-MICROSOFT-CDO-BUSYSTATUS:OOF', 'X-MICROSOFT-CDO-INTENDEDSTATUS:OOF']],
+        ];
+    }
+
+    /**
+     * @dataProvider msBusyStatusProvider
+     */
+    public function testMsBusyStatus(MsBusyStatus $msBusyStatus, array $properties): void
+    {
+        $event = (new Event())->setMsBusyStatus($msBusyStatus);
+
+        self::assertEventRendersCorrect($event, $properties);
     }
 }

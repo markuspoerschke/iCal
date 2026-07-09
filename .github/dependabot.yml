@@ -1,14 +1,34 @@
 version: 2
 updates:
-- package-ecosystem: composer
-  directory: "/"
-  schedule:
-    interval: monthly
-    time: "04:00"
-  target-branch: 2.x
-  versioning-strategy: widen
-- package-ecosystem: github-actions
-  directory: "/"
-  schedule:
-    interval: monthly
-    time: "04:00"
+  - package-ecosystem: composer
+    cooldown:
+      default-days: 7
+    directory: "/"
+    schedule:
+      interval: monthly
+      time: "11:00"
+      timezone: "Europe/Berlin"
+    target-branch: 2.x
+    versioning-strategy: widen
+    open-pull-requests-limit: 2
+
+  - package-ecosystem: github-actions
+    cooldown:
+      default-days: 7
+    directory: "/"
+    schedule:
+      interval: monthly
+      time: "11:00"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 2
+
+  - package-ecosystem: "npm"
+    cooldown:
+      default-days: 7
+    directory: "/website"
+    schedule:
+      interval: monthly
+      time: "11:00"
+      timezone: "Europe/Berlin"
+    target-branch: 2.x
+    open-pull-requests-limit: 2

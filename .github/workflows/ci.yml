@@ -19,6 +19,14 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v6"
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: "Enable Corepack"
+        run: "corepack enable"
+        shell: bash
+
       - name: "Install PHP with extensions"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -26,17 +34,17 @@ jobs:
 
       - name: "Determine composer cache directory"
         id: "determine-composer-cache-directory"
-        run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
+        run: 'echo "directory=$(composer config cache-dir)" >> $GITHUB_OUTPUT'
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v5"
+        uses: "actions/cache@v6"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
           key: "php-${{ matrix.php-version }}-composer-cache"
 
       - name: "Run tests"
-        run: "make -j -O test"
+        run: "make -j -O test test-prettier"
 
       - name: "Send code coverage"
         if: ${{ matrix.php-version == '8.5' }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7

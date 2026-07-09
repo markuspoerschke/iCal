@@ -21,7 +21,7 @@ help:
 	@echo '  vendor              Installs composer vendor'
 
 .PHONY: test
-test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-infection
+test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-infection test-prettier
 
 .PHONY: test-code-style
 test-code-style: vendor
@@ -57,8 +57,7 @@ test-composer-normalize:
 	composer normalize --dry-run --diff
 
 .PHONY: test-prettier
-test-prettier:
-	yarn
+test-prettier: node_modules
 	npx prettier --check .
 
 vendor: composer.json composer.lock

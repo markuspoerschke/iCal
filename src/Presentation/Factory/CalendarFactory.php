@@ -58,6 +58,12 @@ class CalendarFactory
         /* @see https://www.ietf.org/rfc/rfc5545.html#section-3.7.1 */
         yield new Property('CALSCALE', new TextValue('GREGORIAN'));
         $publishedTTL = $calendar->getPublishedTTL();
+
+        // The calendar name is not part of the RFC but is used by some clients.
+        if ($calendar->hasCalName()) {
+            yield new Property('X-WR-CALNAME', new TextValue($calendar->getCalName()));
+        }
+
         if ($publishedTTL) {
             /* @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx */
             yield new Property('X-PUBLISHED-TTL', new DurationValue($publishedTTL));

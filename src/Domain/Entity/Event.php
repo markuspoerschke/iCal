@@ -12,6 +12,7 @@
 namespace Eluceo\iCal\Domain\Entity;
 
 use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\Category;
@@ -29,12 +30,14 @@ class Event
     private Timestamp $touchedAt;
     private ?string $summary = null;
     private ?string $description = null;
+    private ?string $htmlDescription = null;
     private ?Uri $url = null;
     private ?Occurrence $occurrence = null;
     private ?Location $location = null;
     private ?Organizer $organizer = null;
     private ?Timestamp $lastModified = null;
     private ?EventStatus $status = null;
+    private ?MsBusyStatus $msBusyStatus = null;
 
     /**
      * @var array<Attendee>
@@ -132,6 +135,32 @@ class Event
     public function unsetDescription(): self
     {
         $this->description = null;
+
+        return $this;
+    }
+
+    public function getHtmlDescription(): string
+    {
+        assert($this->htmlDescription !== null);
+
+        return $this->htmlDescription;
+    }
+
+    public function hasHtmlDescription(): bool
+    {
+        return $this->htmlDescription !== null;
+    }
+
+    public function setHtmlDescription(string $htmlDescription): self
+    {
+        $this->htmlDescription = $htmlDescription;
+
+        return $this;
+    }
+
+    public function unsetHtmlDescription(): self
+    {
+        $this->htmlDescription = null;
 
         return $this;
     }
@@ -370,6 +399,32 @@ class Event
     public function unsetStatus(): self
     {
         $this->status = null;
+
+        return $this;
+    }
+
+    public function getMsBusyStatus(): MsBusyStatus
+    {
+        assert($this->msBusyStatus !== null);
+
+        return $this->msBusyStatus;
+    }
+
+    public function hasMsBusyStatus(): bool
+    {
+        return $this->msBusyStatus !== null;
+    }
+
+    public function setMsBusyStatus(MsBusyStatus $msBusyStatus): self
+    {
+        $this->msBusyStatus = $msBusyStatus;
+
+        return $this;
+    }
+
+    public function unsetMsBusyStatus(): self
+    {
+        $this->msBusyStatus = null;
 
         return $this;
     }
