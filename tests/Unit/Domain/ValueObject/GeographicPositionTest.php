@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2025 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -27,7 +27,7 @@ class GeographicPositionTest extends TestCase
         new GeographicPosition($latitude, $longitude);
     }
 
-    public function provideInvalidPositions(): Generator
+    public static function provideInvalidPositions(): Generator
     {
         yield [-91, 0];
         yield [91, 0];

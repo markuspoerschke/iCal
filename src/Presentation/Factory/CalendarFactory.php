@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2025 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -23,7 +23,7 @@ class CalendarFactory
     private EventFactory $eventFactory;
     private TimeZoneFactory $timeZoneFactory;
 
-    public function __construct(EventFactory $eventFactory = null, TimeZoneFactory $timeZoneFactory = null)
+    public function __construct(?EventFactory $eventFactory = null, ?TimeZoneFactory $timeZoneFactory = null)
     {
         $this->eventFactory = $eventFactory ?? new EventFactory();
         $this->timeZoneFactory = $timeZoneFactory ?? new TimeZoneFactory();

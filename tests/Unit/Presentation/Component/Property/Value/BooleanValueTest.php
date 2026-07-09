@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2025 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -24,7 +24,7 @@ class BooleanValueTest extends TestCase
         self::assertSame($expected, (string) (new BooleanValue($inputValue)));
     }
 
-    public function provideTestData()
+    public static function provideTestData()
     {
         yield 'Test bool true is same' => [
             true,

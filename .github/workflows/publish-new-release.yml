@@ -10,11 +10,10 @@ on:
 jobs:
   release:
     name: Publish new release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Extract version from branch name (for release branches)
         run: |
@@ -30,9 +29,7 @@ jobs:
           version: ${{ env.RELEASE_VERSION }}
 
       - name: Create Release
-        uses: thomaseizinger/create-release@1.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+        uses: thomaseizinger/create-release@2.0.0
         with:
           target_commitish: ${{ github.event.pull_request.merge_commit_sha }}
           tag_name: ${{ env.RELEASE_VERSION }}
@@ -40,3 +37,4 @@ jobs:
           body: ${{ steps.changelog.outputs.description }}
           draft: false
           prerelease: false
+          github_token: ${{ secrets.PAT }}

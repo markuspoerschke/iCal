@@ -6,7 +6,6 @@
 [![License](https://poser.pugx.org/eluceo/ical/license)](https://packagist.org/packages/eluceo/ical)
 [![Latest Stable Version](https://poser.pugx.org/eluceo/ical/v/stable)](https://packagist.org/packages/eluceo/ical)
 [![Monthly Downloads](https://poser.pugx.org/eluceo/ical/d/monthly)](https://packagist.org/packages/eluceo/ical)
-[![Infection MSI](https://badge.stryker-mutator.io/github.com/markuspoerschke/iCal/2.x)](https://infection.github.io)
 
 This package offers an abstraction layer for creating iCalendars files.
 By using this PHP package, you can create `*.ics` files without the knowledge of the underling format.
@@ -14,10 +13,10 @@ The output itself will follow [RFC 5545](https://www.ietf.org/rfc/rfc5545.html) 
 
 ## Navigate through the project
 
--   📖 [read the documentation](https://ical.poerschke.nrw)
--   🐛 [report a bug or suggest a feature](https://github.com/markuspoerschke/iCal/issues)
--   🙋 [raise a question](https://github.com/markuspoerschke/iCal/discussions/categories/q-a)
--   💬 [start a discussion](https://github.com/markuspoerschke/iCal/discussions)
+- 📖 [read the documentation](https://ical.poerschke.nrw)
+- 🐛 [report a bug or suggest a feature](https://github.com/markuspoerschke/iCal/issues)
+- 🙋 [raise a question](https://github.com/markuspoerschke/iCal/discussions/categories/q-a)
+- 💬 [start a discussion](https://github.com/markuspoerschke/iCal/discussions)
 
 ## Installation
 
@@ -36,7 +35,8 @@ If you just start using this package, you should install version 2.
 
 | Version | PHP Version |
 | ------- | ----------- |
-| >= 2.15 | 8.3 - 8.4   |
+| >= 2.16 | 8.4 - 8.5   |
+| 2.15    | 8.3 - 8.4   |
 | \< 2.14 | 7.4 - 8.3   |
 | 0.16.\* | 7.0 - 8.2   |
 | 0.11.\* | 5.3.0 - 7.4 |
@@ -49,8 +49,8 @@ Visit [ical.poerschke.nrw](https://ical.poerschke.nrw/) for complete documentati
 
 The classes within this package are grouped into two namespaces:
 
--   The `Domain` contains the information about the events.
--   The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
+- The `Domain` contains the information about the events.
+- The `Presentation` contains the transformation from `Domain` into a `*.ics` file.
 
 To create a calendar, the first step will be to create the corresponding domain objects.
 Then these objects can be transformed into a iCalendar PHP representation, which can be cast to string.

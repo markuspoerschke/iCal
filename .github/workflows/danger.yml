@@ -4,9 +4,9 @@ on: [pull_request]
 jobs:
   danger:
     name: Danger JS
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Danger
         uses: docker://ghcr.io/danger/danger-js:10.6.6
         env:

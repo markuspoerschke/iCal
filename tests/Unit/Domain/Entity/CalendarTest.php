@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2025 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
 {
-    public function provideGetSetPublishedTTLTestData(): array
+    public static function provideGetSetPublishedTTLTestData(): array
     {
         return [
             [new DateInterval('P1W')],
