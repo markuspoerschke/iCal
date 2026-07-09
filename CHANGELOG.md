@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Event's HTML alternative description [#657](https://github.com/markuspoerschke/iCal/pull/657)
+
+
 ### Fixed
 
 -   Ensure zero value duration is correctly formatted [#683](https://github.com/markuspoerschke/iCal/pull/683)
