@@ -23,6 +23,10 @@ jobs:
         with:
           node-version: 24
 
+      - name: "Enable Corepack"
+        run: "corepack enable"
+        shell: bash
+
       - name: "Install PHP with extensions"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -39,7 +43,7 @@ jobs:
           key: "php-${{ matrix.php-version }}-composer-cache"
 
       - name: "Run tests"
-        run: "make -j -O test"
+        run: "make -j -O test test-prettier"
 
       - name: "Send code coverage"
         if: ${{ matrix.php-version == '8.5' }}
