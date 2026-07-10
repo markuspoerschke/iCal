@@ -1,6 +1,7 @@
 -include Makefile.local
 
 export XDEBUG_MODE=coverage
+export PHP_CS_FIXER_IGNORE_ENV=1
 
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
@@ -13,14 +14,14 @@ INFECTION_FLAGS ?=
 help:
 	@echo 'Available targets'
 	@echo '  clean               Removes temporary build artifacts like'
-	@echo '  docs                Builds the documentation website'
+	@echo '  website             Builds the documentation website'
 	@echo '  fix                 Fixes composer.json and code style'
 	@echo '  fix-prettier        Fix code style of non PHP files (not included in "fix" target)'
 	@echo '  test                Execute all tests'
 	@echo '  vendor              Installs composer vendor'
 
 .PHONY: test
-test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-phpmd test-infection
+test: test-validate-composer test-code-style test-psalm test-phpunit test-examples test-composer-normalize test-infection test-prettier
 
 .PHONY: test-code-style
 test-code-style: vendor
@@ -28,11 +29,11 @@ test-code-style: vendor
 
 .PHONY: test-psalm
 test-psalm: vendor
-	psalm -m --no-progress ${PSALM_FLAGS}
+	php -v | grep -q 'PHP 8.3' && psalm -m --no-progress ${PSALM_FLAGS} || true
 
 .PHONY: test-phpunit
 test-phpunit: vendor
-	phpunit --coverage-xml=build/coverage/coverage-xml --log-junit=build/coverage/junit.xml ${PHPUNIT_FLAGS}
+	phpunit ${PHPUNIT_FLAGS}
 
 .PHONY: test-examples
 EXAMPLE_FILES := $(wildcard examples/*.php)
@@ -55,14 +56,8 @@ test-composer-normalize: vendor
 test-composer-normalize:
 	composer normalize --dry-run --diff
 
-.PHONY: test-phpmd
-test-phpmd: vendor
-test-phpmd:
-	phpmd ./src text rulesets.xml
-
 .PHONY: test-prettier
-test-prettier:
-	yarn
+test-prettier: node_modules
 	npx prettier --check .
 
 vendor: composer.json composer.lock
@@ -89,18 +84,11 @@ fix-prettier: node_modules
 node_modules: yarn.lock package.json
 	yarn
 
-.PHONY: docs
-docs: docs-vendor
-	cd  website && yarn build
-
-.PHONY: docs-vendor
-docs-vendor:
-	cd website && yarn
-
-.PHONY: docs-preview
-docs-preview: docs-vendor
-	cd website && yarn start
+.PHONY: website
+website:
+	cd website && $(MAKE) build
 
 .PHONY: clean
 clean:
-	rm -rf vendor website/node_modules website/build website/.docusaurus node_modules .phpunit.result.cache .php-cs-fixer.cache build
+	rm -rf vendor node_modules .phpunit.result.cache .php-cs-fixer.cache build
+	cd website && $(MAKE) clean

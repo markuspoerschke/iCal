@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
-         bootstrap="./vendor/autoload.php">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" processIsolation="false"
+         stopOnFailure="false" bootstrap="./vendor/autoload.php"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd">
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+    <coverage>
+        <report>
+            <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+            <xml outputDirectory="build/coverage/coverage-xml"/>
+        </report>
+    </coverage>
     <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+        <junit outputFile="build/coverage/junit.xml"/>
     </logging>
     <testsuites>
         <testsuite name="Unit Tests">
@@ -18,9 +24,4 @@
             <directory suffix="Test.php">./tests/Integration/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
 </phpunit>

@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -32,7 +32,7 @@ final class Organizer
         EmailAddress $emailAddress,
         ?string $displayName = null,
         ?Uri $directoryEntry = null,
-        ?EmailAddress $sentBy = null
+        ?EmailAddress $sentBy = null,
     ) {
         $this->emailAddress = $emailAddress;
         $this->displayName = $displayName;

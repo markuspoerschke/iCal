@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -37,7 +37,11 @@ class DateTimeFactory
      */
     private function getParameters(PointInTime $pointInTime): array
     {
-        if ($pointInTime instanceof DateTime && $pointInTime->hasDateTimeZone()) {
+        if (
+            $pointInTime instanceof DateTime
+            && $pointInTime->hasDateTimeZone()
+            && $pointInTime->getDateTimeZone()->getName() !== 'UTC'
+        ) {
             return [
                 new Property\Parameter('TZID', new TextValue($pointInTime->getDateTimeZone()->getName())),
             ];

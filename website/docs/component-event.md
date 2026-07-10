@@ -33,15 +33,18 @@ $event = (new Event())
 
 The following sections explain the properties of the domain object:
 
--   [Unique Identifier](#unique-identifier)
--   [Touched at](#touched-at)
--   [Summary](#summary)
--   [Description](#description)
--   [Occurrence](#occurrence)
--   [Location](#location)
--   [Organizer](#organizer)
--   [Attachments](#attachments)
--   [Attendee](#attendee)
+- [Unique Identifier](#unique-identifier)
+- [Touched at](#touched-at)
+- [Summary](#summary)
+- [Description](#description)
+- [HTML Description](#html-description)
+- [Occurrence](#occurrence)
+- [Location](#location)
+- [Organizer](#organizer)
+- [Attachments](#attachments)
+- [Attendee](#attendee)
+- [Categories](#categories)
+- [Status](#status)
 
 ### Unique Identifier
 
@@ -111,6 +114,17 @@ $event = new Event();
 $event->setDescription('Lorem Ipsum Dolor...');
 ```
 
+### HTML Description
+
+In addition to the description, it is possible to add an alternative HTML description for clients that support it (ie. Outlook).
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+
+$event = new Event();
+$event->setHtmlDescription('<p>Lorem Ipsum Dolor...</p>');
+```
+
 ### URL
 
 The URL can be used to link to an arbitrary resource.
@@ -129,9 +143,9 @@ $event->setUrl($uri);
 The occurrence property of an event defines, when the event takes place.
 There are currently three different types of occurrences possible:
 
--   [Single day](#single-day)
--   [Multi day](#multi-day)
--   [Timespan](#timespan)
+- [Single day](#single-day)
+- [Multi day](#multi-day)
+- [Timespan](#timespan)
 
 #### Single day
 
@@ -158,8 +172,8 @@ The multi day occurrence defines a span of days.
 
 The constructor `MultiDay($firstDay, $lastDay)` accepts two dates:
 
--   The `$firstDay` attribute defines the first inclusive day, the event will take place.
--   The `$lastDay` attribute defines the last inclusive day, the event will take place.
+- The `$firstDay` attribute defines the first inclusive day, the event will take place.
+- The `$lastDay` attribute defines the last inclusive day, the event will take place.
 
 The given example
 
@@ -285,12 +299,14 @@ Therefore are listed all the possible methods that you can call on the attendee
 use Eluceo\iCal\Domain\Entity\Event;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
 use Eluceo\iCal\Domain\Enum\RoleType;
+USE Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\Entity\Attendee;
+use Eluceo\iCal\Domain\ValueObject\EmailAddress;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
 use Eluceo\iCal\Domain\ValueObject\Uri;
 
 $attendee = new Attendee(new EmailAddress('jdoe@example.com'));
-$attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL)
+$attendee->setCalendarUserType(CalendarUserType::INDIVIDUAL())
     ->addMember(new Member(new EmailAddress('test@example.com')))
     ->setRole(RoleType::CHAIR())
     ->setParticipationStatus(
@@ -316,4 +332,44 @@ $event = (new Event())
 $event = new Event();
 $event->addAttachment($urlAttachment);
 $event->addAttachment($binaryContentAttachment);
+```
+
+### Categories
+
+This property is used to specify categories or subtypes of the calendar component.
+The categories are useful in searching for a calendar component of a particular type and category.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\ValueObject\Category;
+
+$event = new Event();
+$event
+    ->addCategory(new Category('APPOINTMENT'))
+    ->addCategory(new Category('EDUCATION'));
+```
+
+### Status
+
+This property defines the status of the event, e.g. if it has been confirmed or perhaps cancelled. The possible values
+are `tentative`, `confirmed` and `canceled`.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\EventStatus;
+
+$event = new Event();
+$event->setStatus(EventStatus::CANCELLED());
+```
+
+### MsBusyStatus
+
+This property represents the status in Microsoft Outlook for freebusy-view. The possible values are `free`, `tentative`, `busy`, `oof`.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
+
+$event = new Event();
+$event->setMsBusyStatus(MsBusyStatus::FREE());
 ```

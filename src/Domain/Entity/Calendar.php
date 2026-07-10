@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -11,6 +11,7 @@
 
 namespace Eluceo\iCal\Domain\Entity;
 
+use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Collection\EventsArray;
 use Eluceo\iCal\Domain\Collection\EventsGenerator;
@@ -20,8 +21,11 @@ use Iterator;
 class Calendar
 {
     private string $productIdentifier = '-//eluceo/ical//2.0/EN';
-    private string $calendarName = '';
-    private string $calendarDescription = '';
+
+    private ?string $calName = null;
+    private ?string $calDescription = null;
+
+    private ?DateInterval $publishedTTL = null;
 
     private Events $events;
 
@@ -58,6 +62,18 @@ class Calendar
         throw new InvalidArgumentException('$events must be an array, an object implementing Iterator or an instance of Events.');
     }
 
+    public function getPublishedTTL(): ?DateInterval
+    {
+        return $this->publishedTTL;
+    }
+
+    public function setPublishedTTL(?DateInterval $ttl): self
+    {
+        $this->publishedTTL = $ttl;
+
+        return $this;
+    }
+
     public function getProductIdentifier(): string
     {
         return $this->productIdentifier;
@@ -70,28 +86,42 @@ class Calendar
         return $this;
     }
 
-    public function getCalendarName(): string
+    public function getCalName(): string
     {
-        return $this->calendarName;
+        assert($this->calName !== null);
+
+        return $this->calName;
     }
 
-    public function setCalendarName(string $calendarName): self
+    public function setCalName(string $calName): self
     {
-        $this->calendarName = $calendarName;
+        $this->calName = $calName;
 
         return $this;
     }
 
-    public function getCalendarDescription(): string
+    public function hasCalName(): bool
     {
-        return $this->calendarDescription;
+        return $this->calName !== null;
     }
 
-    public function setCalendarDescription(string $calendarDescription): self
+    public function getCalDescription(): string
     {
-        $this->calendarDescription = $calendarDescription;
+        assert($this->calDescription !== null);
+
+        return $this->calDescription;
+    }
+
+    public function setCalDescription(string $calDescription): self
+    {
+        $this->calDescription = $calDescription;
 
         return $this;
+    }
+
+    public function hasCalDescription(): bool
+    {
+        return $this->calDescription !== null;
     }
 
     public function getEvents(): Events

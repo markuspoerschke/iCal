@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -41,6 +41,10 @@ final class DateTimeValue extends Value
 
     private function convertDateTimeToString(DateTime $dateTime): string
     {
+        if ($dateTime->hasDateTimeZone() && $dateTime->getDateTimeZone()->getName() === 'UTC') {
+            return $dateTime->getDateTime()->format(self::FORMAT_UTC);
+        }
+
         return $dateTime->getDateTime()->format(self::FORMAT);
     }
 

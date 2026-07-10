@@ -39,5 +39,6 @@ The sources are available within the `website/docs/` folder.
 To preview the result, you can run:
 
 ```
-make docs-preview
+cd website
+make start
 ```

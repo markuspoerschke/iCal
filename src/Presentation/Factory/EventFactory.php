@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -14,6 +14,8 @@ namespace Eluceo\iCal\Presentation\Factory;
 use DateInterval;
 use Eluceo\iCal\Domain\Collection\Events;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\EventStatus;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
 use Eluceo\iCal\Domain\ValueObject\Alarm;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
@@ -30,9 +32,11 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateTimeValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
+use UnexpectedValueException;
 
 /**
  * @SuppressWarnings("CouplingBetweenObjects")
@@ -43,8 +47,11 @@ class EventFactory
     private DateTimeFactory $dateTimeFactory;
     private AttendeeFactory $attendeeFactory;
 
-    public function __construct(?AlarmFactory $alarmFactory = null, ?DateTimeFactory $dateTimeFactory = null, ?AttendeeFactory $attendeeFactory = null)
-    {
+    public function __construct(
+        ?AlarmFactory $alarmFactory = null,
+        ?DateTimeFactory $dateTimeFactory = null,
+        ?AttendeeFactory $attendeeFactory = null,
+    ) {
         $this->alarmFactory = $alarmFactory ?? new AlarmFactory();
         $this->dateTimeFactory = $dateTimeFactory ?? new DateTimeFactory();
         $this->attendeeFactory = $attendeeFactory ?? new AttendeeFactory();
@@ -71,6 +78,7 @@ class EventFactory
 
     /**
      * @return Generator<Property>
+     *
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -89,6 +97,12 @@ class EventFactory
 
         if ($event->hasDescription()) {
             yield new Property('DESCRIPTION', new TextValue($event->getDescription()));
+        }
+
+        if ($event->hasHtmlDescription()) {
+            yield new Property('X-ALT-DESC', new TextValue($event->getHtmlDescription()), [
+                new Parameter('FMTTYPE', new TextValue('text/html')),
+            ]);
         }
 
         if ($event->hasUrl()) {
@@ -113,6 +127,19 @@ class EventFactory
             }
         }
 
+        if ($event->hasCategories()) {
+            yield $this->getCategoryProperties($event);
+        }
+
+        if ($event->hasStatus()) {
+            yield new Property('STATUS', $this->getEventStatusTextValue($event->getStatus()));
+        }
+
+        if ($event->hasMsBusyStatus()) {
+            yield new Property('X-MICROSOFT-CDO-BUSYSTATUS', $this->getEventMsBusyStatusTextValue($event->getMsBusyStatus()));
+            yield new Property('X-MICROSOFT-CDO-INTENDEDSTATUS', $this->getEventMsBusyStatusTextValue($event->getMsBusyStatus()));
+        }
+
         foreach ($event->getAttachments() as $attachment) {
             yield from $this->getAttachmentProperties($attachment);
         }
@@ -135,12 +162,31 @@ class EventFactory
     private function getOccurrenceProperties(Occurrence $occurrence): Generator
     {
         if ($occurrence instanceof SingleDay) {
-            yield new Property('DTSTART', new DateValue($occurrence->getDate()));
+            yield new Property(
+                'DTSTART',
+                new DateValue($occurrence->getDate()),
+                [
+                    new Parameter('VALUE', new TextValue('DATE')),
+                ]
+            );
         }
 
         if ($occurrence instanceof MultiDay) {
-            yield new Property('DTSTART', new DateValue($occurrence->getFirstDay()));
-            yield new Property('DTEND', new DateValue($occurrence->getLastDay()->add(new DateInterval('P1D'))));
+            yield new Property(
+                'DTSTART',
+                new DateValue($occurrence->getFirstDay()),
+                [
+                    new Parameter('VALUE', new TextValue('DATE')),
+                ]
+            );
+
+            yield new Property(
+                'DTEND',
+                new DateValue($occurrence->getLastDay()->add(new DateInterval('P1D'))),
+                [
+                    new Parameter('VALUE', new TextValue('DATE')),
+                ]
+            );
         }
 
         if ($occurrence instanceof TimeSpan) {
@@ -219,5 +265,53 @@ class EventFactory
         }
 
         return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
+    }
+
+    private function getCategoryProperties(Event $event): Property
+    {
+        $categories = [];
+        foreach ($event->getCategories() as $category) {
+            $categories[] = new TextValue((string) $category);
+        }
+
+        return new Property('CATEGORIES', new ListValue($categories));
+    }
+
+    private function getEventStatusTextValue(EventStatus $status): TextValue
+    {
+        if ($status === EventStatus::CANCELLED()) {
+            return new TextValue('CANCELLED');
+        }
+
+        if ($status === EventStatus::CONFIRMED()) {
+            return new TextValue('CONFIRMED');
+        }
+
+        if ($status === EventStatus::TENTATIVE()) {
+            return new TextValue('TENTATIVE');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', EventStatus::class));
+    }
+
+    private function getEventMsBusyStatusTextValue(MsBusyStatus $msBusyStatus): TextValue
+    {
+        if ($msBusyStatus === MsBusyStatus::FREE()) {
+            return new TextValue('FREE');
+        }
+
+        if ($msBusyStatus === MsBusyStatus::BUSY()) {
+            return new TextValue('BUSY');
+        }
+
+        if ($msBusyStatus === MsBusyStatus::TENTATIVE()) {
+            return new TextValue('TENTATIVE');
+        }
+
+        if ($msBusyStatus === MsBusyStatus::OOF()) {
+            return new TextValue('OOF');
+        }
+
+        throw new UnexpectedValueException(sprintf('The enum %s resulted into an unknown status type value that is not yet implemented.', MsBusyStatus::class));
     }
 }

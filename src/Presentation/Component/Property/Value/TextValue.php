@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -21,17 +21,18 @@ class TextValue extends Value
     /**
      * ESCAPED-CHAR as defined in section 3.3.11.
      */
-    private const ESCAPED_CHARACTERS = [
+    private const array ESCAPED_CHARACTERS = [
         '\\' => '\\\\',
         ';' => '\\;',
         ',' => '\\,',
         "\n" => '\\n',
+        '\\\\n' => '\\n',
     ];
 
     /**
      * Non TSAFE-CHAR as described in section 3.3.11.
      */
-    private const FORBIDDEN_CHARACTERS = [
+    private const array FORBIDDEN_CHARACTERS = [
         "\x00",
         "\x01",
         "\x02",

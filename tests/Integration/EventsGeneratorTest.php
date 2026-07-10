@@ -3,7 +3,7 @@
 /*
  * This file is part of the eluceo/iCal package.
  *
- * (c) 2022 Markus Poerschke <markus@poerschke.nrw>
+ * (c) 2026 Markus Poerschke <markus@poerschke.nrw>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -16,6 +16,7 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Eluceo\iCal\Domain\Entity\Calendar;
 use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\MsBusyStatus;
 use Eluceo\iCal\Domain\ValueObject\Date;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -36,7 +37,8 @@ class EventsGeneratorTest extends TestCase
                 yield (new Event(new UniqueIdentifier('event-' . $i)))
                     ->touch($timestamp)
                     ->setSummary('Event ' . $i)
-                    ->setOccurrence(new SingleDay(new Date($day)));
+                    ->setOccurrence(new SingleDay(new Date($day)))
+                    ->setMsBusyStatus(MsBusyStatus::BUSY());
                 $day = $day->add($dayInterval);
             }
         };
@@ -54,19 +56,25 @@ class EventsGeneratorTest extends TestCase
             'UID:event-0',
             'DTSTAMP:20200101T150000Z',
             'SUMMARY:Event 0',
-            'DTSTART:20200101',
+            'DTSTART;VALUE=DATE:20200101',
+            'X-MICROSOFT-CDO-BUSYSTATUS:BUSY',
+            'X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY',
             'END:VEVENT',
             'BEGIN:VEVENT',
             'UID:event-1',
             'DTSTAMP:20200101T150000Z',
             'SUMMARY:Event 1',
-            'DTSTART:20200102',
+            'DTSTART;VALUE=DATE:20200102',
+            'X-MICROSOFT-CDO-BUSYSTATUS:BUSY',
+            'X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY',
             'END:VEVENT',
             'BEGIN:VEVENT',
             'UID:event-2',
             'DTSTAMP:20200101T150000Z',
             'SUMMARY:Event 2',
-            'DTSTART:20200103',
+            'DTSTART;VALUE=DATE:20200103',
+            'X-MICROSOFT-CDO-BUSYSTATUS:BUSY',
+            'X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY',
             'END:VEVENT',
             'END:VCALENDAR',
         ];
