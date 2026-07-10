@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Event's HTML alternative description [#657](https://github.com/markuspoerschke/iCal/pull/657)
-- Calendar's name (X-WR-CALNAME) [#663](https://github.com/markuspoerschke/iCal/pull/663)
+- Calendar's name and description (`X-WR-CALNAME` and `X-WR-CALDESC`) [#394](https://github.com/markuspoerschke/iCal/pull/394), [#664](https://github.com/markuspoerschke/iCal/pull/664)
 - Re-Add property `X-MICROSOFT-CDO-BUSYSTATUS` that was added in 0.16.0 and then lost [#637](https://github.com/markuspoerschke/iCal/pull/637)
 
 ### Fixed

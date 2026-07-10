@@ -64,6 +64,11 @@ class CalendarFactory
             yield new Property('X-WR-CALNAME', new TextValue($calendar->getCalName()));
         }
 
+        // The calendar description is not part of the RFC but is used by some clients.
+        if ($calendar->hasCalDescription()) {
+            yield new Property('X-WR-CALDESC', new TextValue($calendar->getCalDescription()));
+        }
+
         if ($publishedTTL) {
             /* @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx */
             yield new Property('X-PUBLISHED-TTL', new DurationValue($publishedTTL));
