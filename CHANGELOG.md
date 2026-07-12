@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.0] - 2026-07-12
+
 ### Added
 
 - Event's HTML alternative description [#657](https://github.com/markuspoerschke/iCal/pull/657)
@@ -318,7 +320,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 - **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.16.0...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.17.0...HEAD
+[2.17.0]: https://github.com/markuspoerschke/iCal/compare/2.16.0...2.17.0
 [2.16.0]: https://github.com/markuspoerschke/iCal/compare/2.15.0...2.16.0
 [2.15.0]: https://github.com/markuspoerschke/iCal/compare/2.14.0...2.15.0
 [2.14.0]: https://github.com/markuspoerschke/iCal/compare/2.13.0...2.14.0
