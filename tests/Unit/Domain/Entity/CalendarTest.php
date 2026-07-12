@@ -39,4 +39,38 @@ class CalendarTest extends TestCase
         $calendar->setPublishedTTL($ttl);
         self::assertSame($calendar->getPublishedTTL(), $ttl);
     }
+
+    /**
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::getCalName
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::setCalName
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::hasCalName
+     */
+    public function testGetSetCalName(): void
+    {
+        $calendar = new Calendar();
+
+        self::assertFalse($calendar->hasCalName());
+
+        $calendar->setCalName('Team Calendar');
+
+        self::assertTrue($calendar->hasCalName());
+        self::assertSame('Team Calendar', $calendar->getCalName());
+    }
+
+    /**
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::getCalDescription
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::setCalDescription
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::hasCalDescription
+     */
+    public function testGetSetCalDescription(): void
+    {
+        $calendar = new Calendar();
+
+        self::assertFalse($calendar->hasCalDescription());
+
+        $calendar->setCalDescription('Team availability calendar');
+
+        self::assertTrue($calendar->hasCalDescription());
+        self::assertSame('Team availability calendar', $calendar->getCalDescription());
+    }
 }

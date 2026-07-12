@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.0] - 2026-07-12
+
 ### Added
 
 - Event's HTML alternative description [#657](https://github.com/markuspoerschke/iCal/pull/657)
-- Calendar's name (X-WR-CALNAME) [#663](https://github.com/markuspoerschke/iCal/pull/663)
+- Calendar's name and description (`X-WR-CALNAME` and `X-WR-CALDESC`) [#394](https://github.com/markuspoerschke/iCal/pull/394), [#664](https://github.com/markuspoerschke/iCal/pull/664)
 - Re-Add property `X-MICROSOFT-CDO-BUSYSTATUS` that was added in 0.16.0 and then lost [#637](https://github.com/markuspoerschke/iCal/pull/637)
 - Support for recurrence rules (`RRULE`) [#705](https://github.com/markuspoerschke/iCal/pull/705)
 
@@ -319,7 +321,8 @@ Please check the [upgrade guide](UPGRADE.md) on how to upgrade from version `0.*
 - **Breaking Change:** Changed signature of the `Event::setOrganizer` method. Now there is is only one parameter that must be an instance of `Property\Organizer`.
 - Updated install section in README.md [#54](https://github.com/markuspoerschke/iCal/pull/53)
 
-[Unreleased]: https://github.com/markuspoerschke/iCal/compare/2.16.0...HEAD
+[unreleased]: https://github.com/markuspoerschke/iCal/compare/2.17.0...HEAD
+[2.17.0]: https://github.com/markuspoerschke/iCal/compare/2.16.0...2.17.0
 [2.16.0]: https://github.com/markuspoerschke/iCal/compare/2.15.0...2.16.0
 [2.15.0]: https://github.com/markuspoerschke/iCal/compare/2.14.0...2.15.0
 [2.14.0]: https://github.com/markuspoerschke/iCal/compare/2.13.0...2.14.0

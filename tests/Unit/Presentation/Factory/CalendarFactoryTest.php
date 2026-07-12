@@ -95,4 +95,26 @@ class CalendarFactoryTest extends TestCase
 
         self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));
     }
+
+    /**
+     * @covers \Eluceo\iCal\Presentation\Factory\CalendarFactory::createCalendar
+     */
+    public function testRenderWithCalNameAndDescription(): void
+    {
+        $calendar = new Calendar();
+        $calendar->setCalName('Team Calendar');
+        $calendar->setCalDescription('Team availability calendar');
+        $expected = implode(ContentLine::LINE_SEPARATOR, [
+            'BEGIN:VCALENDAR',
+            'PRODID:' . $calendar->getProductIdentifier(),
+            'VERSION:2.0',
+            'CALSCALE:GREGORIAN',
+            'X-WR-CALNAME:Team Calendar',
+            'X-WR-CALDESC:Team availability calendar',
+            'END:VCALENDAR',
+            '',
+        ]);
+
+        self::assertSame($expected, (string) (new CalendarFactory())->createCalendar($calendar));
+    }
 }
