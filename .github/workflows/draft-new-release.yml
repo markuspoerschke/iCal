@@ -26,10 +26,19 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
 
-      - name: Fix code style
-        uses: actionsx/prettier@v3
+      - uses: actions/setup-node@v6
         with:
-          args: --write CHANGELOG.md
+          node-version-file: ".nvmrc"
+
+      - name: Enable Corepack
+        run: corepack enable
+        shell: bash
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Fix code style
+        run: yarn prettier --write CHANGELOG.md
 
       - run: git checkout -b release/${{ github.event.inputs.version }}
 
