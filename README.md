@@ -96,7 +96,7 @@ echo $iCalendarComponent;
 ### Full example
 
 The following example will create a single day event with a summary and a description.
-More examples can be found in the [examples/](examples) folder, including [examples/example4.php](examples/example4.php) for a complete `VTODO` example.
+More examples can be found in the [examples/](examples) folder.
 
 ```php
 <?php
