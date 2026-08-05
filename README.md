@@ -96,7 +96,7 @@ echo $iCalendarComponent;
 ### Full example
 
 The following example will create a single day event with a summary and a description.
-More examples can be found in the [examples/](examples) folder.
+More examples can be found in the [examples/](examples) folder, including [examples/example4.php](examples/example4.php) for a complete `VTODO` example.
 
 ```php
 <?php
@@ -127,6 +127,37 @@ header('Content-Type: text/calendar; charset=utf-8');
 header('Content-Disposition: attachment; filename="cal.ics"');
 
 // 5. Output
+echo $calendarComponent;
+```
+
+### Todo example (VTODO)
+
+You can also create `VTODO` components and add them to the same calendar.
+
+```php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$todo = (new Eluceo\iCal\Domain\Entity\Todo())
+    ->setSummary('Prepare release')
+    ->setDescription('Write changelog and tag the release')
+    ->setStatus(Eluceo\iCal\Domain\Enum\TodoStatus::IN_PROCESS())
+    ->setPercentComplete(50)
+    ->setStart(
+        new Eluceo\iCal\Domain\ValueObject\Date(
+            \DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24')
+        )
+    )
+;
+
+$calendar = (new Eluceo\iCal\Domain\Entity\Calendar())
+    ->addTodo($todo)
+;
+
+$componentFactory = new Eluceo\iCal\Presentation\Factory\CalendarFactory();
+$calendarComponent = $componentFactory->createCalendar($calendar);
+
 echo $calendarComponent;
 ```
 
