@@ -130,6 +130,37 @@ header('Content-Disposition: attachment; filename="cal.ics"');
 echo $calendarComponent;
 ```
 
+### Todo example (VTODO)
+
+You can also create `VTODO` components and add them to the same calendar.
+
+```php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$todo = (new Eluceo\iCal\Domain\Entity\Todo())
+    ->setSummary('Prepare release')
+    ->setDescription('Write changelog and tag the release')
+    ->setStatus(Eluceo\iCal\Domain\Enum\TodoStatus::IN_PROCESS())
+    ->setPercentComplete(50)
+    ->setStart(
+        new Eluceo\iCal\Domain\ValueObject\Date(
+            \DateTimeImmutable::createFromFormat('Y-m-d', '2030-12-24')
+        )
+    )
+;
+
+$calendar = (new Eluceo\iCal\Domain\Entity\Calendar())
+    ->addTodo($todo)
+;
+
+$componentFactory = new Eluceo\iCal\Presentation\Factory\CalendarFactory();
+$calendarComponent = $componentFactory->createCalendar($calendar);
+
+echo $calendarComponent;
+```
+
 ## License
 
 This package is released under the [**MIT license**](LICENSE).
