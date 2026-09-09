@@ -215,6 +215,48 @@ $event->setOccurrence($occurrence);
 
 describes an event that takes place between 1pm and 2pm on 3rd of january 2020.
 
+### Recurrence rule
+
+A recurrence rule (`RRULE`) defines how an event repeats.
+The frequency is required, all other rule parts are optional.
+
+```php
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Domain\Enum\RecurrenceFrequency;
+use Eluceo\iCal\Domain\Enum\RecurrenceWeekday;
+use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
+
+// every second week on monday and wednesday, 10 times
+$recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::WEEKLY()))
+    ->setInterval(2)
+    ->setCount(10)
+    ->setByDay(['MO', 'WE'])
+    ->setWeekStartDay(RecurrenceWeekday::MONDAY());
+
+$event = new Event();
+$event->setRecurrenceRule($recurrenceRule);
+```
+
+The number of occurrences can be limited either by a count or by an end date.
+Since both must not be used at the same time, calling `setCount()` will discard a previously set end date and calling `setUntil()` will discard a previously set count.
+
+```php
+// every day until the end of the year
+$recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+    ->setUntil(new DateTimeImmutable('2020-12-31 23:59:59'));
+```
+
+The `UNTIL` value is rendered with the same value type as the `DTSTART` property of the event.
+For events that occur on whole days (see [single day](#single-day) and [multi day](#multi-day)), it is rendered as a date, otherwise as a UTC date and time.
+
+The `BYSETPOS`, `BYMONTHDAY`, `BYYEARDAY` and `BYWEEKNO` rule parts as well as the ordinals of `BYDAY` also accept negative values, which count backwards from the end of the interval.
+
+```php
+// the last friday of every month
+$recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::MONTHLY()))
+    ->setByDay(['-1FR']);
+```
+
 ### Location
 
 The location defines where an event takes place.

@@ -19,6 +19,7 @@ use Eluceo\iCal\Domain\Enum\CalendarUserType;
 use Eluceo\iCal\Domain\Enum\EventStatus;
 use Eluceo\iCal\Domain\Enum\MsBusyStatus;
 use Eluceo\iCal\Domain\Enum\ParticipationStatus;
+use Eluceo\iCal\Domain\Enum\RecurrenceFrequency;
 use Eluceo\iCal\Domain\Enum\RoleType;
 use Eluceo\iCal\Domain\ValueObject\Attachment;
 use Eluceo\iCal\Domain\ValueObject\BinaryContent;
@@ -31,6 +32,7 @@ use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Member;
 use Eluceo\iCal\Domain\ValueObject\MultiDay;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
+use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Eluceo\iCal\Domain\ValueObject\TimeSpan;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
@@ -560,6 +562,101 @@ class EventFactoryTest extends TestCase
 
         self::assertEventRendersCorrect($event, [
             'STATUS:TENTATIVE',
+        ]);
+    }
+
+    public function testEventWithYearlyRecurrenceRule(): void
+    {
+        $recurrenceRule = new RecurrenceRule(RecurrenceFrequency::YEARLY());
+
+        $event = (new Event())
+            ->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-01'))))
+            ->setRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART;VALUE=DATE:20300101',
+            'RRULE:FREQ=YEARLY',
+        ]);
+    }
+
+    public function testEventWithMonthlyRecurrenceRuleAndInterval(): void
+    {
+        $recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::MONTHLY()))
+            ->setInterval(2)
+            ->setCount(6);
+
+        $event = (new Event())
+            ->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-01'))))
+            ->setRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART;VALUE=DATE:20300101',
+            'RRULE:FREQ=MONTHLY;INTERVAL=2;COUNT=6',
+        ]);
+    }
+
+    public function testEventWithSingleDayOccurrenceRendersUntilAsDate(): void
+    {
+        $recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+            ->setUntil(new DateTimeImmutable('2030-12-31 23:59:59', new DateTimeZone('UTC')));
+
+        $event = (new Event())
+            ->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-01'))))
+            ->setRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART;VALUE=DATE:20300101',
+            'RRULE:FREQ=DAILY;UNTIL=20301231',
+        ]);
+    }
+
+    public function testEventWithMultiDayOccurrenceRendersUntilAsDate(): void
+    {
+        $recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::WEEKLY()))
+            ->setUntil(new DateTimeImmutable('2030-12-31 23:59:59', new DateTimeZone('UTC')));
+
+        $event = (new Event())
+            ->setOccurrence(new MultiDay(
+                new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-01')),
+                new Date(DateTimeImmutable::createFromFormat('Y-m-d', '2030-01-02')),
+            ))
+            ->setRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART;VALUE=DATE:20300101',
+            'DTEND;VALUE=DATE:20300103',
+            'RRULE:FREQ=WEEKLY;UNTIL=20301231',
+        ]);
+    }
+
+    public function testEventWithTimeSpanOccurrenceRendersUntilAsDateTime(): void
+    {
+        $recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+            ->setUntil(new DateTimeImmutable('2030-12-31 23:59:59', new DateTimeZone('UTC')));
+
+        $event = (new Event())
+            ->setOccurrence(new TimeSpan(
+                new DateTime(new DateTimeImmutable('2030-01-01 10:00:00', new DateTimeZone('UTC')), true),
+                new DateTime(new DateTimeImmutable('2030-01-01 11:00:00', new DateTimeZone('UTC')), true),
+            ))
+            ->setRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'DTSTART:20300101T100000Z',
+            'DTEND:20300101T110000Z',
+            'RRULE:FREQ=DAILY;UNTIL=20301231T235959Z',
+        ]);
+    }
+
+    public function testEventWithoutOccurrenceRendersUntilAsDateTime(): void
+    {
+        $recurrenceRule = (new RecurrenceRule(RecurrenceFrequency::DAILY()))
+            ->setUntil(new DateTimeImmutable('2030-12-31 23:59:59', new DateTimeZone('UTC')));
+
+        $event = (new Event())->setRecurrenceRule($recurrenceRule);
+
+        self::assertEventRendersCorrect($event, [
+            'RRULE:FREQ=DAILY;UNTIL=20301231T235959Z',
         ]);
     }
 

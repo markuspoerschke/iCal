@@ -19,6 +19,7 @@ use Eluceo\iCal\Domain\ValueObject\Category;
 use Eluceo\iCal\Domain\ValueObject\Location;
 use Eluceo\iCal\Domain\ValueObject\Occurrence;
 use Eluceo\iCal\Domain\ValueObject\Organizer;
+use Eluceo\iCal\Domain\ValueObject\RecurrenceRule;
 use Eluceo\iCal\Domain\ValueObject\Timestamp;
 use Eluceo\iCal\Domain\ValueObject\UniqueIdentifier;
 use Eluceo\iCal\Domain\ValueObject\Uri;
@@ -52,6 +53,8 @@ class Event
      * @var array<Attachment>
      */
     private array $attachments = [];
+
+    private ?RecurrenceRule $recurrenceRule = null;
 
     /**
      * @var array<Category>
@@ -255,6 +258,31 @@ class Event
         $this->alarms[] = $alarm;
 
         return $this;
+    }
+
+    public function hasRecurrenceRule(): bool
+    {
+        return $this->recurrenceRule !== null;
+    }
+
+    /**
+     * Set the recurrence rule of the event.
+     *
+     * RFC 5545, section 3.8.5.3 recommends against more than one RRULE per event,
+     * therefore an event holds at most a single recurrence rule.
+     */
+    public function setRecurrenceRule(RecurrenceRule $recurrenceRule): self
+    {
+        $this->recurrenceRule = $recurrenceRule;
+
+        return $this;
+    }
+
+    public function getRecurrenceRule(): RecurrenceRule
+    {
+        assert($this->recurrenceRule !== null);
+
+        return $this->recurrenceRule;
     }
 
     public function addAttachment(Attachment $attachment): self
