@@ -14,15 +14,15 @@ namespace Eluceo\iCal\Domain\ValueObject;
 final class TimeSpan extends Occurrence
 {
     private DateTime $begin;
-    private DateTime $end;
+    private ?DateTime $end;
 
-    public function __construct(DateTime $begin, DateTime $end)
+    public function __construct(DateTime $begin, ?DateTime $end = null)
     {
         $this->begin = $begin;
         $this->end = $end;
     }
 
-    public static function create(DateTime $begin, DateTime $end): self
+    public static function create(DateTime $begin, ?DateTime $end = null): self
     {
         return new static($begin, $end);
     }
@@ -32,7 +32,7 @@ final class TimeSpan extends Occurrence
         return $this->begin;
     }
 
-    public function getEnd(): DateTime
+    public function getEnd(): ?DateTime
     {
         return $this->end;
     }
