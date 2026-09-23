@@ -33,6 +33,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\QuotedUriValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -257,11 +258,11 @@ class EventFactory
         }
 
         if ($organizer->hasDirectoryEntry()) {
-            $parameters[] = new Parameter('DIR', new UriValue($organizer->getDirectoryEntry()));
+            $parameters[] = new Parameter('DIR', new QuotedUriValue($organizer->getDirectoryEntry()));
         }
 
         if ($organizer->isSentInBehalfOf()) {
-            $parameters[] = new Parameter('SENT-BY', new UriValue($organizer->getSentBy()->toUri()));
+            $parameters[] = new Parameter('SENT-BY', new QuotedUriValue($organizer->getSentBy()->toUri()));
         }
 
         return new Property('ORGANIZER', new UriValue($organizer->getEmailAddress()->toUri()), $parameters);
