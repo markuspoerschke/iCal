@@ -48,23 +48,37 @@ class TimeZone
         $timeZone = new self($phpDateTimeZone->getName());
 
         foreach ($transitions as $transitionArray) {
-            $fromDateTime = DateTimeImmutable::createFromFormat(
-                DateTimeImmutable::ISO8601,
-                $transitionArray['time']
-            );
+            $fromDateTime = DateTimeImmutable::createFromFormat('U', $transition['ts'], new DateTimeZone('UTC'));
             assert($fromDateTime instanceof DateTimeImmutable, $transitionArray['time']);
-            $localFromDateTime = $fromDateTime->setTimezone($phpDateTimeZone);
+            $offsetFrom = $phpDateTimeZone->getOffset($fromDateTime->sub(new DateInterval('PT1S')));
+            $offsetFromInterval = $this->resolveInterval($offsetFrom);
+            $previousTimezoneAwareFromDateTime = $fromDateTime->add($offsetFromInterval);
 
             $timeZone->addTransition(new TimeZoneTransition(
                 $transitionArray['isdst'] ? TimeZoneTransitionType::DAYLIGHT() : TimeZoneTransitionType::STANDARD(),
-                $localFromDateTime,
-                $phpDateTimeZone->getOffset($fromDateTime->sub(new DateInterval('PT1S'))),
+                $previousTimezoneAwareFromDateTime,
+                $offsetFrom,
                 $transitionArray['offset'],
                 $transitionArray['abbr']
             ));
         }
 
         return $timeZone;
+    }
+
+    private function resolveInterval(int $seconds): DateInterval
+    {
+        $hours = (int)floor($seconds / 3600);
+        $minutes = ($seconds / 60) % 60;
+
+        $interval = new DateInterval(
+            'PT' . abs($hours) . 'H' . abs($minutes) . 'M'
+        );
+
+        if ($seconds < 0)
+            $interval->invert = 1;
+
+        return $interval;
     }
 
     public function getTimeZoneId(): string
