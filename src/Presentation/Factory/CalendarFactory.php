@@ -21,12 +21,14 @@ use Generator;
 class CalendarFactory
 {
     private EventFactory $eventFactory;
+    private TodoFactory $todoFactory;
     private TimeZoneFactory $timeZoneFactory;
 
-    public function __construct(?EventFactory $eventFactory = null, ?TimeZoneFactory $timeZoneFactory = null)
+    public function __construct(?EventFactory $eventFactory = null, ?TimeZoneFactory $timeZoneFactory = null, ?TodoFactory $todoFactory = null)
     {
         $this->eventFactory = $eventFactory ?? new EventFactory();
         $this->timeZoneFactory = $timeZoneFactory ?? new TimeZoneFactory();
+        $this->todoFactory = $todoFactory ?? new TodoFactory();
     }
 
     public function createCalendar(Calendar $calendar): Component
@@ -43,6 +45,7 @@ class CalendarFactory
     protected function createCalendarComponents(Calendar $calendar): iterable
     {
         yield from $this->eventFactory->createComponents($calendar->getEvents());
+        yield from $this->todoFactory->createComponents($calendar->getTodos());
         yield from $this->timeZoneFactory->createComponents($calendar->getTimeZones());
     }
 
