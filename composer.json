@@ -31,7 +31,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.48",
         "friendsofphp/php-cs-fixer": "^3.92",
-        "infection/infection": "^0.32",
+        "infection/infection": "^0.32 || ^0.35",
         "phpunit/phpunit": "^10.5",
         "vimeo/psalm": "^6.14"
     },
