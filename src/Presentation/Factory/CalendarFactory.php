@@ -20,6 +20,7 @@ use Generator;
 
 class CalendarFactory
 {
+    private array $customCalProps;
     private EventFactory $eventFactory;
     private TimeZoneFactory $timeZoneFactory;
 
@@ -27,6 +28,7 @@ class CalendarFactory
     {
         $this->eventFactory = $eventFactory ?? new EventFactory();
         $this->timeZoneFactory = $timeZoneFactory ?? new TimeZoneFactory();
+        $this->clearCustomCalProps();
     }
 
     public function createCalendar(Calendar $calendar): Component
@@ -73,5 +75,34 @@ class CalendarFactory
             /* @see http://msdn.microsoft.com/en-us/library/ee178699(v=exchg.80).aspx */
             yield new Property('X-PUBLISHED-TTL', new DurationValue($publishedTTL));
         }
+
+        // Remove obsolete keys in custom properties
+        unset($this->customCalProps['PRODID']);
+        unset($this->customCalProps['VERSION']);
+        unset($this->customCalProps['CALSCALE']);
+        if ($publishedTTL) {
+            unset($this->customCalProps['X-PUBLISHED-TTL']);
+        }
+
+        // Additional custom properties
+        reset($this->customCalProps);
+        while ($value = current($this->customCalProps)) {
+            yield new Property(key($this->customCalProps), new TextValue($value));
+            next($this->customCalProps);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function clearCustomCalProps() {
+        $this->customCalProps = [];
+    }
+
+    /**
+     * @return void
+     */
+    public function setCustomCalProp(string $key, string $value): void {
+        $this->customCalProps[$key] = $value;
     }
 }
