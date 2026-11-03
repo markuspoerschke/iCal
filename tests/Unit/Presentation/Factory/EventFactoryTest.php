@@ -193,8 +193,47 @@ class EventFactoryTest extends TestCase
             ));
 
         self::assertEventRendersCorrect($event, [
-            'ORGANIZER;CN=Test Display Name;DIR=example://directory-entry;SENT-BY=mailto',
-            ' :sendby@example.com:mailto:test@example.com',
+            'ORGANIZER;CN=Test Display Name;DIR="example://directory-entry";SENT-BY="mai',
+            ' lto:sendby@example.com":mailto:test@example.com',
+        ]);
+    }
+
+    public function testOrganizerWithoutParameters()
+    {
+        $event = (new Event())
+            ->setOrganizer(new Organizer(new EmailAddress('test@example.com')));
+
+        self::assertEventRendersCorrect($event, [
+            'ORGANIZER:mailto:test@example.com',
+        ]);
+    }
+
+    public function testOrganizerWithDirectoryEntry()
+    {
+        $event = (new Event())
+            ->setOrganizer(new Organizer(
+                new EmailAddress('test@example.com'),
+                null,
+                new Uri('https://example.com/a;b,c')
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ORGANIZER;DIR="https://example.com/a;b,c":mailto:test@example.com',
+        ]);
+    }
+
+    public function testOrganizerWithSentBy()
+    {
+        $event = (new Event())
+            ->setOrganizer(new Organizer(
+                new EmailAddress('test@example.com'),
+                null,
+                null,
+                new EmailAddress('sender@example.com')
+            ));
+
+        self::assertEventRendersCorrect($event, [
+            'ORGANIZER;SENT-BY="mailto:sender@example.com":mailto:test@example.com',
         ]);
     }
 
