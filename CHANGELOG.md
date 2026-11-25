@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support for PHP 8.6 [#785](https://github.com/markuspoerschke/iCal/issues/785)
+
 ## [2.17.0] - 2026-07-12
 
 ### Added

@@ -14,6 +14,7 @@ jobs:
         php-version:
           - "8.4"
           - "8.5"
+          - "8.6"
 
     steps:
       - name: "Checkout"
@@ -44,7 +45,10 @@ jobs:
 
       - name: "Run tests"
         run: "make -j -O test test-prettier"
+        env:
+          # PHP CS Fixer supports PHP syntax only up to 8.5 so far and refuses to run on newer versions.
+          PHP_CS_FIXER_IGNORE_ENV: ${{ matrix.php-version == '8.6' && '1' || '0' }}
 
       - name: "Send code coverage"
-        if: ${{ matrix.php-version == '8.5' }}
+        if: ${{ matrix.php-version == '8.6' }}
         uses: codecov/codecov-action@v7
