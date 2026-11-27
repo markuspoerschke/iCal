@@ -32,6 +32,15 @@ $timeZone = TimeZone::createFromPhpDateTimeZone(
 );
 ```
 
+Timespan events in calendars with time zones should set the `DateTime` `$applyTimeZone` argument to `true` to include time zones with the resulting timestamps.
+
+```php
+use Eluceo\iCal\Domain\ValueObject\TimeSpan;
+use Eluceo\iCal\Domain\ValueObject\DateTime;
+
+new TimeSpan(new DateTime($starTime, true), new DateTime($endTime, true));
+```
+
 ## Recurrence rules
 
 Not implemented yet.
