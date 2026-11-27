@@ -13,6 +13,7 @@ namespace Eluceo\iCal\Unit\Domain\Entity;
 
 use DateInterval;
 use Eluceo\iCal\Domain\Entity\Calendar;
+use Eluceo\iCal\Domain\Entity\Todo;
 use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase
@@ -72,5 +73,19 @@ class CalendarTest extends TestCase
 
         self::assertTrue($calendar->hasCalDescription());
         self::assertSame('Team availability calendar', $calendar->getCalDescription());
+    }
+
+    /**
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::addTodo
+     * @covers \Eluceo\iCal\Domain\Entity\Calendar::getTodos
+     */
+    public function testAddAndGetTodos(): void
+    {
+        $calendar = new Calendar();
+        $todo = new Todo();
+
+        $calendar->addTodo($todo);
+
+        self::assertSame([$todo], $calendar->getTodos());
     }
 }
