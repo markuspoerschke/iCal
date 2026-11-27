@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@docusaurus/core": "3.10.1",
-        "@docusaurus/plugin-content-docs": "3.10.1",
+        "@docusaurus/plugin-content-docs": "3.10.2",
         "@docusaurus/plugin-content-pages": "3.10.1",
         "@docusaurus/plugin-debug": "3.10.1",
         "@docusaurus/preset-classic": "3.10.1",
