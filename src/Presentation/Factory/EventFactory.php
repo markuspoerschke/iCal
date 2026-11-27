@@ -33,6 +33,7 @@ use Eluceo\iCal\Presentation\Component\Property\Value\DateValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\GeoValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\IntegerValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\ListValue;
+use Eluceo\iCal\Presentation\Component\Property\Value\RecurrenceRuleValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\TextValue;
 use Eluceo\iCal\Presentation\Component\Property\Value\UriValue;
 use Generator;
@@ -111,6 +112,10 @@ class EventFactory
 
         if ($event->hasOccurrence()) {
             yield from $this->getOccurrenceProperties($event->getOccurrence());
+        }
+
+        if ($event->hasRecurrenceRule()) {
+            yield new Property('RRULE', new RecurrenceRuleValue($event->getRecurrenceRule(), $this->hasDateValueTypeOccurrence($event)));
         }
 
         if ($event->hasLocation()) {
@@ -193,6 +198,23 @@ class EventFactory
             yield $this->dateTimeFactory->createProperty('DTSTART', $occurrence->getBegin());
             yield $this->dateTimeFactory->createProperty('DTEND', $occurrence->getEnd());
         }
+    }
+
+    /**
+     * The UNTIL rule part must have the same value type as the DTSTART property,
+     * which is a DATE value for events that occur on whole days.
+     *
+     * @see https://tools.ietf.org/html/rfc5545#section-3.3.10
+     */
+    private function hasDateValueTypeOccurrence(Event $event): bool
+    {
+        if (!$event->hasOccurrence()) {
+            return false;
+        }
+
+        $occurrence = $event->getOccurrence();
+
+        return $occurrence instanceof SingleDay || $occurrence instanceof MultiDay;
     }
 
     /**
